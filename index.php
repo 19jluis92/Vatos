@@ -5,9 +5,9 @@
 {
 	case 'vehicle':
 			//Load controller file
-			require('controllers/vehicleController.php');
+			require('controllers/VehiclesController.php');
 			//Create controller and execute it
-			$controller = new vehicleController();
+			$controller = new VehiclesController();
 			break;
 	case 'user':
 			//Load controller file
