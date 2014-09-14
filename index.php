@@ -1,18 +1,33 @@
 <?php
 	//Get Query from URL
-	$ctrl = $_GET['ctrl'] ? $_GET['ctrl'] : ;
-	switch($_GET['ctrl'])
+	$path = $_GET['controller'] ? $_GET['controller'] : 'home' ;
+	switch($_GET['controller'])
 {
 	case 'vehicle':
 			//Load controller file
-			require('controllers/VehicleCtrl.php');
+			require('controllers/vehicleController.php');
 			//Create controller and execute it
-			$ctrl = new vehicleCtrl();
+			$controller = new vehicleController();
+			break;
+	case 'user':
+			//Load controller file
+			require('controllers/UsersController.php');
+			//Create controller and execute it
+			$controller = new UsersController();
+			break;
+	case 'home':
+			//Load controller file
+			require('controllers/home.php');
+			//Create controller and execute it
+			$controller = new HomeController();
 			break;
 	default:
-		$ctrl = 
+		$ctrl = 'home';
+		require('controllers/Home.php');
+
+
 }
 
 //Execute controller
-$ctrl->run();	
+$controller->run();	
 ?>
