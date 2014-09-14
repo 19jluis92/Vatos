@@ -1,14 +1,13 @@
 <?php
 	//Get Query from URL
-	ini_set('display_errors', 1);
 	$path = $_GET['controller'] ? $_GET['controller'] : 'home' ;
 	switch($_GET['controller'])
 {
 	case 'vehicle':
 			//Load controller file
-			require('controllers/VehiclesController.php');
+			require('controllers/vehicleController.php');
 			//Create controller and execute it
-			$controller = new VehiclesController();
+			$controller = new vehicleController();
 			break;
 	case 'user':
 			//Load controller file
@@ -25,6 +24,8 @@
 	default:
 		$ctrl = 'home';
 		require('controllers/Home.php');
+
+
 }
 
 //Execute controller
