@@ -1,6 +1,6 @@
 <?php
 require('controllers/Controller.php');
-class VehiclesController extends Controller {
+class PiecesController extends Controller {
 	private $model;
 	
 
@@ -10,7 +10,7 @@ class VehiclesController extends Controller {
 	function __construct()
 	{
 		require('models/PiecesModel.php');
-		$this->model = new VehiclesModel();
+		$this->model = new PiecesModel();
 	}
 
 	/**

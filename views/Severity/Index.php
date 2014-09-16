@@ -6,7 +6,7 @@
 <body>
 <h1>Index</h1>
 <?php 
-	echo "Color: ", $name,"<br />";
+	echo "Severity: ", $name,"<br />";
  ?>
 </body>
 </html>	

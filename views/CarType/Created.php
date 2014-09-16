@@ -4,9 +4,9 @@
 	<title></title>
 </head>
 <body>
-<h1>Index</h1>
+<h1>CREATED</h1>
 <?php 
-	echo "Piece: ", $name,"<br />";
+	echo "Car Type: ", $name,"<br />";
  ?>
 </body>
 </html>	

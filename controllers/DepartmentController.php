@@ -1,6 +1,6 @@
 <?php
 require('controllers/Controller.php');
-class ColorsController extends Controller {
+class DepartmentsController extends Controller {
 	private $model;
 	
 
@@ -9,8 +9,8 @@ class ColorsController extends Controller {
 	*/
 	function __construct()
 	{
-		require('models/ColorsModel.php');
-		$this->model = new ColorsModel();
+		require('models/DepartmentsModel.php');
+		$this->model = new DepartmentsModel();
 	}
 
 	/**
@@ -49,19 +49,19 @@ class ColorsController extends Controller {
 
 
 	/**
-	*Show all the colors of the database
+	*Show all the departments of the database
 	*@return null nothing returned but view loaded
 	*/
 	private function list()
 	{
 		
-		//get all the colors
+		//get all the departments
 		$result = $this->model->list();	
 		//Query Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Color/Index.php');
+			require('views/Department/Index.php');
 		}
 		else
 		{
@@ -71,8 +71,8 @@ class ColorsController extends Controller {
 	}
 
 	/**
-	*Show the color details with the given post parameters 
-	*@param id the color id
+	*Show the department details with the given post parameters 
+	*@param id the department id
 	*@return null nothing returned but view loaded
 	*/
 	private function details()
@@ -84,7 +84,7 @@ class ColorsController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Details.php');
+			require('views/Department/Details.php');
 		}
 		else
 		{
@@ -93,20 +93,21 @@ class ColorsController extends Controller {
 	}
 
 	/**
-	*Create a color with the given post parameters 
-	*@param name the color name by post
+	*Create a department with the given post parameters 
+	*@param name the department name by post
 	*@return null nothing returned but view loaded
 	*/
 	private function create()
 	{
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
+		$idLocation = $this->validateText($_POST['idLocation']);
 		$result = $this->model->create($name);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Color/Created.php');
+			require('views/Department/Created.php');
 		}
 		else
 		{
@@ -115,8 +116,10 @@ class ColorsController extends Controller {
 	}
 
 	/**
-	*Update a color with the given post parameters 
-	*@param name the color name
+	*Update a department with the given post parameters 
+	*@param id the department name (post)
+	*@param name the department name  (post)
+	*@param idLocation the location of the department (post)
 	*@return null nothing returned but view loaded
 	*/
 	private function edit()
@@ -124,12 +127,13 @@ class ColorsController extends Controller {
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
 		$name = $this->validateText($_POST['name']);
+		$idLocation = $this->validateText($_POST['idLocation']);
 		$result = $this->model->update($id,$name);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Color/Updated.php');
+			require('views/Department/Updated.php');
 		}
 		else
 		{
@@ -137,9 +141,9 @@ class ColorsController extends Controller {
 		}
 	}
 
-	/**
-	*Delete a color with the given post parameters 
-	*@param name the color name
+		/**
+	*Delete a department with the given post parameters 
+	*@param id the department name (post)
 	*@return null nothing returned but view loaded
 	*/
 	private function delete()
@@ -151,7 +155,7 @@ class ColorsController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Deleted.php');
+			require('views/Department/Deleted.php');
 		}
 		else
 		{
