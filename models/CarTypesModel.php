@@ -1,22 +1,22 @@
 <?php
 require('models/Model.php');
-Class ColorsModel extends Model{
+Class CarTypesModel extends Model{
 	private $id;
 	private $name;
 
 	/**
-	*method for list all colors
-	* @return array array of colors 
+	*method for list all cartypes
+	* @return array array of cartypes 
 	*/
 	function list()
 	{
-		//get all elements (set the $elements variable with a Colors array)
+		//get all elements (set the $elements variable with a CarTypes array)
 		return $elements;
 	}
 
 	/**
-	*method for show  Color details
-	*@param string $id
+	*method for show  cartype details
+	*@param string $id existing cartype id
 	* @return bool transaction result
 	*/
 	function details($id)
@@ -26,7 +26,7 @@ Class ColorsModel extends Model{
 	}
 
 	/**
-	*method for create new Color (required on vehicles) 
+	*method for create new cartype (required on vehicles) 
 	*@param string $name
 	* @return bool transaction result
 	*/
@@ -38,9 +38,9 @@ Class ColorsModel extends Model{
 	}
 
 	/**
-	*method for edit a Color  
-	*@param int $id (existing color id)
-	*@param string $name (color name) 
+	*method for edit a cartype  
+	*@param int $id (existing cartype id)
+	*@param string $name (cartype name) 
 	* @return bool transaction result
 	*/
 	function edit($id,$name)
@@ -51,8 +51,8 @@ Class ColorsModel extends Model{
 	}
 
 	/**
-	*method for create new Color (required on vehicles) 
-	*@param int $id (existing color id)
+	*method for create new cartype (required on vehicles) 
+	*@param int $id (existing cartype id)
 	* @return bool transaction result
 	*/
 	function delete($id)

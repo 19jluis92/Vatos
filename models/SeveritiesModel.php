@@ -10,8 +10,8 @@ Class SeveritiesModel extends Model{
 	*/
 	function list()
 	{
-		//delete element using the given $id
-		return true;
+		//get all elements (set the $elements variable with a Severities array)
+		return $elements;
 	}
 
 	/**

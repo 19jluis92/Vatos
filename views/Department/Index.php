@@ -6,7 +6,7 @@
 <body>
 <h1>Index</h1>
 <?php 
-	echo "Piece: ", $name,"<br />";
+	echo "Department: ", $name,"<br />";
  ?>
 </body>
 </html>	
