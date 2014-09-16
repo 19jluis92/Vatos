@@ -1,6 +1,6 @@
 <?php
 require('controllers/Controller.php');
-class VehiclesController extends Controller {
+class SeveritiesController extends Controller {
 	private $model;
 	
 
@@ -9,8 +9,8 @@ class VehiclesController extends Controller {
 	*/
 	function __construct()
 	{
-		require('models/ColorsModel.php');
-		$this->model = new VehiclesModel();
+		require('models/SeveritiesModel.php');
+		$this->model = new SeveritiesModel();
 	}
 
 	/**
@@ -46,22 +46,20 @@ class VehiclesController extends Controller {
 		}
 	}
 
-
-
 	/**
-	*Show all the colors of the database
+	*Show all the severities of the database
 	*@return null nothing returned but view loaded
 	*/
 	private function list()
 	{
 		
-		//get all the colors
+		//get all the severities
 		$result = $this->model->list();	
 		//Query Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Color/Index.php');
+			require('views/Severity/Index.php');
 		}
 		else
 		{
@@ -71,8 +69,8 @@ class VehiclesController extends Controller {
 	}
 
 	/**
-	*Show the color details with the given post parameters 
-	*@param id the color id
+	*Show the severity details with the given post parameters 
+	*@param id the severity id
 	*@return null nothing returned but view loaded
 	*/
 	private function details()
@@ -84,7 +82,7 @@ class VehiclesController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Details.php');
+			require('views/Severity/Details.php');
 		}
 		else
 		{
@@ -93,8 +91,8 @@ class VehiclesController extends Controller {
 	}
 
 	/**
-	*Create a color with the given post parameters 
-	*@param name the color name by post
+	*Create a severity with the given post parameters 
+	*@param name the severity name by post
 	*@return null nothing returned but view loaded
 	*/
 	private function create()
@@ -106,7 +104,7 @@ class VehiclesController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Created.php');
+			require('views/Severity/Created.php');
 		}
 		else
 		{
@@ -115,8 +113,8 @@ class VehiclesController extends Controller {
 	}
 
 	/**
-	*Update a color with the given post parameters 
-	*@param name the color name
+	*Edit a severity with the given post parameters 
+	*@param name the severity name
 	*@return null nothing returned but view loaded
 	*/
 	private function edit()
@@ -129,7 +127,7 @@ class VehiclesController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Updated.php');
+			require('views/Severity/Updated.php');
 		}
 		else
 		{
@@ -137,9 +135,9 @@ class VehiclesController extends Controller {
 		}
 	}
 
-		/**
-	*Delete a color with the given post parameters 
-	*@param name the color name
+	/**
+	*Delete a severity with the given post parameters 
+	*@param name the severity name
 	*@return null nothing returned but view loaded
 	*/
 	private function delete()
@@ -151,7 +149,7 @@ class VehiclesController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Deleted.php');
+			require('views/Severity/Deleted.php');
 		}
 		else
 		{

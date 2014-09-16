@@ -9,7 +9,7 @@ class VehiclesController extends Controller {
 	*/
 	function __construct()
 	{
-		require('models/ColorsModel.php');
+		require('models/PiecesModel.php');
 		$this->model = new VehiclesModel();
 	}
 
@@ -46,22 +46,20 @@ class VehiclesController extends Controller {
 		}
 	}
 
-
-
 	/**
-	*Show all the colors of the database
+	*Show all the pieces of the database
 	*@return null nothing returned but view loaded
 	*/
 	private function list()
 	{
 		
-		//get all the colors
+		//get all the pieces
 		$result = $this->model->list();	
 		//Query Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Color/Index.php');
+			require('views/Piece/Index.php');
 		}
 		else
 		{
@@ -71,8 +69,8 @@ class VehiclesController extends Controller {
 	}
 
 	/**
-	*Show the color details with the given post parameters 
-	*@param id the color id
+	*Show the piece details with the given post parameters 
+	*@param id the piece id
 	*@return null nothing returned but view loaded
 	*/
 	private function details()
@@ -84,17 +82,16 @@ class VehiclesController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Details.php');
+			require('views/Piece/Details.php');
 		}
 		else
 		{
 			require('views/Error.html');
 		}
 	}
-
 	/**
-	*Create a color with the given post parameters 
-	*@param name the color name by post
+	*Create a piece with the given post parameters 
+	*@param name the piece name by post
 	*@return null nothing returned but view loaded
 	*/
 	private function create()
@@ -106,7 +103,7 @@ class VehiclesController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Created.php');
+			require('views/Piece/Created.php');
 		}
 		else
 		{
@@ -115,8 +112,8 @@ class VehiclesController extends Controller {
 	}
 
 	/**
-	*Update a color with the given post parameters 
-	*@param name the color name
+	*Update a piece with the given post parameters 
+	*@param name the piece name
 	*@return null nothing returned but view loaded
 	*/
 	private function edit()
@@ -129,7 +126,7 @@ class VehiclesController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Updated.php');
+			require('views/Piece/Updated.php');
 		}
 		else
 		{
@@ -137,9 +134,9 @@ class VehiclesController extends Controller {
 		}
 	}
 
-		/**
-	*Delete a color with the given post parameters 
-	*@param name the color name
+	/**
+	*Delete a piece with the given post parameters 
+	*@param name the piece name
 	*@return null nothing returned but view loaded
 	*/
 	private function delete()
@@ -151,7 +148,7 @@ class VehiclesController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Deleted.php');
+			require('views/Piece/Deleted.php');
 		}
 		else
 		{
