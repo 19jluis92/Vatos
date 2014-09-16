@@ -137,7 +137,7 @@ class VehiclesController extends Controller {
 		}
 	}
 
-		/**
+	/**
 	*Delete a color with the given post parameters 
 	*@param name the color name
 	*@return null nothing returned but view loaded
