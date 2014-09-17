@@ -36,7 +36,7 @@ Class DepartmentsModel extends Model{
 	*@param string $idLocation
 	* @return bool transaction result
 	*/
-	function create($name)
+	function create($name,$idLocation)
 	{
 		$this->name = $name;
 		$this->idLocation = $idLocation;
@@ -51,7 +51,7 @@ Class DepartmentsModel extends Model{
 	*@param string $idLocation
 	* @return bool transaction result
 	*/
-	function edit($id,$name)
+	function edit($id,$name,$idLocation)
 	{
 		//find element using the given $id
 		$this->name = $name;

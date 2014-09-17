@@ -1,6 +1,6 @@
 <?php
 require('controllers/Controller.php');
-class ColorsController extends Controller {
+class InspectionsController extends Controller {
 	private $model;
 	
 
@@ -9,8 +9,8 @@ class ColorsController extends Controller {
 	*/
 	function __construct()
 	{
-		require('models/ColorsModel.php');
-		$this->model = new ColorsModel();
+		require('models/InspectionsModel.php');
+		$this->model = new InspectionsModel();
 	}
 
 	/**
@@ -49,19 +49,19 @@ class ColorsController extends Controller {
 
 
 	/**
-	*Show all the colors of the database
+	*Show all the inspections of the database
 	*@return null nothing returned but view loaded
 	*/
 	private function list()
 	{
 		
-		//get all the colors
+		//get all the inspections
 		$result = $this->model->list();	
 		//Query Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Color/Index.php');
+			require('views/Inspection/Index.php');
 		}
 		else
 		{
@@ -71,8 +71,8 @@ class ColorsController extends Controller {
 	}
 
 	/**
-	*Show the color details with the given post parameters 
-	*@param id the color id
+	*Show the inspection details with the given post parameters 
+	*@param id the inspection id
 	*@return null nothing returned but view loaded
 	*/
 	private function details()
@@ -84,7 +84,7 @@ class ColorsController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Details.php');
+			require('views/Inspection/Details.php');
 		}
 		else
 		{
@@ -93,20 +93,28 @@ class ColorsController extends Controller {
 	}
 
 	/**
-	*Create a color with the given post parameters 
-	*@param name the color name by post
+	*Create a inspection with the given post parameters 
+	*@param int idService 
+	*@param float mileage 
+	*@param float fuel 
+	*@param string inspectionDate datetime value inspection date 
+	*@param bool type 
 	*@return null nothing returned but view loaded
 	*/
 	private function create()
 	{
 		//Validate Variables
-		$name = $this->validateText($_POST['name']);
+		$idService = $this->validateNumber($_POST['idService']);
+		$mileage = $this->validateFloat($_POST['mileage']);
+		$fuel = $this->validateFloat($_POST['fuel']);
+		$inspectionDate = $this->validateDate($_POST['inspectionDate']);
+		$type = $this->validateBool($_POST['type']);
 		$result = $this->model->create($name);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Color/Created.php');
+			require('views/Inspection/Created.php');
 		}
 		else
 		{
@@ -115,21 +123,30 @@ class ColorsController extends Controller {
 	}
 
 	/**
-	*Update a color with the given post parameters 
-	*@param name the color name
-	*@return null nothing returned but view loaded
+	*Update a inspection with the given post parameters 
+	*@param int $id (post)
+	*@param int $idService  (post)
+	*@param float $mileage  (post)
+	*@param float $fuel  (post)
+	*@param string $inspectionDate (post) datetime value inspection date 
+	*@param  bool $type  (post)
+	*@return null $nothing returned but view loaded
 	*/
 	private function edit()
 	{
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
-		$name = $this->validateText($_POST['name']);
-		$result = $this->model->update($id,$name);	
+		$idService = $this->validateNumber($_POST['idService']);
+		$mileage = $this->validateFloat($_POST['mileage']);
+		$fuel = $this->validateFloat($_POST['fuel']);
+		$inspectionDate = $this->validateDate($_POST['inspectionDate']);
+		$type = $this->validateBool($_POST['type']);
+		$result = $this->model->update($id,$idService,$mileage,$fuel,$inspectionDate,$type);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Color/Updated.php');
+			require('views/Inspection/Updated.php');
 		}
 		else
 		{
@@ -138,8 +155,8 @@ class ColorsController extends Controller {
 	}
 
 	/**
-	*Delete a color with the given post parameters 
-	*@param name the color name
+	*Delete a inspection with the given post parameters 
+	*@param int $id the inspection id
 	*@return null nothing returned but view loaded
 	*/
 	private function delete()
@@ -151,7 +168,7 @@ class ColorsController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Deleted.php');
+			require('views/Inspection/Deleted.php');
 		}
 		else
 		{

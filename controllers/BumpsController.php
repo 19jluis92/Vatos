@@ -1,6 +1,6 @@
 <?php
 require('controllers/Controller.php');
-class ColorsController extends Controller {
+class BumpsController extends Controller {
 	private $model;
 	
 
@@ -9,8 +9,8 @@ class ColorsController extends Controller {
 	*/
 	function __construct()
 	{
-		require('models/ColorsModel.php');
-		$this->model = new ColorsModel();
+		require('models/BumpsModel.php');
+		$this->model = new BumpsModel();
 	}
 
 	/**
@@ -49,19 +49,19 @@ class ColorsController extends Controller {
 
 
 	/**
-	*Show all the colors of the database
+	*Show all the bumps of the database
 	*@return null nothing returned but view loaded
 	*/
 	private function list()
 	{
 		
-		//get all the colors
+		//get all the bumps
 		$result = $this->model->list();	
 		//Query Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Color/Index.php');
+			require('views/Bump/Index.php');
 		}
 		else
 		{
@@ -71,8 +71,8 @@ class ColorsController extends Controller {
 	}
 
 	/**
-	*Show the color details with the given post parameters 
-	*@param id the color id
+	*Show the bump details with the given post parameters 
+	*@param id the bump id
 	*@return null nothing returned but view loaded
 	*/
 	private function details()
@@ -84,7 +84,7 @@ class ColorsController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Details.php');
+			require('views/Bump/Details.php');
 		}
 		else
 		{
@@ -93,20 +93,22 @@ class ColorsController extends Controller {
 	}
 
 	/**
-	*Create a color with the given post parameters 
-	*@param name the color name by post
+	*Create a bump with the given post parameters 
+	*@param name the bump name by post
 	*@return null nothing returned but view loaded
 	*/
 	private function create()
 	{
 		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$result = $this->model->create($name);	
+		$idPiece = $this->validateNumber($_POST['idPiece']);
+		$idSeverity = $this->validateNumber($_POST['idSeverity']);
+		$idInspection = $this->validateNumber($_POST['idInspection']);	
+		$result = $this->model->create($idPiece , $idSeverity, $idInspection);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Color/Created.php');
+			require('views/Bump/Created.php');
 		}
 		else
 		{
@@ -115,21 +117,23 @@ class ColorsController extends Controller {
 	}
 
 	/**
-	*Update a color with the given post parameters 
-	*@param name the color name
+	*Update a bump with the given post parameters 
+	*@param name the bump name
 	*@return null nothing returned but view loaded
 	*/
 	private function edit()
 	{
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
-		$name = $this->validateText($_POST['name']);
-		$result = $this->model->update($id,$name);	
-		//Insert Succesfull
+		$idPiece = $this->validateNumber($_POST['idPiece']);
+		$idSeverity = $this->validateNumber($_POST['idSeverity']);
+		$idInspection = $this->validateNumber($_POST['idInspection']);
+		$result = $this->model->update($id,$idPiece , $idSeverity, $idInspection);	
+		//Update Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Color/Updated.php');
+			require('views/Bump/Updated.php');
 		}
 		else
 		{
@@ -137,9 +141,9 @@ class ColorsController extends Controller {
 		}
 	}
 
-	/**
-	*Delete a color with the given post parameters 
-	*@param name the color name
+		/**
+	*Delete a bump with the given post parameters 
+	*@param name the bump name
 	*@return null nothing returned but view loaded
 	*/
 	private function delete()
@@ -151,7 +155,7 @@ class ColorsController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Color/Deleted.php');
+			require('views/Bump/Deleted.php');
 		}
 		else
 		{

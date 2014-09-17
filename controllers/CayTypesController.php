@@ -146,7 +146,7 @@ class CarTypesController extends Controller {
 	{
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->create($id);	
+		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
 		{
