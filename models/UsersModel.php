@@ -1,27 +1,18 @@
 <?php  
 require('models/Model.php'); 
 class UsersModel extends Model{
-	public $name;
-	public $lastName;
-	public $roleId;
-	public $address;
-	public $phone;
-	public $result;
+	private $email;
+	private $password;
+
 
 	/**
-	* @param string $name
-	* @param string $lastName
-	* @param string $address
-	* @param string $roleId
-	* @param string $phone
+	* @param string $email
+	* @param string $password
 	*/
-	function create($names, $lastName, $address,$roleId, $phone)
+	function create($email, $password)
 	{
-		$this->names   = $names;
-		$this->lastName = $lastName;
-		$this->address  = $address;
-		$this->roleId = $roleId;
-		$this->phone = $phone;
+		$this->email   = $email;
+		$this->password = $password;
 		return true;
 	}
 }
