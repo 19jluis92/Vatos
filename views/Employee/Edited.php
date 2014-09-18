@@ -4,9 +4,9 @@
 	<title></title>
 </head>
 <body>
-<h1>Index </h1>
+<h1>Edited </h1>
 <?php 
-	echo "Index";
+	
  ?>
 </body>
 </html>	
