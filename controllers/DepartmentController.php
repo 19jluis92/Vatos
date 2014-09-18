@@ -19,7 +19,8 @@ class DepartmentsController extends Controller {
 	*/
 	function run()
 	{
-		switch($_GET['view'])
+		$view = isset($_GET['view'])?$_GET['view']:'index';
+		switch($view)
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
@@ -72,7 +73,7 @@ class DepartmentsController extends Controller {
 
 	/**
 	*Show the department details with the given post parameters 
-	*@param id the department id
+	*@param int id the department id
 	*@return null nothing returned but view loaded
 	*/
 	private function details()
@@ -94,15 +95,15 @@ class DepartmentsController extends Controller {
 
 	/**
 	*Create a department with the given post parameters 
-	*@param name the department name by post
+	*@param string  name the department name by post
 	*@return null nothing returned but view loaded
 	*/
 	private function create()
 	{
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
-		$idLocation = $this->validateText($_POST['idLocation']);
-		$result = $this->model->create($name);	
+		$idLocation = $this->validateNumber($_POST['idLocation']);
+		$result = $this->model->create($name,$idLocation);	
 		//Insert Succesfull
 		if($result)
 		{
@@ -117,9 +118,9 @@ class DepartmentsController extends Controller {
 
 	/**
 	*Update a department with the given post parameters 
-	*@param id the department name (post)
-	*@param name the department name  (post)
-	*@param idLocation the location of the department (post)
+	*@param int id the department name (post)
+	*@param string name the department name  (post)
+	*@param int idLocation the location of the department (post)
 	*@return null nothing returned but view loaded
 	*/
 	private function edit()
@@ -127,8 +128,8 @@ class DepartmentsController extends Controller {
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
 		$name = $this->validateText($_POST['name']);
-		$idLocation = $this->validateText($_POST['idLocation']);
-		$result = $this->model->update($id,$name);	
+		$idLocation = $this->validateNumber($_POST['idLocation']);
+		$result = $this->model->update($id,$name,$idLocation);	
 		//Insert Succesfull
 		if($result)
 		{
@@ -150,7 +151,7 @@ class DepartmentsController extends Controller {
 	{
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->create($id);	
+		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
 		{

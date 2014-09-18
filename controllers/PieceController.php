@@ -19,7 +19,8 @@ class PiecesController extends Controller {
 	*/
 	function run()
 	{
-		switch($_GET['view'])
+		$view = isset($_GET['view'])?$_GET['view']:'index';
+		switch($view)
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
@@ -143,7 +144,7 @@ class PiecesController extends Controller {
 	{
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->create($id);	
+		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
 		{
