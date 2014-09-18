@@ -1,7 +1,6 @@
 <?php
 require('controllers/Controller.php');
-class PiecesController extends Controller {
-	private $model;
+class HomeController extends Controller {
 	
 
 	/**
@@ -9,8 +8,7 @@ class PiecesController extends Controller {
 	*/
 	function __construct()
 	{
-		require('models/PiecesModel.php');
-		$this->model = new PiecesModel();
+		
 	}
 
 	/**
@@ -22,56 +20,30 @@ class PiecesController extends Controller {
 		$view = isset($_GET['view'])?$_GET['view']:'index';
 		switch($view)
 		{
-			case 'index':case 'list':
+			case 'index':
 						//Validate User and permissions
-			$this->list();	
-			break;
-			case 'details':
-						//Validate User and permissions
-			$this->details();		
-			break;
-			case 'create':
-						//Validate User and permissions
-			$this->create();		
-			break;
-			case 'edit':
-						//Validate User and permissions
-			$this->edit();		
-			break;
-			case 'delete':
-						//Validate User and permissions
-			$this->delete();		
+			$this->index();	
 			break;
 			default:
+			$this->index();	
 			break;
 		}
 	}
 
+
+
 	/**
-	*Show all the pieces of the database
+	*Show all the colors of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function index()
 	{
-		
-		//get all the pieces
-		$result = $this->model->list();	
-		//Query Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/Piece/Index.php');
-		}
-		else
-		{
-			//Ohh well... :(
-			require('views/Error.html');
-		}
+			require('views/Home/index.html');
 	}
 
 	/**
-	*Show the piece details with the given post parameters 
-	*@param id the piece id
+	*Show the color details with the given post parameters 
+	*@param id the color id
 	*@return null nothing returned but view loaded
 	*/
 	private function details()
@@ -83,16 +55,17 @@ class PiecesController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Piece/Details.php');
+			require('views/Color/Details.php');
 		}
 		else
 		{
 			require('views/Error.html');
 		}
 	}
+
 	/**
-	*Create a piece with the given post parameters 
-	*@param name the piece name by post
+	*Create a color with the given post parameters 
+	*@param name the color name by post
 	*@return null nothing returned but view loaded
 	*/
 	private function create()
@@ -104,7 +77,7 @@ class PiecesController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Piece/Created.php');
+			require('views/Color/Created.php');
 		}
 		else
 		{
@@ -113,8 +86,8 @@ class PiecesController extends Controller {
 	}
 
 	/**
-	*Update a piece with the given post parameters 
-	*@param name the piece name
+	*Update a color with the given post parameters 
+	*@param name the color name
 	*@return null nothing returned but view loaded
 	*/
 	private function edit()
@@ -127,7 +100,7 @@ class PiecesController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Piece/Updated.php');
+			require('views/Color/Updated.php');
 		}
 		else
 		{
@@ -136,8 +109,8 @@ class PiecesController extends Controller {
 	}
 
 	/**
-	*Delete a piece with the given post parameters 
-	*@param name the piece name
+	*Delete a color with the given post parameters 
+	*@param name the color name
 	*@return null nothing returned but view loaded
 	*/
 	private function delete()
@@ -149,7 +122,7 @@ class PiecesController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Piece/Deleted.php');
+			require('views/Color/Deleted.php');
 		}
 		else
 		{
