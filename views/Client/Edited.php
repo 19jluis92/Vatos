@@ -4,6 +4,9 @@
 	<title></title>
 </head>
 <body>
-<h1>CREATED</h1>
+<h1>Edited </h1>
+<?php 
+	
+ ?>
 </body>
 </html>	

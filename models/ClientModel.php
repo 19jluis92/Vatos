@@ -31,5 +31,19 @@ class ClientModel extends Model
 	return true;
 
 	}
+	function edit()
+	{
+	$this->name= $name;
+	$this->lastName = $lastName;
+	$this->rfc = $rfc;
+	$this->clientCol = $clientCol;
+	$this->clientCol1 = $clientCol1;
+
+	return true;
+	}
+	function delete($id)
+	{
+		return true;
+	}
 }
 ?>

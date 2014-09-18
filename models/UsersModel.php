@@ -15,6 +15,25 @@ class UsersModel extends Model{
 		$this->password = $password;
 		return true;
 	}
+/**
+	* Edit a vehicle given the id
+	* @param string $email
+	* @param string $password
+	*/
+	function edit(){
+		$this->email   = $email;
+		$this->password = $password;
+		return true;
+	}
+/**
+	* Delete  given it's id
+	* @param int $id
+	* @return bool transaction result
+	*/
+	function delete($id){
+		return true;
+
+	}
 }
 
 ?>
