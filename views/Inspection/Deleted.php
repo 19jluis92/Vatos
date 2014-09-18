@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
 <h1>CREATED</h1>
 <?php 
 	echo "idService: ", $idService,"<br />";
@@ -12,5 +6,3 @@
 	echo "inspectionDate: ", $inspectionDate,"<br />";
 	echo "type: ", $type,"<br />";
  ?>
-</body>
-</html>	
