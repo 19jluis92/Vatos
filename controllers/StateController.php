@@ -1,6 +1,6 @@
 <?php
 require('controllers/Controller.php');
-class CountryController extends Controller {
+class StateController extends Controller {
 	private $model;
 	
 	/**
@@ -8,8 +8,8 @@ class CountryController extends Controller {
 	*/
 	function __construct()
 	{
-		require('models/CountryModel.php');
-		$this->model = new CountryModel();
+		require('models/StateModel.php');
+		$this->model = new StateModel();
 	}
 
 	/**
@@ -55,13 +55,13 @@ class CountryController extends Controller {
 	private function list()
 	{
 		
-		//get all the Country
+		//get all the State
 		$result = $this->model->list();	
 		//Query Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Country/Index.php');
+			require('views/State/Index.php');
 		}
 		else
 		{
@@ -71,8 +71,8 @@ class CountryController extends Controller {
 	}
 
 	/**
-	*Show the Country details with the given post parameters 
-	*@param int id the Country id
+	*Show the State details with the given post parameters 
+	*@param int id the State id
 	*@return null nothing returned but view loaded
 	*/
 	private function details()
@@ -84,7 +84,7 @@ class CountryController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Country/Details.php');
+			require('views/State/Details.php');
 		}
 		else
 		{
@@ -93,21 +93,21 @@ class CountryController extends Controller {
 	}
 
 	/**
-	*Create a Country with the given post parameters 
-	*@param string  name the Country name by post
+	*Create a State with the given post parameters 
+	*@param string  name the State name by post
 	*@return null nothing returned but view loaded
 	*/
 	private function create()
 	{
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
-		$idCountry = $this->validateNumber($_POST['idCountry']);
-		$result = $this->model->create($name, $idCountry);	
+		$idState = $this->validateNumber($_POST['idState']);
+		$result = $this->model->create($name, $idState);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Country/Created.php');
+			require('views/State/Created.php');
 		}
 		else
 		{
@@ -116,23 +116,23 @@ class CountryController extends Controller {
 	}
 
 	/**
-	*Update a Country with the given post parameters 
-	*@param int id the Country name (post)
-	*@param string name the Country name  (post)
-	*@param int idLocation the location of the Country (post)
+	*Update a State with the given post parameters 
+	*@param int id the State name (post)
+	*@param string name the State name  (post)
+	*@param int idLocation the location of the State (post)
 	*@return null nothing returned but view loaded
 	*/
 	private function edit()
 	{
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
-		$idCountry = $this->validateNumber($_POST['idCountry']);
-		$result = $this->model->update($name,$idCountry);	
+		$idState = $this->validateNumber($_POST['idState']);
+		$result = $this->model->update($name,$idState);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Country/Updated.php');
+			require('views/State/Updated.php');
 		}
 		else
 		{
@@ -141,8 +141,8 @@ class CountryController extends Controller {
 	}
 
 		/**
-	*Delete a Country with the given post parameters 
-	*@param id the Country name (post)
+	*Delete a State with the given post parameters 
+	*@param id the State name (post)
 	*@return null nothing returned but view loaded
 	*/
 	private function delete()
@@ -154,7 +154,7 @@ class CountryController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Country/Deleted.php');
+			require('views/State/Deleted.php');
 		}
 		else
 		{

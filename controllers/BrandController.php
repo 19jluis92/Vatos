@@ -1,6 +1,6 @@
 <?php
 require('controllers/Controller.php');
-class CountryController extends Controller {
+class BrandController extends Controller {
 	private $model;
 	
 	/**
@@ -8,8 +8,8 @@ class CountryController extends Controller {
 	*/
 	function __construct()
 	{
-		require('models/CountryModel.php');
-		$this->model = new CountryModel();
+		require('models/BrandModel.php');
+		$this->model = new BrandModel();
 	}
 
 	/**
@@ -55,14 +55,14 @@ class CountryController extends Controller {
 	private function list()
 	{
 		
-		//get all the Country
+		//get all the Brand
 
 		$result = $this->model->list();	
 		//Query Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Country/Index.php');
+			require('views/Brand/Index.php');
 		}
 		else
 		{
@@ -72,8 +72,8 @@ class CountryController extends Controller {
 	}
 
 	/**
-	*Show the Country details with the given post parameters 
-	*@param int id the Country id
+	*Show the Brand details with the given post parameters 
+	*@param int id the Brand id
 	*@return null nothing returned but view loaded
 	*/
 	private function details()
@@ -85,7 +85,7 @@ class CountryController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Country/Details.php');
+			require('views/Brand/Details.php');
 		}
 		else
 		{
@@ -94,8 +94,8 @@ class CountryController extends Controller {
 	}
 
 	/**
-	*Create a Country with the given post parameters 
-	*@param string  name the Country name by post
+	*Create a Brand with the given post parameters 
+	*@param string  name the Brand name by post
 	*@return null nothing returned but view loaded
 	*/
 	private function create()
@@ -107,7 +107,7 @@ class CountryController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Country/Created.php');
+			require('views/Brand/Created.php');
 		}
 		else
 		{
@@ -116,10 +116,10 @@ class CountryController extends Controller {
 	}
 
 	/**
-	*Update a Country with the given post parameters 
-	*@param int id the Country name (post)
-	*@param string name the Country name  (post)
-	*@param int idLocation the location of the Country (post)
+	*Update a Brand with the given post parameters 
+	*@param int id the Brand name (post)
+	*@param string name the Brand name  (post)
+	*@param int idLocation the location of the Brand (post)
 	*@return null nothing returned but view loaded
 	*/
 	private function edit()
@@ -131,7 +131,7 @@ class CountryController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Country/Updated.php');
+			require('views/Brand/Updated.php');
 		}
 		else
 		{
@@ -140,8 +140,8 @@ class CountryController extends Controller {
 	}
 
 		/**
-	*Delete a Country with the given post parameters 
-	*@param id the Country name (post)
+	*Delete a Brand with the given post parameters 
+	*@param id the Brand name (post)
 	*@return null nothing returned but view loaded
 	*/
 	private function delete()
@@ -153,7 +153,7 @@ class CountryController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Country/Deleted.php');
+			require('views/Brand/Deleted.php');
 		}
 		else
 		{
