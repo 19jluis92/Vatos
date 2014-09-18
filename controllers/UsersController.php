@@ -42,8 +42,9 @@ class UsersController extends Controller{
 	}
 	private function create()
 	{
+		
 		//Validate Variables
-		$email   = $this->validateText($_POST['email']);
+		$email   = $this->validateEmail($_POST['email']);
 		$password = $this->validateText($_POST['password']);
 		$result = $this->model->create($email, $password);
 		
@@ -51,6 +52,7 @@ class UsersController extends Controller{
 		if($result)
 		{
 			//Load view
+
 			require('views/User/Created.php');
 		}
 		else
@@ -67,7 +69,7 @@ class UsersController extends Controller{
 		$result = $this->model->delete($id);
 		if($result)
 		{
-			require('views/User/Deleted.php')
+			require('views/User/Deleted.php');
 		}
 		else
 		{

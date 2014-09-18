@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title> vista created </title>
 </head>
 <body>
 <h1>CREATED</h1>
 <?php 
-
+echo $email;
  ?>
 </body>
 </html>	
