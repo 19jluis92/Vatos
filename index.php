@@ -3,6 +3,16 @@
 	$path = isset($_GET['controller']) ? $_GET['controller'] : 'home' ;
 	switch($path)
 {
+	case 'employee':
+			//Load controller
+			require('controllers/EmployeeController.php');
+			$controller = new EmployeeController();
+		break;
+	case 'client':
+			//Load Controller
+			require('controller/ClientController.php');
+			$controller = new ClientController();
+			break;
 	case 'bump':
 			//Load controller file
 			require('controllers/BumpsController.php');
