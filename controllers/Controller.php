@@ -29,11 +29,11 @@ class Controller{
 		// Run the preg_match() function on regex against the email address
 		if (preg_match($regex, $data))
 		{
-	 		 return 'Valida';
+	 		 return true;
 		}
 		else 
 		{ 
-			return 'Not valid';
+			return false;
 		} 
 		
 	}
@@ -42,8 +42,33 @@ class Controller{
 	* @return string $data
 	* Validate a string to be text and clean it
 	*/
-	protected function validateUser()
+	protected function validateUserName($data)
 	{
+		$regex = '/^[a-z\d_]{4,15}$/i ';
+		if (preg_match($rege, $dat))
+		 {
+			return true;
+		}
+
+		return false;
+
+	}
+	/*¨*
+	*Contraseñas que contengan al menos una letra mayúscula.
+	Contraseñas que contengan al menos una letra minúscula.
+	Contraseñas que contengan al menos un número o caracter especial.
+	Contraseñas cuya longitud sea como mínimo 8 caracteres.
+	Contraseñas cuya longitud máxima no debe ser arbitrariamente limitada.
+	*
+	*/
+	protected function validaPassword($data)
+	{
+		$regex='(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$';
+		if(preg_match($regex, $data))
+		{
+			return true;
+		}
+		return false;
 
 	}
 }
