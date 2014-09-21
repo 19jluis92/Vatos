@@ -1,15 +1,16 @@
 <?php
 require('controllers/Controller.php');
+
 /**
 * 
 */
 class EmployeeController extends Controller
 {
-	
-	function __construct(argument)
+	private $model;
+	function __construct()
 	{
 		require('models/EmployeeModel.php');
-		$this->model= new EmployeeModel();
+		$this->model = new EmployeeModel();
 	}
 
 	function run()
@@ -17,7 +18,7 @@ class EmployeeController extends Controller
 		switch($_GET['view'])
 		{
 			case 'index':
-			$this->list();
+			$this->index();
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -45,10 +46,10 @@ class EmployeeController extends Controller
 	* Show all in database
 	* @return null, view rendered
 	*/
-	private function list()
+	private function index()
 	{
 		//Get all 
-		$result = $this->model->list();
+		$result = $this->model->index();
 		if($result)
 		{
 			//Load view

@@ -20,7 +20,7 @@ class UsersModel extends Model{
 	* @param string $email
 	* @param string $password
 	*/
-	function edit(){
+	function edit($email,$password){
 		$this->email   = $email;
 		$this->password = $password;
 		return true;
@@ -34,6 +34,15 @@ class UsersModel extends Model{
 		return true;
 
 	}
+
+	function index(){
+		return true;
+	}
+
+	function details(){
+		return true;
+	}
+
 }
 
 ?>

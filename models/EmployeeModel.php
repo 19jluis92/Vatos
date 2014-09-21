@@ -62,5 +62,13 @@ class EmployeeModel  extends Model
 	function delete($id){
 		return true;
 	}
+
+	function index(){
+		return true;
+	}
+
+	function details($id){
+		return true;
+	}
 }
 ?>

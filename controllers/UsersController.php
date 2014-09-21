@@ -31,10 +31,6 @@ class UsersController extends Controller{
 				$this->index();
 				break;
 
-			case 'delete':
-			$this->delete();
-				break;
-
 			
 			default:
 			break;
@@ -104,14 +100,14 @@ class UsersController extends Controller{
 	private function edit(){
 		$email = $this->validateText($_POST['email']);
 		$password = $this->validateText($_POST['password']);
-		$result = $this->model->edit();
+		$result = $this->model->edit($email,$password);
 	}
 	/**
 	* Show all users in database
 	* @return null, view rendered
 	*/
 	private function index(){
-		$result = $this->model->list();
+		$result = $this->model->index();
 		if($result)
 		{
 			//Load view

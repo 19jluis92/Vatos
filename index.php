@@ -10,7 +10,7 @@
 		break;
 	case 'client':
 			//Load Controller
-			require('controller/ClientController.php');
+			require('controllers/ClientController.php');
 			$controller = new ClientController();
 			break;
 	case 'bump':

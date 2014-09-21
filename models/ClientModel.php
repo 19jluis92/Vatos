@@ -31,7 +31,7 @@ class ClientModel extends Model
 	return true;
 
 	}
-	function edit()
+	function edit($name,$lastName,$rfc,$clientCol,$clientCol1)
 	{
 	$this->name= $name;
 	$this->lastName = $lastName;
@@ -42,6 +42,16 @@ class ClientModel extends Model
 	return true;
 	}
 	function delete($id)
+	{
+		return true;
+	}
+
+	function index()
+	{
+		return true;
+	}
+
+	function details($id)
 	{
 		return true;
 	}

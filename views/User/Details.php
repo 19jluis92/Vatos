@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Details</title>
 </head>
 <body>
-<h1>Details</h1>
+<h1></h1>
 <?php 
 	
  ?>

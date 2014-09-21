@@ -1,22 +1,25 @@
 <?php
 require('controllers/controller.php');
+
 /**
 * 
 */
 class ClientController extends Controller
 {
+	private $model;
 	
-	function __construct(argument)
+	function __construct()
 	{
 		require('models/ClientModel.php');
 		$this->model = new ClientModel();
 	}
+
 	function run()
 	{
 		switch($_GET['view'])
 		{
 			case 'index':
-			$this->list();
+			$this->index();
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -42,9 +45,9 @@ class ClientController extends Controller
 	* Show all client in database
 	* @return null, view rendered
 	*/
-	private function list()
+	private function index()
 	{
-		$result = $this->model->list();
+		$result = $this->model->index();
 		if($result)
 		{
 			//Load view
@@ -140,7 +143,7 @@ class ClientController extends Controller
 		$lada	     = $this->validateNumber($_POST['lada']);
 		$area    = $this->validateNumber($_POST['area']);
 
-		$result = $this->model->update($name,$lastName,$rfc,$clientCol,$clientCol1);
+		$result = $this->model->edit($name,$lastName,$rfc,$clientCol,$clientCol1);
 		if($result)
 		{
 			//Load view
