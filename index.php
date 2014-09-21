@@ -41,7 +41,7 @@
 			//Load controller file
 			require('controllers/DepartmentsController.php');
 			//Create controller and execute it
-			$controller = new VehiclesController();
+			$controller = new DepartmentsController();
 			break;
 	case 'home':
 			//Load controller file
@@ -49,11 +49,17 @@
 			//Create controller and execute it
 			$controller = new HomeController();
 			break;
+	case 'piece':
+			//Load controller file
+			require('controllers/PiecesController.php');
+			//Create controller and execute it
+			$controller = new PiecesController();
+			break;
 	case 'inspection':
 			//Load controller file
 			require('controllers/InspectionsController.php');
 			//Create controller and execute it
-			$controller = new InspectionController();
+			$controller = new InspectionsController();
 			break;
 	case 'relocation':
 			//Load controller file
