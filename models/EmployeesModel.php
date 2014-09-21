@@ -4,7 +4,7 @@
 * 
 */
 require('models/Model.php'); 
-class EmployeeModel  extends Model
+class EmployeesModel  extends Model
 {
 	private $name;
 	private $lastName;
@@ -20,7 +20,7 @@ class EmployeeModel  extends Model
 	*/
 	private $user;
 	private $city;
-	private $carWorkShop
+	private $carWorkShop;
 
 
 
@@ -31,10 +31,11 @@ class EmployeeModel  extends Model
 	* @param string $address
 	* @param string $phone
 	* @param string $cellPhone
-	* @param string $city
-	* @param string $carWorkShop
+	* @param string $idCity
+	* @param string $idUser
+	* @param string $idCarWorkShop
 	*/
-	function create($name,$lastName,$nss,$address,$phone,$cellPhone)
+	function create($name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop)
 	{
 		$this->name=$name;
 		$this->lastName=$lastName;
@@ -42,7 +43,9 @@ class EmployeeModel  extends Model
 		$this->address = $address;
 		$this->phone = $phone;
 		$this->cellPhone=$cellPhone;
-
+		$this->idCity = $idCity;
+		$this->idUser = $idUser;
+		$this->idCarWorkShop = $idCarWorkShop;
 		return true;
 		
 	}
@@ -53,18 +56,22 @@ class EmployeeModel  extends Model
 	* @param string $address
 	* @param string $phone
 	* @param string $cellPhone
-	* @param string $city
-	* @param string $carWorkShop
+	* @param string $idCity
+	* @param string $idCarWorkShop
 	*/
-	function edit($name,$lastName,$nss,$address,$phone,$cellPhone)
+	function edit($id,$name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop)
 	{
+		//Find element using the given $id
 		$this->name=$name;
 		$this->lastName=$lastName;
 		$this->nss=$nss;
 		$this->address = $address;
 		$this->phone = $phone;
 		$this->cellPhone=$cellPhone;
-
+		$this->idCity = $idCity;
+		$this->idUser = $idUser;
+		$this->idCarWorkShop = $idCarWorkShop;
+		//update the element
 		return true;
 		
 	}

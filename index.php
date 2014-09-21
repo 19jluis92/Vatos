@@ -5,8 +5,8 @@
 {
 	case 'employee':
 			//Load controller
-			require('controllers/EmployeeController.php');
-			$controller = new EmployeeController();
+			require('controllers/EmployeesController.php');
+			$controller = new EmployeesController();
 		break;
 	case 'client':
 			//Load Controller

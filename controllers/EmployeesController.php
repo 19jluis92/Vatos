@@ -4,18 +4,19 @@ require('controllers/Controller.php');
 /**
 * 
 */
-class EmployeeController extends Controller
+class EmployeesController extends Controller
 {
 	private $model;
 	function __construct()
 	{
-		require('models/EmployeeModel.php');
-		$this->model = new EmployeeModel();
+		require('models/EmployeesModel.php');
+		$this->model = new EmployeesModel();
 	}
 
 	function run()
 	{
-		switch($_GET['view'])
+		$view = isset($_GET['view'])?$_GET['view']:'index';
+		switch($view)
 		{
 			case 'index':
 			            $this->all();
@@ -46,10 +47,10 @@ class EmployeeController extends Controller
 	* Show all in database
 	* @return null, view rendered
 	*/
-	private function index()
+	private function all()
 	{
 		//Get all 
-		$result = $this->model->index();
+		$result = $this->model->all();
 		if($result)
 		{
 			//Load view
@@ -89,20 +90,23 @@ class EmployeeController extends Controller
 	* @param string $address
 	* @param string $phone
 	* @param string $cellPhone
-	* @param string $city
-	* @param string $carWorkShop
+	* @param string $idCity
+	* @param string $idUser
+	* @param string $idCarWorkShop
 	*/
 	private function create()
 	{
 		//validateNumberte Variables
-		$name   		 = $this->validateText($_POST['name']);
-		$lastName 		 = $this->validateText($_POST['lastName']);
-		$nss		 = $this->validateText($_POST['nss']);
-		$address		 = $this->validateText($_POST['address']);
-		$phone  		 = $this->validateText($_POST['phone']);
-		$cellPhone  = $this->validateText($_POST['cellPhone']);
-		
-		$result = $this->model->create($name,$lastName,$nss,$address,$phone,$cellPhone);
+		$name = $this->validateText($_POST['name']);
+		$lastName = $this->validateText($_POST['lastName']);
+		$nss =  $this->validateText($_POST['nss']);
+		$address = $this->validateText($_POST['address']);
+		$phone = $this->validateText($_POST['phone']);
+		$cellPhone = $this->validateText($_POST['cellPhone']);
+		$idCity = $this->validateNumber($_POST['idCity']);
+		$idUser = $this->validateNumber($_POST['idUser']);
+		$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
+		$result = $this->model->create($name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop);
 		
 		//Insert Succesful
 		if($result)
@@ -118,27 +122,32 @@ class EmployeeController extends Controller
 	}
 	/**
 	* Update with the given post parameters
+	* @param int $id
 	* @param string $name
 	* @param string $lastName
 	* @param string $nss
 	* @param string $address
 	* @param string $phone
 	* @param string $cellPhone
-	* @param string $city
-	* @param string $carWorkShop
+	* @param int $idCity
+	* @param int $idCarWorkShop
+	* @param int $idUser
 	* @return null, view rendered
 	*/
 	private function edit()
 	{
 		//Validate Variables
-		$name   		 = $this->validateText($_POST['name']);
-		$lastName 		 = $this->validateText($_POST['lastName']);
-		$nss		 = $this->validateText($_POST['nss']);
-		$address		 = $this->validateText($_POST['address']);
-		$phone  		 = $this->validateText($_POST['phone']);
-		$cellPhone  = $this->validateText($_POST['cellPhone']);
-		
-		$result = $this->model->edit($name,$lastName,$nss,$address,$phone,$cellPhone);
+		$id = $this->validateNumber($_POST['id']);
+		$name = $this->validateText($_POST['name']);
+		$lastName = $this->validateText($_POST['lastName']);
+		$nss =  $this->validateText($_POST['nss']);
+		$address = $this->validateText($_POST['address']);
+		$phone = $this->validateText($_POST['phone']);
+		$cellPhone = $this->validateText($_POST['cellPhone']);
+		$idCity = $this->validateNumber($_POST['idCity']);
+		$idUser = $this->validateNumber($_POST['idUser']);
+		$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
+		$result = $this->model->edit($id,$name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop);
 		if($result)
 		{
 			//Load view
@@ -153,7 +162,7 @@ class EmployeeController extends Controller
 
 	/**
 	* Delete  given the Id
-	* @param $VIN
+	* @param $id
 	* @return null, view rendered
 	*/
 	private function delete()
