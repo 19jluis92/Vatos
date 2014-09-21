@@ -25,6 +25,12 @@
 			//Create controller and execute it
 			$controller = new CarTypesController();
 			break;
+	case 'city':
+			//Load controller file
+			require('controllers/CitiesController.php');
+			//Create controller and execute it
+			$controller = new CitiesController();
+			break;
 	case 'color':
 			//Load controller file
 			require('controllers/ColorsController.php');
@@ -123,8 +129,8 @@
 			$controller = new BrandController ();
 			break;
 	default:
-		$ctrl = 'home';
-		require('controllers/Home.php');
+		require('controllers/HomeController.php');
+		$controller = new HomeController ();
 }
 
 //Execute controller

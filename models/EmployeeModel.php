@@ -12,8 +12,18 @@ class EmployeeModel  extends Model
 	private $address;
 	private $phone;
 	private $cellPhone;
+	private $idCity;
+	private $idUser;
+	private $idCarWorkShop;
+
+	/** navigation Properties
+	*/
+	private $user;
 	private $city;
-	private $carWorkShop;
+	private $carWorkShop
+
+
+
 	/**
 	* @param string $name
 	* @param string $lastName
