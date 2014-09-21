@@ -17,6 +17,18 @@ class Controller{
 	* @return string $data
 	* Validate a string to be a number and clean it
 	*/
+	protected function validateBool($data)
+	{
+		if(!isset($data))
+			return 0;
+		return ($data == true  || $data == false) ? $data : false;
+	}
+
+	/**
+	* @param string $data
+	* @return string $data
+	* Validate a string to be a float and clean it
+	*/
 	protected function validateFloat($data)
 	{
 		if(!isset($data))
