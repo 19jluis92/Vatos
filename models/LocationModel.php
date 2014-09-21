@@ -13,10 +13,10 @@ Class LocationModel extends Model{
 	*method for list all states
 	* @return array array of states 
 	*/
-	function list()
+	function all()
 	{
 		//get all elements (set the $elements variable with a states array)
-		return $elements;
+		return true;
 	}
 
 	/**

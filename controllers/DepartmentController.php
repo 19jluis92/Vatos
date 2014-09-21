@@ -24,7 +24,7 @@ class DepartmentsController extends Controller {
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
-			$this->list();	
+			$this->all();	
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -53,11 +53,11 @@ class DepartmentsController extends Controller {
 	*Show all the departments of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function all()
 	{
 		
 		//get all the departments
-		$result = $this->model->list();	
+		$result = $this->model->all();	
 		//Query Succesfull
 		if($result)
 		{
@@ -129,12 +129,12 @@ class DepartmentsController extends Controller {
 		$id = $this->validateNumber($_POST['id']);
 		$name = $this->validateText($_POST['name']);
 		$idLocation = $this->validateNumber($_POST['idLocation']);
-		$result = $this->model->update($id,$name,$idLocation);	
+		$result = $this->model->edit($id,$name,$idLocation);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Department/Updated.php');
+			require('views/Department/Edited.php');
 		}
 		else
 		{

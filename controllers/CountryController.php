@@ -23,7 +23,7 @@ class CountryController extends Controller {
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
-			$this->list();	
+			$this->all();	
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -52,12 +52,12 @@ class CountryController extends Controller {
 	*Show all the Countries of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function all()
 	{
 		
 		//get all the Country
 
-		$result = $this->model->list();	
+		$result = $this->model->all();	
 		//Query Succesfull
 		if($result)
 		{
@@ -126,12 +126,12 @@ class CountryController extends Controller {
 	{
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
-		$result = $this->model->update($id,$name);	
+		$result = $this->model->edit($id,$name);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Country/Updated.php');
+			require('views/Country/Edited.php');
 		}
 		else
 		{

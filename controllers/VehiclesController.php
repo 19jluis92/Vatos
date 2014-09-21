@@ -19,7 +19,7 @@ class VehiclesController extends Controller {
 			case 'index':
 			case 'list':
 						//Validate User and permissions
-						$this->list();
+						$this->all();
 						break;
 			case 'details':
 						//Validate User and permissions
@@ -46,10 +46,10 @@ class VehiclesController extends Controller {
 	* Show all vehicles in database
 	* @return null, view rendered
 	*/
-	private function list()
+	private function all()
 	{
 		//Get all the Vehicles
-		$result = $this->model->list();
+		$result = $this->model->all();
 		if($result)
 		{
 			//Load view
@@ -139,7 +139,7 @@ class VehiclesController extends Controller {
 		$conditions  = $this->validateText($_POST['conditions']);
 		$plates	     = $this->validateNumber($_POST['plates']);
 
-		$result = $this->model->update($vin, $model, $color, $year , $type, $conditions, $plates);
+		$result = $this->model->edit($vin, $model, $color, $year , $type, $conditions, $plates);
 		if($result)
 		{
 			//Load view

@@ -23,7 +23,7 @@ class CarWorkShopController extends Controller {
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
-			$this->list();	
+			$this->all();	
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -52,11 +52,11 @@ class CarWorkShopController extends Controller {
 	*Show all the Countries of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function all()
 	{
 		
 		//get all the CarWorkShop
-		$result = $this->model->list();	
+		$result = $this->model->all();	
 		//Query Succesfull
 		if($result)
 		{
@@ -129,12 +129,12 @@ class CarWorkShopController extends Controller {
 		$name = $this->validateText($_POST['name']);
 		$address = $this->validateText($_POST['address']);
 		$idCity = $this->validateNumber($_POST['idCity']);
-		$result = $this->model->update($name, $address,$idCity);	
+		$result = $this->model->edit($name, $address,$idCity);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/CarWorkShop/Updated.php');
+			require('views/CarWorkShop/Edited.php');
 		}
 		else
 		{

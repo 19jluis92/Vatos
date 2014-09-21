@@ -14,7 +14,7 @@ Class VehiclesModel extends Model{
 	* @return array of vehicles
 	*/
 
-	function list()
+	function all()
 	{
 		//Retrieve list of vehicles
 		return true;

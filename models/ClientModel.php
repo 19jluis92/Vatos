@@ -46,7 +46,7 @@ class ClientModel extends Model
 		return true;
 	}
 
-	function index()
+	function all()
 	{
 		return true;
 	}

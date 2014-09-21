@@ -8,10 +8,10 @@ Class ColorsModel extends Model{
 	*method for list all colors
 	* @return array array of colors 
 	*/
-	function list()
+	function all()
 	{
 		//get all elements (set the $elements variable with a Colors array)
-		return $elements;
+		return true;
 	}
 
 	/**

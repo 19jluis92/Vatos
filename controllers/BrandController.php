@@ -21,9 +21,9 @@ class BrandController extends Controller {
 		$view = isset($_GET['view'])?$_GET['view']:'index';
 		switch($view)
 		{
-			case 'index':case 'list':
+			case 'index':case 'all':case 'list':
 						//Validate User and permissions
-			$this->list();	
+			$this->all();	
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -52,17 +52,17 @@ class BrandController extends Controller {
 	*Show all the Countries of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function all()
 	{
 		
 		//get all the Brand
 
-		$result = $this->model->list();	
+		$result = $this->model->all();	
 		//Query Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Brand/Index.php');
+			require('views/Brand/index.php');
 		}
 		else
 		{
@@ -126,12 +126,12 @@ class BrandController extends Controller {
 	{
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
-		$result = $this->model->update($id,$name);	
+		$result = $this->model->edit($id,$name);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Brand/Updated.php');
+			require('views/Brand/Edited.php');
 		}
 		else
 		{

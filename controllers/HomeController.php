@@ -95,12 +95,12 @@ class HomeController extends Controller {
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
 		$name = $this->validateText($_POST['name']);
-		$result = $this->model->update($id,$name);	
+		$result = $this->model->edit($id,$name);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Color/Updated.php');
+			require('views/Color/Edited.php');
 		}
 		else
 		{

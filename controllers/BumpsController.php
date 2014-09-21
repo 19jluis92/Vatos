@@ -24,7 +24,7 @@ class BumpsController extends Controller {
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
-			$this->list();	
+			$this->all();	
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -53,11 +53,11 @@ class BumpsController extends Controller {
 	*Show all the bumps of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function all()
 	{
 		
 		//get all the bumps
-		$result = $this->model->list();	
+		$result = $this->model->all();	
 		//Query Succesfull
 		if($result)
 		{
@@ -129,12 +129,12 @@ class BumpsController extends Controller {
 		$idPiece = $this->validateNumber($_POST['idPiece']);
 		$idSeverity = $this->validateNumber($_POST['idSeverity']);
 		$idInspection = $this->validateNumber($_POST['idInspection']);
-		$result = $this->model->update($id,$idPiece , $idSeverity, $idInspection);	
+		$result = $this->model->edit($id,$idPiece , $idSeverity, $idInspection);	
 		//Update Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Bump/Updated.php');
+			require('views/Bump/Edited.php');
 		}
 		else
 		{

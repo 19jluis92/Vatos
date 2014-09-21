@@ -17,10 +17,10 @@ Class BumpsModel extends Model{
 	*method for list all bumps
 	* @return array array of bumps 
 	*/
-	function list()
+	function all()
 	{
 		//get all elements (set the $elements variable with a Bumps array)
-		return $elements;
+		return true;
 	}
 
 	/**

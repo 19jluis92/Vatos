@@ -24,7 +24,7 @@ class ServicesController extends Controller {
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
-			$this->list();	
+			$this->all();	
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -53,11 +53,11 @@ class ServicesController extends Controller {
 	*Show all the services of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function all()
 	{
 		
 		//get all the services
-		$result = $this->model->list();	
+		$result = $this->model->all();	
 		//Query Succesfull
 		if($result)
 		{
@@ -142,12 +142,12 @@ class ServicesController extends Controller {
 		$idEmployee = $this->validateNumber($_POST['idEmployee']);
 		$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
 		$idVehicle = $this->validateNumber($_POST['idVehicle']);
-		$result = $this->model->update($id, $startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
+		$result = $this->model->edit($id, $startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Service/Updated.php');
+			require('views/Service/Edited.php');
 		}
 		else
 		{

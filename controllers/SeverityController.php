@@ -24,7 +24,7 @@ class SeveritiesController extends Controller {
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
-			$this->list();	
+			$this->all();	
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -51,11 +51,11 @@ class SeveritiesController extends Controller {
 	*Show all the severities of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function all()
 	{
 		
 		//get all the severities
-		$result = $this->model->list();	
+		$result = $this->model->all();	
 		//Query Succesfull
 		if($result)
 		{
@@ -123,12 +123,12 @@ class SeveritiesController extends Controller {
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
 		$name = $this->validateText($_POST['name']);
-		$result = $this->model->update($id,$name);	
+		$result = $this->model->edit($id,$name);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Severity/Updated.php');
+			require('views/Severity/Edited.php');
 		}
 		else
 		{

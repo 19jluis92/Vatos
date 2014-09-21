@@ -8,10 +8,10 @@ Class CountryModel extends Model{
 	*method for list all countries
 	* @return array array of countries 
 	*/
-	function list()
+	function all()
 	{
 		//get all elements (set the $elements variable with a countries array)
-		return $elements;
+		return true;
 	}
 
 	/**

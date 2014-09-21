@@ -8,10 +8,10 @@ Class SeveritiesModel extends Model{
 	*method for list all severitys
 	* @return array array of severitys 
 	*/
-	function list()
+	function all()
 	{
 		//get all elements (set the $elements variable with a Severities array)
-		return $elements;
+		return true;
 	}
 
 	/**

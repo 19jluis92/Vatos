@@ -23,7 +23,7 @@ class LocationController extends Controller {
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
-			$this->list();	
+			$this->all();	
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -52,11 +52,11 @@ class LocationController extends Controller {
 	*Show all the Countries of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function all()
 	{
 		
 		//get all the Location
-		$result = $this->model->list();	
+		$result = $this->model->all();	
 		//Query Succesfull
 		if($result)
 		{
@@ -127,12 +127,12 @@ class LocationController extends Controller {
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
 		$idCarWorkShop = $this->validateText($_POST['idCarWorkShop']);
-		$result = $this->model->update($name, $idCarWorkShop);	
+		$result = $this->model->edit($name, $idCarWorkShop);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Location/Updated.php');
+			require('views/Location/Edited.php');
 		}
 		else
 		{

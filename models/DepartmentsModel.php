@@ -13,10 +13,10 @@ Class DepartmentsModel extends Model{
 	*method for list all departments
 	* @return array array of departments 
 	*/
-	function list()
+	function all()
 	{
 		//get all elements (set the $elements variable with a Departments array)
-		return $elements;
+		return true;
 	}
 
 	/**

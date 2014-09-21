@@ -17,10 +17,10 @@ Class InspectionsModel extends Model{
 	*method for list all inspections
 	* @return array array of inspections 
 	*/
-	function list()
+	function all()
 	{
 		//get all elements (set the $elements variable with a Inspections array)
-		return $elements;
+		return true;
 	}
 
 	/**

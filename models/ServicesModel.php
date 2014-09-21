@@ -19,10 +19,10 @@ Class ServicesModel extends Model{
 	*method for list all services
 	* @return array array of services 
 	*/
-	function list()
+	function all()
 	{
 		//get all elements (set the $elements variable with a Services array)
-		return $elements;
+		return true;
 	}
 
 	/**

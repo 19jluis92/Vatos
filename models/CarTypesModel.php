@@ -8,10 +8,10 @@ Class CarTypesModel extends Model{
 	*method for list all cartypes
 	* @return array array of cartypes 
 	*/
-	function list()
+	function all()
 	{
 		//get all elements (set the $elements variable with a CarTypes array)
-		return $elements;
+		return true;
 	}
 
 	/**

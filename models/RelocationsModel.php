@@ -20,10 +20,10 @@ Class RelocationsModel extends Model{
 	*method for list all relocations
 	* @return array array of relocations 
 	*/
-	function list()
+	function all()
 	{
 		//get all elements (set the $elements variable with a Relocations array)
-		return $elements;
+		return true;
 	}
 
 	/**

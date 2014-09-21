@@ -24,7 +24,7 @@ class ColorsController extends Controller {
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
-			$this->list();	
+			$this->all();	
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -53,11 +53,11 @@ class ColorsController extends Controller {
 	*Show all the colors of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function all()
 	{
 		
 		//get all the colors
-		$result = $this->model->list();	
+		$result = $this->model->all();	
 		//Query Succesfull
 		if($result)
 		{
@@ -125,12 +125,12 @@ class ColorsController extends Controller {
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
 		$name = $this->validateText($_POST['name']);
-		$result = $this->model->update($id,$name);	
+		$result = $this->model->edit($id,$name);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Color/Updated.php');
+			require('views/Color/Edited.php');
 		}
 		else
 		{

@@ -19,7 +19,7 @@ class ClientController extends Controller
 		switch($_GET['view'])
 		{
 			case 'index':
-			$this->index();
+			            $this->all();
 			break;
 			case 'details':
 						//Validate User and permissions

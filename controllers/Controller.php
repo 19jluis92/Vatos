@@ -7,8 +7,42 @@ class Controller{
 	*/
 	protected function validateNumber($data)
 	{
+		if(!isset($data))
+			return 0;
 		return $data;
 	}
+
+	/**
+	* @param string $data
+	* @return string $data
+	* Validate a string to be a number and clean it
+	*/
+	protected function validateFloat($data)
+	{
+		if(!isset($data))
+			return 0;
+		return $data;
+	}
+
+
+	/**
+	* @param string $data
+	* @return string $data
+	* Validate a string to be a number and clean it
+	*/
+	function validateDate($date, $format = 'Y-m-d H:i:s')
+	{
+		if(!isset($data))
+			return '01/01/1900';
+    	$d = DateTime::createFromFormat($format, $date);
+    	if( $d && $d->format($format) == $date)
+    		return $date;
+    	else
+    		return '01/01/1900';
+	}
+
+
+
 	/**
 	* @param string $data
 	* @return string $data
@@ -16,7 +50,9 @@ class Controller{
 	*/
 	protected function validateText($data)
 	{
-		return $data;
+		if(!isset($data))
+			return '';
+		return htmlspecialchars($data);
 	}
 	/**
 	* @param string $data
@@ -25,6 +61,8 @@ class Controller{
 	*/
 	protected function validateEmail($data)
 	{
+		if(!isset($data))
+			return false;
 		$regex = '/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/'; 
 		// Run the preg_match() function on regex against the email address
 		if (preg_match($regex, $data))
@@ -44,6 +82,8 @@ class Controller{
 	*/
 	protected function validateUserName($data)
 	{
+		if(!isset($data))
+			return false;
 		$regex = '/^[a-z\d_]{4,15}$/i ';
 		if (preg_match($rege, $dat))
 		 {
@@ -63,6 +103,8 @@ class Controller{
 	*/
 	protected function validatePassword($data)
 	{
+		if(!isset($data))
+			return false;
 		$regex='(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$';
 		if(preg_match($regex, $data))
 		{

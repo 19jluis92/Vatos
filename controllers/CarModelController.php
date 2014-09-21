@@ -23,7 +23,7 @@ class CarModelController extends Controller {
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
-			$this->list();	
+			$this->all();	
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -52,11 +52,11 @@ class CarModelController extends Controller {
 	*Show all the Countries of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function all()
 	{
 		
 		//get all the CarModel
-		$result = $this->model->list();	
+		$result = $this->model->all();	
 		//Query Succesfull
 		if($result)
 		{
@@ -127,12 +127,12 @@ class CarModelController extends Controller {
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
 		$idBrand = $this->validateText($_POST['idBrand']);
-		$result = $this->model->update($name, $idBrand);	
+		$result = $this->model->edit($name, $idBrand);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/CarModel/Updated.php');
+			require('views/CarModel/Edited.php');
 		}
 		else
 		{

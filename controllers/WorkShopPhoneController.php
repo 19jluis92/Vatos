@@ -23,7 +23,7 @@ class WorkShopPhoneController extends Controller {
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
-			$this->list();	
+			$this->all();	
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -52,11 +52,11 @@ class WorkShopPhoneController extends Controller {
 	*Show all the Countries of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function all()
 	{
 		
 		//get all the WorkShopPhone
-		$result = $this->model->list();	
+		$result = $this->model->all();	
 		//Query Succesfull
 		if($result)
 		{
@@ -133,12 +133,12 @@ class WorkShopPhoneController extends Controller {
 		$area = $this->validateNumber($_POST['area']);
 		$number = $this->validateNumber($_POST['number']);
 		$idCarWorkShop = $this->validateText($_POST['idCarWorkShop']);
-		$result = $this->model->update($name, $lada, $area, $number, $idCarWorkShop);	
+		$result = $this->model->edit($name, $lada, $area, $number, $idCarWorkShop);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/WorkShopPhone/Updated.php');
+			require('views/WorkShopPhone/Edited.php');
 		}
 		else
 		{

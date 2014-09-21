@@ -24,7 +24,7 @@ class RelocationsController extends Controller {
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
-			$this->list();	
+			$this->all();	
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -53,11 +53,11 @@ class RelocationsController extends Controller {
 	*Show all the relocations of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function all()
 	{
 		
 		//get all the relocations
-		$result = $this->model->list();	
+		$result = $this->model->all();	
 		//Query Succesfull
 		if($result)
 		{
@@ -142,12 +142,12 @@ class RelocationsController extends Controller {
 		$reason = $this->validateText($_POST['reason']);
 		$idDepartment = $this->validateNumber($_POST['idDepartment']);
 		$idService = $this->validateNumber($_POST['idService']);
-		$result = $this->model->update($id,$relocationDate,$idEmployee,$reason,$idDepartment,$idService);	
+		$result = $this->model->edit($id,$relocationDate,$idEmployee,$reason,$idDepartment,$idService);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Relocation/Updated.php');
+			require('views/Relocation/Edited.php');
 		}
 		else
 		{

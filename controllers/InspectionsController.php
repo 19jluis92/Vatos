@@ -24,7 +24,7 @@ class InspectionsController extends Controller {
 		{
 			case 'index':case 'list':
 						//Validate User and permissions
-			$this->list();	
+			$this->all();	
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -53,11 +53,11 @@ class InspectionsController extends Controller {
 	*Show all the inspections of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function list()
+	private function all()
 	{
 		
 		//get all the inspections
-		$result = $this->model->list();	
+		$result = $this->model->all();	
 		//Query Succesfull
 		if($result)
 		{
@@ -142,12 +142,12 @@ class InspectionsController extends Controller {
 		$fuel = $this->validateFloat($_POST['fuel']);
 		$inspectionDate = $this->validateDate($_POST['inspectionDate']);
 		$type = $this->validateBool($_POST['type']);
-		$result = $this->model->update($id,$idService,$mileage,$fuel,$inspectionDate,$type);	
+		$result = $this->model->edit($id,$idService,$mileage,$fuel,$inspectionDate,$type);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Inspection/Updated.php');
+			require('views/Inspection/Edited.php');
 		}
 		else
 		{
