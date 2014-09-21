@@ -10,8 +10,10 @@ class VehiclesController extends Controller {
 		require('models/VehiclesModel.php');
 		$this->model = new VehiclesModel();
 	}
+	
 	function run()
 	{
+		$view = isset($_GET['view'])?$_GET['view']:'index';
 		switch($_GET['view'])
 		{
 			case 'index':

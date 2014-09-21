@@ -73,17 +73,58 @@
 			//Create controller and execute it
 			$controller = new UsersController();
 			break;
+	//Erick's		
 	case 'vehicle':
 			//Load controller file
 			require('controllers/VehiclesController.php');
 			//Create controller and execute it
 			$controller = new VehiclesController();
 			break;
+	case 'country':
+			//Load controller file
+			require('controllers/CountryController.php');
+			//Create controller and execute it
+			$controller = new CountryController ();
+			break;
+	case 'state':
+			//Load controller file
+			require('controllers/StateController.php');
+			//Create controller and execute it
+			$controller = new StateController ();
+			break;
+	case 'carworkshop':
+			//Load controller file
+			require('controllers/CarWorkShopController.php');
+			//Create controller and execute it
+			$controller = new CarWorkShopController ();
+			break;
+	case 'workshopphone':
+			//Load controller file
+			require('controllers/WorkShopPhoneController.php');
+			//Create controller and execute it
+			$controller = new WorkShopPhoneController ();
+			break;
+	case 'location':
+			//Load controller file
+			require('controllers/LocationController.php');
+			//Create controller and execute it
+			$controller = new LocationController ();
+			break;
+	case 'carmodel':
+			//Load controller file
+			require('controllers/CarModelController.php');
+			//Create controller and execute it
+			$controller = new CarModelController ();
+			break;
+	case 'brand':
+			//Load controller file
+			require('controllers/BrandController.php');
+			//Create controller and execute it
+			$controller = new BrandController ();
+			break;
 	default:
 		$ctrl = 'home';
 		require('controllers/Home.php');
-
-
 }
 
 //Execute controller
