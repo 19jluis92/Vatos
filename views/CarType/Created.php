@@ -2,4 +2,3 @@
 <?php 
 	echo "Car Type: ", $name,"<br />";
  ?>
->	
