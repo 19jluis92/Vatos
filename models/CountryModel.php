@@ -4,6 +4,16 @@ Class CountryModel extends Model{
 	private $id;
 	private $name;
 
+	private $db_driver;
+
+	function __construct(){
+		parent::__construct();
+		require("database_config.inc");
+		$this->db_driver = new mysqli($host,$user,$pass,$db);
+		if($this->db_driver->connect_error){
+			die('error de conexión a la base de datos');
+		}
+	}
 	/**
 	*method for list all countries
 	* @return array array of countries 
@@ -32,9 +42,14 @@ Class CountryModel extends Model{
 	*/
 	function create($name)
 	{
-		$this->name = $name;
+		$this->name = $this->db_driver->escape_string($name);
+		$result = $this->db_driver->query("INSERT INTO country (name) values('$this->name')");
+		if(!empty($this->db_driver->error)){
+			echo  $this->db_driver->error;
+			return false;
+		}
 		//save element and get complete item (with $id)
-		return $this;
+		return true;
 	}
 
 	/**

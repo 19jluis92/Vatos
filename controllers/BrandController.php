@@ -113,6 +113,7 @@ class BrandController extends Controller {
 		}
 		else
 		{
+			echo $result;
 			require('views/Error.html');
 		}
 	}

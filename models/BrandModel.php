@@ -42,10 +42,14 @@ Class BrandModel extends Model{
 	*/
 	function create($name)
 	{
-		$this->name = addslashes($name);
+		$this->name = $this->db_driver->escape_string($name);
 		$result = $this->db_driver->query("INSERT INTO brand (name) values('$this->name')");
+		if(!empty($this->db_driver->error)){
+			echo  $this->db_driver->error;
+			return false;
+		}
 		//save element and get complete item (with $id)
-		return $result;
+		return true;
 	}
 
 	/**
