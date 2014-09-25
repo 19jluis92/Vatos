@@ -3,16 +3,25 @@ require('models/Model.php');
 Class BrandModel extends Model{
 	private $id;
 	private $name;
+	private $db_driver;
 
+	function __construct(){
+		parent::__construct();
+		require("database_config.inc");
+		$this->db_driver = new mysqli($host,$user,$pass,$db);
+		if($this->db_driver->connect_error){
+			die('error de conexión a la base de datos');
+		}
+	}
 	/**
 	*method for list all states
 	* @return array array of states 
 	*/
 	function all()
 	{
-		$elements = [];
+		$elements = array(['id' => 1 ,'name' => 'ford'  ],['id' => 2 ,'name' => 'ibiza'  ],['id' => 3 ,'name' => 'volvo'  ],['id' => 4 ,'name' => 'shadow'  ],['id' => 5 ,'name' => 'camaro'  ],['id' => 6 ,'name' => 'pointer'  ] );
 		//get all elements (set the $elements variable with a states array)
-		return true;
+		return $elements;
 	}
 
 	/**
@@ -33,9 +42,10 @@ Class BrandModel extends Model{
 	*/
 	function create($name)
 	{
-		$this->name = $name;
+		$this->name = addslashes($name);
+		$result = $this->db_driver->query("INSERT INTO brand (name) values('$this->name')");
 		//save element and get complete item (with $id)
-		return $this;
+		return $result;
 	}
 
 	/**

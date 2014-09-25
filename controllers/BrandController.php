@@ -56,10 +56,12 @@ class BrandController extends Controller {
 	{
 		
 		//get all the Brand
+		$result = $this->model->all();
+		$mail = (isset($_POST['email'])?$_POST['email']:'');
+		$validationResult = $this->validateEmail($mail);
 
-		$result = $this->model->all();	
 		//Query Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/Brand/index.php');
@@ -80,7 +82,7 @@ class BrandController extends Controller {
 	{
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);	
+		$result = $this->model->details($id);
 		//Insert Succesfull
 		if($result)
 		{

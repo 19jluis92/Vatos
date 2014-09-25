@@ -1,5 +1,9 @@
 <?php 
 class Controller{
+
+	function __construct(){
+
+	}
 /**
 	* @param string $data
 	* @return string $data
