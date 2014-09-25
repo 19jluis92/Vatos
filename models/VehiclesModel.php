@@ -17,8 +17,10 @@ Class VehiclesModel extends Model{
 	function all()
 	{
 		//Retrieve list of vehicles
-		return true;
+		return $arrayName = array(1,2,3,4,5,6);;
 	}
+
+
 
 	/**
 	* method to show a single car

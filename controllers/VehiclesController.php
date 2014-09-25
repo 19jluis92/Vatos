@@ -50,7 +50,7 @@ class VehiclesController extends Controller {
 	{
 		//Get all the Vehicles
 		$result = $this->model->all();
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/Vehicle/Index.php');
