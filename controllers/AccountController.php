@@ -1,6 +1,6 @@
 <?php
 require('controllers/Controller.php');
-class BrandController extends Controller {
+class AccountController extends Controller {
 	private $model;
 	
 	/**
@@ -8,8 +8,8 @@ class BrandController extends Controller {
 	*/
 	function __construct()
 	{
-		require('models/BrandModel.php');
-		$this->model = new BrandModel();
+		require('models/AccountModel.php');
+		$this->model = new AccountModel();
 	}
 
 	/**
@@ -18,28 +18,20 @@ class BrandController extends Controller {
 	*/
 	function run()
 	{
-		$view = isset($_GET['view'])?$_GET['view']:'index';
+		$view = isset($_GET['view'])?$_GET['view']:'login';
 		switch($view)
 		{
-			case 'index':case 'all':case 'list':
+			case 'login':
 						//Validate User and permissions
-			$this->all();	
+			$this->login();	
 			break;
-			case 'details':
+			case 'logout':
+						//Validate User and permissions
+			$this->logout();		
+			break;
+			case 'profile':
 						//Validate User and permissions
 			$this->details();		
-			break;
-			case 'create':
-						//Validate User and permissions
-			$this->create();		
-			break;
-			case 'edit':
-						//Validate User and permissions
-			$this->edit();		
-			break;
-			case 'delete':
-						//Validate User and permissions
-			$this->delete();		
 			break;
 			default:
 			break;
@@ -52,31 +44,24 @@ class BrandController extends Controller {
 	*Show all the Countries of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function all()
+	private function login()
 	{
 		
 		//get all the Brand
-		if($this->LoggedIn() && $this->validatePermissions("brand","list") ){
-			$result = $this->model->all();
-			$mail = (isset($_POST['email'])?$_POST['email']:'');
-			$validationResult = $this->validateEmail($mail);
-
+		$user = (isset($_POST['user'])?$_POST['user']:'');
+		$user = $this->validateText($user);
+		$_SESSION['user'] = $user;
 		//Query Succesfull
-			if(isset($result))
-			{
+		if(isset($user))
+		{
 			//Load view
-				require('views/Brand/index.php');
-			}
-			else
-			{
+			require('views/Account/session.php');
+		}
+		else
+		{
 			//Ohh well... :(
-				require('views/Error.html');
-			}	
+			require('views/Error.html');
 		}
-		else{
-			require('views/ValidationError.html');
-		}
-		
 	}
 
 	/**
@@ -84,25 +69,21 @@ class BrandController extends Controller {
 	*@param int id the Brand id
 	*@return null nothing returned but view loaded
 	*/
-	private function details()
+	private function logout()
 	{
-		//Validate Variables
-		if($this->LoggedIn() && $this->validatePermissions("","") ){
+		session_unset();
+		session_destroy();
+		setcookie(session_name(),time()-3600);
 
-			$id = $this->validateNumber($_POST['id']);
-			$result = $this->model->details($id);
 		//Insert Succesfull
-			if($result)
-			{
+		if($result)
+		{
 			//Load view
-				require('views/Brand/Details.php');
-			}
-			else
-			{
-				require('views/Error.html');
-			}
-		}else{
-			require('views/ValidationError.html');
+			require('views/Home/Index.php');
+		}
+		else
+		{
+			require('views/Error.html');
 		}
 	}
 
@@ -111,22 +92,16 @@ class BrandController extends Controller {
 	*@param string  name the Brand name by post
 	*@return null nothing returned but view loaded
 	*/
-	private function create()
+	private function details()
 	{
-		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$result = $this->model->create($name);	
-		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/Brand/Created.php');
+		session_start();
+		if (isset($_SESSION['user'])) {
+			require('views/Account/LoggedIn.php');
 		}
-		else
-		{
-			echo $result;
-			require('views/Error.html');
+		else{
+			echo "usuario no logueado";
 		}
+
 	}
 
 	/**

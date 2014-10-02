@@ -129,6 +129,29 @@ class Controller{
 		return false;
 
 	}
+
+	protected function LoggedIn()
+	{
+		return isset($_SESSION['user']);
+	}
+
+	protected function validatePermissions($controller , $view)
+	{
+		/* valida los permisos de acuerdo a la base de datos*/
+		if(isset($controller) &&  isset($view) ){
+			if($controller !== '' && $view !== '')
+			{
+			//validar si tiene permisos en la base de datos
+			return true;
+			}
+			else 
+				return false;
+		}
+		else 
+			return false;
+		
+	}
+
 }
 
 ?>

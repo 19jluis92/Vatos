@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	//Get Query from URL
 	$path = isset($_GET['controller']) ? $_GET['controller'] : 'home' ;
 	switch($path)
@@ -133,6 +134,12 @@
 			require('controllers/BrandController.php');
 			//Create controller and execute it
 			$controller = new BrandController ();
+			break;
+	case 'account':
+			//Load controller file
+			require('controllers/AccountController.php');
+			//Create controller and execute it
+			$controller = new AccountController ();
 			break;
 	default:
 		require('controllers/HomeController.php');
