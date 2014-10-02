@@ -74,22 +74,12 @@ class AccountController extends Controller {
 		session_unset();
 		session_destroy();
 		setcookie(session_name(),time()-3600);
-
-		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/Home/Index.php');
-		}
-		else
-		{
-			require('views/Error.html');
-		}
+		require('views/Home/Index.php');
+	
 	}
 
 	/**
-	*Create a Brand with the given post parameters 
-	*@param string  name the Brand name by post
+	*
 	*@return null nothing returned but view loaded
 	*/
 	private function details()
