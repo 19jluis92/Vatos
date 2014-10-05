@@ -4,9 +4,10 @@ require('models/Model.php');
 Class BrandModel extends Model{
 	private $id;
 	private $name;
-	
+
 	function __construct(){
 		parent::__construct();
+
 	}
 	/**
 	*method for list all states
@@ -26,6 +27,19 @@ Class BrandModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details('Brand' , $id,NULL))
+			{
+			$brand = new Brand('');
+			/*opcionales son de prueba*/
+			var_dump($brand);
+			var_dump($result);
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -37,12 +51,17 @@ Class BrandModel extends Model{
 	*/
 	function create($name)
 	{
-		global $db;
 		$brand = new Brand($name);
-		if($result = $db->insert("Brand" , $brand,NULL))
+		if($result = $this->db->insert("Brand" , $brand,NULL))
+			{
+			/*opcionales son de prueba*/
+			var_dump($brand);
+			var_dump($result);
 			return true;
+		}
 		else{
 			echo $result;
+			
 			return false;
 		}
 	}
@@ -55,9 +74,14 @@ Class BrandModel extends Model{
 	*/
 	function edit($id,$name)
 	{
-		$this->name = $name;
-		//update element using the given $id
-		return true;
+		$brand = new Brand($name);
+		$brand->id = $id;
+		if($result = $this->db->update("Brand" , $brand,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 
 	/**
@@ -67,6 +91,12 @@ Class BrandModel extends Model{
 	*/
 	function delete($id)
 	{
+		if($result = $this->db->delete("Brand" , $id,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}

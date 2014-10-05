@@ -29,6 +29,29 @@ class db{
 
 	}
 
+	public function details($table , $id, $predicate)
+	{
+		$id = $this->db_driver->escape_string($id);
+		if($id != NULL){
+			echo "SELECT * FROM $table WHERE  id = '$id'";
+			$result = $this->db_driver->query("SELECT * FROM $table WHERE  id = '$id'",MYSQLI_USE_RESULT);
+			var_dump($result);
+			if(!empty($this->db_driver->error)){
+				echo  $this->db_driver->error;
+				return false;
+			}
+			else{
+				var_dump($result);
+				if($this->db_driver->affected_rows > 0)
+				return $result;
+				else{
+					echo "element not found";
+					return NULL;
+				}
+			}
+		}
+	}
+
 	public function insert($table,$data,$predicate){
 		/*foreach($data as $key => $value) {
 
@@ -46,11 +69,62 @@ class db{
 			return false;
 		}
 		else{
-
-		var_dump($result);	
+			$data->id = $this->db_driver->insert_id;
+			return true;
 		}
-		
-		return true;
+	}
+
+	public function update($table,$data,$predicate){
+		$keys = implode(',', array_keys(get_object_vars($data)));
+		$values='';
+		foreach($data as $key => $value) {
+			$values.="$key = '";
+			$values.=$this->db_driver->escape_string($value);
+			$values.= "',";
+		}
+		$values = rtrim($values, ",");
+		//$values = implode("','", array_values(get_object_vars($data)));
+		$result = $this->db_driver->query("UPDATE $table SET $values where id = $data->id");
+		if(!empty($this->db_driver->error)){
+			echo  $this->db_driver->error;
+			return false;
+		}
+		else{
+			var_dump($result);
+			return true;
+		}
+	}
+
+	public function delete($table , $id, $predicate)
+	{
+		$id = $this->db_driver->escape_string($id);
+		if($id != NULL){
+			$result = $this->db_driver->query("DELETE FROM  $table WHERE  id = $id");
+			if(!empty($this->db_driver->error)){
+				echo  $this->db_driver->error;
+				return false;
+			}
+			else{
+				var_dump($result);
+				if($this->db_driver->affected_rows > 0)
+				return true;
+				else{
+					echo "element not found";
+					return false;
+				}
+			}
+		}
+		if($predicate != NULL){
+			$result = $this->db_driver->query("DELETE FROM  $table WHERE $predicate");
+			if(!empty($this->db_driver->error)){
+				echo  $this->db_driver->error;
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+		else return false;
 
 	}
 	

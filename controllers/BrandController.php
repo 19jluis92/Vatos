@@ -138,6 +138,7 @@ class BrandController extends Controller {
 	{
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
+		$id = $this->validateText($_POST['id']);
 		$result = $this->model->edit($id,$name);	
 		//Insert Succesfull
 		if($result)
