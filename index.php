@@ -1,4 +1,7 @@
 <?php
+	require('database/database.php');
+	global $db;
+	$db = new db();
 	session_start();
 	//Get Query from URL
 	$path = isset($_GET['controller']) ? $_GET['controller'] : 'home' ;

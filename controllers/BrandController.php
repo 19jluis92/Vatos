@@ -56,11 +56,9 @@ class BrandController extends Controller {
 	{
 		
 		//get all the Brand
-		if($this->LoggedIn() && $this->validatePermissions("brand","list") ){
+		if(true || $this->LoggedIn() && $this->validatePermissions("brand","list") ){
 			$result = $this->model->all();
-			$mail = (isset($_POST['email'])?$_POST['email']:'');
-			$validationResult = $this->validateEmail($mail);
-
+		
 		//Query Succesfull
 			if(isset($result))
 			{
@@ -86,8 +84,8 @@ class BrandController extends Controller {
 	*/
 	private function details()
 	{
-		//Validate Variables
-		if($this->LoggedIn() && $this->validatePermissions("","") ){
+		//Validation not implemented yet 
+		if(true || ($this->LoggedIn() && $this->validatePermissions("brand","detais")) ){
 
 			$id = $this->validateNumber($_POST['id']);
 			$result = $this->model->details($id);
