@@ -33,17 +33,18 @@ class db{
 	{
 		$id = $this->db_driver->escape_string($id);
 		if($id != NULL){
-			echo "SELECT * FROM $table WHERE  id = '$id'";
-			$result = $this->db_driver->query("SELECT * FROM $table WHERE  id = '$id'",MYSQLI_USE_RESULT);
-			var_dump($result);
+			echo "SELECT * FROM $table";
+			$result = $this->db_driver->query("SELECT * FROM $table WHERE id  = $id");
+			$model_array = mysqli_fetch_array($result);
 			if(!empty($this->db_driver->error)){
 				echo  $this->db_driver->error;
 				return false;
 			}
 			else{
-				var_dump($result);
+				var_dump($model_array['id']);
+				var_dump($this->db_driver->affected_rows);
 				if($this->db_driver->affected_rows > 0)
-				return $result;
+				return $model_array;
 				else{
 					echo "element not found";
 					return NULL;

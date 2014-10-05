@@ -88,9 +88,10 @@ class BrandController extends Controller {
 		if(true || ($this->LoggedIn() && $this->validatePermissions("brand","detais")) ){
 
 			$id = $this->validateNumber($_POST['id']);
-			$result = $this->model->details($id);
-		//Insert Succesfull
-			if($result)
+			$brand = $this->model->details($id);
+
+		//select Succesfull
+			if($brand != NULL)
 			{
 			//Load view
 				require('views/Brand/Details.php');

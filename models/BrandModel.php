@@ -29,16 +29,14 @@ Class BrandModel extends Model{
 	{
 		if($result = $this->db->details('Brand' , $id,NULL))
 			{
-			$brand = new Brand('');
+			$brand = new Brand($result['name']);
 			/*opcionales son de prueba*/
 			var_dump($brand);
-			var_dump($result);
-			return true;
+			return $brand;
 		}
 		else{
 			echo $result;
-			
-			return false;
+			return NULL;
 		}
 		//delete element using the given $id
 		return true;

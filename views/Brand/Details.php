@@ -1,4 +1,4 @@
 <h1>Details</h1>
 <?php 
-	echo "name: ", $name,"<br />";
+	echo "name: ", $brand->name,"<br />";
  ?>
