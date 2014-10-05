@@ -14,7 +14,7 @@ class UsersController extends Controller{
 	{
 		switch($_GET['view'])
 		{
-			case 'Create':
+			case 'create':
 			//Validate User and permissions
 				$this->create();		
 			break;
@@ -30,7 +30,9 @@ class UsersController extends Controller{
 			case 'index':
 				$this->index();
 				break;
-
+			case 'details':
+				$this->details();
+				break;
 			
 			default:
 			break;
@@ -40,6 +42,7 @@ class UsersController extends Controller{
 	{
 		
 		//Validate Variables
+		
 		$email   = $this->validateEmail($_POST['email']);
 		$password = $this->validateText($_POST['password']);
 		$result = $this->model->create($email, $password);
@@ -48,7 +51,7 @@ class UsersController extends Controller{
 		if($result)
 		{
 			//Load view
-
+			
 			require('views/User/Created.php');
 		}
 		else
@@ -80,7 +83,8 @@ class UsersController extends Controller{
 	private function details(){
 		$id = $this->validateNumber($_POST['id']);
 		$result = $this->model->details($id);
-		if($result)
+		
+		if(isset($result))
 		{
 			//Load view
 			require('views/User/Details.php');
