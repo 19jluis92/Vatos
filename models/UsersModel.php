@@ -1,4 +1,5 @@
 <?php  
+require('database/User.php');
 require('models/Model.php'); 
 class UsersModel extends Model{
 	private $email;
@@ -6,11 +7,6 @@ class UsersModel extends Model{
 
 	function __construct(){
 		parent::__construct();
-		require("database_config.inc");
-		$this->db_driver = new mysqli($host,$user,$pass,$db);
-		if($this->db_driver->connect_error){
-			die('error de conexión a la base de datos');
-		}
 	}
 	/**
 	* @param string $email
@@ -18,33 +14,31 @@ class UsersModel extends Model{
 	*/
 	function create($email, $password)
 	{
-echo 'mama';
-		$this->email   = $this->db_driver->escape_string( $email);
-		$this->password = $this->db_driver->escape_string( $password);
-		$result = $this->db_driver->query("INSERT INTO user (email,password) values('$this->email','$this->password')");
-		if(!empty($this->db_driver->error)){
-			echo $this->db_driver->error;
+		global $db;
+		$user = new User($email,$password);
+		if($result = $db->insert("User" , $user,NULL))
+			return true;
+		else{
+			echo $result;
 			return false;
 		}
-		// save element
-		return true;
 	}
 /**
 	* Edit a vehicle given the id
 	* @param string $email
 	* @param string $password
 	*/
-	function edit($email,$password){
+	function edit($id,$email,$password){
 
-		$this->email   = $this->db_driver->escape_string( $email);
-		$this->password = $this->db_driver->escape_string( $password);
-		$result = $this->db_driver->query("UPDATE  user SET email='$this->email',password='$this->password' WHERE idUser ='1'");
-		if(!empty($this->db_driver->error)){
-			echo $this->db_driver->error;
+		
+		$user = new User($email,$password);
+		$user->id = $id;
+		if($result = $this->db->update("User" , $user,NULL))
+			return true;
+		else{
+			echo $result;
 			return false;
 		}
-		// save element
-		return true;
 	}
 /**
 	* Delete  given it's id
@@ -52,24 +46,48 @@ echo 'mama';
 	* @return bool transaction result
 	*/
 	function delete($id){
+		if($result = $this->db->delete("User" , $id,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
+		//delete element using the given $id
 		return true;
 
 	}
 
 	function index(){
-		return true;
-	}
-
-	function details($id){
-
-		$result = $this->db_driver->query("SELECT * FROM user where idUser='$id'");
-		
+		$result = $this->db_driver->query("SELECT * FROM user");
+		var_dump( $result);
 		if(!empty($this->db_driver->error)){
 			echo $this->db_driver->error;
 			return false;
 		}
-		// save element
-		return $result;
+		
+		while($row = mysqli_fetch_array($result))
+			{
+		 	$rows[] = $row;
+			}
+		return  $row;
+	}
+
+	function details($id){
+
+		
+		if($result = $this->db->details('User' , $id,NULL))
+			{
+			$user = new User($result['email'],$result['password']);
+			/*opcionales son de prueba*/
+			var_dump($user);
+			return $user;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
+		//delete element using the given $id
+		return true;
 	}
 
 }

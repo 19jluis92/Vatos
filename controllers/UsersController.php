@@ -102,9 +102,10 @@ class UsersController extends Controller{
 	* @return null, view rendered
 	*/
 	private function edit(){
+		$id = $this->validateText($_POST['id']);
 		$email = $this->validateText($_POST['email']);
 		$password = $this->validateText($_POST['password']);
-		$result = $this->model->edit($email,$password);
+		$result = $this->model->edit($id,$email,$password);
 	}
 	/**
 	* Show all users in database
@@ -112,9 +113,11 @@ class UsersController extends Controller{
 	*/
 	private function index(){
 		$result = $this->model->index();
-		if($result)
+
+		if(isset($result))
 		{
 			//Load view
+			
 			require('views/User/Index.php');
 		}
 		else

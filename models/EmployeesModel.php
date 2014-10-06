@@ -3,6 +3,7 @@
 /**
 * 
 */
+require('database/Employee.php');
 require('models/Model.php'); 
 class EmployeesModel  extends Model
 {
@@ -24,11 +25,6 @@ class EmployeesModel  extends Model
 
 	function __construct(){
 		parent::__construct();
-		require("database_config.inc");
-		$this->db_driver = new mysqli($host,$user,$pass,$db);
-		if($this->db_driver->connect_error){
-			die('error de conexión a la base de datos');
-		}
 	}
 
 
@@ -45,16 +41,14 @@ class EmployeesModel  extends Model
 	*/
 	function create($name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop)
 	{
-		$this->name=$name;
-		$this->lastName=$lastName;
-		$this->nss=$nss;
-		$this->address = $address;
-		$this->phone = $phone;
-		$this->cellPhone=$cellPhone;
-		$this->idCity = $idCity;
-		$this->idUser = $idUser;
-		$this->idCarWorkShop = $idCarWorkShop;
-		return true;
+		global $db;
+		$employee = new Employee($name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop);
+		if($result = $db->insert("Employee" , $employee,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 		
 	}
 	/**
@@ -69,22 +63,25 @@ class EmployeesModel  extends Model
 	*/
 	function edit($id,$name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop)
 	{
-		//Find element using the given $id
-		$this->name=$name;
-		$this->lastName=$lastName;
-		$this->nss=$nss;
-		$this->address = $address;
-		$this->phone = $phone;
-		$this->cellPhone=$cellPhone;
-		$this->idCity = $idCity;
-		$this->idUser = $idUser;
-		$this->idCarWorkShop = $idCarWorkShop;
-		//update the element
-		return true;
+		$employee = new Employee($id,$name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop);
+		$employee->id = $id;
+		if($result = $this->db->update("Employee" , $employee,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 		
 	}
 
 	function delete($id){
+		if($result = $this->db->delete("Employee" , $id,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
+		//delete element using the given $id
 		return true;
 	}
 
@@ -93,6 +90,18 @@ class EmployeesModel  extends Model
 	}
 
 	function details($id){
+		if($result = $this->db->details('Employee' , $id,NULL))
+			{
+			$employee = new Employee($result['name'],$result['lastName'],$result['nss'],$result['phone'],$result['idCity'],$result['idUser'],$result['idCarWorkShop']);
+			/*opcionales son de prueba*/
+			var_dump($employee);
+			return $employee;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
+		//delete element using the given $id
 		return true;
 	}
 }
