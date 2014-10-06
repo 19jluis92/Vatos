@@ -8,7 +8,7 @@
 		{
 			$this->id=0;
 			$this->name = $name;
-			$this->idLocation = $idLocation
+			$this->idLocation = $idLocation;
 		}
 
 	}
