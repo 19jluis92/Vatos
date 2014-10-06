@@ -29,11 +29,27 @@ class db{
 
 	}
 
+	public function all($table)
+	{
+		$result = $this->db_driver->query("SELECT * FROM $table");
+
+		if(!empty($this->db_driver->error)){
+			echo  $this->db_driver->error;
+			return NULL;
+		}
+		else{
+			$list =[];
+			while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+				$list[] = $row;
+			}
+			return $list;
+		}
+	}
+
 	public function details($table , $id, $predicate)
 	{
 		$id = $this->db_driver->escape_string($id);
 		if($id != NULL){
-			echo "SELECT * FROM $table";
 			$result = $this->db_driver->query("SELECT * FROM $table WHERE id  = $id");
 			$model_array = mysqli_fetch_array($result);
 			if(!empty($this->db_driver->error)){
@@ -41,10 +57,8 @@ class db{
 				return false;
 			}
 			else{
-				var_dump($model_array['id']);
-				var_dump($this->db_driver->affected_rows);
 				if($this->db_driver->affected_rows > 0)
-				return $model_array;
+					return $model_array;
 				else{
 					echo "element not found";
 					return NULL;
@@ -108,7 +122,7 @@ class db{
 			else{
 				var_dump($result);
 				if($this->db_driver->affected_rows > 0)
-				return true;
+					return true;
 				else{
 					echo "element not found";
 					return false;

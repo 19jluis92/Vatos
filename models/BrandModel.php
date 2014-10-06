@@ -14,7 +14,7 @@ Class BrandModel extends Model{
 	*/
 	function all()
 	{
-		$elements = array(['id' => 1 ,'name' => 'ford'  ],['id' => 2 ,'name' => 'ibiza'  ],['id' => 3 ,'name' => 'volvo'  ],['id' => 4 ,'name' => 'shadow'  ],['id' => 5 ,'name' => 'camaro'  ],['id' => 6 ,'name' => 'pointer'  ] );
+		$elements = $this->db->all('Brand');
 		//get all elements (set the $elements variable with a states array)
 		return $elements;
 	}
