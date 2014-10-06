@@ -1,12 +1,17 @@
 <?php
+require ('database/Pieces.php');
 require('models/Model.php');
 Class PiecesModel extends Model{
 	private $id;
 	private $name;
 
+
+	function __construct(){
+		parent::__construct();
+	}
 	/**
-	*method for list all pieces
-	* @return array array of pieces 
+	*method for list all Pieces
+	* @return array array of Pieces 
 	*/
 	function all()
 	{
@@ -21,6 +26,15 @@ Class PiecesModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details('Pieces' , $id,NULL))
+		{
+			$Pieces = new Pieces($result['name']);
+			return $Pieces;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -32,9 +46,16 @@ Class PiecesModel extends Model{
 	*/
 	function create($name)
 	{
-		$this->name = $name;
-		//save element and get complete item (with $id)
-		return $this;
+		$Pieces = new Pieces($name);
+		if($result = $this->db->insert("Pieces" , $Pieces,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -45,9 +66,14 @@ Class PiecesModel extends Model{
 	*/
 	function edit($id,$name)
 	{
-		$this->name = $name;
-		//update element using the given $id
-		return true;
+		$Pieces = new Pieces($name);
+		$Pieces->id = $id;
+		if($result = $this->db->update("Pieces" , $Pieces,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 
 	/**
@@ -57,6 +83,13 @@ Class PiecesModel extends Model{
 	*/
 	function delete($id)
 	{
+		if($result = $this->db->delete("Pieces" , $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}

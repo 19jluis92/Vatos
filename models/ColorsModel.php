@@ -1,9 +1,14 @@
 <?php
+require ('database/Color.php');
 require('models/Model.php');
 Class ColorsModel extends Model{
 	private $id;
 	private $name;
 
+
+	function __construct(){
+		parent::__construct();
+	}
 	/**
 	*method for list all colors
 	* @return array array of colors 
@@ -21,6 +26,15 @@ Class ColorsModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details('Color' , $id,NULL))
+		{
+			$Color = new Color($result['name']);
+			return $Color;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -32,9 +46,16 @@ Class ColorsModel extends Model{
 	*/
 	function create($name)
 	{
-		$this->name = $name;
-		//save element and get complete item (with $id)
-		return $this;
+		$Color = new Color($name);
+		if($result = $this->db->insert("Color" , $Color,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -45,9 +66,14 @@ Class ColorsModel extends Model{
 	*/
 	function edit($id,$name)
 	{
-		$this->name = $name;
-		//update element using the given $id
-		return true;
+		$Color = new Color($name);
+		$Color->id = $id;
+		if($result = $this->db->update("Color" , $Color,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 
 	/**
@@ -57,6 +83,13 @@ Class ColorsModel extends Model{
 	*/
 	function delete($id)
 	{
+		if($result = $this->db->delete("Color" , $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}

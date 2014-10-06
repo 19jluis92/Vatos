@@ -1,9 +1,13 @@
 <?php
+require ('database/Severity.php');
 require('models/Model.php');
 Class SeveritiesModel extends Model{
 	private $id;
 	private $name;
 
+	function __construct(){
+		parent::__construct();
+	}
 	/**
 	*method for list all severitys
 	* @return array array of severitys 
@@ -21,6 +25,15 @@ Class SeveritiesModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details('Severity', $id,NULL))
+		{
+			$Severity = new Severity($result['name']);
+			return $Severity;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -32,9 +45,16 @@ Class SeveritiesModel extends Model{
 	*/
 	function create($name)
 	{
-		$this->name = $name;
-		//save element and get complete item (with $id)
-		return $this;
+		$Severity = new Severity($name);
+		if($result = $this->db->insert("Severity" , $Severity,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -45,9 +65,14 @@ Class SeveritiesModel extends Model{
 	*/
 	function edit($id,$name)
 	{
-		$this->name = $name;
-		//update element using the given $id
-		return true;
+		$Severity = new Severity($name);
+		$Severity->id = $id;
+		if($result = $this->db->update("Severity" , $Severity,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 
 	/**
@@ -57,6 +82,13 @@ Class SeveritiesModel extends Model{
 	*/
 	function delete($id)
 	{
+		if($result = $this->db->delete("Severity" , $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}
