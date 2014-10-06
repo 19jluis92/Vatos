@@ -58,7 +58,7 @@ class CarModelController extends Controller {
 		//get all the CarModel
 		$result = $this->model->all();	
 		//Query Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/CarModel/Index.php');
