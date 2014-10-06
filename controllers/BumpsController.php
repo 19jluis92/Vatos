@@ -59,7 +59,7 @@ class BumpsController extends Controller {
 		//get all the bumps
 		$result = $this->model->all();	
 		//Query Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/Bump/Index.php');

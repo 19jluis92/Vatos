@@ -20,7 +20,7 @@ Class BumpsModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a Bumps array)
-		return true;
+		return $this->db->all('Bump');
 	}
 
 	/**

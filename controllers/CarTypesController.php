@@ -59,7 +59,7 @@ class CarTypesController extends Controller {
 		//get all the cartypes
 		$result = $this->model->all();	
 		//Query Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/CarType/Index.php');

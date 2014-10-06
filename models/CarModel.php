@@ -15,7 +15,7 @@ Class CarModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a states array)
-		return true;
+		return $this->db->all('Model');
 	}
 
 	/**
@@ -25,7 +25,7 @@ Class CarModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('CarModel' , $id,NULL))
+		if($result = $this->db->details('Model' , $id,NULL))
 		{
 			$CarModel = new CarModel($result['name']);
 			return $CarModel;
@@ -46,7 +46,7 @@ Class CarModel extends Model{
 	function create($name, $idBrand)
 	{
 		$CarModel = new CarModel($name,$idBrand);
-		if($result = $this->db->insert("CarModel" , $CarModel,NULL))
+		if($result = $this->db->insert("Model" , $CarModel,NULL))
 		{
 			return true;
 		}
@@ -66,7 +66,7 @@ Class CarModel extends Model{
 	{
 		$CarModel = new CarModel($name,$idBrand);
 		$CarModel->id = $id;
-		if($result = $this->db->update("CarModel", $CarModel,NULL))
+		if($result = $this->db->update("Model", $CarModel,NULL))
 			return true;
 		else{
 			echo $result;
@@ -82,7 +82,7 @@ Class CarModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("CarModel" , $id,NULL))
+		if($result = $this->db->delete("Model" , $id,NULL))
 			return true;
 		else
 		{

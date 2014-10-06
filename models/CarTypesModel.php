@@ -1,5 +1,5 @@
 <?php
-require('database/CarType.php')
+require('database/CarType.php');
 require('models/Model.php');
 Class CarTypesModel extends Model{
 	private $id;
@@ -15,7 +15,7 @@ Class CarTypesModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a CarTypes array)
-		return true;
+		return $this->db->all('CarType');
 	}
 
 	/**
