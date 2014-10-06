@@ -1,4 +1,5 @@
 <?php
+require ('database/Inspections.php');
 require('models/Model.php');
 Class InspectionsModel extends Model{
 	private $id;
@@ -8,6 +9,10 @@ Class InspectionsModel extends Model{
 	private $inspectionDate;
 	private $type;
 
+
+	function __construct(){
+		parent::__construct();
+	}
 	/**
 	*Navigation properties
 	*/
@@ -30,6 +35,15 @@ Class InspectionsModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details('Inspections', $id,NULL))
+		{
+			$Inspections = new Inspections($result['name']);
+			return $Inspections;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -45,13 +59,16 @@ Class InspectionsModel extends Model{
 	*/
 	function create($idService , $mileage , $fuel , $inspectionDate, $type)
 	{
-		$this->idService = $idService;
-		$this->mileage = $mileage;
-		$this->fuel = $fuel;
-		$this->inspectionDate = $inspectionDate;
-		$this->type = $type;
-		//save element and get complete item (with $id)
-		return $this;
+		$Inspections =  new Inspections($idService, $mileage, $fuel, $inspectionDate, $type);
+		if($result = $this->db->insert("Inspections", $Inspections,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -66,14 +83,14 @@ Class InspectionsModel extends Model{
 	*/
 	function edit($id, $mileage , $fuel , $inspectionDate, $type)
 	{
-		//find the element usen the given id
-		$this->idService = $idService;
-		$this->mileage = $mileage;
-		$this->fuel = $fuel;
-		$this->inspectionDate = $inspectionDate;
-		$this->type = $type;
-		//update element using the given $id
-		return true;
+		$Inspections =  new Inspections($idService, $mileage, $fuel, $inspectionDate, $type);
+		$Inspections->id = $id;
+		if($result = $this->db->update("Inspections" , $Inspections,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 
 	/**
@@ -83,6 +100,13 @@ Class InspectionsModel extends Model{
 	*/
 	function delete($id)
 	{
+		if($result = $this->db->delete("Inspections" , $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}

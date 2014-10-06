@@ -1,4 +1,5 @@
 <?php
+require('database/Relocation.php');
 require('models/Model.php');
 Class RelocationsModel extends Model{
 	private $id;
@@ -9,6 +10,9 @@ Class RelocationsModel extends Model{
 	private $idDepartment;
 	private $idService;
 
+	function __construct(){
+		parent::__construct();
+	}
 	/**
 	*Navigation properties
 	*/
@@ -33,6 +37,15 @@ Class RelocationsModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details('Relocation', $id,NULL))
+		{
+			$Relocation = new Relocation($result['name']);
+			return $Relocation;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -48,13 +61,16 @@ Class RelocationsModel extends Model{
 	*/
 	function create($relocationDate,$idEmployee,$reason,$idDepartment,$idService)
 	{
-		$this->relocationDate = $relocationDate;
-		$this->idEmployee = $idEmployee;
-		$this->reason = $reason;
-		$this->idDepartment = $idDepartment;
-		$this->idService = $idService;
-		//save element and get complete item (with $id)
-		return $this;
+		$Relocation = new Relocation($relocationDate, $idEmployee, $reason, $idDepartment, $idService);
+		if($result = $this->db->insert("Relocation" , $Relocation,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -69,14 +85,14 @@ Class RelocationsModel extends Model{
 	*/
 	function edit($id,$relocationDate,$idEmployee,$reason,$idDepartment,$idService)
 	{
-		//find element by $id 
-		$this->relocationDate = $relocationDate;
-		$this->idEmployee = $idEmployee;
-		$this->reason = $reason;
-		$this->idDepartment = $idDepartment;
-		$this->idService = $idService;
-		//update element using the given $id
-		return true;
+		$Relocation = new Relocation($relocationDate, $idEmployee, $reason, $idDepartment, $idService);
+		$Relocation->id = $id;
+		if($result = $this->db->update("Relocation", $Relocation,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 
 	/**
@@ -86,6 +102,13 @@ Class RelocationsModel extends Model{
 	*/
 	function delete($id)
 	{
+		if($result = $this->db->delete("Relocation" , $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}

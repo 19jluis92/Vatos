@@ -5,10 +5,9 @@ Class CarModel extends Model{
 	private $name;
 	private $idBrand;
 
-	/**
-	*Navigation properties
-	*/
-	private $brand;
+	function __construct(){
+		parent::__construct();
+	}
 	/**
 	*method for list all states
 	* @return array array of states 
@@ -26,6 +25,15 @@ Class CarModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details('CarModel' , $id,NULL))
+		{
+			$CarModel = new CarModel($result['name']);
+			return $CarModel;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -35,12 +43,17 @@ Class CarModel extends Model{
 	*@param string $name
 	* @return bool transaction result
 	*/
-	function create($name, $brand)
+	function create($name, $idBrand)
 	{
-		$this->name = $name;
-		$this->idBrand = $brand;
-		//save element and get complete item (with $id)
-		return $this;
+		$CarModel = new CarModel($name,$idBrand);
+		if($result = $this->db->insert("CarModel" , $CarModel,NULL))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	/**
@@ -49,11 +62,16 @@ Class CarModel extends Model{
 	*@param string $name (state name) 
 	* @return bool transaction result
 	*/
-	function edit($id,$name, $brand)
+	function edit($id, $name, $idBrand)
 	{
-		$this->name = $name;
-		$this->idBrand = $brand;
-		//update element using the given $id
+		$CarModel = new CarModel($name,$idBrand);
+		$CarModel->id = $id;
+		if($result = $this->db->update("CarModel", $CarModel,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 		return true;
 	}
 
@@ -64,6 +82,13 @@ Class CarModel extends Model{
 	*/
 	function delete($id)
 	{
+		if($result = $this->db->delete("CarModel" , $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}

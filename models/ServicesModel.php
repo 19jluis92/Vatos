@@ -1,4 +1,5 @@
 <?php
+require ('database/Services.php');
 require('models/Model.php');
 Class ServicesModel extends Model{
 	private $id;
@@ -8,6 +9,10 @@ Class ServicesModel extends Model{
 	private $idCarWorkShop;
 	private $idVehicle;
 
+
+	function __construct(){
+		parent::__construct();
+	}
 	/**
 	* Navigation Properties 
 	*/
@@ -32,6 +37,15 @@ Class ServicesModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details('Services', $id,NULL))
+		{
+			$Services = new Services($result['name']);
+			return $Services;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -47,13 +61,16 @@ Class ServicesModel extends Model{
 	*/
 	function create($startDate,$endDate,$idEmployee,$idCarWorkShop,$idVehicle)
 	{
-		$this->startDate = $startDate;
-		$this->endDate = $endDate;
-		$this->idEmployee = $idEmployee;
-		$this->idCarWorkShop = $idCarWorkShop;
-		$this->idVehicle = $idVehicle;
-		//save element and get complete item (with $id)
-		return $this;
+		$Services = new Services($startDate, $endDate, $idEmployee, $idCarWorkShop, $idVehicle);
+		if($result = $this->db->insert("Services", $Services,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -68,14 +85,14 @@ Class ServicesModel extends Model{
 	*/
 	function edit($id,$startDate,$endDate,$idEmployee,$idCarWorkShop,$idVehicle)
 	{
-		//find the existing element or return false
-		$this->startDate = $startDate;
-		$this->endDate = $endDate;
-		$this->idEmployee = $idEmployee;
-		$this->idCarWorkShop = $idCarWorkShop;
-		$this->idVehicle = $idVehicle;
-		//update element using the given $id
-		return true;
+		$Services = new Services($startDate, $endDate, $idEmployee, $idCarWorkShop, $idVehicle);
+		$Services->id = $id;
+		if($result = $this->db->update("Services", $Services,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 
 	/**
@@ -85,6 +102,13 @@ Class ServicesModel extends Model{
 	*/
 	function delete($id)
 	{
+		if($result = $this->db->delete("Services" , $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}

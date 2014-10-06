@@ -1,14 +1,14 @@
 <?php
+require('database/Department.php');
 require('models/Model.php');
 Class DepartmentsModel extends Model{
 	private $id;
 	private $name;
 	private $idLocation;
-	/**
-	*Navigation properties
-	*/
-	private $location;
 
+	function __construct(){
+		parent::__construct();
+	}
 	/**
 	*method for list all departments
 	* @return array array of departments 
@@ -26,7 +26,16 @@ Class DepartmentsModel extends Model{
 	*/
 	function details($id)
 	{
-		//load the element using the given $id
+		if($result = $this->db->details('Department' , $id,NULL))
+		{
+			$Department = new Department($result['name']);
+			return $Department;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
+		//delete element using the given $id
 		return true;
 	}
 
@@ -38,10 +47,16 @@ Class DepartmentsModel extends Model{
 	*/
 	function create($name,$idLocation)
 	{
-		$this->name = $name;
-		$this->idLocation = $idLocation;
-		//save element and get complete item
-		return true;
+		$Department = new Department($name, $idLocation);
+		if($result = $this->db->insert("Department", $Department,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -53,11 +68,14 @@ Class DepartmentsModel extends Model{
 	*/
 	function edit($id,$name,$idLocation)
 	{
-		//find element using the given $id
-		$this->name = $name;
-		$this->idLocation = $idLocation;
-		//update element using the given $id
-		return true;
+		$Department = new Department($name, $idLocation);
+		$Department->id = $id;
+		if($result = $this->db->update("Department" , $Department,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 
 	/**
@@ -67,6 +85,13 @@ Class DepartmentsModel extends Model{
 	*/
 	function delete($id)
 	{
+		if($result = $this->db->delete("Department", $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}
