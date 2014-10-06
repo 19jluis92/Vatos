@@ -58,7 +58,7 @@ class CarWorkShopController extends Controller {
 		//get all the CarWorkShop
 		$result = $this->model->all();	
 		//Query Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/CarWorkShop/Index.php');

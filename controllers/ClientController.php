@@ -16,7 +16,8 @@ class ClientController extends Controller
 
 	function run()
 	{
-		switch($_GET['view'])
+		$view = isset($_GET['view'])?$_GET['view']:'index';
+		switch($view)
 		{
 			case 'index':
 			            $this->index();

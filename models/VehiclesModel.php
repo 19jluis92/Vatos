@@ -22,7 +22,7 @@ Class VehiclesModel extends Model{
 	function all()
 	{
 		//Retrieve list of vehicles
-		return $arrayName = array(1,2,3,4,5,6);;
+		return $this->db->all('Vehicle');
 	}
 
 

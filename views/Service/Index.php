@@ -2,5 +2,5 @@
 
 <?php
 	echo "Shiwing all services <br />"; 
-	
+	var_dump($result);	
 ?>

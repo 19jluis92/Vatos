@@ -16,7 +16,7 @@ Class PiecesModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a Pieces array)
-		return true;
+		return $this->db->all('Piece');
 	}
 
 	/**
@@ -26,7 +26,7 @@ Class PiecesModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('Pieces' , $id,NULL))
+		if($result = $this->db->details('Piece' , $id,NULL))
 		{
 			$Pieces = new Pieces($result['name']);
 			return $Pieces;
@@ -47,7 +47,7 @@ Class PiecesModel extends Model{
 	function create($name)
 	{
 		$Pieces = new Pieces($name);
-		if($result = $this->db->insert("Pieces" , $Pieces,NULL))
+		if($result = $this->db->insert("Piece" , $Pieces,NULL))
 		{
 			return true;
 		}
@@ -68,7 +68,7 @@ Class PiecesModel extends Model{
 	{
 		$Pieces = new Pieces($name);
 		$Pieces->id = $id;
-		if($result = $this->db->update("Pieces" , $Pieces,NULL))
+		if($result = $this->db->update("Piece" , $Pieces,NULL))
 			return true;
 		else{
 			echo $result;
@@ -83,7 +83,7 @@ Class PiecesModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("Pieces" , $id,NULL))
+		if($result = $this->db->delete("Piece" , $id,NULL))
 			return true;
 		else
 		{

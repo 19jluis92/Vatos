@@ -51,7 +51,7 @@ class EmployeesController extends Controller
 	{
 		//Get all 
 		$result = $this->model->all();
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/Employee/Index.php');

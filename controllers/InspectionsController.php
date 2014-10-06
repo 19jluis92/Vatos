@@ -59,7 +59,7 @@ class InspectionsController extends Controller {
 		//get all the inspections
 		$result = $this->model->all();	
 		//Query Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/Inspection/Index.php');

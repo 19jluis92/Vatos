@@ -59,7 +59,7 @@ class ColorsController extends Controller {
 		//get all the colors
 		$result = $this->model->all();	
 		//Query Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/Color/Index.php');

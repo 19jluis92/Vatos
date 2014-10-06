@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-<h1>Index </h1>
+
+<h1>Index</h1>
 <?php 
-	echo "Index";
+	echo "Listing all the clients<br />";
+		var_dump($result);
+
  ?>
-</body>
-</html>	

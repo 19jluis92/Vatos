@@ -16,7 +16,7 @@ Class CountryModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a countries array)
-		return true;
+		return $this->db->all('Country');
 	}
 
 	/**

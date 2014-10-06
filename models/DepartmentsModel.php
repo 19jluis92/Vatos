@@ -16,7 +16,7 @@ Class DepartmentsModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a Departments array)
-		return true;
+		return $this->db->all('Department');
 	}
 
 	/**

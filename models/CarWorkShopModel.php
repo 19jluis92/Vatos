@@ -1,5 +1,5 @@
 <?php
-require('datebase/CarWorkShop.php');
+require('database/CarWorkShop.php');
 require('models/Model.php');
 Class CarWorkShopModel extends Model{
 	private $id;
@@ -17,7 +17,7 @@ Class CarWorkShopModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a states array)
-		return true;
+		return $this->db->all('CarWorkShop');
 	}
 
 	/**

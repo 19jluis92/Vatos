@@ -25,7 +25,7 @@ Class InspectionsModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a Inspections array)
-		return true;
+		return $this->db->all('Inspection');
 	}
 
 	/**
@@ -35,7 +35,7 @@ Class InspectionsModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('Inspections', $id,NULL))
+		if($result = $this->db->details('Inspection', $id,NULL))
 		{
 			$Inspections = new Inspections($result['name']);
 			return $Inspections;
@@ -60,7 +60,7 @@ Class InspectionsModel extends Model{
 	function create($idService , $mileage , $fuel , $inspectionDate, $type)
 	{
 		$Inspections =  new Inspections($idService, $mileage, $fuel, $inspectionDate, $type);
-		if($result = $this->db->insert("Inspections", $Inspections,NULL))
+		if($result = $this->db->insert("Inspection", $Inspections,NULL))
 		{
 			return true;
 		}
@@ -85,7 +85,7 @@ Class InspectionsModel extends Model{
 	{
 		$Inspections =  new Inspections($idService, $mileage, $fuel, $inspectionDate, $type);
 		$Inspections->id = $id;
-		if($result = $this->db->update("Inspections" , $Inspections,NULL))
+		if($result = $this->db->update("Inspection" , $Inspections,NULL))
 			return true;
 		else{
 			echo $result;
@@ -100,7 +100,7 @@ Class InspectionsModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("Inspections" , $id,NULL))
+		if($result = $this->db->delete("Inspection" , $id,NULL))
 			return true;
 		else
 		{

@@ -5,7 +5,7 @@
 	session_start();
 	//Get Query from URL
 	$path = isset($_GET['controller']) ? $_GET['controller'] : 'home' ;
-	switch($path)
+	switch(strtolower($path))
 {
 	case 'employee':
 			//Load controller

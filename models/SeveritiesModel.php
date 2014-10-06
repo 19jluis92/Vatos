@@ -15,7 +15,7 @@ Class SeveritiesModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a Severities array)
-		return true;
+		return $this->db->all('Severity');
 	}
 
 	/**

@@ -27,7 +27,7 @@ Class RelocationsModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a Relocations array)
-		return true;
+		return $this->db->all('Relocation');
 	}
 
 	/**

@@ -58,7 +58,7 @@ class LocationController extends Controller {
 		//get all the Location
 		$result = $this->model->all();	
 		//Query Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/Location/Index.php');

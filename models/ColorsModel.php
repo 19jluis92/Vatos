@@ -16,7 +16,7 @@ Class ColorsModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a Colors array)
-		return true;
+		return $this->db->all('Color');
 	}
 
 	/**

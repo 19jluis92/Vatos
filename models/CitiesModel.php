@@ -11,7 +11,7 @@ Class CitiesModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a City array)
-		return true;
+		return $this->db->all('City');
 	}
 
 	/**

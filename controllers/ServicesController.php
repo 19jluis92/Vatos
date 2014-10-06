@@ -59,7 +59,7 @@ class ServicesController extends Controller {
 		//get all the services
 		$result = $this->model->all();	
 		//Query Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/Service/Index.php');

@@ -57,7 +57,7 @@ class PiecesController extends Controller {
 		//get all the pieces
 		$result = $this->model->all();	
 		//Query Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/Piece/Index.php');

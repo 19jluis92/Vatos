@@ -58,7 +58,7 @@ class WorkShopPhoneController extends Controller {
 		//get all the WorkShopPhone
 		$result = $this->model->all();	
 		//Query Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/WorkShopPhone/Index.php');

@@ -51,14 +51,16 @@ class db{
 		$id = $this->db_driver->escape_string($id);
 		if($id != NULL){
 			$result = $this->db_driver->query("SELECT * FROM $table WHERE id  = $id");
-			$model_array = mysqli_fetch_array($result);
 			if(!empty($this->db_driver->error)){
 				echo  $this->db_driver->error;
 				return false;
 			}
 			else{
-				if($this->db_driver->affected_rows > 0)
-					return $model_array;
+				if($this->db_driver->affected_rows > 0){
+								$model_array = mysqli_fetch_array($result);
+								return $model_array;
+				}
+					
 				else{
 					echo "element not found";
 					return NULL;

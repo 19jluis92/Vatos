@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-<h1>Index of Vehicles</h1>
-<?php 
-	echo "Index";
 
+<h1>Index</h1>
+<?php 
+	echo "All the vehicles <br />";
 	var_dump($result);
  ?>
-</body>
-</html>	

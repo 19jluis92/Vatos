@@ -18,7 +18,7 @@ Class WorkShopPhoneModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a states array)
-		return true;
+		return $this->db->all('WorkShopPhone');
 	}
 
 	/**
