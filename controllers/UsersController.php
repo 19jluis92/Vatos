@@ -12,28 +12,29 @@ class UsersController extends Controller{
 	}
 	function run()
 	{
-		switch($_GET['view'])
+		$view = isset($_GET['view'])?$_GET['view']:'index';
+		switch($view)
 		{
-			case 'create':
-			//Validate User and permissions
-				$this->create();		
+			case 'index':case 'list':
+						//Validate User and permissions
+			$this->all();	
 			break;
-
-			case 'delete':
-				$this->delete();
-				break;
-
-			case 'edit':
-				$this->edit();
-				break;
-
-			case 'index':
-				$this->index();
-				break;
 			case 'details':
-				$this->details();
-				break;
-			
+						//Validate User and permissions
+			$this->details();		
+			break;
+			case 'create':
+						//Validate User and permissions
+			$this->create();		
+			break;
+			case 'edit':
+						//Validate User and permissions
+			$this->edit();		
+			break;
+			case 'delete':
+						//Validate User and permissions
+			$this->delete();		
+			break;
 			default:
 			break;
 		}
@@ -111,7 +112,7 @@ class UsersController extends Controller{
 	* Show all users in database
 	* @return null, view rendered
 	*/
-	private function index(){
+	private function all(){
 		$result = $this->model->index();
 
 		if(isset($result))

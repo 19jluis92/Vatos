@@ -17,7 +17,7 @@ Class StateModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a states array)
-		return $this->db->all('Stare');
+		return $this->db->all('State');
 	}
 
 	/**
@@ -45,13 +45,13 @@ Class StateModel extends Model{
 	*@param string $name
 	* @return bool transaction result
 	*/
-	function create($name, $country)
+	function create($name, $idCountry)
 	{
-		$State = new State($name, $idCountry);
-		if($result = $this->db->insert("Country" , $country,NULL))
+		$state = new State($name, $idCountry);
+		if($result = $this->db->insert("State" , $state,NULL))
 			{
 			/*opcionales son de prueba*/
-			var_dump($country);
+			var_dump($state);
 			var_dump($result);
 			return true;
 		}

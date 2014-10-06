@@ -1,5 +1,5 @@
 <?php
-require ('database/Pieces.php');
+require ('database/Piece.php');
 require('models/Model.php');
 Class PiecesModel extends Model{
 	private $id;

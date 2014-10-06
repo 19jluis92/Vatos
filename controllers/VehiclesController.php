@@ -14,7 +14,7 @@ class VehiclesController extends Controller {
 	function run()
 	{
 		$view = isset($_GET['view'])?$_GET['view']:'index';
-		switch($_GET['view'])
+		switch($view)
 		{
 			case 'index':
 			case 'list':

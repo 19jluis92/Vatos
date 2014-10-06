@@ -1,5 +1,5 @@
 <?php
-require ('database/Services.php');
+require ('database/Service.php');
 require('models/Model.php');
 Class ServicesModel extends Model{
 	private $id;

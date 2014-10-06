@@ -101,8 +101,8 @@ class StateController extends Controller {
 	{
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
-		$idState = $this->validateNumber($_POST['idState']);
-		$result = $this->model->create($name, $idState);	
+		$idCountry = $this->validateNumber($_POST['idCountry']);
+		$result = $this->model->create($name, $idCountry);	
 		//Insert Succesfull
 		if($result)
 		{

@@ -1,5 +1,5 @@
 <?php
-require ('database/Inspections.php');
+require ('database/Inspection.php');
 require('models/Model.php');
 Class InspectionsModel extends Model{
 	private $id;

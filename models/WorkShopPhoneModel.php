@@ -1,5 +1,5 @@
 <?php
-require('database/WorkShopPhone');
+require('database/WorkShopPhone.php');
 require('models/Model.php');
 Class WorkShopPhoneModel extends Model{
 	private $id;
