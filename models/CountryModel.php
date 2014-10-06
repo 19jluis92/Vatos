@@ -7,7 +7,7 @@ Class CountryModel extends Model{
 
 	function __construct(){
 		parent::__construct();
-		}
+		
 	}
 	/**
 	*method for list all countries
