@@ -86,7 +86,9 @@ class EmployeesModel  extends Model
 	}
 
 	function all(){
-		return true;
+		$elements = $this->db->all('Employee');
+		//get all elements (set the $elements variable with a states array)
+		return $elements;
 	}
 
 	function details($id){

@@ -19,7 +19,7 @@ class ClientController extends Controller
 		switch($_GET['view'])
 		{
 			case 'index':
-			            $this->all();
+			            $this->index();
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -48,7 +48,7 @@ class ClientController extends Controller
 	private function index()
 	{
 		$result = $this->model->index();
-		if($result)
+		if(isset($result))
 		{
 			//Load view
 			require('views/Client/Index.php');

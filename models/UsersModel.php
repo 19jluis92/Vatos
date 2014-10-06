@@ -58,18 +58,9 @@ class UsersModel extends Model{
 	}
 
 	function index(){
-		$result = $this->db_driver->query("SELECT * FROM user");
-		var_dump( $result);
-		if(!empty($this->db_driver->error)){
-			echo $this->db_driver->error;
-			return false;
-		}
-		
-		while($row = mysqli_fetch_array($result))
-			{
-		 	$rows[] = $row;
-			}
-		return  $row;
+		$elements = $this->db->all('User');
+		//get all elements (set the $elements variable with a states array)
+		return $elements;
 	}
 
 	function details($id){

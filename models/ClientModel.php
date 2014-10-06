@@ -66,9 +66,11 @@ class ClientModel extends Model
 		return true;
 	}
 
-	function all()
+	function index()
 	{
-		return true;
+		$elements = $this->db->all('Client');
+		//get all elements (set the $elements variable with a states array)
+		return $elements;
 	}
 
 	function details($id)
