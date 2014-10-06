@@ -1,10 +1,16 @@
 <?php
+require ('database/Bumps.php');
 require('models/Model.php');
 Class BumpsModel extends Model{
 	private $id;
 	private $idInspection;
 	private $idSeverity;
 	private $idPiece;
+
+
+	function __construct(){
+		parent::__construct();
+	}
 
 	/**
 	*Navigation properties
@@ -30,6 +36,15 @@ Class BumpsModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details('Bumps', $id,NULL))
+		{
+			$Bumps = new Bumps($result['name']);
+			return $Bump;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -43,11 +58,16 @@ Class BumpsModel extends Model{
 	*/
 	function create($idPiece, $idSeverity , $idInspection)
 	{
-		$this->idPiece = $idPiece;
-		$this->idSeverity = $idSeverity;
-		$this->idInspection = $idInspection;
-		//save element and get complete item (with $id)
-		return $this;
+		$Bumps = new Bumps($idPiece, $idSeverity, $idInspection);
+		if($result = $this->db->insert("Bump", $Bump,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -60,12 +80,14 @@ Class BumpsModel extends Model{
 	*/
 	function edit($id,$idPiece, $idSeverity , $idInspection)
 	{
-		//find the element using the given $id , false if not found
-		$this->idPiece = $idPiece;
-		$this->idSeverity = $idSeverity;
-		$this->idInspection = $idInspection;
-		//update element using the given $id
-		return true;
+		$Bumps = new Bumps($idPiece, $idSeverity, $idInspection);
+		$Bumps->id = $id;
+		if($result = $this->db->update("Bumps" , $Bumps,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 
 	/**
@@ -75,8 +97,13 @@ Class BumpsModel extends Model{
 	*/
 	function delete($id)
 	{
-		//delete element using the given $id
-		return true;
+		if($result = $this->db->delete("Bumps" , $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 	}
 }
 ?>
