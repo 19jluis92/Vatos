@@ -63,7 +63,7 @@ class EmployeesModel  extends Model
 	*/
 	function edit($id,$name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop)
 	{
-		$employee = new Employee($id,$name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop);
+		$employee = new Employee($name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop);
 		$employee->id = $id;
 		if($result = $this->db->update("Employee" , $employee,NULL))
 			return true;

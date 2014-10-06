@@ -134,6 +134,7 @@ class ClientController extends Controller
 	private function edit()
 	{
 		//Validate Variables
+		$id = $this->validateNumber($_POST['id']);
 		$name   		 = $this->validateText($_POST['name']);
 		$lastName 		 = $this->validateNumber($_POST['lastName']);
 		$rfc		 = $this->validateNumber($_POST['rfc']);
@@ -143,7 +144,7 @@ class ClientController extends Controller
 		$lada	     = $this->validateNumber($_POST['lada']);
 		$area    = $this->validateNumber($_POST['area']);
 
-		$result = $this->model->edit($name,$lastName,$rfc,$clientCol,$clientCol1);
+		$result = $this->model->edit($id,$name,$lastName,$rfc,$clientCol,$clientCol1);
 		if($result)
 		{
 			//Load view

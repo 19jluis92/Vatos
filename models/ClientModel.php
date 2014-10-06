@@ -1,4 +1,5 @@
 <?php
+require('database/Client.php');
 require('models/Model.php');
 /**
 * 
@@ -16,11 +17,6 @@ class ClientModel extends Model
 	
 	function __construct(){
 		parent::__construct();
-		require("database_config.inc");
-		$this->db_driver = new mysqli($host,$user,$pass,$db);
-		if($this->db_driver->connect_error){
-			die('error de conexión a la base de datos');
-		}
 	}
 	
 	/**
@@ -32,27 +28,41 @@ class ClientModel extends Model
 	*/
 	function create($name,$lastName,$rfc,$clientCol,$clientCol1)
 	{
-	$this->name= $name;
-	$this->lastName = $lastName;
-	$this->rfc = $rfc;
-	$this->clientCol = $clientCol;
-	$this->clientCol1 = $clientCol1;
-
-	return true;
+	$client = new Client($name,$lastName,$rfc,$clientCol,$clientCol1);
+		if($result = $this->db->insert("Client" , $client,NULL))
+			{
+			/*opcionales son de prueba*/
+			var_dump($client);
+			var_dump($result);
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 
 	}
-	function edit($name,$lastName,$rfc,$clientCol,$clientCol1)
+	function edit($id,$name,$lastName,$rfc,$clientCol,$clientCol1)
 	{
-	$this->name= $name;
-	$this->lastName = $lastName;
-	$this->rfc = $rfc;
-	$this->clientCol = $clientCol;
-	$this->clientCol1 = $clientCol1;
-
-	return true;
+	$client = new Client($name,$lastName,$rfc,$clientCol,$clientCol1);
+		$client->id = $id;
+		if($result = $this->db->update("client" , $client,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 	function delete($id)
 	{
+		if($result = $this->db->delete("Client" , $id,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
+		//delete element using the given $id
 		return true;
 	}
 
@@ -63,6 +73,18 @@ class ClientModel extends Model
 
 	function details($id)
 	{
+		if($result = $this->db->details('Client' , $id,NULL))
+			{
+			$client = new Client($result['name'],$result['lastName'],$result['rfc'],$result['clientCol'],$result['clientCol1']);
+			/*opcionales son de prueba*/
+			var_dump($client);
+			return $client;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
+		//delete element using the given $id
 		return true;
 	}
 }
