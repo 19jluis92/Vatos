@@ -1,4 +1,5 @@
 <?php
+require('database/WorkShopPhone');
 require('models/Model.php');
 Class WorkShopPhoneModel extends Model{
 	private $id;
@@ -7,10 +8,9 @@ Class WorkShopPhoneModel extends Model{
 	private $number;
 	private $idCarWorkShop;
 
-	/**
-	*Navigation properties
-	*/
-	private $carWorkShop;
+	function __construct(){
+		parent::__construct();
+	}
 	/**
 	*method for list all states
 	* @return array array of states 
@@ -28,6 +28,17 @@ Class WorkShopPhoneModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details('WorkShopPhone', $id,NULL))
+		{
+			$WorkShopPhone = new WorkShopPhone($result['name']);
+			/*opcionales son de prueba*/
+			var_dump($WorkShopPhone);
+			return $brand;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -39,13 +50,16 @@ Class WorkShopPhoneModel extends Model{
 	*/
 	function create($lada, $country, $area, $number, $carWorkShop)
 	{
-		$this->lada = $lada;
-		$this->country = $country;
-		$this->area = $addres;
-		$this->number = $number;
-		$this->idCarWorkShop = $carWorkShop;
-		//save element and get complete item (with $id)
-		return $this;
+		$WorkShopPhone = new WorkShopPhone($lada, $country, $addres, $number,$carWorkShop);
+		if($result = $this->db->insert("WorkShopPhone", $WorkShopPhone,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -56,13 +70,16 @@ Class WorkShopPhoneModel extends Model{
 	*/
 	function edit($lada, $country, $area, $number, $carWorkShop)
 	{
-		$this->lada = $lada;
-		$this->country = $country
-		$this->area = $addres;
-		$this->number = $number;
-		$this->idCarWorkShop = $carWorkShop;
-		//update element using the given $id
-		return true;
+		$WorkShopPhone = new WorkShopPhone($lada, $country, $addres, $number,$carWorkShop);
+		if($result = $this->db->update("WorkShopPhone", $WorkShopPhone,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -72,6 +89,14 @@ Class WorkShopPhoneModel extends Model{
 	*/
 	function delete($id)
 	{
+		
+		if($result = $this->db->delete("WorkShopPhone" , $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}

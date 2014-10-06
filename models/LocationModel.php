@@ -1,14 +1,14 @@
 <?php
+require('database/Location.php');
 require('models/Model.php');
 Class LocationModel extends Model{
 	private $id;
 	private $name;
 	private $idCarWorkShop;
 
-	/**
-	*Navigation properties
-	*/
-	private $carWorkShop;
+	function __construct(){
+		parent::__construct();
+	}
 	/**
 	*method for list all states
 	* @return array array of states 
@@ -26,6 +26,15 @@ Class LocationModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details('Location' , $id,NULL))
+		{
+			$Location = new Location($result['name']);
+			return $Location;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -37,10 +46,16 @@ Class LocationModel extends Model{
 	*/
 	function create($name, $carWorkShop)
 	{
-		$this->name = $name;
-		$this->idCarWorkShop = $carWorkShop;
-		//save element and get complete item (with $id)
-		return $this;
+		$Location = new Location($name, $carWorkShop);
+		if($result = $this->db->insert("Location", $Location,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -51,10 +66,13 @@ Class LocationModel extends Model{
 	*/
 	function edit($name, $carWorkShop)
 	{
-		$this->name = $name;
-		$this->idCarWorkShop = $carWorkShop;
-		//update element using the given $id
-		return true;
+		$Location = new Location($name, $carWorkShop);
+		if($result = $this->db->update("Location", $Location,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 
 	/**
@@ -64,6 +82,13 @@ Class LocationModel extends Model{
 	*/
 	function delete($id)
 	{
+		if($result = $this->db->delete("Location", $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}

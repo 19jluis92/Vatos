@@ -1,4 +1,5 @@
 <?php
+require('database/Vehicle.php');
 require('models/Model.php');
 Class VehiclesModel extends Model{
 	private $vin;
@@ -9,6 +10,10 @@ Class VehiclesModel extends Model{
 	private $conditions;
 	private $plates;
 
+	function __construct(){
+		parent::__construct();
+
+	}
 	/**
 	*method to list all vehicles
 	* @return array of vehicles
@@ -29,6 +34,15 @@ Class VehiclesModel extends Model{
 	**/
 	function details($id)
 	{
+		if($result = $this->db->details('vehicle', $id,NULL))
+		{
+			$vehicle = new vehicle($result['name']);
+			return $vehicle;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		return true;
 	}
 
@@ -44,15 +58,15 @@ Class VehiclesModel extends Model{
 	*/
 	function create($vin, $model, $color, $year , $type, $conditions, $plates)
 	{
-		$this->vin 		  = $vin;
-		$this->model 	  = $model;
-		$this->color 	  = $color;
-		$this->year 	  = $year;
-		$this->type  	  = $type;
-		$this->conditions = $conditions;
-		$this->plates 	  = $plates;
-
-		return true;
+		$vehicle = new Vehicle($vin, $model, $color, $year , $type, $conditions, $plates);
+		if($result = $this->db->insert("Vehicle", $vehicle, NULL))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	/**
@@ -67,15 +81,15 @@ Class VehiclesModel extends Model{
 	*/
 	function edit($vin, $model, $color, $year , $type, $conditions, $plates)
 	{
-		$this->vin 		  = $vin;
-		$this->model 	  = $model;
-		$this->color 	  = $color;
-		$this->year 	  = $year;
-		$this->type  	  = $type;
-		$this->conditions = $conditions;
-		$this->plates 	  = $plates;
-
-		return true;
+		$vehicle = new Vehicle($vin, $model, $color, $year , $type, $conditions, $plates);
+		if($result = $this->db->update("Vehicle", $vehicle, NULL))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	/**
@@ -85,7 +99,14 @@ Class VehiclesModel extends Model{
 	*/
 	function delete($id)
 	{
-		return true;
+		if($result = $this->db->delete("Vehicle" , $id,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			return false;
+		}
 	}
 }
 ?>

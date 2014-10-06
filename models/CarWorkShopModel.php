@@ -1,4 +1,5 @@
 <?php
+require('datebase/CarWorkShop.php');
 require('models/Model.php');
 Class CarWorkShopModel extends Model{
 	private $id;
@@ -6,10 +7,9 @@ Class CarWorkShopModel extends Model{
 	private $address;
 	private $idCity;
 
-	/**
-	*Navigation properties
-	*/
-	private $city;
+	function __construct(){
+		parent::__construct();
+	}
 	/**
 	*method for list all states
 	* @return array array of states 
@@ -27,6 +27,17 @@ Class CarWorkShopModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details("CarWorkShop", $id,NULL))
+			{
+			$CarWorkShop = new CarWorkShop($result['name']);
+			/*opcionales son de prueba*/
+			var_dump($CarWorkShop);
+			return $brand;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -38,12 +49,19 @@ Class CarWorkShopModel extends Model{
 	*/
 	function create($name, $country, $address, $city)
 	{
-		$this->name = $name;
-		$this->country = $country;
-		$this->address = $addres;
-		$this->idCity = $city;
-		//save element and get complete item (with $id)
-		return $this;
+		$CarWorkShop = new CarWorkShop($name, $country, $addres, $city);
+		if($result = $this->db->insert("CarWorkShop", $CarWorkShop,NULL))
+			{
+			/*opcionales son de prueba*/
+			var_dump($CarWorkShop);
+			var_dump($result);
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -54,12 +72,16 @@ Class CarWorkShopModel extends Model{
 	*/
 	function edit($name, $country, $address, $city)
 	{
-		$this->name = $name;
-		$this->country = $country;
-		$this->address = $addres;
-		$this->idCity = $city;
-		//update element using the given $id
-		return true;
+		$CarWorkShop = new CarWorkShop($name, $country, $addres, $city);
+		if($result = $this->db->update("CarWorkShop", $CarWorkShop,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -69,6 +91,13 @@ Class CarWorkShopModel extends Model{
 	*/
 	function delete($id)
 	{
+		if($result = $this->db->delete("CarWorkShop", $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}

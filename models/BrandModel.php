@@ -7,7 +7,6 @@ Class BrandModel extends Model{
 
 	function __construct(){
 		parent::__construct();
-
 	}
 	/**
 	*method for list all states
@@ -91,7 +90,8 @@ Class BrandModel extends Model{
 	{
 		if($result = $this->db->delete("Brand" , $id,NULL))
 			return true;
-		else{
+		else
+		{
 			echo $result;
 			return false;
 		}

@@ -1,17 +1,12 @@
 <?php
+require('database/Country.php');
 require('models/Model.php');
 Class CountryModel extends Model{
 	private $id;
 	private $name;
 
-	private $db_driver;
-
 	function __construct(){
 		parent::__construct();
-		require("database_config.inc");
-		$this->db_driver = new mysqli($host,$user,$pass,$db);
-		if($this->db_driver->connect_error){
-			die('error de conexión a la base de datos');
 		}
 	}
 	/**
@@ -31,6 +26,17 @@ Class CountryModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details('Country' , $id,NULL))
+			{
+			$Country = new Country($result['name']);
+			/*opcionales son de prueba*/
+			var_dump($Country);
+			return $Country;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -42,14 +48,18 @@ Class CountryModel extends Model{
 	*/
 	function create($name)
 	{
-		$this->name = $this->db_driver->escape_string($name);
-		$result = $this->db_driver->query("INSERT INTO country (name) values('$this->name')");
-		if(!empty($this->db_driver->error)){
-			echo  $this->db_driver->error;
+		$country = new Country($name);
+		if($result = $this->db->insert("Country", $country,NULL))
+			{
+			/*opcionales son de prueba*/
+			var_dump($country);
+			var_dump($result);
+			return true;
+		}
+		else{
+			echo $result;			
 			return false;
 		}
-		//save element and get complete item (with $id)
-		return true;
 	}
 
 	/**
@@ -60,9 +70,14 @@ Class CountryModel extends Model{
 	*/
 	function edit($id,$name)
 	{
-		$this->name = $name;
-		//update element using the given $id
-		return true;
+		$Country = new Country($name);
+		$Country->id = $id;
+		if($result = $this->db->update("Country", $Country,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 
 	/**
@@ -72,6 +87,13 @@ Class CountryModel extends Model{
 	*/
 	function delete($id)
 	{
+		if($result = $this->db->delete("Country", $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}

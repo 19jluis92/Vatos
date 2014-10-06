@@ -1,14 +1,15 @@
 <?php
+require('database/State.php');
 require('models/Model.php');
 Class StateModel extends Model{
 	private $id;
 	private $name;
 	private $idCountry;
 
-	/**
-	*Navigation properties
-	*/
-	private $country;
+	function __construct(){
+		parent::__construct();
+
+	}
 	/**
 	*method for list all states
 	* @return array array of states 
@@ -26,8 +27,17 @@ Class StateModel extends Model{
 	*/
 	function details($id)
 	{
-		//delete element using the given $id
-		return true;
+		if($result = $this->db->details('State' , $id,NULL))
+			{
+			$State = new State($result['name']);
+			/*opcionales son de prueba*/
+			var_dump($State);
+			return $State;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 	}
 
 	/**
@@ -37,10 +47,19 @@ Class StateModel extends Model{
 	*/
 	function create($name, $country)
 	{
-		$this->name = $name;
-		$this->country = $country;
-		//save element and get complete item (with $id)
-		return $this;
+		$State = new State($name, $idCountry);
+		if($result = $this->db->insert("Country" , $country,NULL))
+			{
+			/*opcionales son de prueba*/
+			var_dump($country);
+			var_dump($result);
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 	}
 
 	/**
@@ -49,12 +68,15 @@ Class StateModel extends Model{
 	*@param string $name (state name) 
 	* @return bool transaction result
 	*/
-	function edit($id,$name, $country)
+	function edit($name, $idCountry)
 	{
-		$this->name = $name;
-		$this->country = $country;
-		//update element using the given $id
-		return true;
+		$State = new State($name, $idCountry);
+		if($result = $this->db->update("State" , $State,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 
 	/**
@@ -64,6 +86,13 @@ Class StateModel extends Model{
 	*/
 	function delete($id)
 	{
+		if($result = $this->db->delete("State" , $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 		//delete element using the given $id
 		return true;
 	}
