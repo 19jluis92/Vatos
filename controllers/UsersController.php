@@ -128,5 +128,10 @@ class UsersController extends Controller{
 		}
 	}
 
+	public function authenticationForUser($name,$pass){
+		$result = $this->model->authentication($name,$pass);
+		return $result;
+	}
+
 }
 ?>
