@@ -164,9 +164,11 @@ class Controller{
 		$user=$model->authentication($name,$pass);
 		//var_dump($user);
 		
-		if(isset($user)&&$this->validateSession()&&!isset($_SESSION['count']))
+		if(isset($user)&&!isset($_SESSION['count']))
 		{
 		//var_dump($user);
+		
+		
 		$_SESSION['name'] = $user->email; 
 		if(isset($_SESSION['count']))
 			$_SESSION['count']++;
@@ -176,6 +178,8 @@ class Controller{
         //var_dump($_SESSION);
 
 		return true;
+		
+		
 		}
 
 		return false;
@@ -187,11 +191,9 @@ class Controller{
 
 	function validateSession()
 	{
-		var_dump($this);
-		$result = (empty($_SESSION)) ? false : true;
-		var_dump($_SESSION);
-		if(!isset($this->model)) $result=true;
-		var_dump($result);
+		
+		$result = (!empty($_SESSION['name'])) ?  true : false;
+		
 		
 		return $result;
 	}

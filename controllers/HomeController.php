@@ -143,7 +143,9 @@ class HomeController extends Controller {
 
 
 			if(is_bool($result))
+				{
 				$this->login=$_SESSION['name'];
+				}
 
 		return $result;
 		}
