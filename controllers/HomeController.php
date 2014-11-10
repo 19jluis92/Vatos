@@ -23,7 +23,6 @@ class HomeController extends Controller {
 		{
 			case 'index':
 			$this->result=$this->authenticationHome();//Validate User and permissions
-			
 			$this->index();	
 			break;
 			default:
@@ -134,13 +133,13 @@ class HomeController extends Controller {
 
 	public function authenticationHome(){
 		
-		if(isset($_POST['name']) && isset($_POST['password']) )
+		if(!empty( $_POST['name']) && !empty($_POST['password']) )
 		{
+		if( $_POST['password']!="******")
+		{
+			$result=$this->createSession($_POST['name'],$_POST['password']);
+			//var_dump($_SESSION);
 		
-		$result=$this->createSession($_POST['name'],$_POST['password']);
-		//header("location:index.php"); 
-			if($_POST['password']=="******")
-				$this->LogoutHome();
 
 
 			if(is_bool($result))
@@ -148,7 +147,11 @@ class HomeController extends Controller {
 
 		return $result;
 		}
-		
+		if(!empty( $_POST['name']) &&$_POST['password']=="******")
+				$this->LogoutHome();	
+		}
+
+					 
 		
 
 	}

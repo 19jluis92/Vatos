@@ -178,19 +178,21 @@ class Controller{
 		return true;
 		}
 
-		return true;
-		}
-		session_destroy(); 
-		//var_dump($_SESSION);
 		return false;
+		}
+		
+		
+		
 	}
 
 	function validateSession()
 	{
-		
-		$result = session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
-		
 		var_dump($this);
+		$result = (empty($_SESSION)) ? false : true;
+		var_dump($_SESSION);
+		if(!isset($this->model)) $result=true;
+		var_dump($result);
+		
 		return $result;
 	}
 	function logout()
