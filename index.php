@@ -151,5 +151,5 @@
 
 //Execute controller
 
-$controller->run();	
+$controller->run( );	
 ?>

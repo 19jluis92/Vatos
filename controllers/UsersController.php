@@ -10,14 +10,19 @@ class UsersController extends Controller{
 		require('models/UsersModel.php');
 		$this->model = new UsersModel();
 	}
+	
 	function run()
 	{
 		$view = isset($_GET['view'])?$_GET['view']:'index';
 		switch($view)
 		{
 			case 'index':case 'list':
-						//Validate User and permissions
-			$this->all();	
+			if($this->validateSession())			//Validate User and permissions
+			{$this->all();}
+			else{
+				echo'sin session';
+			}
+
 			break;
 			case 'details':
 						//Validate User and permissions

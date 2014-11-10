@@ -2,7 +2,7 @@
 class Controller{
 
 	function __construct(){
-
+	
 	}
 /**
 	* @param string $data
@@ -150,6 +150,55 @@ class Controller{
 		else 
 			return false;
 		
+	}
+
+	public function createSession($name,$pass){
+		
+		if(isset($name) && isset($pass) )
+		{
+		
+		require('models/UsersModel.php');
+		$model = new UsersModel();
+		$name=$name;
+		$pass = $pass;
+		$user=$model->authentication($name,$pass);
+		//var_dump($user);
+		
+		if(isset($user)&&$this->validateSession()&&!isset($_SESSION['count']))
+		{
+		//var_dump($user);
+		$_SESSION['name'] = $user->email; 
+		if(isset($_SESSION['count']))
+			$_SESSION['count']++;
+		else
+			$_SESSION['count']=1;
+
+        //var_dump($_SESSION);
+
+		return true;
+		}
+
+		return true;
+		}
+		session_destroy(); 
+		//var_dump($_SESSION);
+		return false;
+	}
+
+	function validateSession()
+	{
+		
+		$result = session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+		
+		var_dump($this);
+		return $result;
+	}
+	function logout()
+	{
+	session_start(); 
+    session_destroy(); 
+  
+    header('location: index.php'); 
 	}
 
 }

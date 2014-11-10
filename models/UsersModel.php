@@ -86,15 +86,15 @@ class UsersModel extends Model{
 			{
 			$user = new User($result['email'],$result['password']);
 			/*opcionales son de prueba*/
-			var_dump($user);
+			//var_dump($user);
 			return $user;
 		}
 		else{
 			
-			return NULL;
+			return null;
 		}
 		//delete element using the given $id
-		return NULL;
+		return null;
 	}
 
 }

@@ -22,7 +22,7 @@ class HomeController extends Controller {
 		switch($view)
 		{
 			case 'index':
-			$result=$this->authentication();//Validate User and permissions
+			$this->result=$this->authenticationHome();//Validate User and permissions
 			
 			$this->index();	
 			break;
@@ -132,23 +132,31 @@ class HomeController extends Controller {
 		}
 	}
 
-	public function authentication(){
+	public function authenticationHome(){
 		
 		if(isset($_POST['name']) && isset($_POST['password']) )
 		{
 		
-		require('models/UsersModel.php');
-		$this->model = new UsersModel();
-		$name=$_POST['name'];
-		$pass = $_POST['password'];
-		$user=$this->model->authentication($name,$pass);
-		var_dump($user);
-		session_start();
-		$_SESSION['id'] = $user->id; 
-        header("location:index.php"); 
-		return true;
+		$result=$this->createSession($_POST['name'],$_POST['password']);
+		//header("location:index.php"); 
+			if($_POST['password']=="******")
+				$this->LogoutHome();
+
+
+			if(is_bool($result))
+				$this->login=$_SESSION['name'];
+
+		return $result;
 		}
-		return false;
+		
+		
+
+	}
+
+	public function LogoutHome(){
+		$this->logout();
+		//$this->result=true;
+		
 	}
 
 }
