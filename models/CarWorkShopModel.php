@@ -47,14 +47,15 @@ Class CarWorkShopModel extends Model{
 	*@param string $name
 	* @return bool transaction result
 	*/
-	function create($name, $country, $address, $city)
+	function create($name, $address, $city)
 	{
-		$CarWorkShop = new CarWorkShop($name, $country, $addres, $city);
+		$CarWorkShop = new CarWorkShop($name, $address, $city);
 		if($result = $this->db->insert("CarWorkShop", $CarWorkShop,NULL))
 			{
 			/*opcionales son de prueba*/
 			var_dump($CarWorkShop);
 			var_dump($result);
+			echo "riat";
 			return true;
 		}
 		else{
@@ -70,9 +71,9 @@ Class CarWorkShopModel extends Model{
 	*@param string $name (state name) 
 	* @return bool transaction result
 	*/
-	function edit($name, $country, $address, $city)
+	function edit($name, $address, $city)
 	{
-		$CarWorkShop = new CarWorkShop($name, $country, $addres, $city);
+		$CarWorkShop = new CarWorkShop($name, $country, $address, $city);
 		if($result = $this->db->update("CarWorkShop", $CarWorkShop,NULL))
 		{
 			return true;

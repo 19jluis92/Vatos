@@ -11,7 +11,7 @@
 			//Load controller
 			require('controllers/EmployeesController.php');
 			$controller = new EmployeesController();
-		break;
+			break;
 	case 'client':
 			//Load Controller
 			require('controllers/ClientController.php');

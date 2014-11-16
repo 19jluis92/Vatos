@@ -1,5 +1,6 @@
 <?php 
-require('controllers/Controller.php'); 
+require('controllers/Controller.php');
+require('mail.php');
 class UsersController extends Controller{
 	private $model;
 	/**
@@ -46,9 +47,8 @@ class UsersController extends Controller{
 	}
 	private function create()
 	{
-		
+			
 		//Validate Variables
-		
 		$email   = $this->validateEmail($_POST['email']);
 		$password = $this->validateText($_POST['password']);
 		$result = $this->model->create($email, $password);
@@ -57,7 +57,9 @@ class UsersController extends Controller{
 		if($result)
 		{
 			//Load view
-			
+			$message = 'Bienvenido Vato';
+			$mail = new Mail($email, $message);
+			$mail->send_mail();
 			require('views/User/Created.php');
 		}
 		else
