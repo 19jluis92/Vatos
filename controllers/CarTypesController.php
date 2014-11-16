@@ -9,6 +9,7 @@ class CarTypesController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/CarTypesModel.php');
 		$this->model = new CarTypesModel();
 	}
@@ -59,16 +60,19 @@ class CarTypesController extends Controller {
 		//get all the cartypes
 		$result = $this->model->all();	
 		//Query Succesfull
-		if(isset($result))
-		{
-			//Load view
-			require('views/CarType/Index.php');
-		}
-		else
-		{
+			if(isset($result))
+			{
+				$this->smarty->assign('carTypes',$result);
+				//Load view
+				if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+					$this->smarty->assign('deleted',true);
+				$this->smarty->display('./views/CarType/index.tpl');
+			}
+			else
+			{
 			//Ohh well... :(
-			require('views/Error.html');
-		}
+				$this->smarty->display('./views/error.tpl');
+			}	
 	}
 
 	/**
@@ -79,18 +83,19 @@ class CarTypesController extends Controller {
 	private function details()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);	
-		//Insert Succesfull
-		if($result)
-		{
+		$id = $this->validateNumber($_GET['id']);
+		$carType = $this->model->details($id);	
+		//select Succesfull
+		if($carType != NULL)
+			{
 			//Load view
-			require('views/CarType/Details.php');
-		}
-		else
-		{
-			require('views/Error.html');
-		}
+				$this->smarty->assign('carType',$carType);
+				$this->smarty->display('./views/CarType/view.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}	
 	}
 
 	/**
@@ -100,18 +105,29 @@ class CarTypesController extends Controller {
 	*/
 	private function create()
 	{
+
 		//Validate Variables
+				if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 		$name = $this->validateText($_POST['name']);
 		$result = $this->model->create($name);	
 		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/CarType/Created.php');
-		}
-		else
-		{
-			require('views/Error.html');
+			if($result)
+			{
+				unset($postError);
+				header("Location: index.php?controller=CarType&view=details&id=$result->id");
+				//$this->all();
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error',$result);
+			}
+
+		} 
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+			$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/CarType/add.tpl');
 		}
 	}
 
@@ -122,19 +138,38 @@ class CarTypesController extends Controller {
 	*/
 	private function edit()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$name = $this->validateText($_POST['name']);
 		$result = $this->model->edit($id,$name);	
 		//Insert Succesfull
 		if($result)
-		{
-			//Load view
-			require('views/CarType/Edited.php');
+			{
+				unset($postError);
+				header("Location: index.php?controller=CarType");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
 		}
-		else
-		{
-			require('views/Error.html');
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$carType = $this->model->details($id);
+		//select Succesfull
+			if($carType != NULL)
+			{
+			//Load view
+				$this->smarty->assign('carType',$carType);
+				$this->smarty->display('./views/CarType/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
 	}
 
@@ -146,17 +181,17 @@ class CarTypesController extends Controller {
 	private function delete()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/CarType/Deleted.php');
+			header("Location: index.php?controller=CarType&deleted=true");
 		}
 		else
 		{
-			require('views/Error.html');
+				$this->smarty->display('./views/error.tpl');
 		}
 	}
 

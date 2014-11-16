@@ -25,11 +25,9 @@ Class CarTypesModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('catype', $id,NULL))
+		if($result = $this->db->details('cartype', $id,NULL))
 			{
-			$Model = new CarType($result['name']);
-			/*opcionales son de prueba*/
-			var_dump($Model);
+			$Model = new CarType($result['name'],$result['id']);
 			return $Model;
 		}
 		else{
@@ -47,10 +45,10 @@ Class CarTypesModel extends Model{
 	*/
 	function create($name)
 	{
-		$brand = new CarType($name);
+		$CarType = new CarType($name);
 		if($result = $this->db->insert('cartype', $CarType,NULL))
 		{
-			return true;
+			return $result;
 		}
 		else{
 			echo $result;
@@ -67,7 +65,7 @@ Class CarTypesModel extends Model{
 	*/
 	function edit($id,$name)
 	{
-		$CarType = new CarType($name);
+		$CarType = new CarType($name,$id);
 		if($result = $this->db->update('cartype', $CarType,NULL))
 			return true;
 		else{

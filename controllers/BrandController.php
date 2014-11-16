@@ -64,7 +64,6 @@ class BrandController extends Controller {
 			if(isset($result))
 			{
 			//Load view
-				//require('views/Brand/index.php');
 				if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
 					$this->smarty->assign('deleted',true);
 				$this->smarty->display('./views/Brand/index.tpl');
@@ -125,7 +124,6 @@ class BrandController extends Controller {
 			if($result)
 			{
 				unset($postError);
-				var_dump($result);
 				header("Location: index.php?controller=Brand&view=details&id=$result->id");
 				//$this->all();
 			}
@@ -206,7 +204,7 @@ class BrandController extends Controller {
 		}
 		else
 		{
-			require('views/Error.html');
+				$this->smarty->display('./views/error.tpl');
 		}
 	}
 
