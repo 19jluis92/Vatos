@@ -1,5 +1,6 @@
 <?php
 require('models/Model.php');
+require('database/City.php');
 Class CitiesModel extends Model{
 	private $id;
 	private $name;
@@ -11,7 +12,7 @@ Class CitiesModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a City array)
-		return $this->db->all('City');
+		return $this->db->all('city');
 	}
 
 	/**
@@ -21,6 +22,17 @@ Class CitiesModel extends Model{
 	*/
 	function details($id)
 	{
+		if($result = $this->db->details('city', $id,NULL))
+		{
+			$Model = new City($result['name'],$result['idState']);
+			/*opcionales son de prueba*/
+			var_dump($Model);
+			return $Model;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
 		//delete element using the given $id
 		return true;
 	}
@@ -31,10 +43,20 @@ Class CitiesModel extends Model{
 	*@param int $idState
 	* @return bool transaction result
 	*/
-	function create($name)
+	function create($name,$idState)
 	{
 		$this->name = $name;
 		$this->idState = $idState;
+		$city = new City($name,$idState);
+		if($result = $this->db->insert('city' , $city,NULL))
+		{
+			return true;
+		}
+		else{
+			echo $result;
+			
+			return false;
+		}
 		//save element and get complete item (with $id)
 		return $this;
 	}
@@ -48,10 +70,14 @@ Class CitiesModel extends Model{
 	*/
 	function edit($id,$name,$idState)
 	{
-		$this->name = $name;
-		$this->idState = $idState;
-		//update element using the given $id
-		return true;
+		$city = new City($name,$idState);
+		$city->id = $id;
+		if($result = $this->db->update('city' , $city,NULL))
+			return true;
+		else{
+			echo $result;
+			return false;
+		}
 	}
 
 	/**
@@ -61,8 +87,13 @@ Class CitiesModel extends Model{
 	*/
 	function delete($id)
 	{
-		//delete element using the given $id
-		return true;
+		if($result = $this->db->delete('city' , $id,NULL))
+			return true;
+		else
+		{
+			echo $result;
+			return false;
+		}
 	}
 }
 ?>

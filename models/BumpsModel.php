@@ -26,7 +26,7 @@ Class BumpsModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a Bumps array)
-		return $this->db->all('Bump');
+		return $this->db->all('bump');
 	}
 
 	/**
@@ -36,7 +36,7 @@ Class BumpsModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('Bumps', $id,NULL))
+		if($result = $this->db->details('bump', $id,NULL))
 		{
 			$Bumps = new Bumps($result['name']);
 			return $Bump;
@@ -59,7 +59,7 @@ Class BumpsModel extends Model{
 	function create($idPiece, $idSeverity , $idInspection)
 	{
 		$Bumps = new Bumps($idPiece, $idSeverity, $idInspection);
-		if($result = $this->db->insert("Bump", $Bump,NULL))
+		if($result = $this->db->insert("bump", $Bump,NULL))
 		{
 			return true;
 		}
@@ -82,7 +82,7 @@ Class BumpsModel extends Model{
 	{
 		$Bumps = new Bumps($idPiece, $idSeverity, $idInspection);
 		$Bumps->id = $id;
-		if($result = $this->db->update("Bumps" , $Bumps,NULL))
+		if($result = $this->db->update("bump" , $Bumps,NULL))
 			return true;
 		else{
 			echo $result;
@@ -97,7 +97,7 @@ Class BumpsModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("Bumps" , $id,NULL))
+		if($result = $this->db->delete("bump" , $id,NULL))
 			return true;
 		else
 		{

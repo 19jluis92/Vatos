@@ -27,7 +27,7 @@ Class ServicesModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a Services array)
-		return $this->db->all('Service');
+		return $this->db->all('service');
 	}
 
 	/**
@@ -37,7 +37,7 @@ Class ServicesModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('Services', $id,NULL))
+		if($result = $this->db->details('service', $id,NULL))
 		{
 			$Services = new Services($result['name']);
 			return $Services;
@@ -62,7 +62,7 @@ Class ServicesModel extends Model{
 	function create($startDate,$endDate,$idEmployee,$idCarWorkShop,$idVehicle)
 	{
 		$Services = new Services($startDate, $endDate, $idEmployee, $idCarWorkShop, $idVehicle);
-		if($result = $this->db->insert("Services", $Services,NULL))
+		if($result = $this->db->insert('service', $Services,NULL))
 		{
 			return true;
 		}
@@ -87,7 +87,7 @@ Class ServicesModel extends Model{
 	{
 		$Services = new Services($startDate, $endDate, $idEmployee, $idCarWorkShop, $idVehicle);
 		$Services->id = $id;
-		if($result = $this->db->update("Services", $Services,NULL))
+		if($result = $this->db->update('service', $Services,NULL))
 			return true;
 		else{
 			echo $result;
@@ -102,7 +102,7 @@ Class ServicesModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("Services" , $id,NULL))
+		if($result = $this->db->delete('service' , $id,NULL))
 			return true;
 		else
 		{

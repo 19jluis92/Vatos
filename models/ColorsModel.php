@@ -16,7 +16,7 @@ Class ColorsModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a Colors array)
-		return $this->db->all('Color');
+		return $this->db->all('color');
 	}
 
 	/**
@@ -26,7 +26,7 @@ Class ColorsModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('Color' , $id,NULL))
+		if($result = $this->db->details('color' , $id,NULL))
 		{
 			$Color = new Color($result['name']);
 			return $Color;
@@ -47,7 +47,7 @@ Class ColorsModel extends Model{
 	function create($name)
 	{
 		$Color = new Color($name);
-		if($result = $this->db->insert("Color" , $Color,NULL))
+		if($result = $this->db->insert('color' , $Color,NULL))
 		{
 			return true;
 		}
@@ -68,7 +68,7 @@ Class ColorsModel extends Model{
 	{
 		$Color = new Color($name);
 		$Color->id = $id;
-		if($result = $this->db->update("Color" , $Color,NULL))
+		if($result = $this->db->update('color' , $Color,NULL))
 			return true;
 		else{
 			echo $result;
@@ -83,7 +83,7 @@ Class ColorsModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("Color" , $id,NULL))
+		if($result = $this->db->delete('color' , $id,NULL))
 			return true;
 		else
 		{

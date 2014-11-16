@@ -18,7 +18,7 @@ Class WorkShopPhoneModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a states array)
-		return $this->db->all('WorkShopPhone');
+		return $this->db->all('workshopphone');
 	}
 
 	/**
@@ -28,7 +28,7 @@ Class WorkShopPhoneModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('WorkShopPhone', $id,NULL))
+		if($result = $this->db->details('workshopphone', $id,NULL))
 		{
 			$WorkShopPhone = new WorkShopPhone($result['name']);
 			/*opcionales son de prueba*/
@@ -51,7 +51,7 @@ Class WorkShopPhoneModel extends Model{
 	function create($lada, $country, $area, $number, $carWorkShop)
 	{
 		$WorkShopPhone = new WorkShopPhone($lada, $country, $addres, $number,$carWorkShop);
-		if($result = $this->db->insert("WorkShopPhone", $WorkShopPhone,NULL))
+		if($result = $this->db->insert('workshopphone', $WorkShopPhone,NULL))
 		{
 			return true;
 		}
@@ -71,7 +71,7 @@ Class WorkShopPhoneModel extends Model{
 	function edit($lada, $country, $area, $number, $carWorkShop)
 	{
 		$WorkShopPhone = new WorkShopPhone($lada, $country, $addres, $number,$carWorkShop);
-		if($result = $this->db->update("WorkShopPhone", $WorkShopPhone,NULL))
+		if($result = $this->db->update('workshopphone', $WorkShopPhone,NULL))
 		{
 			return true;
 		}
@@ -90,7 +90,7 @@ Class WorkShopPhoneModel extends Model{
 	function delete($id)
 	{
 		
-		if($result = $this->db->delete("WorkShopPhone" , $id,NULL))
+		if($result = $this->db->delete('workshopphone' , $id,NULL))
 			return true;
 		else
 		{

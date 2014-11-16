@@ -29,7 +29,7 @@ class ClientModel extends Model
 	function create($name,$lastName,$rfc,$clientCol,$clientCol1)
 	{
 	$client = new Client($name,$lastName,$rfc,$clientCol,$clientCol1);
-		if($result = $this->db->insert("Client" , $client,NULL))
+		if($result = $this->db->insert('client' , $client,NULL))
 			{
 			/*opcionales son de prueba*/
 			var_dump($client);
@@ -47,7 +47,7 @@ class ClientModel extends Model
 	{
 	$client = new Client($name,$lastName,$rfc,$clientCol,$clientCol1);
 		$client->id = $id;
-		if($result = $this->db->update("client" , $client,NULL))
+		if($result = $this->db->update('client' , $client,NULL))
 			return true;
 		else{
 			echo $result;
@@ -56,7 +56,7 @@ class ClientModel extends Model
 	}
 	function delete($id)
 	{
-		if($result = $this->db->delete("Client" , $id,NULL))
+		if($result = $this->db->delete('client' , $id,NULL))
 			return true;
 		else{
 			echo $result;
@@ -68,14 +68,14 @@ class ClientModel extends Model
 
 	function index()
 	{
-		$elements = $this->db->all('Client');
+		$elements = $this->db->all('client');
 		//get all elements (set the $elements variable with a states array)
 		return $elements;
 	}
 
 	function details($id)
 	{
-		if($result = $this->db->details('Client' , $id,NULL))
+		if($result = $this->db->details('client' , $id,NULL))
 			{
 			$client = new Client($result['name'],$result['lastName'],$result['rfc'],$result['clientCol'],$result['clientCol1']);
 			/*opcionales son de prueba*/

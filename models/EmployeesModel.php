@@ -43,7 +43,7 @@ class EmployeesModel  extends Model
 	{
 		global $db;
 		$employee = new Employee($name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop);
-		if($result = $db->insert("Employee" , $employee,NULL))
+		if($result = $db->insert('employee' , $employee,NULL))
 			return true;
 		else{
 			echo $result;
@@ -65,7 +65,7 @@ class EmployeesModel  extends Model
 	{
 		$employee = new Employee($name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop);
 		$employee->id = $id;
-		if($result = $this->db->update("Employee" , $employee,NULL))
+		if($result = $this->db->update('employee' , $employee,NULL))
 			return true;
 		else{
 			echo $result;
@@ -75,7 +75,7 @@ class EmployeesModel  extends Model
 	}
 
 	function delete($id){
-		if($result = $this->db->delete("Employee" , $id,NULL))
+		if($result = $this->db->delete('employee' , $id,NULL))
 			return true;
 		else{
 			echo $result;
@@ -86,13 +86,13 @@ class EmployeesModel  extends Model
 	}
 
 	function all(){
-		$elements = $this->db->all('Employee');
+		$elements = $this->db->all('employee');
 		//get all elements (set the $elements variable with a states array)
 		return $elements;
 	}
 
 	function details($id){
-		if($result = $this->db->details('Employee' , $id,NULL))
+		if($result = $this->db->details('employee' , $id,NULL))
 			{
 			$employee = new Employee($result['name'],$result['lastName'],$result['nss'],$result['phone'],$result['idCity'],$result['idUser'],$result['idCarWorkShop']);
 			/*opcionales son de prueba*/

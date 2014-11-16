@@ -22,7 +22,7 @@ Class VehiclesModel extends Model{
 	function all()
 	{
 		//Retrieve list of vehicles
-		return $this->db->all('Vehicle');
+		return $this->db->all('vehicle');
 	}
 
 
@@ -59,7 +59,7 @@ Class VehiclesModel extends Model{
 	function create($vin, $model, $color, $year , $type, $conditions, $plates)
 	{
 		$vehicle = new Vehicle($vin, $model, $color, $year , $type, $conditions, $plates);
-		if($result = $this->db->insert("Vehicle", $vehicle, NULL))
+		if($result = $this->db->insert('vehicle', $vehicle, NULL))
 		{
 			return true;
 		}
@@ -82,7 +82,7 @@ Class VehiclesModel extends Model{
 	function edit($vin, $model, $color, $year , $type, $conditions, $plates)
 	{
 		$vehicle = new Vehicle($vin, $model, $color, $year , $type, $conditions, $plates);
-		if($result = $this->db->update("Vehicle", $vehicle, NULL))
+		if($result = $this->db->update('vehicle', $vehicle, NULL))
 		{
 			return true;
 		}
@@ -99,7 +99,7 @@ Class VehiclesModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("Vehicle" , $id,NULL))
+		if($result = $this->db->delete('vehicle' , $id,NULL))
 		{
 			return true;
 		}

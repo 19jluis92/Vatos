@@ -16,7 +16,7 @@ Class LocationModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a states array)
-		return $this->db->all('Location');
+		return $this->db->all('location');
 	}
 
 	/**
@@ -26,7 +26,7 @@ Class LocationModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('Location' , $id,NULL))
+		if($result = $this->db->details('location' , $id,NULL))
 		{
 			$Location = new Location($result['name']);
 			return $Location;
@@ -47,7 +47,7 @@ Class LocationModel extends Model{
 	function create($name, $carWorkShop)
 	{
 		$Location = new Location($name, $carWorkShop);
-		if($result = $this->db->insert("Location", $Location,NULL))
+		if($result = $this->db->insert('location', $Location,NULL))
 		{
 			return true;
 		}
@@ -67,7 +67,7 @@ Class LocationModel extends Model{
 	function edit($name, $carWorkShop)
 	{
 		$Location = new Location($name, $carWorkShop);
-		if($result = $this->db->update("Location", $Location,NULL))
+		if($result = $this->db->update('location', $Location,NULL))
 			return true;
 		else{
 			echo $result;
@@ -82,7 +82,7 @@ Class LocationModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("Location", $id,NULL))
+		if($result = $this->db->delete('location', $id,NULL))
 			return true;
 		else
 		{

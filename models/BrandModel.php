@@ -14,7 +14,7 @@ Class BrandModel extends Model{
 	*/
 	function all()
 	{
-		$elements = $this->db->all('Brand');
+		$elements = $this->db->all('brand');
 		//get all elements (set the $elements variable with a states array)
 		return $elements;
 	}
@@ -26,11 +26,10 @@ Class BrandModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('Brand' , $id,NULL))
+		if($result = $this->db->details('brand', $id,NULL))
 			{
-			$brand = new Brand($result['name']);
+			$brand = new Brand($result['name'],$result['id']);
 			/*opcionales son de prueba*/
-			var_dump($brand);
 			return $brand;
 		}
 		else{
@@ -49,15 +48,13 @@ Class BrandModel extends Model{
 	function create($name)
 	{
 		$brand = new Brand($name);
-		if($result = $this->db->insert("Brand" , $brand,NULL))
+		if($result = $this->db->insert("brand" , $brand,NULL))
 			{
 			/*opcionales son de prueba*/
-			var_dump($brand);
-			var_dump($result);
-			return true;
+			return $result;
 		}
 		else{
-			echo $result;
+			echo 'Error'. $result;
 			
 			return false;
 		}
@@ -71,9 +68,9 @@ Class BrandModel extends Model{
 	*/
 	function edit($id,$name)
 	{
-		$brand = new Brand($name);
+		$brand = new Brand($name,$id);
 		$brand->id = $id;
-		if($result = $this->db->update("Brand" , $brand,NULL))
+		if($result = $this->db->update("brand" , $brand,NULL))
 			return true;
 		else{
 			echo $result;
@@ -88,7 +85,7 @@ Class BrandModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("Brand" , $id,NULL))
+		if($result = $this->db->delete("brand" , $id,NULL))
 			return true;
 		else
 		{

@@ -8,6 +8,7 @@ class BrandController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/BrandModel.php');
 		$this->model = new BrandModel();
 	}
@@ -58,21 +59,24 @@ class BrandController extends Controller {
 		//get all the Brand
 		if(true || $this->LoggedIn() && $this->validatePermissions("brand","list") ){
 			$result = $this->model->all();
-		
+			$this->smarty->assign('brands',$result);
 		//Query Succesfull
 			if(isset($result))
 			{
 			//Load view
-				require('views/Brand/index.php');
+				//require('views/Brand/index.php');
+				if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+					$this->smarty->assign('deleted',true);
+				$this->smarty->display('./views/Brand/index.tpl');
 			}
 			else
 			{
 			//Ohh well... :(
-				require('views/Error.html');
+				$this->smarty->display('./views/error.tpl');
 			}	
 		}
 		else{
-			require('views/ValidationError.html');
+			$this->smarty->display('./views/permissions.tpl');
 		}
 		
 	}
@@ -87,21 +91,22 @@ class BrandController extends Controller {
 		//Validation not implemented yet 
 		if(true || ($this->LoggedIn() && $this->validatePermissions("brand","detais")) ){
 
-			$id = $this->validateNumber($_POST['id']);
+			$id = $this->validateNumber($_GET['id']);
 			$brand = $this->model->details($id);
-
 		//select Succesfull
 			if($brand != NULL)
 			{
 			//Load view
-				require('views/Brand/Details.php');
+				$this->smarty->assign('brand',$brand);
+				$this->smarty->display('./views/Brand/view.tpl');
 			}
 			else
 			{
-				require('views/Error.html');
-			}
-		}else{
-			require('views/ValidationError.html');
+				$this->smarty->display('./views/error.tpl');
+			}	
+		}
+		else{
+			$this->smarty->display('./views/permissions.tpl');
 		}
 	}
 
@@ -112,20 +117,31 @@ class BrandController extends Controller {
 	*/
 	private function create()
 	{
-		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$result = $this->model->create($name);	
-		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/Brand/Created.php');
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+			//Validate Variables
+			$name = $this->validateText($_POST['name']);
+			$result = $this->model->create($name);	
+			//Insert Succesfull
+			if($result)
+			{
+				unset($postError);
+				var_dump($result);
+				header("Location: index.php?controller=Brand&view=details&id=$result->id");
+				//$this->all();
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error',$result);
+			}
+
+		} 
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/Brand/add.tpl');
 		}
-		else
-		{
-			echo $result;
-			require('views/Error.html');
-		}
+		
 	}
 
 	/**
@@ -137,20 +153,39 @@ class BrandController extends Controller {
 	*/
 	private function edit()
 	{
-		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$id = $this->validateText($_POST['id']);
-		$result = $this->model->edit($id,$name);	
-		//Insert Succesfull
-		if($result)
-		{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
+			$name = $this->validateText($_POST['name']);
+			$id = $this->validateText($_GET['id']);
+			$result = $this->model->edit($id,$name);	
+			if($result)
+			{
+				unset($postError);
+				$this->all();
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$brand = $this->model->details($id);
+		//select Succesfull
+			if($brand != NULL)
+			{
 			//Load view
-			require('views/Brand/Edited.php');
+				$this->smarty->assign('brand',$brand);
+				$this->smarty->display('./views/Brand/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
-		else
-		{
-			require('views/Error.html');
-		}
+
+
 	}
 
 		/**
@@ -161,13 +196,13 @@ class BrandController extends Controller {
 	private function delete()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Brand/Deleted.php');
+			header("Location: index.php?controller=Brand&deleted=true");
 		}
 		else
 		{

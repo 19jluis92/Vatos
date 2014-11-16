@@ -17,7 +17,7 @@ Class CarWorkShopModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a states array)
-		return $this->db->all('CarWorkShop');
+		return $this->db->all('carworkshop');
 	}
 
 	/**
@@ -27,7 +27,7 @@ Class CarWorkShopModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details("CarWorkShop", $id,NULL))
+		if($result = $this->db->details('carworkshop', $id,NULL))
 			{
 			$CarWorkShop = new CarWorkShop($result['name']);
 			/*opcionales son de prueba*/
@@ -50,7 +50,7 @@ Class CarWorkShopModel extends Model{
 	function create($name, $country, $address, $city)
 	{
 		$CarWorkShop = new CarWorkShop($name, $country, $addres, $city);
-		if($result = $this->db->insert("CarWorkShop", $CarWorkShop,NULL))
+		if($result = $this->db->insert('carworkshop', $CarWorkShop,NULL))
 			{
 			/*opcionales son de prueba*/
 			var_dump($CarWorkShop);
@@ -73,7 +73,7 @@ Class CarWorkShopModel extends Model{
 	function edit($name, $country, $address, $city)
 	{
 		$CarWorkShop = new CarWorkShop($name, $country, $addres, $city);
-		if($result = $this->db->update("CarWorkShop", $CarWorkShop,NULL))
+		if($result = $this->db->update('carworkshop', $CarWorkShop,NULL))
 		{
 			return true;
 		}
@@ -91,7 +91,7 @@ Class CarWorkShopModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("CarWorkShop", $id,NULL))
+		if($result = $this->db->delete('carworkshop', $id,NULL))
 			return true;
 		else
 		{

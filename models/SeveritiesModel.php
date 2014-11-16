@@ -15,7 +15,7 @@ Class SeveritiesModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a Severities array)
-		return $this->db->all('Severity');
+		return $this->db->all('severity');
 	}
 
 	/**
@@ -25,7 +25,7 @@ Class SeveritiesModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('Severity', $id,NULL))
+		if($result = $this->db->details('severity', $id,NULL))
 		{
 			$Severity = new Severity($result['name']);
 			return $Severity;
@@ -46,7 +46,7 @@ Class SeveritiesModel extends Model{
 	function create($name)
 	{
 		$Severity = new Severity($name);
-		if($result = $this->db->insert("Severity" , $Severity,NULL))
+		if($result = $this->db->insert('severity' , $Severity,NULL))
 		{
 			return true;
 		}
@@ -67,7 +67,7 @@ Class SeveritiesModel extends Model{
 	{
 		$Severity = new Severity($name);
 		$Severity->id = $id;
-		if($result = $this->db->update("Severity" , $Severity,NULL))
+		if($result = $this->db->update('severity' , $Severity,NULL))
 			return true;
 		else{
 			echo $result;
@@ -82,7 +82,7 @@ Class SeveritiesModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("Severity" , $id,NULL))
+		if($result = $this->db->delete('severity' , $id,NULL))
 			return true;
 		else
 		{

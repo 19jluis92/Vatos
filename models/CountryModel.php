@@ -16,7 +16,7 @@ Class CountryModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a countries array)
-		return $this->db->all('Country');
+		return $this->db->all('country');
 	}
 
 	/**
@@ -26,7 +26,7 @@ Class CountryModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('Country' , $id,NULL))
+		if($result = $this->db->details('country' , $id,NULL))
 			{
 			$Country = new Country($result['name']);
 			/*opcionales son de prueba*/
@@ -49,7 +49,7 @@ Class CountryModel extends Model{
 	function create($name)
 	{
 		$country = new Country($name);
-		if($result = $this->db->insert("Country", $country,NULL))
+		if($result = $this->db->insert('country', $country,NULL))
 			{
 			/*opcionales son de prueba*/
 			var_dump($country);
@@ -72,7 +72,7 @@ Class CountryModel extends Model{
 	{
 		$Country = new Country($name);
 		$Country->id = $id;
-		if($result = $this->db->update("Country", $Country,NULL))
+		if($result = $this->db->update('country', $Country,NULL))
 			return true;
 		else{
 			echo $result;
@@ -87,7 +87,7 @@ Class CountryModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("Country", $id,NULL))
+		if($result = $this->db->delete('country', $id,NULL))
 			return true;
 		else
 		{

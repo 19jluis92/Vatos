@@ -27,7 +27,7 @@ Class RelocationsModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a Relocations array)
-		return $this->db->all('Relocation');
+		return $this->db->all('relocation');
 	}
 
 	/**
@@ -37,7 +37,7 @@ Class RelocationsModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('Relocation', $id,NULL))
+		if($result = $this->db->details('relocation', $id,NULL))
 		{
 			$Relocation = new Relocation($result['name']);
 			return $Relocation;
@@ -62,7 +62,7 @@ Class RelocationsModel extends Model{
 	function create($relocationDate,$idEmployee,$reason,$idDepartment,$idService)
 	{
 		$Relocation = new Relocation($relocationDate, $idEmployee, $reason, $idDepartment, $idService);
-		if($result = $this->db->insert("Relocation" , $Relocation,NULL))
+		if($result = $this->db->insert('relocation' , $Relocation,NULL))
 		{
 			return true;
 		}
@@ -87,7 +87,7 @@ Class RelocationsModel extends Model{
 	{
 		$Relocation = new Relocation($relocationDate, $idEmployee, $reason, $idDepartment, $idService);
 		$Relocation->id = $id;
-		if($result = $this->db->update("Relocation", $Relocation,NULL))
+		if($result = $this->db->update('relocation', $Relocation,NULL))
 			return true;
 		else{
 			echo $result;
@@ -102,7 +102,7 @@ Class RelocationsModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("Relocation" , $id,NULL))
+		if($result = $this->db->delete('relocation' , $id,NULL))
 			return true;
 		else
 		{

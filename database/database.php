@@ -79,7 +79,7 @@ class db{
 		$keys = implode(',', array_keys(get_object_vars($data)));
 		//$this->name = $this->db_driver->escape_string($name);
 		$values = implode("','", array_values(get_object_vars($data)));
-		var_dump($values);
+		//var_dump($values);
 		$result = $this->db_driver->query("INSERT INTO $table ($keys) values('$values')");
 		if(!empty($this->db_driver->error)){
 			echo  $this->db_driver->error;
@@ -87,7 +87,7 @@ class db{
 		}
 		else{
 			$data->id = $this->db_driver->insert_id;
-			return true;
+			return $data;
 		}
 	}
 

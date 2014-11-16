@@ -15,7 +15,7 @@ Class CarTypesModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a CarTypes array)
-		return $this->db->all('CarType');
+		return $this->db->all('cartype');
 	}
 
 	/**
@@ -25,7 +25,7 @@ Class CarTypesModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('CarType', $id,NULL))
+		if($result = $this->db->details('catype', $id,NULL))
 			{
 			$Model = new CarType($result['name']);
 			/*opcionales son de prueba*/
@@ -48,7 +48,7 @@ Class CarTypesModel extends Model{
 	function create($name)
 	{
 		$brand = new CarType($name);
-		if($result = $this->db->insert("CarType", $CarType,NULL))
+		if($result = $this->db->insert('cartype', $CarType,NULL))
 		{
 			return true;
 		}
@@ -68,7 +68,7 @@ Class CarTypesModel extends Model{
 	function edit($id,$name)
 	{
 		$CarType = new CarType($name);
-		if($result = $this->db->update("CarType", $CarType,NULL))
+		if($result = $this->db->update('cartype', $CarType,NULL))
 			return true;
 		else{
 			echo $result;
@@ -83,7 +83,7 @@ Class CarTypesModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("CarType" , $id,NULL))
+		if($result = $this->db->delete('cartype' , $id,NULL))
 			return true;
 		else
 		{

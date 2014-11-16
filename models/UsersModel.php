@@ -16,7 +16,7 @@ class UsersModel extends Model{
 	{
 		global $db;
 		$user = new User($email,$password);
-		if($result = $db->insert("User" , $user,NULL))
+		if($result = $db->insert('user' , $user,NULL))
 			return true;
 		else{
 			echo $result;
@@ -33,7 +33,7 @@ class UsersModel extends Model{
 		
 		$user = new User($email,$password);
 		$user->id = $id;
-		if($result = $this->db->update("User" , $user,NULL))
+		if($result = $this->db->update('user' , $user,NULL))
 			return true;
 		else{
 			echo $result;
@@ -46,7 +46,7 @@ class UsersModel extends Model{
 	* @return bool transaction result
 	*/
 	function delete($id){
-		if($result = $this->db->delete("User" , $id,NULL))
+		if($result = $this->db->delete('user' , $id,NULL))
 			return true;
 		else{
 			echo $result;
@@ -58,7 +58,7 @@ class UsersModel extends Model{
 	}
 
 	function index(){
-		$elements = $this->db->all('User');
+		$elements = $this->db->all('user');
 		//get all elements (set the $elements variable with a states array)
 		return $elements;
 	}
@@ -66,7 +66,7 @@ class UsersModel extends Model{
 	function details($id){
 
 		
-		if($result = $this->db->details('User' , $id,NULL))
+		if($result = $this->db->details('user' , $id,NULL))
 			{
 			$user = new User($result['email'],$result['password']);
 			/*opcionales son de prueba*/

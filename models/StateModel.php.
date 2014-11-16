@@ -17,7 +17,7 @@ Class StateModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a states array)
-		return $this->db->all('State');
+		return $this->db->all('state');
 	}
 
 	/**
@@ -27,7 +27,7 @@ Class StateModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('State' , $id,NULL))
+		if($result = $this->db->details('state' , $id,NULL))
 			{
 			$State = new State($result['name']);
 			/*opcionales son de prueba*/
@@ -48,7 +48,7 @@ Class StateModel extends Model{
 	function create($name, $idCountry)
 	{
 		$state = new State($name, $idCountry);
-		if($result = $this->db->insert("State" , $state,NULL))
+		if($result = $this->db->insert('state' , $state,NULL))
 			{
 			/*opcionales son de prueba*/
 			var_dump($state);
@@ -71,7 +71,7 @@ Class StateModel extends Model{
 	function edit($name, $idCountry)
 	{
 		$State = new State($name, $idCountry);
-		if($result = $this->db->update("State" , $State,NULL))
+		if($result = $this->db->update('state' , $State,NULL))
 			return true;
 		else{
 			echo $result;
@@ -86,7 +86,7 @@ Class StateModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("State" , $id,NULL))
+		if($result = $this->db->delete('state' , $id,NULL))
 			return true;
 		else
 		{

@@ -1,8 +1,20 @@
 <?php 
 class Controller{
-
+	protected $smarty;
 	function __construct(){
 
+		// *nix style (note capital 'S')
+		//require_once('../libs/Smarty.class.php');
+		require '/libs/Smarty.class.php';
+		$this->smarty = new Smarty();
+		$this->smarty->setTemplateDir('/views/');
+		$this->smarty->setCompileDir('/views_c/');
+		$this->smarty->setConfigDir('/configs/');
+		$this->smarty->setCacheDir('/cache/');
+		//** un-comment the following line to show the debug console
+		$this->smarty->debugging = true;
+		$this->smarty->caching = false;
+		$this->smarty->cache_lifetime = 0;
 	}
 /**
 	* @param string $data
@@ -50,11 +62,11 @@ class Controller{
 	{
 		if(!isset($data))
 			return '01/01/1900';
-    	$d = DateTime::createFromFormat($format, $date);
-    	if( $d && $d->format($format) == $date)
-    		return $date;
-    	else
-    		return '01/01/1900';
+		$d = DateTime::createFromFormat($format, $date);
+		if( $d && $d->format($format) == $date)
+			return $date;
+		else
+			return '01/01/1900';
 	}
 
 
@@ -83,7 +95,7 @@ class Controller{
 		// Run the preg_match() function on regex against the email address
 		if (preg_match($regex, $data))
 		{
-	 		 return true;
+			return true;
 		}
 		else 
 		{ 
@@ -102,7 +114,7 @@ class Controller{
 			return false;
 		$regex = '/^[a-z\d_]{4,15}$/i ';
 		if (preg_match($rege, $dat))
-		 {
+		{
 			return true;
 		}
 
@@ -142,7 +154,7 @@ class Controller{
 			if($controller !== '' && $view !== '')
 			{
 			//validar si tiene permisos en la base de datos
-			return true;
+				return true;
 			}
 			else 
 				return false;

@@ -3,6 +3,18 @@
 	global $db;
 	$db = new db();
 	session_start();
+/*
+	$to = "lic.nancy.torres+web@gmail.com";
+	$subject = "Practica Correos";
+	$message = "Miguel Alejandro Sandoval Gómez";
+	$headers = 'From: hello@vatos.com';
+	mail($to,$subject,$message,$headers);
+	$to = "lic.nancy.torres+web@gmail.com";
+	$subject = "Practica Correos";
+	$message = "Erick Alfonso Fabian";
+	$headers = 'From: hello@vatos.com';
+	mail($to,$subject,$message,$headers);
+*/
 	//Get Query from URL
 	$path = isset($_GET['controller']) ? $_GET['controller'] : 'home' ;
 	switch(strtolower($path))

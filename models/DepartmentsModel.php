@@ -16,7 +16,7 @@ Class DepartmentsModel extends Model{
 	function all()
 	{
 		//get all elements (set the $elements variable with a Departments array)
-		return $this->db->all('Department');
+		return $this->db->all('department');
 	}
 
 	/**
@@ -26,7 +26,7 @@ Class DepartmentsModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('Department' , $id,NULL))
+		if($result = $this->db->details('department' , $id,NULL))
 		{
 			$Department = new Department($result['name']);
 			return $Department;
@@ -48,7 +48,7 @@ Class DepartmentsModel extends Model{
 	function create($name,$idLocation)
 	{
 		$Department = new Department($name, $idLocation);
-		if($result = $this->db->insert("Department", $Department,NULL))
+		if($result = $this->db->insert('department', $Department,NULL))
 		{
 			return true;
 		}
@@ -70,7 +70,7 @@ Class DepartmentsModel extends Model{
 	{
 		$Department = new Department($name, $idLocation);
 		$Department->id = $id;
-		if($result = $this->db->update("Department" , $Department,NULL))
+		if($result = $this->db->update('department' , $Department,NULL))
 			return true;
 		else{
 			echo $result;
@@ -85,7 +85,7 @@ Class DepartmentsModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("Department", $id,NULL))
+		if($result = $this->db->delete('department', $id,NULL))
 			return true;
 		else
 		{

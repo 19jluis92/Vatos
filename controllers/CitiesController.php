@@ -103,7 +103,8 @@ class CitiesController extends Controller {
 	{
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
-		$result = $this->model->create($name);	
+		$idState = $this->validateNumber($_POST['idState']);
+		$result = $this->model->create($name,$idState);	
 		//Insert Succesfull
 		if($result)
 		{
