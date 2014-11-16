@@ -1,7 +1,7 @@
 <?php
 require('controllers/Controller.php');
 class HomeController extends Controller {
-	
+	private $model;
 
 	/**
 	*Default constructor , include and create the model
@@ -17,11 +17,12 @@ class HomeController extends Controller {
 	*/
 	function run()
 	{
+		
 		$view = isset($_GET['view'])?$_GET['view']:'index';
 		switch($view)
 		{
 			case 'index':
-						//Validate User and permissions
+			$this->result=$this->authenticationHome();//Validate User and permissions
 			$this->index();	
 			break;
 			default:
@@ -128,6 +129,39 @@ class HomeController extends Controller {
 		{
 			require('views/Error.html');
 		}
+	}
+
+	public function authenticationHome(){
+		
+		if(!empty( $_POST['name']) && !empty($_POST['password']) )
+		{
+		if( $_POST['password']!="******")
+		{
+			$result=$this->createSession($_POST['name'],$_POST['password']);
+			//var_dump($_SESSION);
+		
+
+
+			if(is_bool($result))
+				{
+				$this->login=$_SESSION['name'];
+				}
+
+		return $result;
+		}
+		if(!empty( $_POST['name']) &&$_POST['password']=="******")
+				$this->LogoutHome();	
+		}
+
+					 
+		
+
+	}
+
+	public function LogoutHome(){
+		$this->logout();
+		//$this->result=true;
+		
 	}
 
 }

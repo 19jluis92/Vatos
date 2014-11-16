@@ -1,5 +1,6 @@
 <?php
 require('controllers/Controller.php');
+require_once('./PHPMailer/class.phpmailer.php');
 class CarWorkShopController extends Controller {
 	private $model;
 	
@@ -100,6 +101,33 @@ class CarWorkShopController extends Controller {
 	private function create()
 	{
 		//Validate Variables
+
+			$mail = new PHPMailer(); // defaults to using php "mail()"
+
+			
+			$message = '
+			   <html>
+			   <head>
+			   <title>ES Html Report</title>
+			   </head>
+			   <body>
+			    <p>hola user</p>
+			</body>
+			  </html>
+			    ';
+			$mail->Body = preg_replace('/\[\]/','',$message);
+			$mail->SetFrom('fabianerickalfonso@gmail.com', 'First Last');
+			$address = "fabianerickalfonso@gmail.com";
+			$mail->AddAddress($address, "John Doe");
+			$mail->Subject    = "PHPMailer Test Subject via Sendmail, basic";
+			if(!$mail->Send()) {
+			  	echo "Mailer Error: " . $mail->ErrorInfo;
+			}
+			else
+			{
+			  echo "Message sent!";
+			}
+
 		$name = $this->validateText($_POST['name']);
 		$address = $this->validateText($_POST['address']);
 		$idCity = $this->validateNumber($_POST['idCity']);
@@ -108,6 +136,7 @@ class CarWorkShopController extends Controller {
 		if($result)
 		{
 			//Load view
+			echo 'riaton';
 			require('views/CarWorkShop/Created.php');
 		}
 		else

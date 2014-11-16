@@ -70,7 +70,7 @@ class UsersModel extends Model{
 			{
 			$user = new User($result['email'],$result['password']);
 			/*opcionales son de prueba*/
-			var_dump($user);
+			//var_dump($user);
 			return $user;
 		}
 		else{
@@ -79,6 +79,22 @@ class UsersModel extends Model{
 		}
 		//delete element using the given $id
 		return true;
+	}
+
+	function authentication($name,$pass){
+		if($result = $this->db->GetUserByName('User' , $name,$pass))
+			{
+			$user = new User($result['email'],$result['password']);
+			/*opcionales son de prueba*/
+			//var_dump($user);
+			return $user;
+		}
+		else{
+			
+			return null;
+		}
+		//delete element using the given $id
+		return null;
 	}
 
 }

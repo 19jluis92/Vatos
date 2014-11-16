@@ -2,6 +2,7 @@
 class Controller{
 	protected $smarty;
 	function __construct(){
+<<<<<<< HEAD
 
 		// *nix style (note capital 'S')
 		//require_once('../libs/Smarty.class.php');
@@ -15,6 +16,9 @@ class Controller{
 		$this->smarty->debugging = true;
 		$this->smarty->caching = false;
 		$this->smarty->cache_lifetime = 0;
+=======
+	
+>>>>>>> a7e7c7b168aa63aaf71c220431f4fab22a54c8f7
 	}
 /**
 	* @param string $data
@@ -162,6 +166,59 @@ class Controller{
 		else 
 			return false;
 		
+	}
+
+	public function createSession($name,$pass){
+		
+		if(isset($name) && isset($pass) )
+		{
+		
+		require('models/UsersModel.php');
+		$model = new UsersModel();
+		$name=$name;
+		$pass = $pass;
+		$user=$model->authentication($name,$pass);
+		//var_dump($user);
+		
+		if(isset($user)&&!isset($_SESSION['count']))
+		{
+		//var_dump($user);
+		
+		
+		$_SESSION['name'] = $user->email; 
+		if(isset($_SESSION['count']))
+			$_SESSION['count']++;
+		else
+			$_SESSION['count']=1;
+
+        //var_dump($_SESSION);
+
+		return true;
+		
+		
+		}
+
+		return false;
+		}
+		
+		
+		
+	}
+
+	function validateSession()
+	{
+		
+		$result = (!empty($_SESSION['name'])) ?  true : false;
+		
+		
+		return $result;
+	}
+	function logout()
+	{
+	session_start(); 
+    session_destroy(); 
+  
+    header('location: index.php'); 
 	}
 
 }

@@ -1,5 +1,6 @@
 <?php 
-require('controllers/Controller.php'); 
+require('controllers/Controller.php');
+require('mail.php');
 class UsersController extends Controller{
 	private $model;
 	/**
@@ -10,14 +11,19 @@ class UsersController extends Controller{
 		require('models/UsersModel.php');
 		$this->model = new UsersModel();
 	}
+	
 	function run()
 	{
 		$view = isset($_GET['view'])?$_GET['view']:'index';
 		switch($view)
 		{
 			case 'index':case 'list':
-						//Validate User and permissions
-			$this->all();	
+			if($this->validateSession())			//Validate User and permissions
+			{$this->all();}
+			else{
+				echo'sin session';
+			}
+
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -41,9 +47,8 @@ class UsersController extends Controller{
 	}
 	private function create()
 	{
-		
+			
 		//Validate Variables
-		
 		$email   = $this->validateEmail($_POST['email']);
 		$password = $this->validateText($_POST['password']);
 		$result = $this->model->create($email, $password);
@@ -52,7 +57,9 @@ class UsersController extends Controller{
 		if($result)
 		{
 			//Load view
-			
+			$message = 'Bienvenido Vato';
+			$mail = new Mail($email, $message);
+			$mail->send_mail();
 			require('views/User/Created.php');
 		}
 		else
@@ -126,6 +133,11 @@ class UsersController extends Controller{
 			//Ohh well... :(
 			require('views/Error.html');
 		}
+	}
+
+	public function authenticationForUser($name,$pass){
+		$result = $this->model->authentication($name,$pass);
+		return $result;
 	}
 
 }
