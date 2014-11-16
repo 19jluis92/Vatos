@@ -10,7 +10,6 @@ class ClientController extends Controller
 	
 	function __construct()
 	{
-		parent::__construct();
 		require('models/ClientModel.php');
 		$this->model = new ClientModel();
 	}
@@ -53,17 +52,12 @@ class ClientController extends Controller
 		if(isset($result))
 		{
 			//Load view
-			
-			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
-				$this->smarty->assign('deleted',true);
-			
-			$this->smarty->assign('users',$result);
-			$this->smarty->display('./views/Client/index.tpl');
+			require('views/Client/Index.php');
 		}
 		else
 		{
 			//Ohh well... :(
-				$this->smarty->display('./views/error.tpl');
+			require('views/Error.html');
 		}
 
 	}

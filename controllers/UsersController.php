@@ -8,7 +8,6 @@ class UsersController extends Controller{
 	*/
 	function __construct()
 	{
-		parent::__construct();
 		require('models/UsersModel.php');
 		$this->model = new UsersModel();
 	}
@@ -19,7 +18,7 @@ class UsersController extends Controller{
 		switch($view)
 		{
 			case 'index':case 'list':
-			if(true)			//Validate User and permissions
+			if($this->validateSession())			//Validate User and permissions
 			{$this->all();}
 			else{
 				echo'sin session';
@@ -48,34 +47,25 @@ class UsersController extends Controller{
 	}
 	private function create()
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
-//Validate Variables
-			$email   = $this->validateEmail($_POST['email']);
-			$password = $this->validateText($_POST['password']);
-			$result = $this->model->create($email, $password);
 			
-			//Insert Succesful
-			if($result)
-			{
-				//Load view
-				$message = 'Bienvenido Vato';
-				$mail = new Mail($email, $message);
-				$mail->send_mail();
-				require('views/User/Created.php');
-			}
-			else
-			{
-				require('views/Error.html');
-			}
-
-
-		}
-		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
-			if(isset($name))
-				$this->smarty->assign('name',$name);
-			$this->smarty->display('./views/User/add.tpl');
-		}
+		//Validate Variables
+		$email   = $this->validateEmail($_POST['email']);
+		$password = $this->validateText($_POST['password']);
+		$result = $this->model->create($email, $password);
 		
+		//Insert Succesful
+		if($result)
+		{
+			//Load view
+			$message = 'Bienvenido Vato';
+			$mail = new Mail($email, $message);
+			$mail->send_mail();
+			require('views/User/Created.php');
+		}
+		else
+		{
+			require('views/Error.html');
+		}
 	}
 	/**
 	*@param $id
@@ -86,7 +76,7 @@ class UsersController extends Controller{
 		$result = $this->model->delete($id);
 		if($result)
 		{
-			header("Location: index.php?controller=user&deleted=true");
+			require('views/User/Deleted.php');
 		}
 		else
 		{
@@ -99,20 +89,18 @@ class UsersController extends Controller{
 	* @return null, view rendered
 	*/
 	private function details(){
-		$id = $this->validateNumber($_GET['id']);
+		$id = $this->validateNumber($_POST['id']);
 		$result = $this->model->details($id);
 		
 		if(isset($result))
 		{
 			//Load view
-			//Load view
-			$this->smarty->assign('user',$result);
-			$this->smarty->display('./views/User/view.tpl');
+			require('views/User/Details.php');
 		}
 		else
 		{
 			//Ohh well... :(
-			$this->smarty->display('./views/error.tpl');
+			require('views/Error.html');
 		}
 	}
 	/**
@@ -122,39 +110,10 @@ class UsersController extends Controller{
 	* @return null, view rendered
 	*/
 	private function edit(){
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
-
 		$id = $this->validateText($_POST['id']);
 		$email = $this->validateText($_POST['email']);
 		$password = $this->validateText($_POST['password']);
 		$result = $this->model->edit($id,$email,$password);
-		if($result)
-			{
-				unset($postError);
-				header("Location: index.php?controller=user");
-			}
-			else
-			{
-				$postError = true;
-				$this->smarty->assign('error','no se pudo :(');
-			}
-		}
-		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
-			$id = $this->validateNumber($_GET['id']);
-			$user = $this->model->details($id);
-		//select Succesfull
-			if($user != NULL)
-			{
-			//Load view
-				$this->smarty->assign('user',$user);
-				$this->smarty->display('./views/User/edit.tpl');
-			}
-			else
-			{
-				$this->smarty->display('./views/error.tpl');
-			}
-
-		}
 	}
 	/**
 	* Show all users in database
@@ -167,16 +126,12 @@ class UsersController extends Controller{
 		{
 			//Load view
 			
-			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
-				$this->smarty->assign('deleted',true);
-			
-			$this->smarty->assign('users',$result);
-			$this->smarty->display('./views/User/index.tpl');
+			require('views/User/Index.php');
 		}
 		else
 		{
 			//Ohh well... :(
-				$this->smarty->display('./views/error.tpl');
+			require('views/Error.html');
 		}
 	}
 
