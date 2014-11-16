@@ -5,7 +5,12 @@
 		public $idSeverity;
 		public $idPiece;
 
-		function __construct($idInspection, $idSeverity, $idPiece)
+		/**
+			*method for show state details
+			*@param string $id existing state id
+			* @return bool transaction result
+		*/
+		function __construct($idInspection, $idSeverity, $idPiece,$id=0)
 		{
 			$this->id=0;
 			$this->idInspection = $idInspection;

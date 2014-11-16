@@ -160,7 +160,7 @@ class BrandController extends Controller {
 			if($result)
 			{
 				unset($postError);
-				$this->all();
+				header("Location: index.php?controller=Brand");
 			}
 			else
 			{

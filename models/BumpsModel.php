@@ -1,5 +1,5 @@
 <?php
-require ('database/Bumps.php');
+require ('database/Bump.php');
 require('models/Model.php');
 Class BumpsModel extends Model{
 	private $id;
@@ -38,7 +38,7 @@ Class BumpsModel extends Model{
 	{
 		if($result = $this->db->details('bump', $id,NULL))
 		{
-			$Bumps = new Bumps($result['name']);
+			$Bump = new Bump($result['idInspection'],$result['idSeverity'],$result['idPiece'],$result['id']);
 			return $Bump;
 		}
 		else{
@@ -58,10 +58,10 @@ Class BumpsModel extends Model{
 	*/
 	function create($idPiece, $idSeverity , $idInspection)
 	{
-		$Bumps = new Bumps($idPiece, $idSeverity, $idInspection);
+		$Bump = new Bump($idPiece, $idSeverity, $idInspection);
 		if($result = $this->db->insert("bump", $Bump,NULL))
 		{
-			return true;
+			return $result;
 		}
 		else{
 			echo $result;
@@ -80,9 +80,8 @@ Class BumpsModel extends Model{
 	*/
 	function edit($id,$idPiece, $idSeverity , $idInspection)
 	{
-		$Bumps = new Bumps($idPiece, $idSeverity, $idInspection);
-		$Bumps->id = $id;
-		if($result = $this->db->update("bump" , $Bumps,NULL))
+		$Bump = new Bump($idPiece, $idSeverity, $idInspection,$id);
+		if($result = $this->db->update("bump" , $Bump,NULL))
 			return true;
 		else{
 			echo $result;

@@ -2,7 +2,7 @@
 class Controller{
 	protected $smarty;
 	function __construct(){
-<<<<<<< HEAD
+
 
 		// *nix style (note capital 'S')
 		//require_once('../libs/Smarty.class.php');
@@ -16,9 +16,6 @@ class Controller{
 		$this->smarty->debugging = true;
 		$this->smarty->caching = false;
 		$this->smarty->cache_lifetime = 0;
-=======
-	
->>>>>>> a7e7c7b168aa63aaf71c220431f4fab22a54c8f7
 	}
 /**
 	* @param string $data
