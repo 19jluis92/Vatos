@@ -1,5 +1,5 @@
 <?php  
-	class CarModel{
+	class Car_Model{
 		public $id;
 		public $name;
 		public $idBrand;
