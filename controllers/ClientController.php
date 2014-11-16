@@ -10,6 +10,7 @@ class ClientController extends Controller
 	
 	function __construct()
 	{
+		parent::__construct();
 		require('models/ClientModel.php');
 		$this->model = new ClientModel();
 	}
@@ -52,12 +53,17 @@ class ClientController extends Controller
 		if(isset($result))
 		{
 			//Load view
-			require('views/Client/Index.php');
+			
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			
+			$this->smarty->assign('users',$result);
+			$this->smarty->display('./views/Client/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+				$this->smarty->display('./views/error.tpl');
 		}
 
 	}
@@ -69,17 +75,20 @@ class ClientController extends Controller
 	private function details()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->details($id);
-		if($result)
+		
+		if(isset($result))
 		{
 			//Load view
-			require('views/Client/Details.php');
+			//Load view
+			$this->smarty->assign('user',$result);
+			$this->smarty->display('./views/Client/view.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -96,6 +105,7 @@ class ClientController extends Controller
 	*/
 	private function create()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 		//Validate Variables
 		$name   		 = $this->validateText($_POST['name']);
 		$lastName 		 = $this->validateNumber($_POST['lastName']);
@@ -119,6 +129,15 @@ class ClientController extends Controller
 			//Ohh well... :(
 			require('views/Error.html');
 		}
+
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			
+			$this->smarty->display('./views/Client/add.tpl');
+		}
+		
 	}
 	/**
 	* Update  with the given post parameters
