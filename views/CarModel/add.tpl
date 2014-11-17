@@ -20,7 +20,10 @@
 				</div>
 				<div class="input number required">
 				<label for="idbrand">Id Brand</label>
-					<input type="number" name="idBrand" required="required" id="idbrand">
+					<select  name="idBrand" required="required" id="idbrand">
+					    <option value=''>-- none --</option>
+    					{html_options options=$brands}
+				</select>
 				</div>
 			</fieldset>
 			<button type="submit">Submit</button>
