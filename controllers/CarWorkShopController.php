@@ -38,8 +38,8 @@ class CarWorkShopController extends Controller {
 					break;
 			case 'edit':
 					//Validate User and permissions
-					$this->validateSession() ? $this->edit() : require('views/Error.html') ;
-					
+					//$this->validateSession() ? $this->edit() : require('views/Error.html') ;
+					$this->edit();
 					break;
 			case 'delete':
 					//Validate User and permissions

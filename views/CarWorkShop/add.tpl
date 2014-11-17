@@ -28,7 +28,9 @@
                <input type="number" name="idCity" required="required" id="idCity">
             </div>
          </fieldset>
-         <button type="submit">Submit</button>
+         <button type="submit">
+            Submit
+         </button>
       </form>
    </div>
             {/block}

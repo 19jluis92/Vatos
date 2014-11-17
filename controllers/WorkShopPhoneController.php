@@ -8,6 +8,7 @@ class WorkShopPhoneController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/WorkShopPhoneModel.php');
 		$this->model = new WorkShopPhoneModel();
 	}
@@ -22,27 +23,27 @@ class WorkShopPhoneController extends Controller {
 		switch($view)
 		{
 			case 'index':case 'list':
-						//Validate User and permissions
-			$this->all();	
-			break;
+					//Validate User and permissions
+					$this->all();	
+					break;
 			case 'details':
-						//Validate User and permissions
-			$this->details();		
-			break;
+					//Validate User and permissions
+					$this->details();		
+					break;
 			case 'create':
-						//Validate User and permissions
-			$this->create();		
-			break;
+					//Validate User and permissions
+					$this->create();		
+					break;
 			case 'edit':
-						//Validate User and permissions
-			$this->edit();		
-			break;
+					//Validate User and permissions
+					$this->edit();		
+					break;
 			case 'delete':
-						//Validate User and permissions
-			$this->delete();		
-			break;
+					//Validate User and permissions
+					$this->delete();		
+					break;
 			default:
-			break;
+					break;
 		}
 	}
 
@@ -56,17 +57,20 @@ class WorkShopPhoneController extends Controller {
 	{
 		
 		//get all the WorkShopPhone
-		$result = $this->model->all();	
+		$result = $this->model->all();
+		$this->smarty->assign('workshopphone',$result);
 		//Query Succesfull
 		if(isset($result))
 		{
 			//Load view
-			require('views/WorkShopPhone/Index.php');
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			$this->smarty->display('./views/workshopphone/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -79,16 +83,17 @@ class WorkShopPhoneController extends Controller {
 	{
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);	
+		$workshopphone = $this->model->details($id);	
 		//Insert Succesfull
-		if($result)
+		if($workshopphone != null)
 		{
 			//Load view
-			require('views/WorkShopPhone/Details.php');
+			$this->smarty->assign('workshopphone',$workshopphone);
+			$this->smarty->display('./views/WorkShopPhone/view.tpl');
 		}
 		else
 		{
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -99,22 +104,33 @@ class WorkShopPhoneController extends Controller {
 	*/
 	private function create()
 	{
-		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$lada = $this->validateText($_POST['lada']);
-		$area = $this->validateText($_POST['area']);
-		$number = $this->validateNumber($_POST['number']);
-		$idCarWorkShop = $this->validateText($_POST['idCarWorkShop']);
-		$result = $this->model->create($name, $lada, $area, $number, $idCarWorkShop);	
-		//Insert Succesfull
-		if($result)
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
-			//Load view
-			require('views/WorkShopPhone/Created.php');
+			//Validate Variables
+			$name = $this->validateText($_POST['name']);
+			$lada = $this->validateText($_POST['lada']);
+			$area = $this->validateText($_POST['area']);
+			$number = $this->validateNumber($_POST['number']);
+			$idCarWorkShop = $this->validateText($_POST['idCarWorkShop']);
+			$result = $this->model->create($name, $lada, $area, $number, $idCarWorkShop);	
+			//Insert Succesfull
+			if($result)
+			{
+				//Load view
+				unset($postError);
+				var_dump($result);
+				header("Location: index.php?controller=workshopphone&view=details&id=$result->id");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error',$result);
+			}
 		}
-		else
-		{
-			require('views/Error.html');
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/workshopphone/add.tpl');
 		}
 	}
 
@@ -127,23 +143,45 @@ class WorkShopPhoneController extends Controller {
 	*/
 	private function edit()
 	{
-		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$lada = $this->validateText($_POST['lada']);
-		$area = $this->validateNumber($_POST['area']);
-		$number = $this->validateNumber($_POST['number']);
-		$idCarWorkShop = $this->validateText($_POST['idCarWorkShop']);
-		$result = $this->model->edit($name, $lada, $area, $number, $idCarWorkShop);	
-		//Insert Succesfull
-		if($result)
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT')
 		{
+			//Validate Variables
+			$name = $this->validateText($_POST['name']);
+			$lada = $this->validateText($_POST['lada']);
+			$area = $this->validateNumber($_POST['area']);
+			$number = $this->validateNumber($_POST['number']);
+			$idCarWorkShop = $this->validateText($_POST['idCarWorkShop']);
+			$result = $this->model->edit($name, $lada, $area, $number, $idCarWorkShop);	
+			//Insert Succesfull
+			if($result)
+			{
+				//Load view
+				unset($postError);
+				header("Location: index.php?controller=workshopphone");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$workshopphone = $this->model->details($id);
+		//select Succesfull
+			if($workshopphone != NULL)
+			{
 			//Load view
-			require('views/WorkShopPhone/Edited.php');
+				$this->smarty->assign('workshopphone',$workshopphone);
+				$this->smarty->display('./views/WorkShopPhone/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
-		else
-		{
-			require('views/Error.html');
-		}
+
 	}
 
 		/**
@@ -160,7 +198,7 @@ class WorkShopPhoneController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/WorkShopPhone/Deleted.php');
+			header("Location: index.php?controller=workshopphone&deleted=true");
 		}
 		else
 		{

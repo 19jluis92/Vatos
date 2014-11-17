@@ -8,7 +8,6 @@
 
 		function __construct($name, $lada, $area, $number, $idCarWorkShop)
 		{
-			$this->id=0;
 			$this->lada = $lada;
 			$this->area = $area;
 			$this->number = $number;
