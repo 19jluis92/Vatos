@@ -8,15 +8,15 @@
 		<h3>Actions</h3>
 		<ul class="side-nav">
 			<li>
-			<a href="index.php?controller=State&view=edit&id={$user->id}">Edit State</a> </li>
+			<a href="index.php?controller=Relocation&view=edit&id={$user->id}">Edit Relocation</a> </li>
 			<li>
-				<form action="index.php?controller=State&view=delete&id={$user->id}" style="display:none;" method="post">
+				<form action="index.php?controller=Relocation&view=delete&id={$user->id}" style="display:none;" method="post">
 					<input type="hidden" name="_method" value="POST">
 				</form>
-				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_State.submit(); } event.returnValue = false; return false;">Delete State</a> 
+				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_State.submit(); } event.returnValue = false; return false;">Delete Relocation</a> 
 			</li>
-			<li><a href="index.php?controller=State">List State</a> </li>
-			<li><a href="index.php?controller=State&view=create">New State</a> </li>
+			<li><a href="index.php?controller=Relocation">List Relocation</a> </li>
+			<li><a href="index.php?controller=Relocation&view=create">New Relocation</a> </li>
 		</ul>
 	</div>
 	<div class="bump view large-10 medium-9 columns">
@@ -34,7 +34,18 @@
 				<h6 class="subheader">idState</h6>
 				<p>{$user->idState}</p>
 			</div>
-			
+			<div class="large-5 columns strings">
+				<h6 class="subheader">reason</h6>
+				<p>{$user->reason}</p>
+			</div>
+			<div class="large-2 larege-offset-1 columns numbers end">
+				<h6 class="subheader">idDepartment</h6>
+				<p>{$user->idDepartment}</p>
+			</div>
+			<div class="large-2 larege-offset-1 columns numbers end">
+				<h6 class="subheader">idService</h6>
+				<p>{$user->idService}</p>
+			</div>
 
 		</div>
 	</div>

@@ -7,7 +7,7 @@
 	<div class="actions columns large-2 medium-3">
 		<h3>Actions</h3>
 		<ul class="side-nav">
-			<li><a href="index.php?controller=State&view=create">New State</a></li>
+			<li><a href="index.php?controller=Relocation&view=create">New Relocation</a></li>
 		</ul>
 	</div>
 	<div class="Bump index large-10 medium-9 columns">
@@ -15,13 +15,22 @@
 			<thead>
 				<tr>
 					<th>
-						<a href="index.php?controller=State&amp;sort=id&amp;direction=asc">Id</a>
+						<a href="index.php?controller=Relocation&amp;sort=id&amp;direction=asc">Id</a>
 					</th>
 					<th>
-						<a href="index.php?controller=State&amp;sort=name&amp;direction=asc">name</a>
+						<a href="index.php?controller=Relocation&amp;sort=relocationDate&amp;direction=asc">relocationDate</a>
 					</th>
 					<th>
-						<a href="index.php?controller=State&amp;sort=idState&amp;direction=asc">idState</a>
+						<a href="index.php?controller=Relocation&amp;sort=idEmployee&amp;direction=asc">idEmployee</a>
+					</th>
+					<th>
+						<a href="index.php?controller=Relocation&amp;sort=reason&amp;direction=asc">reason</a>
+					</th>
+					<th>
+						<a href="index.php?controller=Relocation&amp;sort=idDepartment&amp;direction=asc">idDepartment</a>
+					</th>
+					<th>
+						<a href="index.php?controller=Relocation&amp;sort=idService&amp;direction=asc">idService</a>
 					</th>
 					<th class="actions">Actions</th>
 				</tr>
@@ -31,15 +40,18 @@
 
 				<tr>
 					<td>{$user.id}</td>
-					<td>{$user.name}</td>
-					<td>{$user.idState}</td>
+					<td>{$user.relocationDate}</td>
+					<td>{$user.idEmployee}</td>
+					<td>{$user.reason}</td>
+					<td>{$user.idDepartment}</td>
+					<td>{$user.idService}</td>
 					<td class="actions">
-						<a href="index.php?controller=State&view=details&id={$user.id}">View</a>				
-						<a href="index.php?controller=State&view=edit&id={$user.id}">Edit</a>		
-						<form action="index.php?controller=State&view=delete&id={$user.id}" name="post_State_{$user.id}" style="display:none;" method="POST">
+						<a href="index.php?controller=Relocation&view=details&id={$user.id}">View</a>				
+						<a href="index.php?controller=Relocation&view=edit&id={$user.id}">Edit</a>		
+						<form action="index.php?controller=Relocation&view=delete&id={$user.id}" name="post_State_{$user.id}" style="display:none;" method="POST">
 							<input type="hidden" name="_method" value="POST">
 						</form>
-						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $user.id?&quot;)) { document.post_State_{$user.id}.submit(); } event.returnValue = false; return false;">Delete</a>
+						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $user.id?&quot;)) { document.post_Relocation_{$user.id}.submit(); } event.returnValue = false; return false;">Delete</a>
 					</td>
 				</tr>
 			</tbody>
