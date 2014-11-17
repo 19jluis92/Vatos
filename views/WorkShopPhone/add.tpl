@@ -1,41 +1,46 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}My Page Title{/block}
+{block name=title}Telefonos{/block}
+{block name=pageheader}Telefonos{/block}
 {block name=head}
 {/block}
 {block name=body}
 <div class="row">
-   <div class="actions columns large-2 medium-3">
-      <h3>Actions</h3>
-      <ul class="side-nav">
-         <li><a href="index.php?controller=workshophone">List  WorkShopPhone</a></li>
+   <div class="actions col-md-2">
+      <h3>Acciones</h3>
+      <ul class="list-group">
+         <li><a class="list-group-item" href="index.php?controller=workshopphone">Listar Telefonos de talleres</a></li>
       </ul>
    </div>
-   <div class="workshophone form large-10 medium-9 columns">
+   <div class="workshopphone col-md-10">
       <form method="post" accept-charset="utf-8" action="index.php?controller=workshophone&view=create"><div style="display:none;">
          <input type="hidden" name="_method" value="POST">
       </div>
          <fieldset>
-            <legend>Add WorkShopPhone</legend>
-            <div class="input text required">
-               <label for="lada">
-                  Lada
-               </label>
-               <input type="text" name="lada" required="required" maxlength="45" id="lada">
+            <legend>Agregar Telefono de taller</legend>
+
+            <div class="row">
+               <div class="col-md-2">
+                  <label for="lada" class="input-group-addon">+</label>
+                  <input type="text" name="lada" required="required" class="form-control" maxlength="45" id="lada" placeholder="Lada">
+               </div>
+               <div class="col-md-4">
+                  <label for="area" class="input-group-addon">Area</label>
+                  <input type="text" name="name" required="required" class="form-control" maxlength="45" id="area" placeholder="Area">
+               </div>
+               <div class="col-md-6">
+                  <label for="number" class="input-group-addon">Numero</label>
+                  <input type="text" name="number" required="required" class="form-control" maxlength="45" id="number" placeholder="Numero">
+               </div> 
             </div>
-            <div class="form-group">
-               <label for="area">Area</label>
-               <input type="text" name="area" required="required" maxlength="45" id="area">
+            <br />
+
+            <div class="form-group input-group">
+               <label for="idcarworkshop" class="input-group-addon">Id Taller</label>
+               <input type="number" name="idcarworkshop" required="required" class="form-control" maxlength="45" id="idcarworkshop" placeholder="Id Taller">
             </div>
-            <div class="form-group">
-               <label for="number">number</label>
-               <input type="text" name="number" required="required" maxlength="45" id="number">
-            </div>
-            <div class="form-group">
-               <label for="idCarWorkShop">Id Car Work Shop</label>
-               <input type="number" name="idCarWorkShop" required="required" maxlength="45" id="idCarWorkShop">
-            </div>
+
          </fieldset>
-         <button type="submit">Submit</button>
+         <button class="pull-right" type="submit">Enviar</button>
       </form>
    </div>
    </div>
