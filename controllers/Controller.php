@@ -13,7 +13,7 @@ class Controller{
 		$this->smarty->setConfigDir('/configs/');
 		$this->smarty->setCacheDir('/cache/');
 		//** un-comment the following line to show the debug console
-		$this->smarty->debugging = true;
+		$this->smarty->debugging = false;
 		$this->smarty->caching = false;
 		$this->smarty->cache_lifetime = 0;
 	}
