@@ -9,6 +9,7 @@ class PiecesController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/PiecesModel.php');
 		$this->model = new PiecesModel();
 	}
@@ -59,14 +60,17 @@ class PiecesController extends Controller {
 		//Query Succesfull
 		if(isset($result))
 		{
-			//Load view
-			require('views/Piece/Index.php');
+			$this->smarty->assign('pieces',$result);
+				//Load view
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			$this->smarty->display('./views/Piece/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
-		}
+			$this->smarty->display('./views/error.tpl');
+		}	
 	}
 
 	/**
@@ -77,18 +81,19 @@ class PiecesController extends Controller {
 	private function details()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);	
-		//Insert Succesfull
-		if($result)
+		$id = $this->validateNumber($_GET['id']);
+		$piece = $this->model->details($id);	
+		//select Succesfull
+		if($piece != NULL)
 		{
 			//Load view
-			require('views/Piece/Details.php');
+			$this->smarty->assign('piece',$piece);
+			$this->smarty->display('./views/Piece/view.tpl');
 		}
 		else
 		{
-			require('views/Error.html');
-		}
+			$this->smarty->display('./views/error.tpl');
+		}	
 	}
 	/**
 	*Create a piece with the given post parameters 
@@ -97,18 +102,28 @@ class PiecesController extends Controller {
 	*/
 	private function create()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$result = $this->model->create($name);	
+			$name = $this->validateText($_POST['name']);
+			$result = $this->model->create($name);	
 		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/Piece/Created.php');
-		}
-		else
-		{
-			require('views/Error.html');
+			if($result)
+			{
+				unset($postError);
+				header("Location: index.php?controller=Piece&view=details&id=$result->id");
+				//$this->all();
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error',$result);
+			}
+
+		} 
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/Piece/add.tpl');
 		}
 	}
 
@@ -120,18 +135,37 @@ class PiecesController extends Controller {
 	private function edit()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$name = $this->validateText($_POST['name']);
-		$result = $this->model->edit($id,$name);	
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
+			$id = $this->validateNumber($_GET['id']);
+			$name = $this->validateText($_POST['name']);
+			$result = $this->model->edit($id,$name);	
 		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/Piece/Edited.php');
+			if($result)
+			{
+				unset($postError);
+				header("Location: index.php?controller=Piece");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
 		}
-		else
-		{
-			require('views/Error.html');
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$piece = $this->model->details($id);
+		//select Succesfull
+			if($piece != NULL)
+			{
+			//Load view
+				$this->smarty->assign('piece',$piece);
+				$this->smarty->display('./views/Piece/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
 	}
 
@@ -142,18 +176,18 @@ class PiecesController extends Controller {
 	*/
 	private function delete()
 	{
-		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+			//Validate Variables
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Piece/Deleted.php');
+			header("Location: index.php?controller=Piece&deleted=true");
 		}
 		else
 		{
-			require('views/Error.html');
+				$this->smarty->display('./views/error.tpl');
 		}
 	}
 

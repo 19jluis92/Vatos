@@ -28,7 +28,7 @@ Class PiecesModel extends Model{
 	{
 		if($result = $this->db->details('piece' , $id,NULL))
 		{
-			$Pieces = new Pieces($result['name']);
+			$Pieces = new Piece($result['name'],$result['id']);
 			return $Pieces;
 		}
 		else{
@@ -46,10 +46,10 @@ Class PiecesModel extends Model{
 	*/
 	function create($name)
 	{
-		$Pieces = new Pieces($name);
+		$Pieces = new Piece($name);
 		if($result = $this->db->insert('piece' , $Pieces,NULL))
 		{
-			return true;
+			return $result;
 		}
 		else{
 			echo $result;
@@ -66,8 +66,7 @@ Class PiecesModel extends Model{
 	*/
 	function edit($id,$name)
 	{
-		$Pieces = new Pieces($name);
-		$Pieces->id = $id;
+		$Pieces = new Piece($name,$id);
 		if($result = $this->db->update('piece' , $Pieces,NULL))
 			return true;
 		else{
