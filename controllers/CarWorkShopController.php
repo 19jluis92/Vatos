@@ -1,6 +1,6 @@
 <?php
 require('controllers/Controller.php');
-require_once('./PHPMailer/class.phpmailer.php');
+require('mail.php');
 class CarWorkShopController extends Controller {
 	private $model;
 	
@@ -9,6 +9,7 @@ class CarWorkShopController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/CarWorkShopModel.php');
 		$this->model = new CarWorkShopModel();
 	}
@@ -23,27 +24,29 @@ class CarWorkShopController extends Controller {
 		switch($view)
 		{
 			case 'index':case 'list':
-						//Validate User and permissions
-			$this->all();	
-			break;
+					//Validate User and permissions
+					$this->all();	
+					break;
 			case 'details':
-						//Validate User and permissions
-			$this->details();		
-			break;
+					//Validate User and permissions
+					$this->details();		
+					break;
 			case 'create':
-						//Validate User and permissions
-			$this->create();		
-			break;
+					//Validate User and permissions
+					//$this->validateSession() ? $this->create() : require('views/Error.html') ;
+					$this->create();
+					break;
 			case 'edit':
-						//Validate User and permissions
-			$this->edit();		
-			break;
+					//Validate User and permissions
+					$this->validateSession() ? $this->edit() : require('views/Error.html') ;
+					
+					break;
 			case 'delete':
-						//Validate User and permissions
-			$this->delete();		
-			break;
+					//Validate User and permissions
+					$this->validateSession() ? $this->delete() : require('views/Error.html') ;
+					break;
 			default:
-			break;
+					break;
 		}
 	}
 
@@ -58,16 +61,19 @@ class CarWorkShopController extends Controller {
 		
 		//get all the CarWorkShop
 		$result = $this->model->all();	
+		$this->smarty->assign('carworkshop',$result);
 		//Query Succesfull
 		if(isset($result))
 		{
 			//Load view
-			require('views/CarWorkShop/Index.php');
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			$this->smarty->display('./views/CarWorkShop/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -80,16 +86,18 @@ class CarWorkShopController extends Controller {
 	{
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);	
+		$carworkshop = $this->model->details($id);
+
 		//Insert Succesfull
-		if($result)
+		if($carworkshop)
 		{
 			//Load view
-			require('views/CarWorkShop/Details.php');
+			$this->smarty->assign('carworkshop',$carworkshop);
+			$this->smarty->display('./views/CarWorkShop/view.tpl');
 		}
 		else
 		{
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -100,48 +108,34 @@ class CarWorkShopController extends Controller {
 	*/
 	private function create()
 	{
-		//Validate Variables
 
-			$mail = new PHPMailer(); // defaults to using php "mail()"
-
-			
-			$message = '
-			   <html>
-			   <head>
-			   <title>ES Html Report</title>
-			   </head>
-			   <body>
-			    <p>hola user</p>
-			</body>
-			  </html>
-			    ';
-			$mail->Body = preg_replace('/\[\]/','',$message);
-			$mail->SetFrom('fabianerickalfonso@gmail.com', 'First Last');
-			$address = "fabianerickalfonso@gmail.com";
-			$mail->AddAddress($address, "John Doe");
-			$mail->Subject    = "PHPMailer Test Subject via Sendmail, basic";
-			if(!$mail->Send()) {
-			  	echo "Mailer Error: " . $mail->ErrorInfo;
-			}
-			else
-			{
-			  echo "Message sent!";
-			}
-
-		$name = $this->validateText($_POST['name']);
-		$address = $this->validateText($_POST['address']);
-		$idCity = $this->validateNumber($_POST['idCity']);
-		$result = $this->model->create($name, $address, $idCity);	
-		//Insert Succesfull
-		if($result)
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
-			//Load view
-			echo 'riaton';
-			require('views/CarWorkShop/Created.php');
+			//Validate Variables
+	      $email   = $this->validateEmail($_POST['email']);
+	      $password = $this->validateText($_POST['password']);
+	      $result = ($email && $password != 1) ? $this->model->create($email, $password) : 0 ;
+	      //Insert Succesful
+	      if($result)
+	      {
+	         //Load view
+	         echo 'mail';
+	         $message = 'Bienvenido Vato';
+	         $mail = new Mail($email, $message);
+	         $mail->send_mail();
+	         header("Location: index.php?controller=carworkshop&view=details&id=$result->id");
+	      }
+	      else
+	      {
+	         $postError = true;
+				$this->smarty->assign('error',$result);
+	      }
 		}
-		else
-		{
-			require('views/Error.html');
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			echo 'here';
+			$this->smarty->display('./views/CarWorkShop/add.tpl');
 		}
 	}
 
@@ -154,20 +148,41 @@ class CarWorkShopController extends Controller {
 	*/
 	private function edit()
 	{
-		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$address = $this->validateText($_POST['address']);
-		$idCity = $this->validateNumber($_POST['idCity']);
-		$result = $this->model->edit($name, $address,$idCity);	
-		//Insert Succesfull
-		if($result)
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT')
 		{
-			//Load view
-			require('views/CarWorkShop/Edited.php');
+			//Validate Variables
+			$name = $this->validateText($_POST['name']);
+			$address = $this->validateText($_POST['address']);
+			$idCity = $this->validateNumber($_POST['idCity']);
+			$result = $this->model->edit($name, $address,$idCity);	
+			//Insert Succesfull
+			if($result)
+			{
+				//Load view
+				unset($postError);
+				header("Location: index.php?controller=carworkshop");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
 		}
-		else
-		{
-			require('views/Error.html');
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$carworkshop = $this->model->details($id);
+		//select Succesfull
+			if($carworkshop != NULL)
+			{
+			//Load view
+				$this->smarty->assign('carworkshop',$carworkshop);
+				$this->smarty->display('./views/carworkshop/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
 	}
 
