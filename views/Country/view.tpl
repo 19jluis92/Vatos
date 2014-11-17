@@ -8,15 +8,15 @@
 		<h3>Actions</h3>
 		<ul class="side-nav">
 			<li>
-			<a href="index.php?controller=Location&view=edit&id={$user->id}">Edit Location</a> </li>
+			<a href="index.php?controller=Country&view=edit&id={$user->id}">Edit Country</a> </li>
 			<li>
-				<form action="index.php?controller=Location&view=delete&id={$user->id}" style="display:none;" method="post">
+				<form action="index.php?controller=Country&view=delete&id={$user->id}" style="display:none;" method="post">
 					<input type="hidden" name="_method" value="POST">
 				</form>
-				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_Location.submit(); } event.returnValue = false; return false;">Delete Location</a> 
+				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_Country.submit(); } event.returnValue = false; return false;">Delete Country</a> 
 			</li>
-			<li><a href="index.php?controller=Location">List Location</a> </li>
-			<li><a href="index.php?controller=Location&view=create">New Location</a> </li>
+			<li><a href="index.php?controller=Country">List Country</a> </li>
+			<li><a href="index.php?controller=Country&view=create">New Country</a> </li>
 		</ul>
 	</div>
 	<div class="bump view large-10 medium-9 columns">
@@ -30,10 +30,7 @@
 				<h6 class="subheader">Name</h6>
 				<p>{$user->name}</p>
 			</div>
-			<div class="large-2 larege-offset-1 columns numbers end">
-				<h6 class="subheader">idCarWorkShop</h6>
-				<p>{$user->idCarWorkShop}</p>
-			</div>
+			
 			
 
 		</div>
