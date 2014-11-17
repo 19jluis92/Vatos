@@ -117,7 +117,9 @@ class CountryController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Country/Created.php');
+			unset($postError);
+				header("Location: index.php?controller=Country");
+			
 		}
 		else
 		{
