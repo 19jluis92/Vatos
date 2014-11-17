@@ -1,6 +1,6 @@
 <?php
-require ('database/Bump.php');
-require('models/Model.php');
+require_once('database/Bump.php');
+require_once('models/Model.php');
 Class BumpsModel extends Model{
 	private $id;
 	private $idInspection;

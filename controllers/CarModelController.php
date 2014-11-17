@@ -123,8 +123,8 @@ class CarModelController extends Controller {
 
 		} 
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
-			if(isset($name))
-				$this->smarty->assign('name',$name);
+			$this->loadProperties();
+			$this->smarty->assign('brands',$this->toAssociativeArray($this->brands->all()));
 			$this->smarty->display('./views/CarModel/add.tpl');
 		}
 	}
@@ -164,6 +164,8 @@ class CarModelController extends Controller {
 			if($carModel != NULL)
 			{
 			//Load view
+				$this->loadProperties();
+				$this->smarty->assign('brands',$this->toAssociativeArray($this->brands->all()));
 				$this->smarty->assign('carModel',$carModel);
 				$this->smarty->display('./views/CarModel/edit.tpl');
 			}
@@ -196,6 +198,11 @@ class CarModelController extends Controller {
 		{
 			require('views/Error.html');
 		}
+	}
+
+	private function loadProperties(){
+		require('models/BrandModel.php');
+		$this->brands = new BrandModel();
 	}
 
 }

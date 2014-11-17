@@ -1,6 +1,6 @@
 <?php
-require('database/Vehicle.php');
-require('models/Model.php');
+require_once('database/Vehicle.php');
+require_once('models/Model.php');
 Class VehiclesModel extends Model{
 	private $vin;
 	private $model;
@@ -36,7 +36,7 @@ Class VehiclesModel extends Model{
 	{
 		if($result = $this->db->details('vehicle', $id,NULL))
 		{
-			$vehicle = new vehicle($result['name']);
+			$vehicle = new vehicle($result['vin'],$result['idModel'],$result['idColor'],$result['year'],$result['idCarType'],$result['characteristics'],$result['plates'],$result['id']);
 			return $vehicle;
 		}
 		else{
@@ -61,7 +61,7 @@ Class VehiclesModel extends Model{
 		$vehicle = new Vehicle($vin, $model, $color, $year , $type, $conditions, $plates);
 		if($result = $this->db->insert('vehicle', $vehicle, NULL))
 		{
-			return true;
+			return $result;
 		}
 		else
 		{
@@ -81,10 +81,10 @@ Class VehiclesModel extends Model{
 	*/
 	function edit($vin, $model, $color, $year , $type, $conditions, $plates)
 	{
-		$vehicle = new Vehicle($vin, $model, $color, $year , $type, $conditions, $plates);
+		$vehicle = new Vehicle($vin, $model, $color, $year , $type, $conditions, $plates,$id);
 		if($result = $this->db->update('vehicle', $vehicle, NULL))
 		{
-			return true;
+			return $result;
 		}
 		else
 		{

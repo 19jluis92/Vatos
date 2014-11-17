@@ -218,6 +218,15 @@ class Controller{
     header('location: index.php'); 
 	}
 
+	/*HELPERS*/
+	protected function toAssociativeArray($array, $key='id' , $value='name'){
+		$result = [];
+		foreach ($array as &$valor) {
+			$result[$valor[$key]] = $valor[$value]; 
+		}
+		return $result;
+	}
+
 }
 
 ?>

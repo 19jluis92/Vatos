@@ -1,6 +1,6 @@
 <?php
-require ('database/Severity.php');
-require('models/Model.php');
+require_once('database/Severity.php');
+require_once('models/Model.php');
 Class SeveritiesModel extends Model{
 	private $id;
 	private $name;

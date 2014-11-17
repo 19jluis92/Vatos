@@ -1,6 +1,6 @@
 <?php
-require('database/State.php');
-require('models/Model.php');
+require_once('database/State.php');
+require_once('models/Model.php');
 Class StateModel extends Model{
 	private $id;
 	private $name;

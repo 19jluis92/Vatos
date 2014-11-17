@@ -18,10 +18,12 @@
 	  				<label for="name" class="input-group-addon">Nombre</label>
 	  				<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
 				</div>
-
-				<div class="form-group input-group">
-	  				<label for="idBrand" class="input-group-addon">Id Marca</label>
-	  				<input type="number" name="idBrand" required="required" class="form-control" maxlength="45" id="idBrand" placeholder="Id Marca">
+				<div class="input number required">
+				<label for="idbrand">Id Brand</label>
+					<select  name="idBrand" required="required" id="idbrand">
+					    <option value=''>-- none --</option>
+    					{html_options options=$brands}
+				</select>
 				</div>
 			</fieldset>
 			<button class="pull-right" type="submit">Submit</button>

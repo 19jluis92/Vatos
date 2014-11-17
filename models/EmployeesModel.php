@@ -3,8 +3,8 @@
 /**
 * 
 */
-require('database/Employee.php');
-require('models/Model.php'); 
+require_once('database/Employee.php');
+require_once('models/Model.php'); 
 class EmployeesModel  extends Model
 {
 	private $name;

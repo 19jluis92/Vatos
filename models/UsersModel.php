@@ -1,6 +1,6 @@
 <?php  
-require('database/User.php');
-require('models/Model.php'); 
+require_once('database/User.php');
+require_once('models/Model.php'); 
 class UsersModel extends Model{
 	private $email;
 	private $password;

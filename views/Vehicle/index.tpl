@@ -30,6 +30,25 @@
                <th class="actions">Acciones</th>
             </tr>
          </thead> <tbody>
+            {foreach item=vehicle from=$vehicles}
+            <tr>
+               <td>{$vehicle.id}</td>
+               <td>{$vehicle.vin}</td>
+               <td>{$vehicle.idModel}</td>
+               <td>{$vehicle.idColor}</td>
+               <td class="actions">
+               <div class="btn-group" role="group" aria-label="...">
+                  <a  class="btn btn-default" href="index.php?controller=Vehicle&view=details&id={$vehicle.id}">Ver</a>           
+                  <a  class="btn btn-default" href="index.php?controller=Vehicle&view=edit&id={$vehicle.id}">Editar</a>     
+                  <form action="index.php?controller=Vehicle&view=delete&id={$vehicle.id}" name="post_vehicle_{$vehicle.id}" style="display:none;" method="post">
+                     <input type="hidden" name="_method" value="POST">
+                  </form>
+                  <a  class="btn btn-default" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_vehicle_{$vehicle.id}.submit(); } event.returnValue = false; return false;">Eliminar</a>
+                  </div>
+               </td>
+            </tr>
+            {/foreach}
+         </tbody>
       </table>
       <div class="paginator">
          <ul class="pagination">

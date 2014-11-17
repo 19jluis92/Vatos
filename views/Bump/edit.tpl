@@ -28,15 +28,27 @@
 		<fieldset>
 			<legend>Edit Bump</legend>
 			<label for="idpiece">Id Piece</label>
-			<input type="number" name="idPiece" required="required" id="idpiece" value="{$bump->idPiece}">
+			<select name="idPiece" required="required" id="idpiece" class="form-control">
+				<option value=''>-- none --</option>
+				{html_options options=$pieces selected=$bump->idPiece}
+			</select>
+			<input type="number" name="idPiece" required="required" id="idpiece" value="{}">
 		</div>
 		<div class="input number required">
 			<label for="idseverity">Id Severity</label>
+			<select name="idSeverity" required="required" id="idseverity" class="form-control">
+				<option value=''>-- none --</option>
+				{html_options options=$severities selected=$bump->idSeverity}
+			</select>
+
 			<input type="number" name="idSeverity" required="required" id="idseverity" value="{$bump->idSeverity}">
 		</div>
 		<div class="input number required">
 			<label for="idinspection">Id Inspection</label>
-			<input type="number" name="idInspection" required="required" id="idinspection" value="{$bump->idInspection}">
+			<select name="idInspection" required="required" id="idinspection" class="form-control">
+				<option value=''>-- none --</option>
+				{html_options options=$inspections selected=$bump->idInspection}
+			</select>
 		</div>	
 	</fieldset>
 	<button type="submit">Submit

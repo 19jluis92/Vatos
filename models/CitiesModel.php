@@ -1,6 +1,6 @@
 <?php
-require('models/Model.php');
-require('database/City.php');
+require_once('models/Model.php');
+require_once('database/City.php');
 Class CitiesModel extends Model{
 	private $id;
 	private $name;

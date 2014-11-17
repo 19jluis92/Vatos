@@ -22,7 +22,12 @@
 			<fieldset>
 				<legend>Edit CarModel</legend>
 				<div class="input text required"><label for="name">Name</label><input type="text" name="name" required="required" maxlength="45" id="name" value="{$carModel->name}"></div>
-				<div class="input number required"><label for="idbrand">Id Brand</label><input type="number" name="idBrand" required="required" id="idbrand" value="{$carModel->idBrand}"></div>
+				<div class="input number required"><label for="idbrand">Id Brand</label>
+				<select  name="idBrand" required="required" id="idbrand">
+					    <option value=''>-- none --</option>
+    					{html_options options=$brands selected=$carModel->idBrand}
+				</select>
+				</div>
 			</fieldset>
 			<button type="submit">Submit</button>
 		</form>

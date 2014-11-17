@@ -1,6 +1,6 @@
 <?php
-require('database/Brand.php');
-require('models/Model.php');
+require_once('database/Brand.php');
+require_once('models/Model.php');
 Class BrandModel extends Model{
 	private $id;
 	private $name;

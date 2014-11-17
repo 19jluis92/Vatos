@@ -1,6 +1,6 @@
 <?php
-require('database/Country.php');
-require('models/Model.php');
+require_once('database/Country.php');
+require_once('models/Model.php');
 Class CountryModel extends Model{
 	private $id;
 	private $name;
