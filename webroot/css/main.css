@@ -114,6 +114,20 @@
   display: none;
 }
 
+.inner-side-bar ul li{
+  list-style: none;
+}
+
+.inner-side-bar ul li a{
+  color: #787878;
+}
+
+.inner-side-bar ul li a:hover{
+  color: #303030;
+}
+
+
+
 
 .list-group{
   list-style: none;
