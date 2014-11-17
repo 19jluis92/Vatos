@@ -1,10 +1,17 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}My Page Title{/block}
+{block name=title}Agregar Vehiculo{/block}
+{block name=pageheader}Vehiculos{/block}
 {block name=head}
 {/block}
 {block name=body}
 <div class="row">
-   <div class="col-md-9">
+   <div class="actions col-md-2">
+      <h3>Acciones</h3>
+      <ul class="list-group">
+         <li><a class="list-group-item" href="index.php?controller=vehicle">Mostrar todos los vehiculos</a></li>
+      </ul>
+  </div>
+   <div class="col-md-10">
          <div class="vehicle form large-10 medium-9 columns">
             <form method="post" accept-charset="utf-8" action="index.php?controller=vehicle&view=create">
                <div style="display:none;">
@@ -65,15 +72,5 @@
             </form>
          </div>
    </div>
-   <div class="col-md-3">
-      <h3>
-         Acciones
-      </h3>
-      <ul class="side-nav">
-         <li>
-            <a href="index.php?controller=vehicle">Mostrar todos los vehiculos</a>
-         </li>
-      </ul>
-  </div>
 </div>
 {/block}

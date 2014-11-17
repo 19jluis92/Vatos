@@ -1,29 +1,30 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}My Page Title{/block}
+{block name=title}Estados{/block}
+{block name=pageheader}Estados{/block}
 {block name=head}
 {/block}
 {block name=body}
 <div class="row">
-	<div class="actions columns large-2 medium-3">
-		<h3>Actions</h3>
-		<ul class="side-nav">
-			<li><a href="index.php?controller=State&view=create">New State</a></li>
+	<div class="actions col-md-2">
+		<h3>Acciones</h3>
+		<ul class="list-group">
+			<li><a href="index.php?controller=State&view=create">Nuevo Estado</a></li>
 		</ul>
 	</div>
-	<div class="Bump index large-10 medium-9 columns">
-		<table cellpadding="0" cellspacing="0">
+	<div class="col-md-10">
+		<table class="table" cellpadding="0" cellspacing="0">
 			<thead>
 				<tr>
 					<th>
 						<a href="index.php?controller=State&amp;sort=id&amp;direction=asc">Id</a>
 					</th>
 					<th>
-						<a href="index.php?controller=State&amp;sort=name&amp;direction=asc">name</a>
+						<a href="index.php?controller=State&amp;sort=name&amp;direction=asc">Nombre</a>
 					</th>
 					<th>
-						<a href="index.php?controller=State&amp;sort=idState&amp;direction=asc">idState</a>
+						<a href="index.php?controller=State&amp;sort=idState&amp;direction=asc">id Estado</a>
 					</th>
-					<th class="actions">Actions</th>
+					<th class="actions">Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,12 +35,12 @@
 					<td>{$user.name}</td>
 					<td>{$user.idState}</td>
 					<td class="actions">
-						<a href="index.php?controller=State&view=details&id={$user.id}">View</a>				
-						<a href="index.php?controller=State&view=edit&id={$user.id}">Edit</a>		
+						<a href="index.php?controller=State&view=details&id={$user.id}">Mostrar</a>				
+						<a href="index.php?controller=State&view=edit&id={$user.id}">Editar</a>		
 						<form action="index.php?controller=State&view=delete&id={$user.id}" name="post_State_{$user.id}" style="display:none;" method="POST">
 							<input type="hidden" name="_method" value="POST">
 						</form>
-						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $user.id?&quot;)) { document.post_State_{$user.id}.submit(); } event.returnValue = false; return false;">Delete</a>
+						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $user.id?&quot;)) { document.post_State_{$user.id}.submit(); } event.returnValue = false; return false;">Borrar</a>
 					</td>
 				</tr>
 			</tbody>
@@ -47,11 +48,11 @@
 		</table>
 		<div class="paginator">
 			<ul class="pagination">
-				<li class="prev disabled"><a href="">&lt; previous</a></li><li class="next disabled"><a href="">next &gt;</a></li>		</ul>
-				<p>1 of 1</p>
+				<li class="prev disabled"><a href="">&lt; Anterior</a></li><li class="next disabled"><a href="">Siguiente &gt;</a></li>		</ul>
+				<p>1 de 1</p>
 			</div>
-		</div>
 	</div>
+</div>
 	{if isset($deleted)}
 	<script type="text/javascript">
 		alert("eliminación correcta");

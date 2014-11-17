@@ -6,7 +6,7 @@
 {block name=body}
 <div class="row">
 	<div class="actions col-md-2">
-		<h3>Actions</h3>
+		<h3>Acciones</h3>
 		<ul class="list-group">
 			<li><a class="list-group-item" href="index.php?controller=Brand">Mostrar Marcas</a></li>
 		</ul>

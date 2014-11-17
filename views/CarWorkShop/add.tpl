@@ -1,35 +1,39 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}My Page Title{/block}
+{block name=title}Agregar Taller automotriz{/block}
+{block name=pageheader}Taller automotriz{/block}
 {block name=head}
 {/block}
 {block name=body}
 <div class="row">
-   <div class="actions columns large-2 medium-3">
-      <h3>Actions</h3>
-      <ul class="side-nav">
-         <li><a href="index.php?controller=carworkshop">List Car Work Shops</a>
+   <div class="actions col-md-2">
+      <h3>Acciones</h3>
+      <ul class="list-group">
+         <li><a class="list-group-item" href="index.php?controller=carworkshop">Listar Talleres</a>
          </li>
       </ul>
    </div>
-   <div class="bump form large-10 medium-9 columns">
+   <div class="brand col-md-10">
       <form method="post" accept-charset="utf-8" action="index.php?controller=carworkshop&view=create">
          <fieldset>
-            <legend>Add Car Work Shop</legend>
-            <div class="input number required">
-               <label for="name">Nombre</label>
-               <input type="text" name="Name" required="required" id="Name">
+            <legend>Agregar Taller automotriz</legend>
+            <div class="form-group input-group">
+               <label for="name" class="input-group-addon">Nombre</label>
+               <input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
             </div>
-            <div class="input number required">
-               <label for="address">Direccion</label>
-               <input type="text" name="address" required="required" id="address">
+
+            <div class="form-group input-group">
+               <label for="address" class="input-group-addon">Direccion</label>
+               <input type="text" name="address" required="required" class="form-control" maxlength="45" id="address" placeholder="Direccion">
             </div>
-            <div class="input number required">
-               <label for="idCity">Id Ciudad</label>
-               <input type="number" name="idCity" required="required" id="idCity">
+
+            <div class="form-group input-group">
+               <label for="idCity" class="input-group-addon">Id Ciudad</label>
+               <input type="text" name="idCity" required="required" class="form-control" maxlength="45" id="idCity" placeholder="Id Ciudad">
             </div>
+
          </fieldset>
-         <button type="submit">
-            Submit
+         <button class="pull-right" type="submit">
+            Enviar
          </button>
       </form>
    </div>

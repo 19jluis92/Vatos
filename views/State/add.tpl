@@ -4,29 +4,36 @@
 {/block}
 {block name=body}
 <div class="row">
-	<div class="actions columns large-2 medium-3">
-		<h3>Actions</h3>
-		<ul class="side-nav">
-			<li><a href="index.php?controller=State">List State</a>
-			</li>
+	<div class="actions col-md-2">
+		<h3>Acciones</h3>
+		<ul class="list-group">
+			<li><a class="list-group-item" href="index.php?controller=State">Mostrar Estados</a></li>
 		</ul>
 	</div>
-	<div class="bump form large-10 medium-9 columns">
+	<div class="brand col-md-10">
 		<form method="post" accept-charset="utf-8" action="index.php?controller=State&view=create">
 			<fieldset>
-				<legend>Add State</legend>
-				<div class="input number required">
-					<label for="id">Id State</label>
-					<input type="number" name="id" required="required" id="id">
+				<legend>Agregar Estado</legend>
+
+				<div class="form-group input-group">
+	  				<label for="id" class="input-group-addon">Id Estado</label>
+					<input class="form-control" type="number" name="id" required="required" id="id" placeholder="Id Estado">
 				</div>
-				<div class="input number required">
-					<label for="name">Name</label>
-					<input type="text" name="name" required="required" id="name">
+
+				<div class="form-group input-group">
+	  				<label for="name" class="input-group-addon">Nombre</label>
+	  				<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
 				</div>
-				<div class="input number required">
-					<label for="name">Name</label>
-					<input type="number" name="name" required="required" id="idState">
+
+				<div class="form-group input-group">
+	  				<label for="idState" class="input-group-addon">Id Pais</label>
+					<input class="form-control" type="number" name="idState" required="required" id="idState" placeholder="Id Pais">
 				</div>
-				</fieldset>
-				<button type="submit">Submit</button></form></div>
+
+
+			</fieldset>
+			<button class="pull-right" type="submit">Submit</button>
+		</form>
+	</div>
+</div>
 				{/block}
