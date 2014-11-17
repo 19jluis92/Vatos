@@ -8,7 +8,7 @@ class HomeController extends Controller {
 	*/
 	function __construct()
 	{
-		
+		parent::__construct();
 	}
 
 	/**
@@ -138,18 +138,20 @@ class HomeController extends Controller {
 		if( $_POST['password']!="******")
 		{
 			$result=$this->createSession($_POST['name'],$_POST['password']);
-			//var_dump($_SESSION);
+			//var_dump($result);
 		
-
+			
 
 			if(is_bool($result))
 				{
 				$this->login=$_SESSION['name'];
-				}
 
+				}
+		$this->smarty->assign('result',$result);
 		return $result;
 		}
 		if(!empty( $_POST['name']) &&$_POST['password']=="******")
+			
 				$this->LogoutHome();	
 		}
 

@@ -40,15 +40,46 @@
                 </div>
                 <div class="navbar-collapse collapse">
                   <form class="navbar-form navbar-right login" role="form" method="post">
+                  <?php
+                
+                 
+                  if(is_bool($this->result)){
+                    $name=$this->login;
+                    echo ' 
                     <div class="form-group">
-                      <input type="text" placeholder="Email" class="form-control">
+                      <input type="text" placeholder="Email" class="form-control" name="name"   value='.$name.' readonly>
                     </div>
+                        ';
+                    echo '
                     <div class="form-group">
-                      <input type="password" placeholder="Password" class="form-control">
+                      <input type="password"  class="form-control" name="password"  value="******" readonly>
                     </div>
-                    <button type="submit" class="btn btn-success">Sign in</button>
+                        ';
+                    echo'
+                    <button  type="Post" class="btn btn-success"
+                     >Logout</button>
+                    ';
+                  }
+                  else
+                  {
+                    echo ' 
+                    <div class="form-group">
+                      <input type="text" placeholder="Email" class="form-control" name="name">
+                    </div>
+                        ';
+                    echo '
+                    <div class="form-group">
+                      <input type="password" placeholder="Password" class="form-control" name="password">
+                    </div>
+                        ';
+                    echo'
+                    <button type="submit" class="btn btn-success"  value="login">Sign in</button>
+                    ';
+                  }
+                
+                  ?>
             
-                  </form>
+          </form>
                 </div><!--/.navbar-collapse -->
               </div>
             </div>
