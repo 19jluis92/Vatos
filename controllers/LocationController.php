@@ -8,6 +8,7 @@ class LocationController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/LocationModel.php');
 		$this->model = new LocationModel();
 	}
@@ -61,12 +62,17 @@ class LocationController extends Controller {
 		if(isset($result))
 		{
 			//Load view
-			require('views/Location/Index.php');
+			
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			
+			$this->smarty->assign('users',$result);
+			$this->smarty->display('./views/Location/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+				$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -81,14 +87,17 @@ class LocationController extends Controller {
 		$id = $this->validateNumber($_POST['id']);
 		$result = $this->model->details($id);	
 		//Insert Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
-			require('views/Location/Details.php');
+			//Load view
+			$this->smarty->assign('user',$result);
+			$this->smarty->display('./views/Location/view.tpl');
 		}
 		else
 		{
-			require('views/Error.html');
+			//Ohh well... :(
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -99,7 +108,8 @@ class LocationController extends Controller {
 	*/
 	private function create()
 	{
-		//Validate Variables
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+			//Validate Variables
 		$name = $this->validateText($_POST['name']);
 		$idCarWorkShop = $this->validateText($_POST['idCarWorkShop']);
 		$result = $this->model->create($name, $idCarWorkShop);	
@@ -113,6 +123,13 @@ class LocationController extends Controller {
 		{
 			require('views/Error.html');
 		}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/Location/add.tpl');
+		}
+		
 	}
 
 	/**
@@ -124,6 +141,8 @@ class LocationController extends Controller {
 	*/
 	private function edit()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
+
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
 		$idCarWorkShop = $this->validateText($_POST['idCarWorkShop']);
@@ -132,11 +151,29 @@ class LocationController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Location/Edited.php');
+			unset($postError);
+				header("Location: index.php?controller=Location");
 		}
 		else
 		{
 			require('views/Error.html');
+		}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$user = $this->model->details($id);
+		//select Succesfull
+			if($user != NULL)
+			{
+			//Load view
+				$this->smarty->assign('user',$user);
+				$this->smarty->display('./views/Location/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
 	}
 
@@ -153,8 +190,7 @@ class LocationController extends Controller {
 		//Insert Succesfull
 		if($result)
 		{
-			//Load view
-			require('views/Location/Deleted.php');
+			header("Location: index.php?controller=Location&deleted=true");
 		}
 		else
 		{
