@@ -28,7 +28,7 @@ Class ColorsModel extends Model{
 	{
 		if($result = $this->db->details('color' , $id,NULL))
 		{
-			$Color = new Color($result['name']);
+			$Color = new Color($result['name'],$result['id']);
 			return $Color;
 		}
 		else{
@@ -49,7 +49,7 @@ Class ColorsModel extends Model{
 		$Color = new Color($name);
 		if($result = $this->db->insert('color' , $Color,NULL))
 		{
-			return true;
+			return $result;
 		}
 		else{
 			echo $result;

@@ -27,7 +27,7 @@ Class SeveritiesModel extends Model{
 	{
 		if($result = $this->db->details('severity', $id,NULL))
 		{
-			$Severity = new Severity($result['name']);
+			$Severity = new Severity($result['name'],$result['id']);
 			return $Severity;
 		}
 		else{
@@ -48,7 +48,7 @@ Class SeveritiesModel extends Model{
 		$Severity = new Severity($name);
 		if($result = $this->db->insert('severity' , $Severity,NULL))
 		{
-			return true;
+			return $result;
 		}
 		else{
 			echo $result;

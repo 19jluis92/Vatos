@@ -9,6 +9,7 @@ class SeveritiesController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/SeveritiesModel.php');
 		$this->model = new SeveritiesModel();
 	}
@@ -59,14 +60,17 @@ class SeveritiesController extends Controller {
 		//Query Succesfull
 		if(isset($result))
 		{
-			//Load view
-			require('views/Severity/Index.php');
+			$this->smarty->assign('severities',$result);
+				//Load view
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			$this->smarty->display('./views/Severity/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
-		}
+			$this->smarty->display('./views/error.tpl');
+		}	
 	}
 
 	/**
@@ -77,18 +81,19 @@ class SeveritiesController extends Controller {
 	private function details()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);	
-		//Insert Succesfull
-		if($result)
+		$id = $this->validateNumber($_GET['id']);
+		$severity = $this->model->details($id);	
+		//select Succesfull
+		if($severity != NULL)
 		{
 			//Load view
-			require('views/Severity/Details.php');
+			$this->smarty->assign('severity',$severity);
+			$this->smarty->display('./views/Severity/view.tpl');
 		}
 		else
 		{
-			require('views/Error.html');
-		}
+			$this->smarty->display('./views/error.tpl');
+		}	
 	}
 
 	/**
@@ -98,18 +103,28 @@ class SeveritiesController extends Controller {
 	*/
 	private function create()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$result = $this->model->create($name);	
+			$name = $this->validateText($_POST['name']);
+			$result = $this->model->create($name);	
 		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/Severity/Created.php');
-		}
-		else
-		{
-			require('views/Error.html');
+			if($result)
+			{
+				unset($postError);
+				header("Location: index.php?controller=Severity&view=details&id=$result->id");
+				//$this->all();
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error',$result);
+			}
+
+		} 
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/Severity/add.tpl');
 		}
 	}
 
@@ -120,19 +135,38 @@ class SeveritiesController extends Controller {
 	*/
 	private function edit()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
+
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$name = $this->validateText($_POST['name']);
-		$result = $this->model->edit($id,$name);	
-		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/Severity/Edited.php');
+			$id = $this->validateNumber($_GET['id']);
+			$name = $this->validateText($_POST['name']);
+			$result = $this->model->edit($id,$name);	
+			if($result)
+			{
+				unset($postError);
+				header("Location: index.php?controller=Severity");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
 		}
-		else
-		{
-			require('views/Error.html');
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$severity = $this->model->details($id);
+		//select Succesfull
+			if($severity != NULL)
+			{
+			//Load view
+				$this->smarty->assign('severity',$severity);
+				$this->smarty->display('./views/Severity/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
 	}
 
@@ -144,17 +178,17 @@ class SeveritiesController extends Controller {
 	private function delete()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Severity/Deleted.php');
+			header("Location: index.php?controller=Severity&deleted=true");
 		}
 		else
 		{
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
