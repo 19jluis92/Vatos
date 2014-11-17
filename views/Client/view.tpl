@@ -8,15 +8,15 @@
 		<h3>Actions</h3>
 		<ul class="side-nav">
 			<li>
-			<a href="index.php?controller=user&view=edit&id={$user->id}">Edit User</a> </li>
+			<a href="index.php?controller=client&view=edit&id={$user->id}">Edit Client</a> </li>
 			<li>
-				<form action="index.php?controller=User&view=delete&id={$user->id}" style="display:none;" method="post">
+				<form action="index.php?controller=client&view=delete&id={$user->id}" style="display:none;" method="post">
 					<input type="hidden" name="_method" value="POST">
 				</form>
-				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_user.submit(); } event.returnValue = false; return false;">Delete User</a> 
+				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_client.submit(); } event.returnValue = false; return false;">Delete Client</a> 
 			</li>
-			<li><a href="index.php?controller=user">List User</a> </li>
-			<li><a href="index.php?controller=user&view=create">New User</a> </li>
+			<li><a href="index.php?controller=client">List Client</a> </li>
+			<li><a href="index.php?controller=client&view=create">New Client</a> </li>
 		</ul>
 	</div>
 	<div class="bump view large-10 medium-9 columns">
@@ -27,14 +27,33 @@
 				<p>{$user->id}</p>
 			</div>
 			<div class="large-2 larege-offset-1 columns numbers end">
-				<h6 class="subheader">Email</h6>
-				<p>{$user->email}</p>
+				<h6 class="subheader">Name</h6>
+				<p>{$user->Name}</p>
 			</div>
 			<div class="large-2 larege-offset-1 columns numbers end">
-				<h6 class="subheader">Password</h6>
-				<p>{$user->password}</p>
+				<h6 class="subheader">Last Name</h6>
+				<p>{$user->lastname}</p>
 			</div>
-			
+			<div class="large-2 larege-offset-1 columns numbers end">
+				<h6 class="subheader">Colonia</h6>
+				<p>{$user->clientCol}</p>
+			</div>
+			<div class="large-2 larege-offset-1 columns numbers end">
+				<h6 class="subheader">Colonia</h6>
+				<p>{$user->clientCol1}</p>
+			</div>
+			<div class="large-2 larege-offset-1 columns numbers end">
+				<h6 class="subheader">phone</h6>
+				<p>{$user->phone}</p>
+			</div>
+			<div class="large-2 larege-offset-1 columns numbers end">
+				<h6 class="subheader">lada</h6>
+				<p>{$user->lada}</p>
+			</div>
+			<div class="large-2 larege-offset-1 columns numbers end">
+				<h6 class="subheader">area</h6>
+				<p>{$user->area}</p>
+			</div>
 
 		</div>
 	</div>

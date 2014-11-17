@@ -116,7 +116,7 @@ class ClientController extends Controller
 		$lada	     = $this->validateNumber($_POST['lada']);
 		$area    = $this->validateNumber($_POST['area']);
 
-		$result = $this->model->create($name,$lastName,$rfc,$clientCol,$clientCol1);
+		$result = $this->model->create($name,$lastName,$rfc,$clientCol,$clientCol1,$number,$lada,$area);
 		
 		//Insert Succesful
 		if($result)

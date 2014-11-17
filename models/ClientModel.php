@@ -26,18 +26,18 @@ class ClientModel extends Model
 	* @param string $clientCol
 	* @param string $clientCol1
 	*/
-	function create($name,$lastName,$rfc,$clientCol,$clientCol1)
+	function create($name,$lastName,$rfc,$clientCol,$clientCol1,$number,$lada,$area)
 	{
 	$client = new Client($name,$lastName,$rfc,$clientCol,$clientCol1);
 		if($result = $this->db->insert('client' , $client,NULL))
-			{
+		{
+		
 			/*opcionales son de prueba*/
-			var_dump($client);
 			var_dump($result);
 			return true;
 		}
 		else{
-			echo $result;
+			
 			
 			return false;
 		}

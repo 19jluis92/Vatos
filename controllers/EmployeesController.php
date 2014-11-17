@@ -9,6 +9,7 @@ class EmployeesController extends Controller
 	private $model;
 	function __construct()
 	{
+		parent::__construct();
 		require('models/EmployeesModel.php');
 		$this->model = new EmployeesModel();
 	}
@@ -54,7 +55,11 @@ class EmployeesController extends Controller
 		if(isset($result))
 		{
 			//Load view
-			require('views/Employee/Index.php');
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			
+			$this->smarty->assign('users',$result);
+			$this->smarty->display('./views/Employee/index.tpl');
 		}
 		else
 		{
@@ -75,12 +80,13 @@ class EmployeesController extends Controller
 		if($result)
 		{
 			//Load view
-			require('views/Employee/Details.php');
+			$this->smarty->assign('user',$result);
+			$this->smarty->display('./views/Employee/view.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 	/**
@@ -96,7 +102,8 @@ class EmployeesController extends Controller
 	*/
 	private function create()
 	{
-		//validateNumberte Variables
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+			//validateNumberte Variables
 		$name = $this->validateText($_POST['name']);
 		$lastName = $this->validateText($_POST['lastName']);
 		$nss =  $this->validateText($_POST['nss']);
@@ -112,12 +119,18 @@ class EmployeesController extends Controller
 		if($result)
 		{
 			//Load view
-			require('views/Employee/Created.php');
+			require('views/Employee/add.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
 			require('views/Error.html');
+		}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/Employee/add.tpl');
 		}
 	}
 	/**
@@ -136,6 +149,7 @@ class EmployeesController extends Controller
 	*/
 	private function edit()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
 		$name = $this->validateText($_POST['name']);
@@ -151,12 +165,32 @@ class EmployeesController extends Controller
 		if($result)
 		{
 			//Load view
-			require('views/Employee/Edited.php');
+			unset($postError);
+				header("Location: index.php?controller=employee");
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+			$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			
+		}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$user = $this->model->details($id);
+		//select Succesfull
+			if($user != NULL)
+			{
+			//Load view
+				$this->smarty->assign('user',$user);
+				$this->smarty->display('./views/Employee/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
 	}
 
@@ -173,7 +207,7 @@ class EmployeesController extends Controller
 		if($result)
 		{
 			//Load view
-			require('views/Employee/Deleted.php');
+			header("Location: index.php?controller=employee&deleted=true");
 		}
 		else
 		{
