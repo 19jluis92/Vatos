@@ -81,13 +81,16 @@
                   <li class="active"><a href="#">Menu <span class="sr-only">(current)</span></a></li>
                   <li><a href="index.php?controller=home">home</a></li>
                   <li><a href="index.php?controller=user" >User</a></li>
-                  <li><a href="#" data-dropdown="true">Vehiculo</a></li>
-                    <div class="inner-side-bar">
-                      <ul class="side-nav">
-                        <li><a href="index.php?controller=vehicle" >Mostrar todos los vehiculos</a></li>
-                        <li><a href="index.php?controller=vehicle&view=create">Vehiculo</a></li>
-                      </ul>
-                    </div>
+                  <li>
+                    <a href="#" data-dropdown="true">Vehiculo
+                    </a>
+                      <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=vehicle" >Mostrar todos los vehiculos</a></li>
+                          <li><a href="index.php?controller=vehicle&view=create">Vehiculo</a></li>
+                        </ul>
+                      </div>
+                  </li>
                   <li><a href="index.php?controller=Employee">Employee</a></li>
                   <li><a href="index.php?controller=client">client</a></li>
                   <li><a href="index.php?controller=bump">bump</a></li>
@@ -107,9 +110,6 @@
                   <li><a href="index.php?controller=carmodel">carmodel</a></li>
                   <li><a href="index.php?controller=brand">brand</a></li>
                   <li><a href="index.php?controller=account">account</a></li>
-                </ul>
-                
-               
               </div>
               <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header">Dashboard</h1>
@@ -138,8 +138,8 @@
           </script>
           <script type="text/javascript">
             $( document ).ready(function() {
-              $('a[data-dropdown="true"]').click(function(event){
-                $(this).next().show();
+              $('a[data-dropdown="true"]').on('click',function(e) {
+                $(this).next('div').slideToggle().show();
               });
             });
           </script>
