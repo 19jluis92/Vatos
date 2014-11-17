@@ -9,6 +9,7 @@ class RelocationsController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/RelocationsModel.php');
 		$this->model = new RelocationsModel();
 	}
@@ -59,15 +60,20 @@ class RelocationsController extends Controller {
 		//get all the relocations
 		$result = $this->model->all();	
 		//Query Succesfull
-		if(isset($result))
+	if(isset($result))
 		{
 			//Load view
-			require('views/Relocation/Index.php');
+			
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			
+			$this->smarty->assign('users',$result);
+			$this->smarty->display('./views/Relocation/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+				$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -82,14 +88,17 @@ class RelocationsController extends Controller {
 		$id = $this->validateNumber($_POST['id']);
 		$result = $this->model->details($id);	
 		//show Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
-			require('views/Relocation/Details.php');
+			//Load view
+			$this->smarty->assign('user',$result);
+			$this->smarty->display('./views/Relocation/view.tpl');
 		}
 		else
 		{
-			require('views/Error.html');
+			//Ohh well... :(
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -104,7 +113,8 @@ class RelocationsController extends Controller {
 	*/
 	private function create()
 	{
-		//Validate Variables
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+			//Validate Variables
 		$relocationDate = $this->validateDate($_POST['relocationDate']);
 		$idEmployee = $this->validateNumber($_POST['idEmployee']);
 		$reason = $this->validateText($_POST['reason']);
@@ -115,12 +125,21 @@ class RelocationsController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Relocation/Created.php');
+			unset($postError);
+				header("Location: index.php?controller=Relocation");
+			
 		}
 		else
 		{
 			require('views/Error.html');
 		}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/Relocation/add.tpl');
+		}
+		
 	}
 
 	/**
@@ -135,6 +154,7 @@ class RelocationsController extends Controller {
 	*/
 	private function edit()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
 		$relocationDate = $this->validateDate($_POST['relocationDate']);
@@ -145,13 +165,31 @@ class RelocationsController extends Controller {
 		$result = $this->model->edit($id,$relocationDate,$idEmployee,$reason,$idDepartment,$idService);	
 		//Insert Succesfull
 		if($result)
-		{
-			//Load view
-			require('views/Relocation/Edited.php');
+			{
+				unset($postError);
+				header("Location: index.php?controller=Relocation");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
 		}
-		else
-		{
-			require('views/Error.html');
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$user = $this->model->details($id);
+		//select Succesfull
+			if($user != NULL)
+			{
+			//Load view
+				$this->smarty->assign('user',$user);
+				$this->smarty->display('./views/Relocation/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
 	}
 
@@ -163,13 +201,13 @@ class RelocationsController extends Controller {
 	private function delete()
 	{
 		//Validate Variables
+		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
-		if($result)
+			if($result)
 		{
-			//Load view
-			require('views/Relocation/Deleted.php');
+			header("Location: index.php?controller=Relocation&deleted=true");
 		}
 		else
 		{
