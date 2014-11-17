@@ -20,9 +20,6 @@
   <link rel="stylesheet" href="webroot/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="webroot/css/main.css">
   <style type="text/css">
-    .active {
-      border: solid black;
-    }
   </style>
   <script src="webroot/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   {block name=head}{/block}
@@ -140,6 +137,7 @@
             $( document ).ready(function() {
               $('a[data-dropdown="true"]').on('click',function(e) {
                 $(this).next('div').slideToggle().show();
+                $(this).next('div').addClass('active');
               });
             });
           </script>
