@@ -8,6 +8,7 @@ class StateController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/StateModel.php');
 		$this->model = new StateModel();
 	}
@@ -61,12 +62,17 @@ class StateController extends Controller {
 		if(isset($result))
 		{
 			//Load view
-			require('views/State/Index.php');
+			
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			
+			$this->smarty->assign('users',$result);
+			$this->smarty->display('./views/State/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+				$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -81,14 +87,17 @@ class StateController extends Controller {
 		$id = $this->validateNumber($_POST['id']);
 		$result = $this->model->details($id);	
 		//Insert Succesfull
-		if($result)
+		if(isset($result))
 		{
 			//Load view
-			require('views/State/Details.php');
+			//Load view
+			$this->smarty->assign('user',$result);
+			$this->smarty->display('./views/State/view.tpl');
 		}
 		else
 		{
-			require('views/Error.html');
+			//Ohh well... :(
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -99,6 +108,7 @@ class StateController extends Controller {
 	*/
 	private function create()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
 		$idCountry = $this->validateNumber($_POST['idCountry']);
@@ -107,12 +117,21 @@ class StateController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/State/Created.php');
+			unset($postError);
+			header("Location: index.php?controller=State");
+			
 		}
 		else
 		{
 			require('views/Error.html');
 		}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/State/add.tpl');
+		}
+		
 	}
 
 	/**
@@ -124,19 +143,38 @@ class StateController extends Controller {
 	*/
 	private function edit()
 	{
-		//Validate Variables
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
+				//Validate Variables
 		$name = $this->validateText($_POST['name']);
 		$idState = $this->validateNumber($_POST['idState']);
 		$result = $this->model->edit($name,$idState);	
 		//Insert Succesfull
 		if($result)
-		{
-			//Load view
-			require('views/State/Edited.php');
+			{
+				unset($postError);
+				header("Location: index.php?controller=State");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
 		}
-		else
-		{
-			require('views/Error.html');
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$user = $this->model->details($id);
+		//select Succesfull
+			if($user != NULL)
+			{
+			//Load view
+				$this->smarty->assign('user',$user);
+				$this->smarty->display('./views/State/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
 	}
 
@@ -151,10 +189,9 @@ class StateController extends Controller {
 		$id = $this->validateNumber($_POST['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
-		if($result)
+			if($result)
 		{
-			//Load view
-			require('views/State/Deleted.php');
+			header("Location: index.php?controller=State&deleted=true");
 		}
 		else
 		{

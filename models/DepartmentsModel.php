@@ -28,7 +28,7 @@ Class DepartmentsModel extends Model{
 	{
 		if($result = $this->db->details('department' , $id,NULL))
 		{
-			$Department = new Department($result['name']);
+			$Department = new Department($result['name'],$result['idLocation'],$result['id']);
 			return $Department;
 		}
 		else{
@@ -50,7 +50,7 @@ Class DepartmentsModel extends Model{
 		$Department = new Department($name, $idLocation);
 		if($result = $this->db->insert('department', $Department,NULL))
 		{
-			return true;
+			return $result;
 		}
 		else{
 			echo $result;
@@ -68,7 +68,7 @@ Class DepartmentsModel extends Model{
 	*/
 	function edit($id,$name,$idLocation)
 	{
-		$Department = new Department($name, $idLocation);
+		$Department = new Department($name, $idLocation,$id);
 		$Department->id = $id;
 		if($result = $this->db->update('department' , $Department,NULL))
 			return true;
