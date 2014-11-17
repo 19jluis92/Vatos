@@ -106,7 +106,8 @@ class BumpsController extends Controller {
 	*/
 	private function create()
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
+		{
 		//Validate Variables
 			$idPiece = $this->validateNumber($_POST['idPiece']);
 			$idSeverity = $this->validateNumber($_POST['idSeverity']);

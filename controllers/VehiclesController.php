@@ -7,6 +7,7 @@ class VehiclesController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/VehiclesModel.php');
 		$this->model = new VehiclesModel();
 	}
@@ -50,15 +51,18 @@ class VehiclesController extends Controller {
 	{
 		//Get all the Vehicles
 		$result = $this->model->all();
+		$this->smarty->assign('vehicle',$result);
 		if(isset($result))
 		{
 			//Load view
-			require('views/Vehicle/Index.php');
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			$this->smarty->display('./views/Vehicle/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 	/**
@@ -94,27 +98,36 @@ class VehiclesController extends Controller {
 	*/
 	private function create()
 	{
-		//Validate Variables
-		$vin   		 = $this->validateText($_POST['vin']);
-		$model 		 = $this->validateNumber($_POST['model']);
-		$color		 = $this->validateNumber($_POST['color']);
-		$year		 = $this->validateNumber($_POST['year']);
-		$type  		 = $this->validateNumber($_POST['type']);
-		$conditions  = $this->validateText($_POST['conditions']);
-		$plates	     = $this->validateNumber($_POST['plates']);
-		
-		$result = $this->model->create($vin, $model, $color, $year , $type, $conditions, $plates);
-		
-		//Insert Succesful
-		if($result)
+
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
-			//Load view
-			require('views/Vehicle/Created.php');
+			//Validate Variables
+			$vin   		 = $this->validateText($_POST['vin']);
+			$model 		 = $this->validateNumber($_POST['model']);
+			$color		 = $this->validateNumber($_POST['color']);
+			$year		 = $this->validateNumber($_POST['year']);
+			$type  		 = $this->validateNumber($_POST['type']);
+			$conditions  = $this->validateText($_POST['conditions']);
+			$plates	     = $this->validateNumber($_POST['plates']);
+			
+			$result = $this->model->create($vin, $model, $color, $year , $type, $conditions, $plates);
+			
+			//Insert Succesful
+			if($result)
+			{
+				header("Location: index.php?controller=vehicle&view=create&id=$result->id");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error',$result);
+			}
 		}
-		else
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
 		{
-			//Ohh well... :(
-			require('views/Error.html');
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/Vehicle/add.tpl');
 		}
 	}
 	/**
@@ -131,24 +144,52 @@ class VehiclesController extends Controller {
 	private function edit()
 	{
 		//Validate Variables
-		$vin   		 = $this->validateText($_POST['vin']);
-		$model 		 = $this->validateNumber($_POST['model']);
-		$color		 = $this->validateNumber($_POST['color']);
-		$year		 = $this->validateNumber($_POST['year']);
-		$type  		 = $this->validateNumber($_POST['type']);
-		$conditions  = $this->validateText($_POST['conditions']);
-		$plates	     = $this->validateNumber($_POST['plates']);
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') 
+		{
+			$vin   		 = $this->validateText($_POST['vin']);
+			$model 		 = $this->validateNumber($_POST['model']);
+			$color		 = $this->validateNumber($_POST['color']);
+			$year		 = $this->validateNumber($_POST['year']);
+			$type  		 = $this->validateNumber($_POST['type']);
+			$conditions  = $this->validateText($_POST['conditions']);
+			$plates	     = $this->validateNumber($_POST['plates']);
 
-		$result = $this->model->edit($vin, $model, $color, $year , $type, $conditions, $plates);
-		if($result)
-		{
-			//Load view
-			require('views/Vehicle/Edited.php');
+			$result = $this->model->edit($vin, $model, $color, $year , $type, $conditions, $plates);
+			if($result)
+			{
+				//Load view
+				unset($postError);
+				header("Location: index.php?controller=vehicle");
+			}
+			else
+			{
+				//Ohh well... :(
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
 		}
-		else
-		{
-			//Ohh well... :(
-			require('views/Error.html');
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$vin   		 = $this->validateText($_POST['vin']);
+			$model 		 = $this->validateNumber($_POST['model']);
+			$color		 = $this->validateNumber($_POST['color']);
+			$year		 = $this->validateNumber($_POST['year']);
+			$type  		 = $this->validateNumber($_POST['type']);
+			$conditions  = $this->validateText($_POST['conditions']);
+			$plates	     = $this->validateNumber($_POST['plates']);
+
+			$vehicle = $this->model->details($id);
+			//select Succesfull
+			if($vehicle != NULL)
+			{
+				//Load view
+				$this->smarty->assign('vehicle',$vehicle);
+				$this->smarty->display('./views/vehicle/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
 	}
 	/**
@@ -159,12 +200,12 @@ class VehiclesController extends Controller {
 	private function delete()
 	{
 		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->create($id);	
+		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Vehicle/Deleted.php');
+			header("Location: index.php?controller=vehicle&deleted=true");
 		}
 		else
 		{
