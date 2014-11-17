@@ -1,32 +1,38 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}My Page Title{/block}
+{block name=title}Agregar Lugar{/block}
+{block name=pageheader}Lugares{/block}
 {block name=head}
 {/block}
 {block name=body}
 <div class="row">
-	<div class="actions columns large-2 medium-3">
-		<h3>Actions</h3>
-		<ul class="side-nav">
-			<li><a href="index.php?controller=Location">List Location</a>
-			</li>
+	<div class="actions col-md-2">
+		<h3>Acciones</h3>
+		<ul class="list-group">
+			<li><a class="list-group-item" href="index.php?controller=Location">Listar lugares</a>
 		</ul>
 	</div>
-	<div class="bump form large-10 medium-9 columns">
+	<div class="location col-md-10">
 		<form method="post" accept-charset="utf-8" action="index.php?controller=Location&view=create">
 			<fieldset>
-				<legend>Add Location</legend>
-				<div class="input number required">
-					<label for="id">Id Location</label>
-					<input type="number" name="id" required="required" id="id">
+				<legend>Agregar Lugar</legend>
+				<div class="row">
+              <div class="col-md-4">
+		  				<label for="id" class="input-group-addon">Id Lugar</label>
+		  				<input type="number" name="id" required="required" class="form-control" maxlength="45" id="id" placeholder="Id Lugar">
+               </div>
+               <div class="col-md-8">              
+		  				<label for="name" class="input-group-addon">Nombre</label>
+		  				<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
+               </div>  
+            </div>
+            <br />
+
+            <div class="form-group input-group">
+	  				<label for="idcarworkshop" class="input-group-addon">Id Taller</label>
+	  				<input type="number" name="idcarworkshop" required="required" class="form-control" maxlength="45" id="idcarworkshop" placeholder="Id Taller Automotriz">
 				</div>
-				<div class="input number required">
-					<label for="name">Name</label>
-					<input type="text" name="name" required="required" id="name">
-				</div>
-				<div class="input number required">
-					<label for="idCarWorkShop">idCarWorkShop</label>
-					<input type="number" name="idCarWorkShop" required="required" id="idCarWorkShop">
-				</div>
-				</fieldset>
-				<button type="submit">Submit</button></form></div>
+			</fieldset>
+			<button class="pull-right" type="submit">Submit</button>
+	</form>
+</div>
 				{/block}
