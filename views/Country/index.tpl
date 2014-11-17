@@ -7,7 +7,7 @@
 	<div class="actions columns large-2 medium-3">
 		<h3>Actions</h3>
 		<ul class="side-nav">
-			<li><a href="index.php?controller=Location&view=create">New Location</a></li>
+			<li><a href="index.php?controller=Country&view=create">New Country</a></li>
 		</ul>
 	</div>
 	<div class="Bump index large-10 medium-9 columns">
@@ -15,14 +15,12 @@
 			<thead>
 				<tr>
 					<th>
-						<a href="index.php?controller=Location&amp;sort=id&amp;direction=asc">Id</a>
+						<a href="index.php?controller=Country&amp;sort=id&amp;direction=asc">Id</a>
 					</th>
 					<th>
-						<a href="index.php?controller=Location&amp;sort=name&amp;direction=asc">name</a>
+						<a href="index.php?controller=Country&amp;sort=name&amp;direction=asc">name</a>
 					</th>
-					<th>
-						<a href="index.php?controller=Location&amp;sort=idCarWorkShop&amp;direction=asc">idCarWorkShop</a>
-					</th>
+					
 					<th class="actions">Actions</th>
 				</tr>
 			</thead>
@@ -32,14 +30,13 @@
 				<tr>
 					<td>{$user.id}</td>
 					<td>{$user.name}</td>
-					<td>{$user.idCarWorkShop}</td>
 					<td class="actions">
-						<a href="index.php?controller=Location&view=details&id={$user.id}">View</a>				
-						<a href="index.php?controller=Location&view=edit&id={$user.id}">Edit</a>		
-						<form action="index.php?controller=Location&view=delete&id={$user.id}" name="post_user_{$user.id}" style="display:none;" method="POST">
+						<a href="index.php?controller=Country&view=details&id={$user.id}">View</a>				
+						<a href="index.php?controller=Country&view=edit&id={$user.id}">Edit</a>		
+						<form action="index.php?controller=Country&view=delete&id={$user.id}" name="post_user_{$user.id}" style="display:none;" method="POST">
 							<input type="hidden" name="_method" value="POST">
 						</form>
-						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $user.id?&quot;)) { document.post_Location_{$user.id}.submit(); } event.returnValue = false; return false;">Delete</a>
+						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $user.id?&quot;)) { document.post_Country_{$user.id}.submit(); } event.returnValue = false; return false;">Delete</a>
 					</td>
 				</tr>
 			</tbody>
