@@ -39,7 +39,7 @@ Class ServicesModel extends Model{
 	{
 		if($result = $this->db->details('service', $id,NULL))
 		{
-			$Services = new Services($result['name']);
+			$Services = new Service($result['startDate'],$result['endDate'],$result['idEmployee'],$result['idCarWorkShop'],$result['idVehicle'],$result['ic']);
 			return $Services;
 		}
 		else{
@@ -61,10 +61,10 @@ Class ServicesModel extends Model{
 	*/
 	function create($startDate,$endDate,$idEmployee,$idCarWorkShop,$idVehicle)
 	{
-		$Services = new Services($startDate, $endDate, $idEmployee, $idCarWorkShop, $idVehicle);
+		$Services = new Service($startDate, $endDate, $idEmployee, $idCarWorkShop, $idVehicle);
 		if($result = $this->db->insert('service', $Services,NULL))
 		{
-			return true;
+			return $result;
 		}
 		else{
 			echo $result;
@@ -85,7 +85,7 @@ Class ServicesModel extends Model{
 	*/
 	function edit($id,$startDate,$endDate,$idEmployee,$idCarWorkShop,$idVehicle)
 	{
-		$Services = new Services($startDate, $endDate, $idEmployee, $idCarWorkShop, $idVehicle);
+		$Services = new Service($startDate, $endDate, $idEmployee, $idCarWorkShop, $idVehicle);
 		$Services->id = $id;
 		if($result = $this->db->update('service', $Services,NULL))
 			return true;

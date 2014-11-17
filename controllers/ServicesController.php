@@ -9,6 +9,7 @@ class ServicesController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/ServicesModel.php');
 		$this->model = new ServicesModel();
 	}
@@ -61,14 +62,17 @@ class ServicesController extends Controller {
 		//Query Succesfull
 		if(isset($result))
 		{
-			//Load view
-			require('views/Service/Index.php');
+			$this->smarty->assign('services',$result);
+				//Load view
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			$this->smarty->display('./views/Service/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
-		}
+			$this->smarty->display('./views/error.tpl');
+		}	
 	}
 
 	/**
@@ -79,18 +83,19 @@ class ServicesController extends Controller {
 	private function details()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);	
-		//Insert Succesfull
-		if($result)
+		$id = $this->validateNumber($_GET['id']);
+		$service = $this->model->details($id);	
+		//select Succesfull
+		if($service != NULL)
 		{
 			//Load view
-			require('views/Service/Details.php');
+			$this->smarty->assign('service',$service);
+			$this->smarty->display('./views/Service/view.tpl');
 		}
 		else
 		{
-			require('views/Error.html');
-		}
+			$this->smarty->display('./views/error.tpl');
+		}	
 	}
 
 	/**
@@ -104,22 +109,33 @@ class ServicesController extends Controller {
 	*/
 	private function create()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+
 		//Validate Variables
-		$startDate = $this->validateDate($_POST['startDate']);
-		$endDate = $this->validateDate($_POST['endDate']);
-		$idEmployee = $this->validateNumber($_POST['idEmployee']);
-		$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
-		$idVehicle = $this->validateNumber($_POST['idVehicle']);
-		$result = $this->model->create($startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
+			$startDate = $this->validateDate($_POST['startDate']);
+			$endDate = $this->validateDate($_POST['endDate']);
+			$idEmployee = $this->validateNumber($_POST['idEmployee']);
+			$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
+			$idVehicle = $this->validateNumber($_POST['idVehicle']);
+			$result = $this->model->create($startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
 		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/Service/Created.php');
-		}
-		else
-		{
-			require('views/Error.html');
+			if($result)
+			{
+				unset($postError);
+				header("Location: index.php?controller=Service&view=details&id=$result->id");
+				//$this->all();
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error',$result);
+			}
+
+		} 
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/Service/add.tpl');
 		}
 	}
 
@@ -135,8 +151,10 @@ class ServicesController extends Controller {
 	*/
 	private function edit()
 	{
+				if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
+
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$startDate = $this->validateDate($_POST['startDate']);
 		$endDate = $this->validateDate($_POST['endDate']);
 		$idEmployee = $this->validateNumber($_POST['idEmployee']);
@@ -145,13 +163,31 @@ class ServicesController extends Controller {
 		$result = $this->model->edit($id, $startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
 		//Insert Succesfull
 		if($result)
-		{
-			//Load view
-			require('views/Service/Edited.php');
+			{
+				unset($postError);
+				header("Location: index.php?controller=Service");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
 		}
-		else
-		{
-			require('views/Error.html');
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$service = $this->model->details($id);
+		//select Succesfull
+			if($service != NULL)
+			{
+			//Load view
+				$this->smarty->assign('service',$service);
+				$this->smarty->display('./views/Service/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
 	}
 
@@ -163,17 +199,17 @@ class ServicesController extends Controller {
 	private function delete()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Service/Deleted.php');
+			header("Location: index.php?controller=Service&deleted=true");
 		}
 		else
 		{
-			require('views/Error.html');
+				$this->smarty->display('./views/error.tpl');
 		}
 	}
 

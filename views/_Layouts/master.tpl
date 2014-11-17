@@ -112,7 +112,7 @@
                   <li><a href="index.php?controller=account">account</a></li>
               </div>
               <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">Dashboard</h1>
+                <h1 class="page-header">{block name=pageheader}Dashboard{/block}</h1>
                 {block name=body}{/block} 
               </div>
             </div>

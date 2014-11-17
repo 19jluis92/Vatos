@@ -7,10 +7,9 @@
 		public $idCarWorkShop;
 		public $idVehicle;
 
-		function __construct($name, $startDate, $endDate, $idEmployee, $idCarWorkShop, $idVehicle)
+		function __construct($startDate, $endDate, $idEmployee, $idCarWorkShop, $idVehicle,$id=0)
 		{
-			$this->id=0;
-			$this->name = $name;
+			$this->id=$id;
 			$this->startDate = $startDate;
 			$this->endDate = $endDate;
 			$this->idEmployee = $idEmployee;
