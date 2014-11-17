@@ -5,7 +5,7 @@
 {block name=body}
 <div class="row">
 	<div class="actions columns large-2 medium-3">
-		<h3>Actions</h3>
+		<h3>Acciones</h3>
 		<ul class="side-nav">
 			<li>
 			<a href="index.php?controller=user&view=edit&id={$user->id}">Edit User</a> </li>
