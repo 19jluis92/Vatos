@@ -37,7 +37,7 @@ Class InspectionsModel extends Model{
 	{
 		if($result = $this->db->details('inspection', $id,NULL))
 		{
-			$Inspections = new Inspections($result['name']);
+			$Inspections = new Inspection($result['idService'],$result['mileage'],$result['fuel'],$result['inspectionDate'],$result['type'],$result['id']);
 			return $Inspections;
 		}
 		else{
@@ -59,10 +59,10 @@ Class InspectionsModel extends Model{
 	*/
 	function create($idService , $mileage , $fuel , $inspectionDate, $type)
 	{
-		$Inspections =  new Inspections($idService, $mileage, $fuel, $inspectionDate, $type);
+		$Inspections =  new Inspection($idService, $mileage, $fuel, $inspectionDate, $type);
 		if($result = $this->db->insert('inspection', $Inspections,NULL))
 		{
-			return true;
+			return $result;
 		}
 		else{
 			echo $result;
@@ -81,10 +81,9 @@ Class InspectionsModel extends Model{
 	*@param bool $type 
 	* @return bool transaction result
 	*/
-	function edit($id, $mileage , $fuel , $inspectionDate, $type)
+	function edit($id,$idService , $mileage , $fuel , $inspectionDate, $type)
 	{
-		$Inspections =  new Inspections($idService, $mileage, $fuel, $inspectionDate, $type);
-		$Inspections->id = $id;
+		$Inspections =  new Inspection($idService, $mileage, $fuel, $inspectionDate, $type,$id);
 		if($result = $this->db->update('inspection' , $Inspections,NULL))
 			return true;
 		else{

@@ -9,6 +9,7 @@ class InspectionsController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/InspectionsModel.php');
 		$this->model = new InspectionsModel();
 	}
@@ -61,13 +62,16 @@ class InspectionsController extends Controller {
 		//Query Succesfull
 		if(isset($result))
 		{
-			//Load view
-			require('views/Inspection/Index.php');
+			$this->smarty->assign('inspections',$result);
+				//Load view
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			$this->smarty->display('./views/Inspection/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -80,17 +84,18 @@ class InspectionsController extends Controller {
 	{
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);	
-		//Insert Succesfull
-		if($result)
+		$inspection = $this->model->details($id);	
+		//select Succesfull
+		if($inspection != NULL)
 		{
 			//Load view
-			require('views/Inspection/Details.php');
+			$this->smarty->assign('inspection',$inspection);
+			$this->smarty->display('./views/Inspection/view.tpl');
 		}
 		else
 		{
-			require('views/Error.html');
-		}
+			$this->smarty->display('./views/error.tpl');
+		}	
 	}
 
 	/**
@@ -104,22 +109,31 @@ class InspectionsController extends Controller {
 	*/
 	private function create()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 		//Validate Variables
-		$idService = $this->validateNumber($_POST['idService']);
-		$mileage = $this->validateFloat($_POST['mileage']);
-		$fuel = $this->validateFloat($_POST['fuel']);
-		$inspectionDate = $this->validateDate($_POST['inspectionDate']);
-		$type = $this->validateBool($_POST['type']);
-		$result = $this->model->create($idService , $mileage , $fuel , $inspectionDate , $type);	
-		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/Inspection/Created.php');
-		}
-		else
-		{
-			require('views/Error.html');
+			$idService = $this->validateNumber($_POST['idService']);
+			$mileage = $this->validateFloat($_POST['mileage']);
+			$fuel = $this->validateFloat($_POST['fuel']);
+			$inspectionDate = $this->validateDate($_POST['inspectionDate']);
+			$type = $this->validateBool($_POST['type']);
+			$result = $this->model->create($idService , $mileage , $fuel , $inspectionDate , $type);	
+			if($result)
+			{
+				unset($postError);
+				header("Location: index.php?controller=Inspection&view=details&id=$result->id");
+				//$this->all();
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error',$result);
+			}
+
+		} 
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/Inspection/add.tpl');
 		}
 	}
 
@@ -135,23 +149,42 @@ class InspectionsController extends Controller {
 	*/
 	private function edit()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$idService = $this->validateNumber($_POST['idService']);
-		$mileage = $this->validateFloat($_POST['mileage']);
-		$fuel = $this->validateFloat($_POST['fuel']);
-		$inspectionDate = $this->validateDate($_POST['inspectionDate']);
-		$type = $this->validateBool($_POST['type']);
-		$result = $this->model->edit($id,$idService,$mileage,$fuel,$inspectionDate,$type);	
+			$id = $this->validateNumber($_POST['id']);
+			$idService = $this->validateNumber($_POST['idService']);
+			$mileage = $this->validateFloat($_POST['mileage']);
+			$fuel = $this->validateFloat($_POST['fuel']);
+			$inspectionDate = $this->validateDate($_POST['inspectionDate']);
+			$type = $this->validateBool($_POST['type']);
+			$result = $this->model->edit($id,$idService,$mileage,$fuel,$inspectionDate,$type);	
 		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/Inspection/Edited.php');
+			if($result)
+			{
+				unset($postError);
+				header("Location: index.php?controller=Inspection");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
 		}
-		else
-		{
-			require('views/Error.html');
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$inspection = $this->model->details($id);
+		//select Succesfull
+			if($inspection != NULL)
+			{
+			//Load view
+				$this->smarty->assign('inspection',$inspection);
+				$this->smarty->display('./views/Inspection/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
 	}
 
@@ -163,17 +196,17 @@ class InspectionsController extends Controller {
 	private function delete()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
-		if($result)
+				if($result)
 		{
 			//Load view
-			require('views/Inspection/Deleted.php');
+			header("Location: index.php?controller=Inspection&deleted=true");
 		}
 		else
 		{
-			require('views/Error.html');
+				$this->smarty->display('./views/error.tpl');
 		}
 	}
 
