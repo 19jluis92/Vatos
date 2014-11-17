@@ -4,23 +4,25 @@
 {/block}
 {block name=body}
 <div class="row">
-	<div class="actions columns large-2 medium-3">
-		<h3>Actions</h3>
-		<ul class="side-nav">
-			<li><a href="index.php?controller=Department">List Department</a></li>
+	<div class="actions col-md-2">
+		<h3>Acciones</h3>
+		<ul class="list-group">
+			<li><a class="list-group-item"  href="index.php?controller=Department">Mostrar Departamento</a></li>
 		</ul>
 	</div>
-	<div class="department form large-10 medium-9 columns">
-		<form method="post" accept-charset="utf-8" action="index.php?controller=Department&view=create">
+	<div class="brand col-md-10">
+		<form  class="form-horizontal" method="post" accept-charset="utf-8" action="index.php?controller=Department&view=create">
+		<div style="display:none;"><input type="hidden" name="_method" value="POST">
+			</div>
 			<fieldset>
 			<legend>Add Department</legend>
 				<div class="input text required">
-					<label for="name">Name</label>
-					<input type="text" name="name" required="required" maxlength="45" id="name">
+					<label for="name" class="input-group-addon">Name</label>
+					<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name">
 				</div>
-				<div class="input number required"><label for="idlocation">Id Location</label><input type="number" name="idLocation" required="required" id="idlocation"></div>
+				<div class="input number required"><label for="idlocation" class="input-group-addon">Id Location</label><input type="number" name="idLocation" required="required" id="idlocation" class="form-control" maxlength="45"></div>
 			</fieldset>
-			<button type="submit">Submit</button>
+			<button class="btn btn-default" type="submit">Submit</button>
 		</form>
 	</div>
 </div>

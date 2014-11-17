@@ -5,14 +5,14 @@
 {block name=body}
 
 <div class="row">
-	<div class="actions columns large-2 medium-3">
-		<h3>Actions</h3>
-		<ul class="side-nav">
-			<li><a href="index.php?controller=Department&view=create">New Department</a></li>
+	<div class="actions col-md-2">
+		<h3>Acciones</h3>
+		<ul class="list-group">
+			<li><a  class="list-group-item"  href="index.php?controller=Department&view=create">Agregar Departamento</a></li>
 		</ul>
 	</div>
-	<div class="department index large-10 medium-9 columns">
-		<table cellpadding="0" cellspacing="0">
+	<div class="col-md-10">
+		<table class="col-md-10" cellpadding="0" cellspacing="0">
 			<thead>
 				<tr>
 					<th><a href="index.php?controller=Department&sort=id&amp;direction=asc">Id</a></th>
@@ -29,17 +29,21 @@
 					<td>{$department.name}</td>
 					<td>{$department.idLocation}</td>
 					<td class="actions">
-						<a href="index.php?controller=Department&view=details&id={$department.id}">View</a>				
-						<a href="index.php?controller=Department&view=edit&id={$department.id}">Edit</a>		
+					<div class="btn-group" role="group" aria-label="...">
+					<a href="index.php?controller=Department&view=details&id={$department.id}">Ver</a>				
+						<a class="btn btn-default"  href="index.php?controller=Department&view=edit&id={$department.id}">Editar</a>		
 						<form action="index.php?controller=Department&view=delete&id={$department.id}" name="post_department_{$department.id}" style="display:none;" method="post">
 							<input type="hidden" name="_method" value="POST">
 						</form>
-						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_department_{$department.id}.submit(); } event.returnValue = false; return false;">Delete</a>
+						<a class="btn btn-default"   href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_department_{$department.id}.submit(); } event.returnValue = false; return false;">Eliminar</a>
+					</div>	
+						
 					</td>
 				</tr>
 			</tbody>
 			{/foreach}
 		</table>
+		</br>
 		<div class="paginator">
 			<ul class="pagination">
 				<li class="prev disabled"><a href="">&lt; previous</a></li><li class="next disabled"><a href="">next &gt;</a></li>		</ul>
