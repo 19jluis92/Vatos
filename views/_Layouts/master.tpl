@@ -19,7 +19,11 @@
   </style>
   <link rel="stylesheet" href="webroot/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="webroot/css/main.css">
-
+  <style type="text/css">
+    .active {
+      border: solid black;
+    }
+  </style>
   <script src="webroot/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   {block name=head}{/block}
 </head>
@@ -77,6 +81,13 @@
                   <li class="active"><a href="#">Menu <span class="sr-only">(current)</span></a></li>
                   <li><a href="index.php?controller=home">home</a></li>
                   <li><a href="index.php?controller=user" >User</a></li>
+                  <li><a href="#" data-dropdown="true">Vehiculo</a></li>
+                    <div class="inner-side-bar">
+                      <ul class="side-nav">
+                        <li><a href="index.php?controller=vehicle" >Mostrar todos los vehiculos</a></li>
+                        <li><a href="index.php?controller=vehicle&view=create">Vehiculo</a></li>
+                      </ul>
+                    </div>
                   <li><a href="index.php?controller=Employee">Employee</a></li>
                   <li><a href="index.php?controller=client">client</a></li>
                   <li><a href="index.php?controller=bump">bump</a></li>
@@ -88,7 +99,6 @@
                   <li><a href="index.php?controller=relocation">relocation</a></li>
                   <li><a href="index.php?controller=service">service</a></li>
                   <li><a href="index.php?controller=severity">severity</a></li>
-                  <li><a href="index.php?controller=vehicle">vehicle</a></li>
                   <li><a href="index.php?controller=country">country</a></li>
                   <li><a href="index.php?controller=state">state</a></li>
                   <li><a href="index.php?controller=carworkshop">carworkshop</a></li>
@@ -125,6 +135,13 @@
             e.src='//www.google-analytics.com/analytics.js';
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X');ga('send','pageview');
+          </script>
+          <script type="text/javascript">
+            $( document ).ready(function() {
+              $('a[data-dropdown="true"]').click(function(event){
+                $(this).next().show();
+              });
+            });
           </script>
           {/literal}
           {block name=scripts}{/block}

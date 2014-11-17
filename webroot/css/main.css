@@ -110,6 +110,9 @@ body {
   border-radius: 50%;
 }
 
+.inner-side-bar{
+  display: none;
+}
 
 
 
