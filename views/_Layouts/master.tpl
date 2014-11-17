@@ -74,23 +74,32 @@
             <div class="row">
               <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                  <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                  <li><a href="#">Reports</a></li>
-                  <li><a href="#">Analytics</a></li>
-                  <li><a href="#">Export</a></li>
+                  <li class="active"><a href="#">Menu <span class="sr-only">(current)</span></a></li>
+                  <li><a href="index.php?controller=home">home</a></li>
+                  <li><a href="index.php?controller=user" >User</a></li>
+                  <li><a href="index.php?controller=Employee">Employee</a></li>
+                  <li><a href="index.php?controller=client">client</a></li>
+                  <li><a href="index.php?controller=bump">bump</a></li>
+                  <li><a href="index.php?controller=city">city</a></li>
+                  <li><a href="index.php?controller=cartype">cartype</a></li>
+                  <li><a href="index.php?controller=color">color</a></li>
+                  <li><a href="index.php?controller=department">department</a></li>
+                  <li><a href="index.php?controller=inspection">inspection</a></li>
+                  <li><a href="index.php?controller=relocation">relocation</a></li>
+                  <li><a href="index.php?controller=service">service</a></li>
+                  <li><a href="index.php?controller=severity">severity</a></li>
+                  <li><a href="index.php?controller=vehicle">vehicle</a></li>
+                  <li><a href="index.php?controller=country">country</a></li>
+                  <li><a href="index.php?controller=state">state</a></li>
+                  <li><a href="index.php?controller=carworkshop">carworkshop</a></li>
+                  <li><a href="index.php?controller=workshopphone">workshopphone</a></li>
+                  <li><a href="index.php?controller=location">location</a></li>
+                  <li><a href="index.php?controller=carmodel">carmodel</a></li>
+                  <li><a href="index.php?controller=brand">brand</a></li>
+                  <li><a href="index.php?controller=account">account</a></li>
                 </ul>
-                <ul class="nav nav-sidebar">
-                  <li><a href="">Nav item</a></li>
-                  <li><a href="">Nav item again</a></li>
-                  <li><a href="">One more nav</a></li>
-                  <li><a href="">Another nav item</a></li>
-                  <li><a href="">More navigation</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                  <li><a href="">Nav item again</a></li>
-                  <li><a href="">One more nav</a></li>
-                  <li><a href="">Another nav item</a></li>
-                </ul>
+                
+               
               </div>
               <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header">Dashboard</h1>
