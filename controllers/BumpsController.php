@@ -129,7 +129,6 @@ class BumpsController extends Controller {
 		} 
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			$this->loadProperties();
-			var_dump($this->toAssociativeArray($this->severities->all(),'id','name'));
 			$this->smarty->assign('pieces',$this->toAssociativeArray($this->pieces->all()));
 			$this->smarty->assign('severities',$this->toAssociativeArray($this->severities->all()));
 			$this->smarty->assign('inspections',$this->toAssociativeArray($this->inspections->all()));

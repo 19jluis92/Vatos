@@ -20,26 +20,26 @@ class VehiclesController extends Controller {
 			case 'index':
 			case 'list':
 						//Validate User and permissions
-						$this->all();
-						break;
+			$this->all();
+			break;
 			case 'details':
 						//Validate User and permissions
-						$this->details();
-						break;
+			$this->details();
+			break;
 			case 'create':
 						//Validate User and permissions
-						$this->create();		
-						break;
+			$this->create();		
+			break;
 			case 'edit':
 						//Validate User and permissions
-						$this->edit();
-						break;
+			$this->edit();
+			break;
 			case 'delete':
 						//Validate User and permissions
-						$this->delete();
-						break;
-				default:
-						break;
+			$this->delete();
+			break;
+			default:
+			break;
 		}
 	}
 
@@ -51,7 +51,7 @@ class VehiclesController extends Controller {
 	{
 		//Get all the Vehicles
 		$result = $this->model->all();
-		$this->smarty->assign('vehicle',$result);
+		$this->smarty->assign('vehicles',$result);
 		if(isset($result))
 		{
 			//Load view
@@ -72,19 +72,19 @@ class VehiclesController extends Controller {
 	*/
 	private function details()
 	{
-		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);
-		if($result)
+		$id = $this->validateNumber($_GET['id']);
+		$vehicle = $this->model->details($id);
+		//select Succesfull
+		if($vehicle != NULL)
 		{
 			//Load view
-			require('views/Vehicle/Details.php');
+			$this->smarty->assign('vehicle',$vehicle);
+			$this->smarty->display('./views/Vehicle/view.tpl');
 		}
 		else
 		{
-			//Ohh well... :(
-			require('views/Error.html');
-		}
+			$this->smarty->display('./views/error.tpl');
+		}	
 	}
 	/**
 	* Create new Vehicle
@@ -111,7 +111,7 @@ class VehiclesController extends Controller {
 			$plates	     = $this->validateNumber($_POST['plates']);
 			
 			$result = $this->model->create($vin, $model, $color, $year , $type, $conditions, $plates);
-			
+			var_dump($result);
 			//Insert Succesful
 			if($result)
 			{
@@ -125,8 +125,10 @@ class VehiclesController extends Controller {
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
 		{
-			if(isset($name))
-				$this->smarty->assign('name',$name);
+			$this->loadProperties();
+			$this->smarty->assign('colors',$this->toAssociativeArray($this->colors->all()));
+			$this->smarty->assign('carTypes',$this->toAssociativeArray($this->carTypes->all()));
+			$this->smarty->assign('models',$this->toAssociativeArray($this->models->all()));
 			$this->smarty->display('./views/Vehicle/add.tpl');
 		}
 	}
@@ -169,19 +171,15 @@ class VehiclesController extends Controller {
 			}
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
-			$vin   		 = $this->validateText($_POST['vin']);
-			$model 		 = $this->validateNumber($_POST['model']);
-			$color		 = $this->validateNumber($_POST['color']);
-			$year		 = $this->validateNumber($_POST['year']);
-			$type  		 = $this->validateNumber($_POST['type']);
-			$conditions  = $this->validateText($_POST['conditions']);
-			$plates	     = $this->validateNumber($_POST['plates']);
-
+			$id = $this->validateNumber($_GET['id']);
 			$vehicle = $this->model->details($id);
 			//select Succesfull
 			if($vehicle != NULL)
 			{
-				//Load view
+				$this->loadProperties();
+				$this->smarty->assign('colors',$this->toAssociativeArray($this->colors->all()));
+				$this->smarty->assign('carTypes',$this->toAssociativeArray($this->carTypes->all()));
+				$this->smarty->assign('models',$this->toAssociativeArray($this->models->all()));
 				$this->smarty->assign('vehicle',$vehicle);
 				$this->smarty->display('./views/vehicle/edit.tpl');
 			}
@@ -212,6 +210,16 @@ class VehiclesController extends Controller {
 			//Ohh well... :(
 			require('views/Error.html');
 		}	
+	}
+
+
+	private function loadProperties(){
+		require('models/ColorsModel.php');
+		$this->colors = new ColorsModel();
+		require('models/CarModel.php');
+		$this->models = new CarModel();
+		require('models/CarTypesModel.php');
+		$this->carTypes = new CarTypesModel();
 	}
 
 }
