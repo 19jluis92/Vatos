@@ -9,6 +9,7 @@ class DepartmentsController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/DepartmentsModel.php');
 		$this->model = new DepartmentsModel();
 	}
@@ -61,14 +62,17 @@ class DepartmentsController extends Controller {
 		//Query Succesfull
 		if(isset($result))
 		{
-			//Load view
-			require('views/Department/Index.php');
+			$this->smarty->assign('departments',$result);
+				//Load view
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			$this->smarty->display('./views/Department/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
-		}
+			$this->smarty->display('./views/error.tpl');
+		}	
 	}
 
 	/**
@@ -78,18 +82,18 @@ class DepartmentsController extends Controller {
 	*/
 	private function details()
 	{
-		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);	
-		//Insert Succesfull
-		if($result)
+		$id = $this->validateNumber($_GET['id']);
+		$department = $this->model->details($id);	
+		//select Succesfull
+		if($department != NULL)
 		{
 			//Load view
-			require('views/Department/Details.php');
+			$this->smarty->assign('department',$department);
+			$this->smarty->display('./views/Department/view.tpl');
 		}
 		else
 		{
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -100,19 +104,29 @@ class DepartmentsController extends Controller {
 	*/
 	private function create()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$idLocation = $this->validateNumber($_POST['idLocation']);
-		$result = $this->model->create($name,$idLocation);	
+			$name = $this->validateText($_POST['name']);
+			$idLocation = $this->validateNumber($_POST['idLocation']);
+			$result = $this->model->create($name,$idLocation);	
 		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/Department/Created.php');
-		}
-		else
-		{
-			require('views/Error.html');
+			if($result)
+			{
+				unset($postError);
+				header("Location: index.php?controller=Department&view=details&id=$result->id");
+				//$this->all();
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error',$result);
+			}
+
+		} 
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/Department/add.tpl');
 		}
 	}
 
@@ -125,20 +139,39 @@ class DepartmentsController extends Controller {
 	*/
 	private function edit()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$name = $this->validateText($_POST['name']);
-		$idLocation = $this->validateNumber($_POST['idLocation']);
-		$result = $this->model->edit($id,$name,$idLocation);	
+			$id = $this->validateNumber($_GET['id']);
+			$name = $this->validateText($_POST['name']);
+			$idLocation = $this->validateNumber($_POST['idLocation']);
+			$result = $this->model->edit($id,$name,$idLocation);	
 		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/Department/Edited.php');
+			if($result)
+			{
+				unset($postError);
+				header("Location: index.php?controller=Department");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
 		}
-		else
-		{
-			require('views/Error.html');
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$department = $this->model->details($id);
+		//select Succesfull
+			if($department != NULL)
+			{
+			//Load view
+				$this->smarty->assign('department',$department);
+				$this->smarty->display('./views/Department/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
 	}
 
@@ -150,17 +183,17 @@ class DepartmentsController extends Controller {
 	private function delete()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Department/Deleted.php');
+			header("Location: index.php?controller=Department&deleted=true");
 		}
 		else
 		{
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
