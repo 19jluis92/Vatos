@@ -77,7 +77,14 @@
                 <ul class="nav nav-sidebar">
                   <li class="active"><a href="#">Menu <span class="sr-only">(current)</span></a></li>
                   <li><a href="index.php?controller=home">home</a></li>
-                  <li><a href="index.php?controller=user" >User</a></li>
+                  <li><a href="#" data-dropdown="true" >User</a>
+                      <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=user" >Mostrar todos los Usuarios</a></li>
+                          <li><a href="index.php?controller=user&view=create">Usuario</a></li>
+                        </ul>
+                      </div>
+                  </li>
                   <li>
                     <a href="#" data-dropdown="true">Vehiculo
                     </a>
@@ -88,25 +95,158 @@
                         </ul>
                       </div>
                   </li>
-                  <li><a href="index.php?controller=Employee">Employee</a></li>
-                  <li><a href="index.php?controller=client">client</a></li>
-                  <li><a href="index.php?controller=bump">bump</a></li>
-                  <li><a href="index.php?controller=city">city</a></li>
-                  <li><a href="index.php?controller=cartype">cartype</a></li>
-                  <li><a href="index.php?controller=color">color</a></li>
-                  <li><a href="index.php?controller=department">department</a></li>
-                  <li><a href="index.php?controller=inspection">inspection</a></li>
-                  <li><a href="index.php?controller=relocation">relocation</a></li>
-                  <li><a href="index.php?controller=service">service</a></li>
-                  <li><a href="index.php?controller=severity">severity</a></li>
-                  <li><a href="index.php?controller=country">country</a></li>
-                  <li><a href="index.php?controller=state">state</a></li>
-                  <li><a href="index.php?controller=carworkshop">carworkshop</a></li>
-                  <li><a href="index.php?controller=workshopphone">workshopphone</a></li>
-                  <li><a href="index.php?controller=location">location</a></li>
-                  <li><a href="index.php?controller=carmodel">carmodel</a></li>
-                  <li><a href="index.php?controller=brand">brand</a></li>
-                  <li><a href="index.php?controller=account">account</a></li>
+                  <li><a href="#" data-dropdown="true">Employee</a>
+                    <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=Employee" >Mostrar todos los Empleados</a></li>
+                          <li><a href="index.php?controller=Employee&view=create">Empleado</a></li>
+                        </ul>
+                      </div>
+                  </li>
+                  <li><a href="#" data-dropdown="true">Client</a>
+                    <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=client" >Mostrar todos los Clientes</a></li>
+                          <li><a href="index.php?controller=client&view=create">Clientes</a></li>
+                        </ul>
+                      </div>
+                  </li>
+                  <li><a href="#" data-dropdown="true">bump</a>
+                    <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=bump" >Mostrar todos los Bumb</a></li>
+                          <li><a href="index.php?controller=bump&view=create">Bumb</a></li>
+                        </ul>
+                      </div>
+                  </li>
+                  <li><a href="#" data-dropdown="true">Ciudad</a>
+                  <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=city" >Mostrar todas las Ciudades</a></li>
+                          <li><a href="index.php?controller=city&view=create">Ciudad</a></li>
+                        </ul>
+                      </div>
+                  </li>
+                  <li><a href="#" data-dropdown="true">Tipo de carro</a>
+                    <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=cartype" >Mostrar todos los carros</a></li>
+                          <li><a href="index.php?controller=cartype&view=create">Carro</a></li>
+                        </ul>
+                      </div>
+                  </li>
+                  <li><a href="#" data-dropdown="true">color</a>
+                    <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=color" >Mostrar todos los colores</a></li>
+                          <li><a href="index.php?controller=color&view=create">Color</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                  <li><a href="#" data-dropdown="true">Departamentos</a>
+                  <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=department" >Mostrar todos los Departamentos</a></li>
+                          <li><a href="index.php?controller=department&view=create">Departamento</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                  <li><a href="#" data-dropdown="true">Inspaccion</a>
+                    <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=inspection" >Mostrar Inspecciones</a></li>
+                          <li><a href="index.php?controller=inspection&view=create">Inspeccion</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                  <li><a href="#" data-dropdown="true">Recolocacion</a>
+                  <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=relocation" >Mostrar Recolocaciones</a></li>
+                          <li><a href="index.php?controller=relocation&view=create">Recolocacion</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                  <li><a href="#" data-dropdown="true">Servicio</a>
+                   <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=service" >Mostrar Servicios</a></li>
+                          <li><a href="index.php?controller=service&view=create">Servicio</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                  <li><a href="index.php?controller=severity" data-dropdown="true">Severidad</a>
+                  <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=severity" >Mostrar Severidades</a></li>
+                          <li><a href="index.php?controller=severity&view=create">Severidad</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                  <li><a href="#" data-dropdown="true">Pais</a>
+                  <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=country" >Mostrar Pais</a></li>
+                          <li><a href="index.php?controller=country&view=create">Pais</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                  <li><a href="#" data-dropdown="true">Estado</a>
+                  <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=state" >Mostrar Estados</a></li>
+                          <li><a href="index.php?controller=state&view=create">Estado</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                  <li><a href="#"data-dropdown="true">carworkshop</a>
+                     <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=carworkshop" >Mostrar carworkshop</a></li>
+                          <li><a href="index.php?controller=carworkshop&view=create">carworkshop</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                  <li><a href="#" data-dropdown="true">workshopphone</a>
+                    <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=workshopphone" >Mostrar workshopphone</a></li>
+                          <li><a href="index.php?controller=workshopphone&view=create">workshopphone</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                  <li><a href="#" data-dropdown="true">location</a>
+                    <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=location" >Mostrar location</a></li>
+                          <li><a href="index.php?controller=location&view=create">location</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                  <li><a href="#"data-dropdown="true">Modelo de Auto</a>
+                    <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=carmodel" >Mostrar Autos</a></li>
+                          <li><a href="index.php?controller=carmodel&view=create">Modelo</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                  <li><a href="#"data-dropdown="true">Marca</a>
+                    <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=brand" >Mostrar Marcas</a></li>
+                          <li><a href="index.php?controller=brand&view=create">Marca</a></li>
+                        </ul>
+                    </div>
+                  </li>
+                  <li><a href="#"data-dropdown="true">Cuenta</a>
+                    <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=account" >Mostrar Cuentas</a></li>
+                          <li><a href="index.php?controller=account&view=create">Cuenta</a></li>
+                        </ul>
+                    </div>
+                  </li>
               </div>
               <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header">{block name=pageheader}Dashboard{/block}</h1>
