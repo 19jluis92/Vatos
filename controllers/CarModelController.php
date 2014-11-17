@@ -8,6 +8,7 @@ class CarModelController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/CarModel.php');
 		$this->model = new CarModel();
 	}
@@ -61,13 +62,16 @@ class CarModelController extends Controller {
 		if(isset($result))
 		{
 			//Load view
-			require('views/CarModel/Index.php');
+			$this->smarty->assign('carModels',$result);
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			$this->smarty->display('./views/CarModel/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
-		}
+			$this->smarty->display('./views/error.tpl');
+		}	
 	}
 
 	/**
@@ -77,18 +81,18 @@ class CarModelController extends Controller {
 	*/
 	private function details()
 	{
-		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);	
-		//Insert Succesfull
-		if($result)
+		$id = $this->validateNumber($_GET['id']);
+		$carModel = $this->model->details($id);
+		//select Succesfull
+		if($carModel != NULL)
 		{
 			//Load view
-			require('views/CarModel/Details.php');
+			$this->smarty->assign('carModel',$carModel);
+			$this->smarty->display('./views/CarModel/view.tpl');
 		}
 		else
 		{
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -99,19 +103,29 @@ class CarModelController extends Controller {
 	*/
 	private function create()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$idBrand = $this->validateText($_POST['idBrand']);
-		$result = $this->model->create($name, $idBrand);	
+			$name = $this->validateText($_POST['name']);
+			$idBrand = $this->validateText($_POST['idBrand']);
+			$result = $this->model->create($name, $idBrand);	
 		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/CarModel/Created.php');
-		}
-		else
-		{
-			require('views/Error.html');
+			if($result)
+			{
+				unset($postError);
+				header("Location: index.php?controller=CarModel&view=details&id=$result->id");
+				//$this->all();
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error',$result);
+			}
+
+		} 
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			if(isset($name))
+				$this->smarty->assign('name',$name);
+			$this->smarty->display('./views/CarModel/add.tpl');
 		}
 	}
 
@@ -124,20 +138,42 @@ class CarModelController extends Controller {
 	*/
 	private function edit()
 	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 		//Validate Variables
 		$name = $this->validateText($_POST['name']);
+		$id = $this->validateText($_GET['id']);
 		$idBrand = $this->validateText($_POST['idBrand']);
-		$result = $this->model->edit($name, $idBrand);	
+		$result = $this->model->edit($id,$name, $idBrand);	
 		//Insert Succesfull
-		if($result)
-		{
+			$result = $this->model->edit($id,$name,$idBrand);	
+			if($result)
+			{
+				unset($postError);
+				header("Location: index.php?controller=CarModel");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$carModel = $this->model->details($id);
+		//select Succesfull
+			if($carModel != NULL)
+			{
 			//Load view
-			require('views/CarModel/Edited.php');
+				$this->smarty->assign('carModel',$carModel);
+				$this->smarty->display('./views/CarModel/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
-		else
-		{
-			require('views/Error.html');
-		}
+
 	}
 
 		/**
@@ -148,13 +184,13 @@ class CarModelController extends Controller {
 	private function delete()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/CarModel/Deleted.php');
+			header("Location: index.php?controller=CarModel&deleted=true");
 		}
 		else
 		{

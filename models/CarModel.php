@@ -1,4 +1,5 @@
 <?php
+require('database/Car_Model.php');
 require('models/Model.php');
 Class CarModel extends Model{
 	private $id;
@@ -27,7 +28,7 @@ Class CarModel extends Model{
 	{
 		if($result = $this->db->details('model' , $id,NULL))
 		{
-			$CarModel = new CarModel($result['name']);
+			$CarModel = new Car_Model($result['name'],$result['idBrand'],$result['id']);
 			return $CarModel;
 		}
 		else{
@@ -45,10 +46,10 @@ Class CarModel extends Model{
 	*/
 	function create($name, $idBrand)
 	{
-		$CarModel = new CarModel($name,$idBrand);
+		$CarModel = new Car_Model($name,$idBrand);
 		if($result = $this->db->insert("model" , $CarModel,NULL))
 		{
-			return true;
+			return $result;
 		}
 		else
 		{
@@ -64,8 +65,7 @@ Class CarModel extends Model{
 	*/
 	function edit($id, $name, $idBrand)
 	{
-		$CarModel = new CarModel($name,$idBrand);
-		$CarModel->id = $id;
+		$CarModel = new Car_Model($name,$idBrand,$id);
 		if($result = $this->db->update("model", $CarModel,NULL))
 			return true;
 		else{
@@ -82,7 +82,7 @@ Class CarModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("Mmdel" , $id,NULL))
+		if($result = $this->db->delete("model" , $id,NULL))
 			return true;
 		else
 		{

@@ -29,7 +29,6 @@ Class BrandModel extends Model{
 		if($result = $this->db->details('brand', $id,NULL))
 			{
 			$brand = new Brand($result['name'],$result['id']);
-			/*opcionales son de prueba*/
 			return $brand;
 		}
 		else{
