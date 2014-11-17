@@ -1,6 +1,6 @@
 <?php
-require('database/Vehicle.php');
-require('models/Model.php');
+require_once('database/Vehicle.php');
+require_once('models/Model.php');
 Class VehiclesModel extends Model{
 	private $vin;
 	private $model;

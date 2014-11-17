@@ -1,6 +1,6 @@
 <?php
-require('database/WorkShopPhone.php');
-require('models/Model.php');
+require_once('database/WorkShopPhone.php');
+require_once('models/Model.php');
 Class WorkShopPhoneModel extends Model{
 	private $id;
 	private $lada;

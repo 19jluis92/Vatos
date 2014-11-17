@@ -1,6 +1,6 @@
 <?php
-require('database/Department.php');
-require('models/Model.php');
+require_once('database/Department.php');
+require_once('models/Model.php');
 Class DepartmentsModel extends Model{
 	private $id;
 	private $name;

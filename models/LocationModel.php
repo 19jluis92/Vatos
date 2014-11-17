@@ -1,6 +1,6 @@
 <?php
-require('database/Location.php');
-require('models/Model.php');
+require_once('database/Location.php');
+require_once('models/Model.php');
 Class LocationModel extends Model{
 	private $id;
 	private $name;

@@ -1,6 +1,6 @@
 <?php
-require ('database/Color.php');
-require('models/Model.php');
+require_once('database/Color.php');
+require_once('models/Model.php');
 Class ColorsModel extends Model{
 	private $id;
 	private $name;

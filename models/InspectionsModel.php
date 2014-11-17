@@ -1,6 +1,6 @@
 <?php
-require ('database/Inspection.php');
-require('models/Model.php');
+require_once('database/Inspection.php');
+require_once('models/Model.php');
 Class InspectionsModel extends Model{
 	private $id;
 	private $idService;

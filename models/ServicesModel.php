@@ -1,6 +1,6 @@
 <?php
-require ('database/Service.php');
-require('models/Model.php');
+require_once('database/Service.php');
+require_once ('models/Model.php');
 Class ServicesModel extends Model{
 	private $id;
 	private $startDate;

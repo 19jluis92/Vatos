@@ -1,6 +1,6 @@
 <?php
-require('database/CarType.php');
-require('models/Model.php');
+require_once('database/CarType.php');
+require_once('models/Model.php');
 Class CarTypesModel extends Model{
 	private $id;
 	private $name;

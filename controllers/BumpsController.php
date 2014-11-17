@@ -2,7 +2,9 @@
 require('controllers/Controller.php');
 class BumpsController extends Controller {
 	private $model;
-	
+	private $pieces;
+	private $severities;
+	private $inspections;
 
 	/**
 	*Default constructor , include and create the model
@@ -115,7 +117,6 @@ class BumpsController extends Controller {
 			if($result)
 			{
 				unset($postError);
-				var_dump($result);
 				header("Location: index.php?controller=Bump&view=details&id=$result->id");
 				//$this->all();
 			}
@@ -127,8 +128,11 @@ class BumpsController extends Controller {
 
 		} 
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
-			if(isset($name))
-				$this->smarty->assign('name',$name);
+			$this->loadProperties();
+			var_dump($this->toAssociativeArray($this->severities->all(),'id','name'));
+			$this->smarty->assign('pieces',$this->toAssociativeArray($this->pieces->all()));
+			$this->smarty->assign('severities',$this->toAssociativeArray($this->severities->all()));
+			$this->smarty->assign('inspections',$this->toAssociativeArray($this->inspections->all()));
 			$this->smarty->display('./views/Bump/add.tpl');
 		}
 	}
@@ -159,13 +163,16 @@ class BumpsController extends Controller {
 			}
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$this->loadProperties();
 			$id = $this->validateNumber($_GET['id']);
 			$bump = $this->model->details($id);
 		//select Succesfull
 			if($bump != NULL)
 			{
-			//Load view
-				$this->smarty->assign('bump',$bump);
+
+				$this->smarty->assign('pieces',$this->toAssociativeArray($this->pieces->all()));
+				$this->smarty->assign('severities',$this->toAssociativeArray($this->severities->all()));
+				$this->smarty->assign('inspections',$this->toAssociativeArray($this->inspections->all()));
 				$this->smarty->display('./views/Bump/edit.tpl');
 			}
 			else
@@ -196,6 +203,16 @@ class BumpsController extends Controller {
 		{
 			require('views/Error.html');
 		}
+	}
+
+
+	private function loadProperties(){
+		require('models/InspectionsModel.php');
+		$this->inspections = new InspectionsModel();
+		require('models/PiecesModel.php');
+		$this->pieces = new PiecesModel();
+		require('models/SeveritiesModel.php');
+		$this->severities = new SeveritiesModel();
 	}
 
 }

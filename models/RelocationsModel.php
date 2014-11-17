@@ -1,6 +1,6 @@
 <?php
-require('database/Relocation.php');
-require('models/Model.php');
+require_once('database/Relocation.php');
+require_once('models/Model.php');
 Class RelocationsModel extends Model{
 	private $id;
 	private $name;
