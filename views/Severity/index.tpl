@@ -5,14 +5,14 @@
 {block name=body}
 
 <div class="row">
-	<div class="actions columns large-2 medium-3">
-		<h3>Actions</h3>
-		<ul class="side-nav">
-			<li><a href="index.php?controller=Severity&view=create">New Severity</a></li>
+	<div class="actions col-md-2">
+		<h3>Acciones</h3>
+		<ul class="list-group">
+			<li><a class="list-group-item" href="index.php?controller=Severity&view=create">Nueva Severidad</a></li>
 		</ul>
 	</div>
-	<div class="severity index large-10 medium-9 columns">
-		<table cellpadding="0" cellspacing="0">
+	<div  class="col-md-10"
+		<table class="table" cellpadding="0" cellspacing="0">
 			<thead>
 				<tr>
 					<th><a href="/vatoscake/severity?sort=id&amp;direction=asc">Id</a></th>
@@ -27,12 +27,15 @@
 					<td>{$severity.id}</td>
 					<td>{$severity.name}</td>
 					<td class="actions">
-						<a href="index.php?controller=Severity&view=details&id={$severity.id}">View</a>				
-						<a href="index.php?controller=Severity&view=edit&id={$severity.id}">Edit</a>		
+					<div class="btn-group" role="group" aria-label="...">
+					<a class="btn btn-default" href="index.php?controller=Severity&view=details&id={$severity.id}">Ver</a>				
+						<a  class="btn btn-default" href="index.php?controller=Severity&view=edit&id={$severity.id}">Editar</a>		
 						<form action="index.php?controller=Severity&view=delete&id={$severity.id}" name="post_severity_{$severity.id}" style="display:none;" method="post">
 							<input type="hidden" name="_method" value="POST">
 						</form>
-						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_severity_{$severity.id}.submit(); } event.returnValue = false; return false;">Delete</a>
+						<a class="btn btn-default"  href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_severity_{$severity.id}.submit(); } event.returnValue = false; return false;">Eliminar</a>
+					</div>
+						
 					</td>
 				</tr>
 			</tbody>
