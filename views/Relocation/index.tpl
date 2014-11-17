@@ -1,38 +1,39 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}My Page Title{/block}
+{block name=title}Relocaciones{/block}
+{block name=pageheader}Relocaciones{/block}
 {block name=head}
 {/block}
 {block name=body}
 <div class="row">
-	<div class="actions columns large-2 medium-3">
-		<h3>Actions</h3>
-		<ul class="side-nav">
-			<li><a href="index.php?controller=Relocation&view=create">New Relocation</a></li>
-		</ul>
-	</div>
-	<div class="Bump index large-10 medium-9 columns">
-		<table cellpadding="0" cellspacing="0">
+	<div class="actions col-md-2">
+      <h3>Acciones</h3>
+      <ul class="list-group">
+         <li><a class="list-group-item" href="index.php?controller=Relocation&view=create">Nueva Relocacion</a></li>
+      </ul>
+   </div>
+	<div class="col-md-10">
+		<table class="table" cellpadding="0" cellspacing="0">
 			<thead>
 				<tr>
 					<th>
 						<a href="index.php?controller=Relocation&amp;sort=id&amp;direction=asc">Id</a>
 					</th>
 					<th>
-						<a href="index.php?controller=Relocation&amp;sort=relocationDate&amp;direction=asc">relocationDate</a>
+						<a href="index.php?controller=Relocation&amp;sort=relocationDate&amp;direction=asc">Fecha de Relocacion</a>
 					</th>
 					<th>
-						<a href="index.php?controller=Relocation&amp;sort=idEmployee&amp;direction=asc">idEmployee</a>
+						<a href="index.php?controller=Relocation&amp;sort=idEmployee&amp;direction=asc">id Empleado</a>
 					</th>
 					<th>
-						<a href="index.php?controller=Relocation&amp;sort=reason&amp;direction=asc">reason</a>
+						<a href="index.php?controller=Relocation&amp;sort=reason&amp;direction=asc">Razon</a>
 					</th>
 					<th>
-						<a href="index.php?controller=Relocation&amp;sort=idDepartment&amp;direction=asc">idDepartment</a>
+						<a href="index.php?controller=Relocation&amp;sort=idDepartment&amp;direction=asc">id Departmento</a>
 					</th>
 					<th>
-						<a href="index.php?controller=Relocation&amp;sort=idService&amp;direction=asc">idService</a>
+						<a href="index.php?controller=Relocation&amp;sort=idService&amp;direction=asc">id Servicio</a>
 					</th>
-					<th class="actions">Actions</th>
+					<th class="actions">Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -46,12 +47,12 @@
 					<td>{$user.idDepartment}</td>
 					<td>{$user.idService}</td>
 					<td class="actions">
-						<a href="index.php?controller=Relocation&view=details&id={$user.id}">View</a>				
-						<a href="index.php?controller=Relocation&view=edit&id={$user.id}">Edit</a>		
+						<a href="index.php?controller=Relocation&view=details&id={$user.id}">Mostrar</a>				
+						<a href="index.php?controller=Relocation&view=edit&id={$user.id}">Editar</a>		
 						<form action="index.php?controller=Relocation&view=delete&id={$user.id}" name="post_State_{$user.id}" style="display:none;" method="POST">
 							<input type="hidden" name="_method" value="POST">
 						</form>
-						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $user.id?&quot;)) { document.post_Relocation_{$user.id}.submit(); } event.returnValue = false; return false;">Delete</a>
+						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $user.id?&quot;)) { document.post_Relocation_{$user.id}.submit(); } event.returnValue = false; return false;">Eliminar</a>
 					</td>
 				</tr>
 			</tbody>
@@ -59,7 +60,7 @@
 		</table>
 		<div class="paginator">
 			<ul class="pagination">
-				<li class="prev disabled"><a href="">&lt; previous</a></li><li class="next disabled"><a href="">next &gt;</a></li>		</ul>
+				<li class="prev disabled"><a href="">&lt; Anterior</a></li><li class="next disabled"><a href="">Siguiente &gt;</a></li>		</ul>
 				<p>1 of 1</p>
 			</div>
 		</div>

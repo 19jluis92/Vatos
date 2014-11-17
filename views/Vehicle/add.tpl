@@ -22,17 +22,16 @@
                   Agregar Vehiculo
                </legend>
 
-               <div class="row">
+              <div class="row">
                 <div class="col-md-8">
                   <label for="name" class="input-group-addon">Nombre</label>
                   <input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
-
-               </div>
-               <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
                   <label for="vin" class="input-group-addon">Vin</label>
                   <input type="text" name="vin" required="required" class="form-control" maxlength="45" id="vin" placeholder="VIN">
-               </div>  
-            </div>
+                </div>  
+              </div>
             <br />
 
             <div class="row">
