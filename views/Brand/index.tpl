@@ -22,7 +22,6 @@
 			</thead>
 			<tbody>
 				{foreach item=brand from=$brands}
-
 				<tr>
 					<td>{$brand.id}</td>
 					<td>{$brand.name}</td>
@@ -37,8 +36,8 @@
 						</div>
 					</td>
 				</tr>
+				{/foreach}
 			</tbody>
-			{/foreach}
 		</table>
 		<div class="paginator">
 			<ul class="pagination">

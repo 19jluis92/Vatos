@@ -1,11 +1,11 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}Agregar Marca{/block}
+{block name=title}Editar Marca{/block}
 {block name=pageheader}Marcas{/block}
 {block name=head}
 {/block}
 {block name=body}
 <div class="container-fluid">
-	<div class="row ">
+	<div class="row">
 		<div class="actions col-md-2">
 			<h3>Actions</h3>
 			<ul class="list-group">
