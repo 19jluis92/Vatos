@@ -32,7 +32,7 @@
                   <input type="text" name="vin" required="required" class="form-control" maxlength="45" id="vin" placeholder="VIN">
                 </div>  
               </div>
-            <br />
+              <br />
 
             <div class="row">
                <div class="col-md-6">

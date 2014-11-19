@@ -77,6 +77,7 @@ class db{
 			$new_arr[$newkey] = $value;
 
 		}*/
+		echo 'here';
 		$keys = implode(',', array_keys(get_object_vars($data)));
 		//$this->name = $this->db_driver->escape_string($name);
 		$values = implode("','", array_values(get_object_vars($data)));

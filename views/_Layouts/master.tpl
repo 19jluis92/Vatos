@@ -151,7 +151,7 @@
                         </ul>
                     </div>
                   </li>
-                  <li><a href="#" data-dropdown="true">Inspaccion</a>
+                  <li><a href="#" data-dropdown="true">Inspeccion</a>
                     <div class="inner-side-bar">
                         <ul>
                           <li><a href="index.php?controller=inspection" >Mostrar Inspecciones</a></li>
@@ -175,7 +175,7 @@
                         </ul>
                     </div>
                   </li>
-                  <li><a href="index.php?controller=severity" data-dropdown="true">Severidad</a>
+                  <li><a href="#" data-dropdown="true">Severidad</a>
                   <div class="inner-side-bar">
                         <ul>
                           <li><a href="index.php?controller=severity" >Mostrar Severidades</a></li>

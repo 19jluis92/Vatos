@@ -74,7 +74,8 @@ class BrandController extends Controller {
 				$this->smarty->display('./views/error.tpl');
 			}	
 		}
-		else{
+		else
+		{
 			$this->smarty->display('./views/permissions.tpl');
 		}
 		

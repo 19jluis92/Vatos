@@ -26,18 +26,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				{foreach item=user from=$users}
+				{foreach item=country from=$Countrys}
 
 				<tr>
-					<td>{$user.id}</td>
-					<td>{$user.name}</td>
+					<td>{$country.id}</td>
+					<td>{$country.name}</td>
 					<td class="actions">
-						<a href="index.php?controller=Country&view=details&id={$user.id}">View</a>				
-						<a href="index.php?controller=Country&view=edit&id={$user.id}">Edit</a>		
-						<form action="index.php?controller=Country&view=delete&id={$user.id}" name="post_user_{$user.id}" style="display:none;" method="POST">
+						<a href="index.php?controller=Country&view=details&id={$country.id}">View</a>				
+						<a href="index.php?controller=Country&view=edit&id={$country.id}">Edit</a>		
+						<form action="index.php?controller=Country&view=delete&id={$country.id}" name="post_user_{$country.id}" style="display:none;" method="POST">
 							<input type="hidden" name="_method" value="POST">
 						</form>
-						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $user.id?&quot;)) { document.post_Country_{$user.id}.submit(); } event.returnValue = false; return false;">Delete</a>
+						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $country.id?&quot;)) { document.post_Country_{$country.id}.submit(); } event.returnValue = false; return false;">Delete</a>
 					</td>
 				</tr>
 			</tbody>

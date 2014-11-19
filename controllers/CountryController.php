@@ -58,7 +58,8 @@ class CountryController extends Controller {
 		
 		//get all the Country
 
-		$result = $this->model->all();	
+		$result = $this->model->all();
+		$this->smarty->assign('countrys',$result);
 		//Query Succesfull
 		if(isset($result))
 		{
@@ -67,7 +68,7 @@ class CountryController extends Controller {
 			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
 				$this->smarty->assign('deleted',true);
 			
-			$this->smarty->assign('users',$result);
+			$this->smarty->assign('countrys',$result);
 			$this->smarty->display('./views/Country/index.tpl');
 		}
 		else
