@@ -143,13 +143,14 @@ class BumpsController extends Controller {
 	*/
 	private function edit()
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT')
+		{
 			$id = $this->validateNumber($_GET['id']);
 			$idPiece = $this->validateNumber($_POST['idPiece']);
 			$idSeverity = $this->validateNumber($_POST['idSeverity']);
 			$idInspection = $this->validateNumber($_POST['idInspection']);
 			$result = $this->model->edit($id,$idPiece , $idSeverity, $idInspection);	
-		//Update Succesfull
+			//Update Succesfull
 			if($result)
 			{
 				unset($postError);

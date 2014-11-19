@@ -1,5 +1,6 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}My Page Title{/block}
+{block name=title}Agregar Usuario{/block}
+{block name=pageheader}Usuario{/block}
 {block name=head}
 {/block}
 {block name=body}
@@ -13,17 +14,23 @@
 	</div>
 	<div class="brand col-md-10">
 		<form method="post" accept-charset="utf-8" action="index.php?controller=User&view=create" class="form-horizontal">
-		<div style="display:none;"><input type="hidden" name="_method" value="POST">
+		<div style="display:none;">
+         <input type="hidden" name="_method" value="POST">
 			</div>
 			<fieldset>
 				<legend>Agregar Usuario</legend>
 				<div class="form-group input-group">
-					<label for="id" class="input-group-addon">Id User</label>
-					<input type="number" name="idPiece" required="required" id="idpiece" placeholder="Id" class="form-control"></div><div class="input number required">
-					<label for="email" class="input-group-addon">Email</label>
-					<input type="text" name="email" required="required" id="email" placeholder="Email" class="form-control"></div><div class="input number required">
-					<label for="password" class="input-group-addon">Password</label>
-					<input type="password" name="password" required="required" id="password" placeholder="Password" class="form-control"></div>
+					<div class="row">
+               	<div class="col-md-8">
+						<label for="email" class="input-group-addon">Email</label>
+						<input type="text" name="email" required="required" id="email" placeholder="Email" class="form-control"></div><div class="input number required">
+                </div>
+                <div class="col-md-4">
+						<label for="password" class="input-group-addon">Password</label>
+						<input type="password" name="password" required="required" id="password" placeholder="Password" class="form-control"></div>
+                </div>  
+              </div>
+              <br />
 				</fieldset>
-				<button class="btn btn-default" type="submit">Submit</button></form></div>
+				<button class="btn btn-default pull-right" type="submit">Submit</button></form></div>
 				{/block}

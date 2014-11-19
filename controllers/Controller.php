@@ -96,7 +96,7 @@ class Controller{
 		// Run the preg_match() function on regex against the email address
 		if (preg_match($regex, $data))
 		{
-			return true;
+			return $data;
 		}
 		else 
 		{ 
@@ -114,9 +114,9 @@ class Controller{
 		if(!isset($data))
 			return false;
 		$regex = '/^[a-z\d_]{4,15}$/i ';
-		if (preg_match($rege, $dat))
+		if (preg_match($regex, $data))
 		{
-			return true;
+			return $data;
 		}
 
 		return false;

@@ -21,7 +21,7 @@
 						<a href="index.php?controller=user&amp;sort=email&amp;direction=asc">Email</a>
 					</th>
 					<th>
-						<a href="index.php?controller=user&amp;sort=Password&amp;direction=asc">Password</a>
+						<a href="index.php?controller=user&amp;sort=Password&amp;direction=asc">Contraseña</a>
 					</th>
 					<th class="actions">Acciones</th>
 				</tr>

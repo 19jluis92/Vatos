@@ -2,6 +2,7 @@
 require_once('database/User.php');
 require_once('models/Model.php'); 
 class UsersModel extends Model{
+	private $id;
 	private $email;
 	private $password;
 
@@ -9,17 +10,47 @@ class UsersModel extends Model{
 		parent::__construct();
 	}
 	/**
+	*method for list all Users
+	* @return array array of Users 
+	*/	
+	function all(){
+		//get all elements (set the $elements variable with a states array)
+		return $this->db->all('user');
+	}
+	/**
+	*method for show  User details
+	*@param string User
+	* @return bool transaction result
+	*/
+	function details($id)
+	{
+		if($result = $this->db->details('user', $id,NULL))
+		{
+			$user = new User($result['email'], $result['password'],$result['id']);
+			return $user;
+		}
+		else
+		{
+			echo $result;
+			return NULL;
+		}
+		//delete element using the given $id
+		return true;
+	}
+	/**
 	* @param string $email
 	* @param string $password
 	*/
 	function create($email, $password)
-	{
+	{	
 		global $db;
-		$user = new User($email,$password);
-		if($result = $db->insert('user' , $user,NULL))
-			return true;
-		else{
-			echo $result;
+		$user = new User($email, $password);
+		if($result = $db->insert('user', $user,NULL))
+		{
+			return $result;
+		}
+		else
+		{
 			return false;
 		}
 	}
@@ -28,9 +59,8 @@ class UsersModel extends Model{
 	* @param string $email
 	* @param string $password
 	*/
-	function edit($id,$email,$password){
-
-		
+	function edit($id,$email,$password)
+	{		
 		$user = new User($email,$password);
 		$user->id = $id;
 		if($result = $this->db->update('user' , $user,NULL))
@@ -46,10 +76,10 @@ class UsersModel extends Model{
 	* @return bool transaction result
 	*/
 	function delete($id){
-		if($result = $this->db->delete('user' , $id,NULL))
+		if($result = $this->db->delete('user', $id,NULL))
 			return true;
-		else{
-			echo $result;
+		else
+		{
 			return false;
 		}
 		//delete element using the given $id
@@ -57,29 +87,7 @@ class UsersModel extends Model{
 
 	}
 
-	function index(){
-		$elements = $this->db->all('user');
-		//get all elements (set the $elements variable with a states array)
-		return $elements;
-	}
 
-	function details($id){
-
-		
-		if($result = $this->db->details('user' , $id,NULL))
-			{
-			$user = new User($result['email'],$result['password']);
-			/*opcionales son de prueba*/
-			//var_dump($user);
-			return $user;
-		}
-		else{
-			echo $result;
-			return NULL;
-		}
-		//delete element using the given $id
-		return true;
-	}
 
 	function authentication($name,$pass){
 		var_dump($name);

@@ -23,32 +23,26 @@
 		
 	</ul>
 	
-</div>
-<div  class="brand col-md-10">
-	<form method="post"  class="form-horizontal"  accept-charset="utf-8" action="index.php?controller=user&view=edit&id={$user->id}">
-	<div style="display:none;"><input type="hidden" name="_method" value="PUT"></div>	
-		<fieldset>
-			<legend>Editar Usuario</legend>
-			<label  class="input-group-addon" for="idpiece">Id user</label>
-			<input type="number" name="id" required="required" id="id" value="{$user->id}" class="form-control">
+	</div>
+		<div  class="brand col-md-10">
+			<form method="post"  class="form-horizontal"  accept-charset="utf-8" action="index.php?controller=user&view=edit&id={$user->id}">
+				<div style="display:none;"><input type="hidden" name="_method" value="PUT"></div>	
+				<fieldset>
+					<legend>Editar Usuario</legend>
+					<div class="input number required">
+						<label  class="input-group-addon" for="email">Email</label>
+						<input type="text" name="email" required="required" id="email" value="{$user->email}"   class="form-control" style="width: 83%;">
+					</div>
+					</br>
+					<div class="input number required">
+						<label  class="input-group-addon" for="password">password</label>
+						<input type="password" name="password" required="required" id="password" value="{$user->password}" class="form-control" style="width: 83%;">
+					</div>	
+				</fieldset>
+				<button class="btn btn-default pull-right" type="submit">Enviar</button>
+			</form>
 		</div>
-		</br>
-		<div class="input number required">
-			<label  class="input-group-addon" for="email">Email</label>
-			<input type="text" name="email" required="required" id="email" value="{$user->email}"   class="form-control" style="width: 83%;">
-		</div>
-		</br>
-		<div class="input number required">
-			<label  class="input-group-addon" for="password">password</label>
-			<input type="password" name="password" required="required" id="password" value="{$user->password}" class="form-control" style="width: 83%;">
-		</div>	
-	</fieldset>
-	<button  class="btn btn-default" type="submit">Submit
-	</button>
-</form>
-</div>
-
-</div>
+	</div>
 </div>
 
 {/block}
