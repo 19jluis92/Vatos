@@ -19,7 +19,7 @@
 				
 				<div class="input number required">
 					<label for="name" class="input-group-addon">Nombre</label>
-					<input type="text" name="Name" required="required" id="Name" class="form-control" >
+					<input type="text" name="name" required="required" id="name" class="form-control" >
 				</div>
 				<div class="input number required">
 					<label for="lastName" class="input-group-addon">Apellido</label>
@@ -37,12 +37,16 @@
 					<input type="text" name="address" required="required" id="address" class="form-control" >
 				</div>
 				<div class="input number required">
+					<label for="NSS" class="input-group-addon">NSS</label>
+					<input type="text" name="nss" required="required" id="nss" class="form-control" >
+				</div>
+				<div class="input number required">
 					<label for="phone" class="input-group-addon">phone</label>
 					<input type="phone" name="phone" required="required" id="phone" class="form-control" >
 				</div>
 				<div class="input number required">
 					<label for="cellphone" class="input-group-addon">Cell phone</label>
-					<input type="phone" name="cellphone" required="required" id="cellphone" class="form-control" >
+					<input type="phone" name="cellPhone" required="required" id="cellPhone" class="form-control" >
 				</div>
 				<div class="input number required">
 					<label for="idUser" class="input-group-addon">Usuario</label>

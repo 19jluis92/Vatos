@@ -119,7 +119,7 @@ class EmployeesController extends Controller
 		if($result)
 		{
 			//Load view
-			require('views/Employee/add.tpl');
+				header("Location: index.php?controller=employee");
 		}
 		else
 		{
@@ -185,6 +185,10 @@ class EmployeesController extends Controller
 			if($user != NULL)
 			{
 			//Load view
+				$this->loadProperties();
+				$this->smarty->assign('City',$this->toAssociativeArray($this->City->all()));
+				$this->smarty->assign('Users',$this->toAssociativeArray($this->Users->all()));
+				$this->smarty->assign('CarWorkShop',$this->toAssociativeArray($this->CarWorkShop->all()));
 				$this->smarty->assign('user',$user);
 				$this->smarty->display('./views/Employee/edit.tpl');
 			}

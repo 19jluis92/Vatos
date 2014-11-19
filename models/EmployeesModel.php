@@ -94,7 +94,7 @@ class EmployeesModel  extends Model
 	function details($id){
 		if($result = $this->db->details('employee' , $id,NULL))
 			{
-			$employee = new Employee($result['name'],$result['lastName'],$result['nss'],$result['phone'],$result['idCity'],$result['idUser'],$result['idCarWorkShop']);
+			$employee = new Employee($result['id'],$result['name'],$result['lastName'],$result['nss'],$result['address'],$result['phone'],$result['cellphone'],$result['idCity'],$result['idUser'],$result['idCarWorkShop']);
 			/*opcionales son de prueba*/
 			var_dump($employee);
 			return $employee;
