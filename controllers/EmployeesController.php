@@ -130,6 +130,8 @@ class EmployeesController extends Controller
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			if(isset($name))
 				$this->smarty->assign('name',$name);
+			
+			$this->loadProperties();
 			$this->smarty->display('./views/Employee/add.tpl');
 		}
 	}
@@ -215,7 +217,16 @@ class EmployeesController extends Controller
 			require('views/Error.html');
 		}	
 	}
-
+private function loadProperties(){
+		require('models/CitiesModel.php');
+		$this->City = new CitiesModel();
+		require('models/UsersModel.php');
+		$this->Users = new UsersModel();
+		require('models/CarWorkShopModel.php');
+		$this->CarWorkShop = new CarWorkShopModel();
+		
+		
+	}
 }
 
 ?>

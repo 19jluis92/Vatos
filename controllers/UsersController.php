@@ -42,6 +42,11 @@ class UsersController extends Controller{
 						//Validate User and permissions
 			$this->delete();		
 			break;
+
+			case 'ajax':
+
+				echo json_encode($this->model->index());
+			break;
 			default:
 			break;
 		}
@@ -49,7 +54,7 @@ class UsersController extends Controller{
 	private function create()
 	{
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
-//Validate Variables
+			//Validate Variables
 			$email   = $this->validateEmail($_POST['email']);
 			$password = $this->validateText($_POST['password']);
 			$result = $this->model->create($email, $password);

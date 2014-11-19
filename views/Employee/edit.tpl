@@ -30,8 +30,7 @@
 
 			<legend>Edit employee</legend>
 		<div class="input number required">
-					<label for="id" class="input-group-addon">Id User</label>
-					<input type="number" name="id" required="required" id="id" class="form-control" maxlength="45">
+					
 				</div>
 				<div class="input number required">
 					<label for="name" class="input-group-addon">Name</label>
