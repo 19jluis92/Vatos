@@ -45,7 +45,7 @@ class UsersController extends Controller{
 
 			case 'ajax':
 
-				echo json_encode($this->model->index());
+				echo json_encode($this->model->all());
 			break;
 			default:
 			break;
