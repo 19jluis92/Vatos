@@ -24,7 +24,7 @@ class PiecesController extends Controller {
 		switch($view)
 		{
 			case 'index':case 'list':
-						/a/Validate User and permissions
+						//Validate User and permissions
 			$this->all();	
 			break;
 			case 'details':
