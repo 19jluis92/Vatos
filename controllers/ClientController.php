@@ -1,7 +1,6 @@
 <?php
-require('controllers/controller.php');
-class ClientController extends Controller
-{
+require('controllers/Controller.php');
+class ClientController extends Controller{
 	private $model;
 	
 	function __construct()
@@ -17,8 +16,8 @@ class ClientController extends Controller
 		switch($view)
 		{
 			case 'index':
-			            $this->index();
-			break;
+            $this->all();
+				break;
 			case 'details':
 						//Validate User and permissions
 						$this->details();
@@ -43,12 +42,12 @@ class ClientController extends Controller
 	* Show all client in database
 	* @return null, view rendered
 	*/
-	private function index()
+	private function all()
 	{
-		$result = $this->model->index();
+		$result = $this->model->all();
+		$this->smarty->assign('clients',$result);
 		if(isset($result))
 		{
-			$this->smarty->assign('clients',$result);
 			//Load view
 			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
 				$this->smarty->assign('deleted',true);
@@ -71,13 +70,12 @@ class ClientController extends Controller
 	{
 		//Validate Variables
 		$id = $this->validateNumber($_GET['id']);
-		$result = $this->model->details($id);
-		
-		if(isset($result))
+		$client = $this->model->details($id);
+		if($client != NULL)
 		{
 			//Load view
 			//Load view
-			$this->smarty->assign('user',$result);
+			$this->smarty->assign('client',$client);
 			$this->smarty->display('./views/Client/view.tpl');
 		}
 		else
@@ -135,36 +133,52 @@ class ClientController extends Controller
 	* @param string $name
 	* @param string $lastName
 	* @param string $rfc
-	* @param string $clientCol
-	* @param string $clientCol1
-	* @param string $number
-	* @param string $lada
-	* @param string $area
 	* @return null, view rendered
 	*/
 	private function edit()
 	{
-		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$name   		 = $this->validateText($_POST['name']);
-		$lastName 		 = $this->validateNumber($_POST['lastName']);
-		$rfc		 = $this->validateNumber($_POST['rfc']);
-		$clientCol		 = $this->validateNumber($_POST['clientCol']);
-		$clientCol1  		 = $this->validateNumber($_POST['clientCol1']);
-		$number  = $this->validateText($_POST['number']);
-		$lada	     = $this->validateNumber($_POST['lada']);
-		$area    = $this->validateNumber($_POST['area']);
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT')
+		{
+			echo 'here';
+			//Validate Variables
+			$id = $this->validateNumber($_GET['id']);
+			$name  = $this->validateText($_POST['name']);
+			$lastName = $this->validateNumber($_POST['lastName']);
+			$rfc = $this->validateNumber($_POST['rfc']);
+			$email = $this->validateEmail($_POST['email']);
+			$address = $this->validateEmail($_POST['address']);
 
-		$result = $this->model->edit($id,$name,$lastName,$rfc,$clientCol,$clientCol1);
-		if($result)
-		{
-			//Load view
-			require('views/Client/Edited.php');
+			$result = $this->model->edit($id,$name,$lastName,$rfc,$email, $address);
+			if($result)
+			{
+				//Load view
+				unset($postError);
+				header("Location: index.php?controller=Client");
+			}
+			else
+			{
+				//Ohh well... :(
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
 		}
-		else
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
 		{
-			//Ohh well... :(
-			require('views/Error.html');
+			$id = $this->validateNumber($_GET['id']);
+			$client = $this->model->details($id);
+
+			//select Succesfull
+			if($client != NULL)
+			{
+				var_dump($client);
+				$this->smarty->assign('client',$client);
+				$this->smarty->display('./views/Client/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
 		}
 	}
 	/**
@@ -174,13 +188,13 @@ class ClientController extends Controller
 	*/
 	private function delete()
 	{
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/Client/Deleted.php');
+			header("Location: index.php?controller=Client&deleted=true");
 		}
 		else
 		{

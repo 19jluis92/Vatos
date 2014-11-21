@@ -6,6 +6,7 @@ require_once('models/Model.php');
 */
 class ClientModel extends Model
 {
+	private $id;
 	private $name;
 	private $lastName;
 	private $rfc;
@@ -15,8 +16,11 @@ class ClientModel extends Model
 	function __construct(){
 		parent::__construct();
 	}
-	
-	function index()
+	/**
+	*method for list all bumps
+	* @return array array of bumps 
+	*/
+	function all()
 	{
 		//Get all elements (set the $elements variable with a states array)
 		return $this->db->all('client');
@@ -25,8 +29,8 @@ class ClientModel extends Model
 	function details($id)
 	{
 		if($result = $this->db->details('client' , $id,NULL))
-		{
-			$client = new Client($result['name'],$result['lastName'],$result['rfc'],$result['email'],$result['address']);
+		{	
+			$client = new Client($result['Name'],$result['LastName'],$result['RFC'],$result['email'],$result['address'], $result['id']);
 			return $client;
 		}
 		else
@@ -57,27 +61,31 @@ class ClientModel extends Model
 		}
 
 	}
+
 	function edit($id,$name,$lastName,$rfc,$email,$address)
 	{
-		$client = new Client($name,$lastName,$rfc,$email,$address);
-		$client->id = $id;
+		$client = new Client($name,$lastName,$rfc,$email,$address, $id);
 		if($result = $this->db->update('client' , $client,NULL))
-			return true;
-		else{
-			echo $result;
+		{
+			return $client;
+		}
+		else
+		{
 			return false;
 		}
 	}
+
 	function delete($id)
 	{
 		if($result = $this->db->delete('client' , $id,NULL))
+		{
 			return true;
-		else{
+		}
+		else
+		{
 			echo $result;
 			return false;
 		}
-		//delete element using the given $id
-		return true;
 	}
 }
 ?>

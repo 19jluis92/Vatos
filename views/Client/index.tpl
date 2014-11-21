@@ -41,15 +41,15 @@
 
 				<tr>
 					<td>{$client.id}</td>
-					<td>{$client.name}</td>
+					<td>{$client.Name}</td>
 					<td>{$client.LastName}</td>
-					<td>{$client.rfc}</td>
+					<td>{$client.RFC}</td>
 					<td>{$client.email}</td>
 					<td>{$client.address}</td>
 					<td class="actions">
 					<div class="btn-group" role="group" aria-label="...">
-					<a class="btn btn-default"  href="index.php?controller=client&view=details&id={$client.id}">View</a>				
-						<a class="btn btn-default" href="index.php?controller=client&view=edit&id={$client.id}">Edit</a>		
+					<a class="btn btn-default"  href="index.php?controller=client&view=details&id={$client.id}">View</a>	
+						<a class="btn btn-default"  href="index.php?controller=client&view=edit&id={$client.id}">Editar</a>			
 						<form action="index.php?controller=client&view=delete&id={$client.id}" name="post_client_{$client.id}" style="display:none;" method="POST">
 							<input type="hidden" name="_method" value="POST">
 						</form>
