@@ -28,7 +28,10 @@
 
             <div class="form-group input-group">
                <label for="idCity" class="input-group-addon">Id Ciudad</label>
-               <input type="text" name="idCity" required="required" class="form-control" maxlength="45" id="idCity" placeholder="Id Ciudad">
+                  <select name="idCity" required="required" class="form-control"id="idCity" placeholder="Id Ciudad">
+                   <option value=''>-- none --</option>
+                  {html_options options=$cities}
+            </select>
             </div>
 
          </fieldset>

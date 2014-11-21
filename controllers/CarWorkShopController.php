@@ -25,28 +25,28 @@ class CarWorkShopController extends Controller {
 		{
 			case 'index':case 'list':
 					//Validate User and permissions
-					$this->all();	
-					break;
+			$this->all();	
+			break;
 			case 'details':
 					//Validate User and permissions
-					$this->details();		
-					break;
+			$this->details();		
+			break;
 			case 'create':
 					//Validate User and permissions
 					//$this->validateSession() ? $this->create() : require('views/Error.html') ;
-					$this->create();
-					break;
+			$this->create();
+			break;
 			case 'edit':
 					//Validate User and permissions
 					//$this->validateSession() ? $this->edit() : require('views/Error.html') ;
-					$this->edit();
-					break;
+			$this->edit();
+			break;
 			case 'delete':
 					//Validate User and permissions
-					$this->validateSession() ? $this->delete() : require('views/Error.html') ;
-					break;
+			$this->validateSession() ? $this->delete() : require('views/Error.html') ;
+			break;
 			default:
-					break;
+			break;
 		}
 	}
 
@@ -112,29 +112,25 @@ class CarWorkShopController extends Controller {
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
 			//Validate Variables
-	      $email   = $this->validateEmail($_POST['email']);
-	      $password = $this->validateText($_POST['password']);
-	      $result = ($email && $password != 1) ? $this->model->create($email, $password) : 0 ;
+			$name = $this->validateText($_POST['name']);
+			$address = $this->validateText($_POST['address']);
+			$idCity = $this->validateNumber($_POST['idCity']);
+			$result = $this->model->create($name, $address,$idCity);	
 	      //Insert Succesful
-	      if($result)
-	      {
-	         //Load view
-	         echo 'mail';
-	         $message = 'Bienvenido Vato';
-	         $mail = new Mail($email, $message);
-	         $mail->send_mail();
-	         header("Location: index.php?controller=carworkshop&view=details&id=$result->id");
-	      }
-	      else
-	      {
-	         $postError = true;
+			if($result)
+			{
+	         	unset($postError);
+				header("Location: index.php?controller=carworkshop&view=details&id=$result->id");
+			}
+			else
+			{
+				$postError = true;
 				$this->smarty->assign('error',$result);
-	      }
+			}
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
-			if(isset($name))
-				$this->smarty->assign('name',$name);
-			echo 'here';
+			$this->loadProperties();
+			$this->smarty->assign('cities',$this->toAssociativeArray($this->cities->all()));
 			$this->smarty->display('./views/CarWorkShop/add.tpl');
 		}
 	}
@@ -154,7 +150,7 @@ class CarWorkShopController extends Controller {
 			$name = $this->validateText($_POST['name']);
 			$address = $this->validateText($_POST['address']);
 			$idCity = $this->validateNumber($_POST['idCity']);
-			$result = $this->model->edit($name, $address,$idCity);	
+			$result = $this->model->edit($id,$name, $address,$idCity);	
 			//Insert Succesfull
 			if($result)
 			{
@@ -207,6 +203,13 @@ class CarWorkShopController extends Controller {
 			require('views/Error.html');
 		}
 	}
+
+		private function loadProperties(){
+		require('models/CitiesModel.php');
+		$this->cities = new CitiesModel();
+		
+	}
+
 
 }
 

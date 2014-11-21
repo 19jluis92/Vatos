@@ -8,10 +8,10 @@ class Controller{
 		//require_once('../libs/Smarty.class.php');
 		require '/libs/Smarty.class.php';
 		$this->smarty = new Smarty();
-		$this->smarty->setTemplateDir('/views/');
-		$this->smarty->setCompileDir('/views_c/');
-		$this->smarty->setConfigDir('/configs/');
-		$this->smarty->setCacheDir('/cache/');
+		$this->smarty->setTemplateDir($_SERVER['DOCUMENT_ROOT'].'/views/');
+		$this->smarty->setCompileDir($_SERVER['DOCUMENT_ROOT'].'/views_c/');
+		$this->smarty->setConfigDir($_SERVER['DOCUMENT_ROOT'].'/configs/');
+		$this->smarty->setCacheDir($_SERVER['DOCUMENT_ROOT'].'/cache/');
 		//** un-comment the following line to show the debug console
 		$this->smarty->debugging = false;
 		$this->smarty->caching = false;
