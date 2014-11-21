@@ -272,7 +272,7 @@
           <script src="webroot/js/vendor/bootstrap.min.js"></script>
 
           <script src="webroot/js/main.js"></script>
-
+          <script src="webroot/js/ajax.js"></script>
           <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
           {literal}
           <script>

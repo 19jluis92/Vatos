@@ -92,7 +92,7 @@ class UsersModel extends Model{
 	function authentication($name,$pass){
 		var_dump($name);
 		var_dump($pass);
-		if($result = $this->db->GetUserByName('User' , $name,$pass))
+		if($result = $this->db->GetUserByName('user' , $name,$pass))
 			{
 			$user = new User($result['email'],$result['password']);
 			/*opcionales son de prueba*/

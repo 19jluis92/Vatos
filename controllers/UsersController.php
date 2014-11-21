@@ -12,25 +12,20 @@ class UsersController extends Controller{
 		require('models/UsersModel.php');
 		$this->model = new UsersModel();
 	}
-	/**
-	*Execute Actions based on the action selected from user in Query Args
-	*@return null
-	*/
+	
 	function run()
 	{
 		$view = isset($_GET['view'])?$_GET['view']:'index';
 		switch($view)
 		{
 			case 'index':case 'list':
-					if(true)			//Validate User and permissions
-					{
-						$this->all();
-					}
-					else
-					{
-						echo'sin session';
-					}
-					break;
+			if(true)			//Validate User and permissions
+			{$this->all();}
+			else{
+				echo'sin session';
+			}
+
+			break;
 			case 'details':
 						//Validate User and permissions
 			$this->details();		
@@ -47,58 +42,18 @@ class UsersController extends Controller{
 						//Validate User and permissions
 			$this->delete();		
 			break;
+
+			case 'ajax':
+
+				echo json_encode($this->model->all());
+			break;
 			default:
 			break;
 		}
 	}
-	/**
-	* Show all users in database
-	* @return null, view rendered
-	*/
-	private function all()
-	{
-		$result = $this->model->all();
-
-		if(isset($result))
-		{
-			$this->smarty->assign('users',$result);
-
-			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
-				$this->smarty->assign('deleted',true);
-			$this->smarty->display('./views/User/index.tpl');
-		}
-		else
-		{
-			//Ohh well... :(
-				$this->smarty->display('./views/error.tpl');
-		}
-	}
-	/**
-	* Show details of car given it's Id
-	* @param id
-	* @return null, view rendered
-	*/
-	private function details(){
-		$id = $this->validateNumber($_GET['id']);
-		$user = $this->model->details($id);
-		
-		if($user != NULL)
-		{
-			//Load view
-			//Load view
-			$this->smarty->assign('user',$user);
-			$this->smarty->display('./views/User/view.tpl');
-		}
-		else
-		{
-			//Ohh well... :(
-			$this->smarty->display('./views/error.tpl');
-		}
-	}
 	private function create()
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
-		{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 			//Validate Variables
 			$email   = $this->validateEmail($_POST['email']);
 			$password = $this->validateText($_POST['password']);
@@ -111,13 +66,11 @@ class UsersController extends Controller{
 				$message = 'Bienvenido Vato';
 				$mail = new Mail($email, $message);
 				$mail->send_mail();
-				unset($postError);
-				header("Location: index.php?controller=user&view=details&id=$result->id");
+				require('views/User/Created.php');
 			}
 			else
 			{
-				$postError = true;
-				$this->smarty->assign('error',$result);
+				require('views/Error.html');
 			}
 
 
@@ -130,20 +83,56 @@ class UsersController extends Controller{
 		
 	}
 	/**
+	*@param $id
+	*@param return null
+	**/
+	private function delete(){
+		$id = $this->validateNumber($_POST['id']);
+		$result = $this->model->delete($id);
+		if($result)
+		{
+			header("Location: index.php?controller=user&deleted=true");
+		}
+		else
+		{
+			require('views/Error.html');
+		}
+	}
+	/**
+	* Show details of car given it's Id
+	* @param id
+	* @return null, view rendered
+	*/
+	private function details(){
+		$id = $this->validateNumber($_GET['id']);
+		$result = $this->model->details($id);
+		
+		if(isset($result))
+		{
+			//Load view
+			//Load view
+			$this->smarty->assign('user',$result);
+			$this->smarty->display('./views/User/view.tpl');
+		}
+		else
+		{
+			//Ohh well... :(
+			$this->smarty->display('./views/error.tpl');
+		}
+	}
+	/**
 	* Update user
 	* @param email
 	* @param password
 	* @return null, view rendered
 	*/
-	private function edit()
-	{
+	private function edit(){
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 
-		$id = $this->validateText($_GET['id']);
+		$id = $this->validateText($_POST['id']);
 		$email = $this->validateText($_POST['email']);
 		$password = $this->validateText($_POST['password']);
 		$result = $this->model->edit($id,$email,$password);
-
 		if($result)
 			{
 				unset($postError);
@@ -173,20 +162,26 @@ class UsersController extends Controller{
 		}
 	}
 	/**
-	*@param $id
-	*@param return null
-	**/
-	private function delete()
-	{
-		$id = $this->validateNumber($_GET['id']);
-		$result = $this->model->delete($id);
-		if($result)
+	* Show all users in database
+	* @return null, view rendered
+	*/
+	private function all(){
+		$result = $this->model->index();
+
+		if(isset($result))
 		{
-			header("Location: index.php?controller=user&deleted=true");
+			//Load view
+			
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			
+			$this->smarty->assign('users',$result);
+			$this->smarty->display('./views/User/index.tpl');
 		}
 		else
 		{
-			$this->smarty->display('./views/error.tpl');
+			//Ohh well... :(
+				$this->smarty->display('./views/error.tpl');
 		}
 	}
 

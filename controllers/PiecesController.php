@@ -24,7 +24,7 @@ class PiecesController extends Controller {
 		switch($view)
 		{
 			case 'index':case 'list':
-						//Validate User and permissions
+						/a/Validate User and permissions
 			$this->all();	
 			break;
 			case 'details':
@@ -42,6 +42,10 @@ class PiecesController extends Controller {
 			case 'delete':
 						//Validate User and permissions
 			$this->delete();		
+			break;
+			case 'ajax':
+
+				echo json_encode($this->model->all());
 			break;
 			default:
 			break;

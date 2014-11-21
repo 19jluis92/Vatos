@@ -21,7 +21,7 @@
 						<a href="index.php?controller=employee&amp;sort=name&amp;direction=asc">Name</a>
 					</th>
 					<th>
-						<a href="index.php?controller=employee&amp;sort=lastname&amp;direction=asc">Last Name</a>
+						<a href="index.php?controller=employee&amp;sort=lastName&amp;direction=asc">Last Name</a>
 					</th>
 					<th>
 						<a href="index.php?controller=employee&amp;sort=nss&amp;direction=asc">nss</a>
@@ -53,7 +53,7 @@
 				<tr>
 					<td>{$user.id}</td>
 					<td>{$user.name}</td>
-					<td>{$user.lastname}</td>
+					<td>{$user.lastName}</td>
 					<td>{$user.nss}</td>
 					<td>{$user.address}</td>
 					<td>{$user.phone}</td>
