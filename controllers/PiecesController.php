@@ -2,8 +2,6 @@
 require('controllers/Controller.php');
 class PiecesController extends Controller {
 	private $model;
-	
-
 	/**
 	*Default constructor , include and create the model
 	*/
@@ -24,7 +22,7 @@ class PiecesController extends Controller {
 		switch($view)
 		{
 			case 'index':case 'list':
-						//a/Validate User and permissions
+						//Validate User and permissions
 			$this->all();	
 			break;
 			case 'details':
