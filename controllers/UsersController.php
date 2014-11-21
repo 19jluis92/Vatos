@@ -166,7 +166,7 @@ class UsersController extends Controller{
 	* @return null, view rendered
 	*/
 	private function all(){
-		$result = $this->model->index();
+		$result = $this->model->all();
 
 		if(isset($result))
 		{

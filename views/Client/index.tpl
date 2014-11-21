@@ -1,5 +1,5 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}My Page Title{/block}
+{block name=title}Clientes{/block}
 {block name=head}
 {/block}
 {block name=body}
@@ -18,53 +18,42 @@
 						<a href="index.php?controller=client&amp;sort=id&amp;direction=asc">Id</a>
 					</th>
 					<th>
-						<a href="index.php?controller=client&amp;sort=name&amp;direction=asc">Name</a>
+						<a href="index.php?controller=client&amp;sort=name&amp;direction=asc">Nombre</a>
 					</th>
 					<th>
-						<a href="index.php?controller=client&amp;sort=lastname&amp;direction=asc">Last Name</a>
+						<a href="index.php?controller=client&amp;sort=lastname&amp;direction=asc">Apellido</a>
 					</th>
 					<th>
-						<a href="index.php?controller=client&amp;sort=rfc&amp;direction=asc">rfc</a>
+						<a href="index.php?controller=client&amp;sort=rfc&amp;direction=asc">RFC</a>
 					</th>
 					<th>
-						<a href="index.php?controller=client&amp;sort=clientCol&amp;direction=asc">Colonia</a>
+						<a href="index.php?controller=client&amp;sort=email&amp;direction=asc">Email</a>
 					</th>
 					<th>
-						<a href="index.php?controller=client&amp;sort=clientCol1&amp;direction=asc">Colonia 2</a>
+						<a href="index.php?controller=client&amp;sort=address&amp;direction=asc">Direccion</a>
 					</th>
-					<th>
-						<a href="index.php?controller=client&amp;sort=phone&amp;direction=asc">phone</a>
 					</th>
-					<th>
-						<a href="index.php?controller=client&amp;sort=lada&amp;direction=asc">lada</a>
-					</th>
-					<th>
-						<a href="index.php?controller=client&amp;sort=area&amp;direction=asc">area</a>
-					</th>
-					<th class="actions">Actions</th>
+					<th class="actions">Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
-				{foreach item=user from=$users}
+				{foreach item=client from=$clients}
 
 				<tr>
-					<td>{$user.id}</td>
-					<td>{$user.name}</td>
-					<td>{$user.LastName}</td>
-					<td>{$user.rfc}</td>
-					<td>{$user.ClientCol}</td>
-					<td>{$user.ClientCol1}</td>
-					<td>{$user.phone}</td>
-					<td>{$user.lada}</td>
-					<td>{$user.area}</td>
+					<td>{$client.id}</td>
+					<td>{$client.Name}</td>
+					<td>{$client.LastName}</td>
+					<td>{$client.RFC}</td>
+					<td>{$client.email}</td>
+					<td>{$client.address}</td>
 					<td class="actions">
 					<div class="btn-group" role="group" aria-label="...">
-					<a class="btn btn-default"  href="index.php?controller=client&view=details&id={$user.id}">View</a>				
-						<a class="btn btn-default" href="index.php?controller=client&view=edit&id={$user.id}">Edit</a>		
-						<form action="index.php?controller=client&view=delete&id={$user.id}" name="post_user_{$user.id}" style="display:none;" method="POST">
+					<a class="btn btn-default"  href="index.php?controller=client&view=details&id={$client.id}">View</a>	
+						<a class="btn btn-default"  href="index.php?controller=client&view=edit&id={$client.id}">Editar</a>			
+						<form action="index.php?controller=client&view=delete&id={$client.id}" name="post_client_{$client.id}" style="display:none;" method="POST">
 							<input type="hidden" name="_method" value="POST">
 						</form>
-						<a class="btn btn-default" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_user_{$user.id}.submit(); } event.returnValue = false; return false;">Delete</a>
+						<a class="btn btn-default" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_client_{$client.id}.submit(); } event.returnValue = false; return false;">Delete</a>
 					</div>
 						
 					</td>

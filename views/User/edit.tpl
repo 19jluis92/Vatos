@@ -11,7 +11,6 @@
 			<li>
 				<form action="index.php?controller=user&view=delete&id={$user->id}" name="post_54684496c4fdf026147299" style="display:none;" method="post">
 					<input type="hidden" name="_method" value="POST">
-
 				</form>
 				<a  class="list-group-item" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_54684496c4fdf026147299.submit(); } event.returnValue = false; return false;">Eliminar
 				</a>

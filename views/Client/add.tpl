@@ -1,5 +1,5 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}My Page Title{/block}
+{block name=title}Clientes{/block}
 {block name=head}
 {/block}
 {block name=body}
@@ -12,47 +12,40 @@
 		</ul>
 	</div>
 	<div class="brand col-md-10">
-		<form method="post" accept-charset="utf-8" action="index.php?controller=client&view=create"  class="form-horizontal">
-		<div style="display:none;"><input type="hidden" name="_method" value="POST">
-			</div>
+		<form method="post" accept-charset="utf-8" action="index.php?controller=client&view=create">
 			<fieldset>
 				<legend>Agregar Cliente</legend>
-				<div class="input number required">
-					<label for="id" class="input-group-addon">Id Client</label>
-					<input type="number" name="id" required="required" id="id" class="form-control" maxlength="45">
-					</div>
-					<div class="input number required">
-					<label for="name" class="input-group-addon">Name</label>
-					<input type="text" name="name" required="required" id="name" class="form-control" maxlength="45">
-					</div>
-					<div class="input number required" >
-					<label for="lastName" class="input-group-addon">lastName</label>
-					<input type="text" name="lastName" required="required" id="lastName" class="form-control" maxlength="45">
-					</div>
-					<div class="input number required">
-					<label for="rfc" class="input-group-addon">rfc</label>
-					<input type="text" name="rfc" required="required" id="rfc" class="form-control" maxlength="45">
-					</div>
-					<div class="input number required">
-					<label for="clientCol" class="input-group-addon">Colonia</label>
-					<input type="text" name="clientCol" required="required" id="clientCol" class="form-control" maxlength="45">
-					</div>
-					<div class="input number required">
-					<label for="clientCol1" class="input-group-addon">Colonia</label>
-					<input type="text" name="clientCol1" required="required" id="clientCol1" class="form-control" maxlength="45">
-					</div>
-					<div class="input number required">
-					<label for="number" class="input-group-addon">Phone</label>
-					<input type="phone" name="number" required="required" id="number" class="form-control" maxlength="45">
-					</div>
-					<div class="input number required">
-					<label for="lada" class="input-group-addon">lada</label>
-					<input type="number" name="lada" required="required" id="lada" class="form-control" maxlength="45">
-					</div>
-					<div class="input number required">
-					<label for="area" class="input-group-addon">area</label>
-					<input type="text" name="area" required="required" id="area" class="form-control" maxlength="45">
-					</div>
+					<div class="row">
+	               <div class="col-md-6">
+	                	<label for="name" class="input-group-addon">Nombre</label>
+							<input type="text" name="name" required="required" id="name" class="form-control" maxlength="45" placeholder="Nombre">
+	               </div>
+	               <div class="col-md-6">
+							<label for="lastName" class="input-group-addon">Apellidos</label>
+							<input type="text" name="lastName" required="required" id="lastName" class="form-control" maxlength="45" placeholder="Apellidos">
+	               </div>  
+              	</div>
+               <br />
+               <div class="row">
+	              <div class="col-md-6">
+							<label for="rfc" class="input-group-addon">RFC</label>
+							<input type="text" name="rfc" required="required" id="rfc" class="form-control" maxlength="45" placeholder="RFC">
+	               </div>
+	               <div class="col-md-6">
+	                	<label for="email" class="input-group-addon">Correo Electronico</label>
+							<input type="text" name="email" required="required" id="email" class="form-control" maxlength="45" placeholder="Email">
+	               </div>
+	            </div>
+              <br />
+
+               <div class="row">
+
+	               <div class="col-md-12">
+	               	<label for="address" class="input-group-addon">Direccion</label>
+							<input type="text" name="address" required="required" id="address" class="form-control" maxlength="45" placeholder="Direccion">
+	               </div>
+	            </div>
+              <br />
 				</fieldset>
-				<button type="submit">Submit</button></form></div>
+				<button class="pull-right" type="submit">Guardar</button></form></div>
 				{/block}
