@@ -4,23 +4,18 @@
 	public $name;
 	public $lastName;
 	public $rfc;
-	public $clientCol;
-	public $clientCol1;
+	public $email;
+	public $address;
 
-		function __construct($name,$lastName,$rfc,$clientCol,$clientCol1)
+	function __construct($name,$lastName,$rfc,$email,$address, $id=0)
 	{
 		$this->name = $name;
 		$this->lastName = $lastName;
 		$this->rfc = $rfc;
-		$this->clientCol = $clientCol;
-		$this->clientCol1 = $clientCol1;
-		$this->id=0;
-
-
+		$this->email = $email;
+		$this->address = $address;
+		$this->id = $id;
 	}
-
 }
-
-
 ?>
 

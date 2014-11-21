@@ -1,9 +1,5 @@
 <?php
 require('controllers/controller.php');
-
-/**
-* 
-*/
 class ClientController extends Controller
 {
 	private $model;
@@ -52,18 +48,17 @@ class ClientController extends Controller
 		$result = $this->model->index();
 		if(isset($result))
 		{
+			$this->smarty->assign('clients',$result);
 			//Load view
-			
 			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
 				$this->smarty->assign('deleted',true);
 			
-			$this->smarty->assign('users',$result);
 			$this->smarty->display('./views/Client/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-				$this->smarty->display('./views/error.tpl');
+			$this->smarty->display('./views/error.tpl');
 		}
 
 	}
@@ -97,37 +92,33 @@ class ClientController extends Controller
 	* @param string $name
 	* @param string $lastName
 	* @param string $rfc
-	* @param string $clientCol
-	* @param string $clientCol1
-	* @param string $number
-	* @param string $lada
-	* @param string $area
+	* @param string $email
+	* @param string $address
 	*/
 	private function create()
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
-		//Validate Variables
-		$name   		 = $this->validateText($_POST['name']);
-		$lastName 		 = $this->validateNumber($_POST['lastName']);
-		$rfc		 = $this->validateNumber($_POST['rfc']);
-		$clientCol		 = $this->validateNumber($_POST['clientCol']);
-		$clientCol1  		 = $this->validateNumber($_POST['clientCol1']);
-		$number  = $this->validateText($_POST['number']);
-		$lada	     = $this->validateNumber($_POST['lada']);
-		$area    = $this->validateNumber($_POST['area']);
-
-		$result = $this->model->create($name,$lastName,$rfc,$clientCol,$clientCol1,$number,$lada,$area);
-		
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
+		{
+			//Validate Variables
+			$name= $this->validateText($_POST['name']);
+			$lastName= $this->validateNumber($_POST['lastName']);
+			$rfc= $this->validateNumber($_POST['rfc']);
+			$email=$this->validateEmail($_POST['email']);
+			$address=$this->validateNumber($_POST['address']);
+			$result = $this->model->create($name,$lastName,$rfc, $email, $address);
 		//Insert Succesful
 		if($result)
 		{
 			//Load view
-			require('views/Client/Created.php');
+			unset($postError);
+			header("Location: index.php?controller=client&view=details&id=$result->id");
+			
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+			$postError = true;
+			$this->smarty->assign('error',$result);
 		}
 
 		}

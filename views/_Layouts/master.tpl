@@ -95,6 +95,16 @@
                         </ul>
                       </div>
                   </li>
+                  <li>
+                    <a href="#" data-dropdown="true">Pieza
+                    </a>
+                      <div class="inner-side-bar">
+                        <ul>
+                          <li><a href="index.php?controller=piece" >Mostrar todas las piezas</a></li>
+                          <li><a href="index.php?controller=piece&view=create">Pieza</a></li>
+                        </ul>
+                      </div>
+                  </li>
                   <li><a href="#" data-dropdown="true">Employee</a>
                     <div class="inner-side-bar">
                         <ul>

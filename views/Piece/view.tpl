@@ -8,17 +8,17 @@
 		<h3>Actions</h3>
 		<ul class="side-nav">
 			<li>
-				<a href="index.php?controller=Piece&view=edit&id={$piece->id}">Edit Piece</a>
+				<a href="index.php?controller=Piece&view=edit&id={$piece->id}">Editar Pieza</a>
 			</li>
 			<li>
 				<form action="index.php?controller=Piece&view=delete&id={$piece->id}" style="display:none;" method="post"><input type="hidden" name="_method" value="POST"></form>
-				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_piece.submit(); } event.returnValue = false; return false;">Delete Piece</a> 
+				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_piece.submit(); } event.returnValue = false; return false;">Borrar Pieza</a> 
 			</li>
 			<li>
-			<a href="index.php?controller=Piece">List Piece</a> 
+			<a href="index.php?controller=Piece">Listar Piezas</a> 
 			</li>
 			<li>
-			<a href="index.php?controller=Piece&view=create">New Piece</a>
+			<a href="index.php?controller=Piece&view=create">Nueva Pieza</a>
 			</li>
 		</ul>
 	</div>
