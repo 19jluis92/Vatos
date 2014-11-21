@@ -32,7 +32,7 @@
                   <input type="text" name="vin" required="required" class="form-control" maxlength="45" id="vin" placeholder="VIN">
                 </div>  
               </div>
-            <br />
+              <br />
 
             <div class="row">
                <div class="col-md-6">
@@ -64,7 +64,7 @@
          </div>
          <div class="col-md-4">
             <label for="year" class="input-group-addon">Año</label>
-            <input type="number" name="year" class="form-control" required="required" id="year" placeholder="año">
+            <input type="number" name="year" class="form-control" required="required" id="year" placeholder="1985" pattern="[0-9]*" value="1900">
          </div>  
          <div class="col-md-2">
             <label for ="color" class="input-group-addon">Color</label>

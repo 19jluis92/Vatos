@@ -39,7 +39,12 @@ class CarWorkShopController extends Controller {
 			case 'edit':
 					//Validate User and permissions
 					//$this->validateSession() ? $this->edit() : require('views/Error.html') ;
+
 			$this->edit();
+			break;
+			case 'ajax':
+
+				echo json_encode($this->model->all());
 			break;
 			case 'delete':
 					//Validate User and permissions

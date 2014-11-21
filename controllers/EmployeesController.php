@@ -119,7 +119,7 @@ class EmployeesController extends Controller
 		if($result)
 		{
 			//Load view
-			require('views/Employee/add.tpl');
+				header("Location: index.php?controller=employee");
 		}
 		else
 		{
@@ -130,6 +130,8 @@ class EmployeesController extends Controller
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			if(isset($name))
 				$this->smarty->assign('name',$name);
+			
+			$this->loadProperties();
 			$this->smarty->display('./views/Employee/add.tpl');
 		}
 	}
@@ -183,6 +185,10 @@ class EmployeesController extends Controller
 			if($user != NULL)
 			{
 			//Load view
+				$this->loadProperties();
+				$this->smarty->assign('City',$this->toAssociativeArray($this->City->all()));
+				$this->smarty->assign('Users',$this->toAssociativeArray($this->Users->all()));
+				$this->smarty->assign('CarWorkShop',$this->toAssociativeArray($this->CarWorkShop->all()));
 				$this->smarty->assign('user',$user);
 				$this->smarty->display('./views/Employee/edit.tpl');
 			}
@@ -215,7 +221,16 @@ class EmployeesController extends Controller
 			require('views/Error.html');
 		}	
 	}
-
+private function loadProperties(){
+		require('models/CitiesModel.php');
+		$this->City = new CitiesModel();
+		require('models/UsersModel.php');
+		$this->Users = new UsersModel();
+		require('models/CarWorkShopModel.php');
+		$this->CarWorkShop = new CarWorkShopModel();
+		
+		
+	}
 }
 
 ?>

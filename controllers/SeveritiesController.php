@@ -2,8 +2,6 @@
 require('controllers/Controller.php');
 class SeveritiesController extends Controller {
 	private $model;
-	
-
 	/**
 	*Default constructor , include and create the model
 	*/
@@ -47,7 +45,6 @@ class SeveritiesController extends Controller {
 			break;
 		}
 	}
-
 	/**
 	*Show all the severities of the database
 	*@return null nothing returned but view loaded
@@ -135,9 +132,9 @@ class SeveritiesController extends Controller {
 	*/
 	private function edit()
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
-
-		//Validate Variables
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT')
+		{
+			//Validate Variables
 			$id = $this->validateNumber($_GET['id']);
 			$name = $this->validateText($_POST['name']);
 			$result = $this->model->edit($id,$name);	

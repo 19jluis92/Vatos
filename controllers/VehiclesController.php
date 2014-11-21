@@ -115,7 +115,7 @@ class VehiclesController extends Controller {
 			//Insert Succesful
 			if($result)
 			{
-				header("Location: index.php?controller=vehicle&view=create&id=$result->id");
+				header("Location: index.php?controller=vehicle&view=index");
 			}
 			else
 			{
@@ -148,6 +148,7 @@ class VehiclesController extends Controller {
 		//Validate Variables
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') 
 		{
+			$id = $this->validateNumber($_GET['id']);
 			$vin   		 = $this->validateText($_POST['vin']);
 			$model 		 = $this->validateNumber($_POST['model']);
 			$color		 = $this->validateNumber($_POST['color']);
@@ -156,7 +157,7 @@ class VehiclesController extends Controller {
 			$conditions  = $this->validateText($_POST['conditions']);
 			$plates	     = $this->validateNumber($_POST['plates']);
 
-			$result = $this->model->edit($vin, $model, $color, $year , $type, $conditions, $plates);
+			$result = $this->model->edit($id, $vin, $model, $color, $year , $type, $conditions, $plates);
 			if($result)
 			{
 				//Load view
@@ -197,7 +198,7 @@ class VehiclesController extends Controller {
 	*/
 	private function delete()
 	{
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)

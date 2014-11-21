@@ -13,7 +13,7 @@
    </div>
    <div class="col-md-10">
       <div class="vehicle form-horizontal large-10 medium-9 columns">
-         <form role="form" method="post" accept-charset="utf-8" action="index.php?controller=Vehicle&view=create">
+         <form role="form" method="post" accept-charset="utf-8" action="index.php?controller=Vehicle&view=edit&id={$vehicle->id}">
             <div style="display:none;">
                <input type="hidden" name="_method" value="POST">
             </div>

@@ -28,6 +28,7 @@ Class SeveritiesModel extends Model{
 		if($result = $this->db->details('severity', $id,NULL))
 		{
 			$Severity = new Severity($result['name'],$result['id']);
+			var_dump($Severity->id);
 			return $Severity;
 		}
 		else{
@@ -59,7 +60,7 @@ Class SeveritiesModel extends Model{
 
 	/**
 	*method for edit a Severity  
-	*@param int $id (existing severity id)
+	*@param int $id (existin severity id)
 	*@param string $name (severity name) 
 	* @return bool transaction result
 	*/

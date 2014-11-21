@@ -2,6 +2,7 @@
 require_once('database/Vehicle.php');
 require_once('models/Model.php');
 Class VehiclesModel extends Model{
+	private $id;
 	private $vin;
 	private $model;
 	private $color;
@@ -79,7 +80,7 @@ Class VehiclesModel extends Model{
 	* @param string $conditions
 	* @param int $plates
 	*/
-	function edit($vin, $model, $color, $year , $type, $conditions, $plates)
+	function edit($id,$vin, $model, $color, $year , $type, $conditions, $plates)
 	{
 		$vehicle = new Vehicle($vin, $model, $color, $year , $type, $conditions, $plates,$id);
 		if($result = $this->db->update('vehicle', $vehicle, NULL))
