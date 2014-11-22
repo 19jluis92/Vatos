@@ -171,6 +171,33 @@ class db{
 			}
 		}
 	}
+
+	public function GetByColum($table , $name,$colum)
+	{
+	
+		$name = $this->db_driver->escape_string($name);
+		$colum = $this->db_driver->escape_string($colum);
+		
+		if($name != NULL){
+			$result = $this->db_driver->query("SELECT * FROM $table WHERE $colum = '$name' ");
+			if(!empty($this->db_driver->error)){
+				echo  $this->db_driver->error;
+				return false;
+			}
+			else{
+				if($this->db_driver->affected_rows > 0){
+					#var_dump(mysqli_fetch_array($result));
+								$model_array = mysqli_fetch_array($result);
+								return $model_array;
+				}
+					
+				else{
+					echo "element not found";
+					return NULL;
+				}
+			}
+		}
+	}
 	
 } ?>
 

@@ -156,6 +156,12 @@
 			//Create controller and execute it
 			$controller = new AccountController ();
 			break;
+	case  'inventory':
+			//Load controller file
+			require('controllers/InventaryController.php');
+			//Create controller and execute it
+			$controller = new InventaryController();
+			break;
 	default:
 		require('controllers/HomeController.php');
 		$controller = new HomeController ();
