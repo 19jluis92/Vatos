@@ -118,7 +118,6 @@
                 </div>
               </div>
               <ul class="sidebar-menu">
-
                 <li class="treeview">
                   <a href="#">
                     <i class="fa fa-edit"></i> <span>User</span>
@@ -318,6 +317,7 @@
 
     <script src="webroot/js/main.js"></script>
     <script src="webroot/js/ajax.js"></script>
+    <script src="webroot/js/inventaryAjax.js"></script>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     {literal}
     <script>

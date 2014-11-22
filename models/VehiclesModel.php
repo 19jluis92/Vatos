@@ -109,5 +109,23 @@ Class VehiclesModel extends Model{
 			return false;
 		}
 	}
+
+	function getVehicleByClient($id){
+	if($result = $this->db->GetByColum('clientvehicle' , ''+$id,'idClient'))
+		{
+			$final_result;
+			$i=0;
+			foreach ($result as  $variable) {
+				# code...
+				$final_result[$i++]=$this->db->GetByColum('vehicle',$variable['idVehicle'],'id');
+			}
+			#var_dump($final_result);
+			return $final_result;
+		}
+		else{
+			
+			return false;
+		}
+	}
 }
 ?>
