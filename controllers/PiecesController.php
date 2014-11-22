@@ -2,8 +2,6 @@
 require('controllers/Controller.php');
 class PiecesController extends Controller {
 	private $model;
-	
-
 	/**
 	*Default constructor , include and create the model
 	*/

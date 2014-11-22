@@ -14,23 +14,18 @@
 		<form method="post" accept-charset="utf-8" action="index.php?controller=State&view=create">
 			<fieldset>
 				<legend>Agregar Estado</legend>
+					<div class="form-group input-group">
+		  				<label for="name" class="input-group-addon">Nombre</label>
+		  				<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
+					</div>
 
-				<div class="form-group input-group">
-	  				<label for="id" class="input-group-addon">Id Estado</label>
-					<input class="form-control" type="number" name="id" required="required" id="id" placeholder="Id Estado">
-				</div>
-
-				<div class="form-group input-group">
-	  				<label for="name" class="input-group-addon">Nombre</label>
-	  				<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
-				</div>
-
-				<div class="form-group input-group">
-	  				<label for="idState" class="input-group-addon">Id Pais</label>
-					<input class="form-control" type="number" name="idState" required="required" id="idState" placeholder="Id Pais">
-				</div>
-
-
+					<div class="form-group input-group">
+		  				<label for="idCountry" class="input-group-addon">Pais</label>
+                  <select name="idCountry" required="required" id="idCountry" class="form-control">
+                    <option value=''>-- none --</option>
+                    {html_options options=$countries}
+                 </select>
+					</div>
 			</fieldset>
 			<button class="pull-right" type="submit">Submit</button>
 		</form>

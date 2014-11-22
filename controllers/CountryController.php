@@ -57,18 +57,15 @@ class CountryController extends Controller {
 	{
 		
 		//get all the Country
-
 		$result = $this->model->all();
-		$this->smarty->assign('countrys',$result);
 		//Query Succesfull
 		if(isset($result))
 		{
 			//Load view
-			
 			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
 				$this->smarty->assign('deleted',true);
 			
-			$this->smarty->assign('countrys',$result);
+			$this->smarty->assign('countries',$result);
 			$this->smarty->display('./views/Country/index.tpl');
 		}
 		else
@@ -86,14 +83,13 @@ class CountryController extends Controller {
 	private function details()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);	
+		$id = $this->validateNumber($_GET['id']);
+		$country = $this->model->details($id);	
 		//Insert Succesfull
-		if(isset($result))
+		if($country != NULL)
 		{
 			//Load view
-			//Load view
-			$this->smarty->assign('user',$result);
+			$this->smarty->assign('country',$country);
 			$this->smarty->display('./views/Country/view.tpl');
 		}
 		else
@@ -143,38 +139,41 @@ class CountryController extends Controller {
 	*/
 	private function edit()
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
-		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$result = $this->model->edit($id,$name);	
-		//Insert Succesfull
-		if($result)
-			{
-				unset($postError);
-				header("Location: index.php?controller=Country");
-			}
-			else
-			{
-				$postError = true;
-				$this->smarty->assign('error','no se pudo :(');
-			}
-		}
-		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT')
+		{
+			//Validate Variables
 			$id = $this->validateNumber($_GET['id']);
-			$user = $this->model->details($id);
-		//select Succesfull
-			if($user != NULL)
-			{
-			//Load view
-				$this->smarty->assign('user',$user);
-				$this->smarty->display('./views/Country/edit.tpl');
+			$name = $this->validateText($_POST['name']);
+			$result = $this->model->edit($id,$name);
+			//Insert Succesfull
+			if($result)
+				{
+					unset($postError);
+					header("Location: index.php?controller=Country");
+				}
+				else
+				{
+					$postError = true;
+					$this->smarty->assign('error','no se pudo :(');
+				}
 			}
-			else
+			if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
 			{
-				$this->smarty->display('./views/error.tpl');
-			}
+				$id = $this->validateNumber($_GET['id']);
+				$country = $this->model->details($id);
+			//select Succesfull
+				if($country != NULL)
+				{
+				//Load view
+					$this->smarty->assign('country',$country);
+					$this->smarty->display('./views/Country/edit.tpl');
+				}
+				else
+				{
+					$this->smarty->display('./views/error.tpl');
+				}
 
-		}
+			}
 	}
 
 		/**
@@ -185,10 +184,11 @@ class CountryController extends Controller {
 	private function delete()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->delete($id);	
+		$id = $this->validateNumber($_GET['id']);
+		echo $id;
+		$result = $this->model->delete($id);
 		//Insert Succesfull
-			if($result)
+		if($result)
 		{
 			header("Location: index.php?controller=Country&deleted=true");
 		}

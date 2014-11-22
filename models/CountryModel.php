@@ -27,10 +27,8 @@ Class CountryModel extends Model{
 	function details($id)
 	{
 		if($result = $this->db->details('country' , $id,NULL))
-			{
-			$Country = new Country($result['name']);
-			/*opcionales son de prueba*/
-			var_dump($Country);
+		{
+			$Country = new Country($result['Name'],$result['id']);
 			return $Country;
 		}
 		else{
@@ -72,10 +70,12 @@ Class CountryModel extends Model{
 	{
 		$Country = new Country($name);
 		$Country->id = $id;
+		var_dump($Country);
 		if($result = $this->db->update('country', $Country,NULL))
-			return true;
-		else{
-			echo $result;
+
+			return $result;
+		else
+		{
 			return false;
 		}
 	}
@@ -88,14 +88,13 @@ Class CountryModel extends Model{
 	function delete($id)
 	{
 		if($result = $this->db->delete('country', $id,NULL))
+		{
 			return true;
+		}
 		else
 		{
-			echo $result;
 			return false;
 		}
-		//delete element using the given $id
-		return true;
 	}
 }
 ?>

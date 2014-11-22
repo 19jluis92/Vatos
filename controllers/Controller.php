@@ -227,6 +227,14 @@ class Controller{
 		return $result;
 	}
 
+	protected function parcheAlCageDeChelis($array, $key='id' , $value='Name'){
+		$result = [];
+		foreach ($array as &$valor) {
+			$result[$valor[$key]] = $valor[$value]; 
+		}
+		return $result;
+	}
+
 }
 
 ?>

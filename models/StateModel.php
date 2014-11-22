@@ -28,10 +28,9 @@ Class StateModel extends Model{
 	function details($id)
 	{
 		if($result = $this->db->details('state' , $id,NULL))
-			{
-			$State = new State($result['name']);
+		{
+			$State = new State($result['Name'],$result['IdCountry'],$result['id']);
 			/*opcionales son de prueba*/
-			var_dump($State);
 			return $State;
 		}
 		else{
@@ -68,12 +67,18 @@ Class StateModel extends Model{
 	*@param string $name (state name) 
 	* @return bool transaction result
 	*/
-	function edit($name, $idCountry)
+	function edit($id,$name, $idCountry)
 	{
-		$State = new State($name, $idCountry);
-		if($result = $this->db->update('state' , $State,NULL))
-			return true;
-		else{
+
+		$State = new State($name, $idCountry,$id);
+		if($result = $this->db->update('state', $State,NULL))
+		{
+			var_dump($result)
+			return $result;
+
+		}
+		else
+		{
 			echo $result;
 			return false;
 		}
