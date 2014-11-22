@@ -42,7 +42,42 @@ class InventaryController extends Controller
 	}
 
 	public function edit(){
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT')
+		{
+			
+			$result = true;
+			if($result)
+			{
+				//Load view
+				unset($postError);
+				header("Location: index.php?controller=Home&view=index");
+				
+			}
+			else
+			{
+				//Ohh well... :(
+				$postError = true;
+				$this->smarty->assign('error','no se pudo :(');
+			}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
+		{
+			$id = $this->validateNumber($_GET['id']);
+			#$client = $this->model->details($id);
 
+			//select Succesfull
+			if(isset($id))
+			{
+				#var_dump($client);
+				$this->smarty->assign('id',$id);
+				$this->smarty->display('./views/Inventary/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
+		}
 	}
 
 	public function delete(){
@@ -56,7 +91,7 @@ class InventaryController extends Controller
 			if($result)
 			{
 				unset($postError);
-				header("Location: index.php?controller=Inspection&view=details&id=$result->id");
+				header("Location: index.php?controller=Home&view=index");
 				//$this->all();
 			}
 			else
@@ -69,7 +104,7 @@ class InventaryController extends Controller
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			
 			$this->loadProperties();
-			$this->smarty->assign('Clients',$this->toAssociativeArray($this->Client->all()));	
+			//$this->smarty->assign('Clients',$this->toAssociativeArray($this->Client->all()));	
 			$this->smarty->display('./views/Inventary/add.tpl');
 		}
 	}	
