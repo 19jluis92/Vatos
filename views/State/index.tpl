@@ -28,19 +28,19 @@
 				</tr>
 			</thead>
 			<tbody>
-				{foreach item=user from=$users}
+				{foreach item=state from=$states}
 
 				<tr>
-					<td>{$user.id}</td>
-					<td>{$user.name}</td>
-					<td>{$user.idState}</td>
+					<td>{$state.id}</td>
+					<td>{$state.Name}</td>
+					<td>{$state.IdCountry}</td>
 					<td class="actions">
-						<a href="index.php?controller=State&view=details&id={$user.id}">Mostrar</a>				
-						<a href="index.php?controller=State&view=edit&id={$user.id}">Editar</a>		
-						<form action="index.php?controller=State&view=delete&id={$user.id}" name="post_State_{$user.id}" style="display:none;" method="POST">
+						<a href="index.php?controller=State&view=details&id={$state.id}">Mostrar</a>				
+						<a href="index.php?controller=State&view=edit&id={$state.id}">Editar</a>		
+						<form action="index.php?controller=State&view=delete&id={$state.id}" name="post_State_{$state.id}" style="display:none;" method="POST">
 							<input type="hidden" name="_method" value="POST">
 						</form>
-						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $user.id?&quot;)) { document.post_State_{$user.id}.submit(); } event.returnValue = false; return false;">Borrar</a>
+						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $state.id?&quot;)) { document.post_State_{$state.id}.submit(); } event.returnValue = false; return false;">Borrar</a>
 					</td>
 				</tr>
 			</tbody>

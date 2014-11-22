@@ -8,35 +8,37 @@
 		<h3>Actions</h3>
 		<ul class="side-nav">
 			<li>
-			<a href="index.php?controller=State&view=edit&id={$user->id}">Edit State</a> </li>
+			<a href="index.php?controller=State&view=edit&id={$state->id}">Editar Estado</a> </li>
 			<li>
-				<form action="index.php?controller=State&view=delete&id={$user->id}" style="display:none;" method="post">
+				<form action="index.php?controller=State&view=delete&id={$state->id}" style="display:none;" method="post">
 					<input type="hidden" name="_method" value="POST">
 				</form>
-				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_State.submit(); } event.returnValue = false; return false;">Delete State</a> 
+				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_State.submit(); } event.returnValue = false; return false;">Borrar Estado</a> 
 			</li>
-			<li><a href="index.php?controller=State">List State</a> </li>
-			<li><a href="index.php?controller=State&view=create">New State</a> </li>
+			<li><a href="index.php?controller=State">Listar Estados</a> </li>
+			<li><a href="index.php?controller=State&view=create">Nuevo Estado</a> </li>
 		</ul>
 	</div>
-	<div class="bump view large-10 medium-9 columns">
-		<h2>{$user->id}</h2>
+	<div class="state col-md-12">
+		<h2>{$state->id}</h2>
+		
 		<div class="row">
-			<div class="large-5 columns strings">
+			<div class="col-md-4">
 				<h6 class="subheader">Id</h6>
-				<p>{$user->id}</p>
+				<p>{$state->id}</p>
 			</div>
-			<div class="large-2 larege-offset-1 columns numbers end">
+			<div class="col-md-4">
 				<h6 class="subheader">Name</h6>
-				<p>{$user->name}</p>
+				<p>{$state->name}</p>
 			</div>
-			<div class="large-2 larege-offset-1 columns numbers end">
-				<h6 class="subheader">idState</h6>
-				<p>{$user->idState}</p>
+			<div class="col-md-4">
+				<h6 class="subheader">IdCountry</h6>
+				<p>{$state->idCountry}</p>
 			</div>
+		</div>
 			
 
-		</div>
+		
 	</div>
 </div>
 {/block}

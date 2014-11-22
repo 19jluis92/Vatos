@@ -26,18 +26,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				{foreach item=country from=$Countrys}
+				{foreach item=country from=$countries}
 
 				<tr>
 					<td>{$country.id}</td>
-					<td>{$country.name}</td>
+					<td>{$country.Name}</td>
 					<td class="actions">
-						<a href="index.php?controller=Country&view=details&id={$country.id}">View</a>				
-						<a href="index.php?controller=Country&view=edit&id={$country.id}">Edit</a>		
-						<form action="index.php?controller=Country&view=delete&id={$country.id}" name="post_user_{$country.id}" style="display:none;" method="POST">
-							<input type="hidden" name="_method" value="POST">
-						</form>
-						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $country.id?&quot;)) { document.post_Country_{$country.id}.submit(); } event.returnValue = false; return false;">Delete</a>
+						<a class="btn btn-default" href="index.php?controller=Country&view=details&id={$country.id}">Mostrar</a>				
+						<a class="btn btn-default" href="index.php?controller=Country&view=edit&id={$country.id}">Editar</a>		
+						<form action="index.php?controller=Country&view=delete&id={$country.id}" name="post_country_{$country.id}" style="display:none;" method="post">
+                     <input type="hidden" name="_method" value="POST">
+                  </form>
+                  <a  class="btn btn-default" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_country_{$country.id}.submit(); } event.returnValue = false; return false;">Eliminar</a>
 					</td>
 				</tr>
 			</tbody>

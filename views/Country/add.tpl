@@ -16,10 +16,6 @@
 			<fieldset>
 				<legend>Agregar Pais</legend>
 				<div class="form-group input-group">
-	  				<label for="idCountry" class="input-group-addon">Id Pais</label>
-	  				<input type="number" name="name" required="required" class="form-control" maxlength="45" id="idCountry" placeholder="Id Pais">
-				</div>
-				<div class="form-group input-group">
 	  				<label for="name" class="input-group-addon">Nombre</label>
 	  				<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
 				</div>

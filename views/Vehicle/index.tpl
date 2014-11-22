@@ -48,7 +48,7 @@
                </td>
             </tr>
             {/foreach}
-         </tbody>
+         </tbody>icle
       </table>
       <div class="paginator">
          <ul class="pagination">

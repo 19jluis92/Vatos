@@ -57,16 +57,15 @@ class StateController extends Controller {
 	{
 		
 		//get all the State
-		$result = $this->model->all();	
+		$result = $this->model->all();
+		$this->smarty->assign('states',$result);
 		//Query Succesfull
 		if(isset($result))
 		{
 			//Load view
 			
 			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
-				$this->smarty->assign('deleted',true);
-			
-			$this->smarty->assign('users',$result);
+				$this->smarty->assign('deleted',true);		
 			$this->smarty->display('./views/State/index.tpl');
 		}
 		else
@@ -84,14 +83,14 @@ class StateController extends Controller {
 	private function details()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);	
+		$id = $this->validateNumber($_GET['id']);
+		$result = $this->model->details($id);
 		//Insert Succesfull
 		if(isset($result))
 		{
 			//Load view
 			//Load view
-			$this->smarty->assign('user',$result);
+			$this->smarty->assign('state',$result);
 			$this->smarty->display('./views/State/view.tpl');
 		}
 		else
@@ -108,27 +107,30 @@ class StateController extends Controller {
 	*/
 	private function create()
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
-		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$idCountry = $this->validateNumber($_POST['idCountry']);
-		$result = $this->model->create($name, $idCountry);	
-		//Insert Succesfull
-		if($result)
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
-			//Load view
-			unset($postError);
-			header("Location: index.php?controller=State");
+			//Validate Variables
+			$name = $this->validateText($_POST['name']);
+			$idCountry = $this->validateNumber($_POST['idCountry']);
+			$result = $this->model->create($name, $idCountry);	
+			//Insert Succesfull
+			if($result)
+			{
+				//Load view
+				unset($postError);
+				header("Location: index.php?controller=State");
+				
+			}
+			else
+			{
+				require('views/Error.html');
+			}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
+		{
 			
-		}
-		else
-		{
-			require('views/Error.html');
-		}
-		}
-		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
-			if(isset($name))
-				$this->smarty->assign('name',$name);
+			$this->loadProperties();
+			$this->smarty->assign('countries',$this->parcheAlCageDeChelis($this->countries->all()));
 			$this->smarty->display('./views/State/add.tpl');
 		}
 		
@@ -143,16 +145,20 @@ class StateController extends Controller {
 	*/
 	private function edit()
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
-				//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$idState = $this->validateNumber($_POST['idState']);
-		$result = $this->model->edit($name,$idState);	
-		//Insert Succesfull
-		if($result)
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT')
+		{
+			//Validate Variables
+			$id = $this->validateNumber($_GET['id']);
+			$name = $this->validateText($_POST['name']);
+			$idCountry = $this->validateNumber($_POST['idCountry']);
+			$result = $this->model->edit($id,$name,$idCountry);
+			echo("algo".$result->name);
+			//Insert Succesfull
+			if($result)
 			{
 				unset($postError);
 				header("Location: index.php?controller=State");
+				//require('views/Error.html');
 			}
 			else
 			{
@@ -162,12 +168,14 @@ class StateController extends Controller {
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			$id = $this->validateNumber($_GET['id']);
-			$user = $this->model->details($id);
+			$state = $this->model->details($id);
 		//select Succesfull
-			if($user != NULL)
+			if($state != NULL)
 			{
 			//Load view
-				$this->smarty->assign('user',$user);
+				$this->loadProperties();
+				$this->smarty->assign('countries',$this->parcheAlCageDeChelis($this->countries->all()));
+				$this->smarty->assign('state',$state);
 				$this->smarty->display('./views/State/edit.tpl');
 			}
 			else
@@ -197,6 +205,12 @@ class StateController extends Controller {
 		{
 			require('views/Error.html');
 		}
+	}
+
+	private function loadProperties()
+	{
+		require('models/CountryModel.php');
+		$this->countries = new CountryModel();
 	}
 
 }
