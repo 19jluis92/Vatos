@@ -40,11 +40,11 @@
 				<div class="row ">
                 <div class="form-group input-group">
 						<label for="startDate" class="input-group-addon">Fecha de inicio</label>
-						<input type="date" required="required" name="startDate" class="form-control" id="startDate">
+						<input type="date" required="required" name="startDate" class="form-control bloqserv" id="startDate">
                 </div>
                 <div class="form-group input-group">
 						<label for="endDate" class="input-group-addon">Fecha de fin</label>
-						<input type="date" name="endDate" class="form-control" id="endDate"></select>
+						<input type="date" name="endDate" class="form-control bloqserv" id="endDate"></select>
                 </div>  
               </div>
             <br />
@@ -53,7 +53,7 @@
                <div class="form-group input-group">
 						<label for="idcarworkshop" class="input-group-addon"> Taller </label>
 						
-						<select id="idvehicleService" class="form-control serviceIdtaller"  required="required">
+						<select id="idvehicleService" class="form-control bloqserv"  required="required">
     					<option value=''>-- none --</option> 
     					</select>
 						
@@ -61,12 +61,12 @@
                </br>
                	<div class="form-group input-group">
 						<label for="idvehicle"class="input-group-addon">VIN  Vehiculo</label>
-						<input type="text"  class="form-control serviceIdVehicle" name="idVehicle" required="required" id="idvehicle" data-id="0" readonly>
+						<input type="text"  class="form-control serviceIdVehicle bloqserv" name="idVehicle" required="required" id="idvehicle" data-id="0" readonly>
                 </div>
                 </br>
                 <div class="form-group input-group">
 						<label for="idemployee" class="input-group-addon">Empleado</label>
-						<input type="number"  class="form-control" name="idEmployee" required="required" id="idemployee" readonly>
+						<input type="number"  class="form-control bloqserv" name="idEmployee" required="required" id="idemployee" readonly>
 					</div>
               </div>
             <br />

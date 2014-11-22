@@ -111,7 +111,7 @@ $.get("index.php?controller=service&view=ajax",function(e){
 });
 
 $('#bto1').on('click',function(e){
-	//$('.bloqIns').attr('readonly',true);
+	
 	debugger;
 	$.ajax({
 		url:'index.php?controller=service&view=createInventary',
@@ -119,10 +119,12 @@ $('#bto1').on('click',function(e){
 		data:{
 		startDate : $('#startDate').val() ,
 		endDate : $('#endDate').val(),
-		idvehicleService : 0,
+		idvehicleService : 1,
 		idVehicle : $('#idvehicle option:selected').val(),
+		idEmployee: 3,//$('#idemployee').val(),
 		}
 	}).done(function(e){
+		$('.bloqserv').attr('readonly',true);
 			$('#error').modal('show');
 		});
 });
