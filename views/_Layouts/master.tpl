@@ -118,7 +118,6 @@
                 </div>
               </div>
               <ul class="sidebar-menu">
-
                 <li class="treeview">
                   <a href="#">
                     <i class="fa fa-edit"></i> <span>User</span>
