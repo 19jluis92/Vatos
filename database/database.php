@@ -57,10 +57,10 @@ class db{
 			}
 			else{
 				if($this->db_driver->affected_rows > 0){
-								$model_array = mysqli_fetch_array($result);
-								return $model_array;
+					$model_array = mysqli_fetch_array($result);
+					return $model_array;
 				}
-					
+
 				else{
 					echo "element not found";
 					return NULL;
@@ -108,7 +108,6 @@ class db{
 			return false;
 		}
 		else{
-			var_dump($result);
 			return true;
 		}
 	}
@@ -148,7 +147,7 @@ class db{
 
 	public function GetUserByName($table , $name,$pass)
 	{
-	
+
 		$name = $this->db_driver->escape_string($name);
 		$pass = $this->db_driver->escape_string($pass);
 		
@@ -160,10 +159,10 @@ class db{
 			}
 			else{
 				if($this->db_driver->affected_rows > 0){
-								$model_array = mysqli_fetch_array($result);
-								return $model_array;
+					$model_array = mysqli_fetch_array($result);
+					return $model_array;
 				}
-					
+
 				else{
 					echo "element not found";
 					return NULL;
@@ -172,29 +171,22 @@ class db{
 		}
 	}
 
-	public function GetByColum($table , $name,$colum)
+	public function GetByColum($table , $name,$column)
 	{
-	
 		$name = $this->db_driver->escape_string($name);
-		$colum = $this->db_driver->escape_string($colum);
-		
+		$column = $this->db_driver->escape_string($column);
 		if($name != NULL){
-			$result = $this->db_driver->query("SELECT * FROM $table WHERE $colum = '$name' ");
+			$result = $this->db_driver->query("SELECT * FROM $table WHERE $column = '$name'");
 			if(!empty($this->db_driver->error)){
 				echo  $this->db_driver->error;
 				return false;
 			}
 			else{
-				if($this->db_driver->affected_rows > 0){
-					#var_dump(mysqli_fetch_array($result));
-								$model_array = mysqli_fetch_array($result);
-								return $model_array;
+				$list =[];
+				while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+					$list[] = $row;
 				}
-					
-				else{
-					echo "element not found";
-					return NULL;
-				}
+				return $list;
 			}
 		}
 	}

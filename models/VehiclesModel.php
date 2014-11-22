@@ -111,15 +111,13 @@ Class VehiclesModel extends Model{
 	}
 
 	function getVehicleByClient($id){
-	if($result = $this->db->GetByColum('clientvehicle' , $id,'idClient'))
+	if($result = $this->db->GetByColum('clientvehicle' , ''+$id,'idClient'))
 		{
 			$final_result;
 			$i=0;
-			var_dump($result);
-			foreach ($result as  &$variable) {
+			foreach ($result as  $variable) {
 				# code...
-				#var_dump($variable);
-				$final_result[$i++]=$this->db->GetByColum('vehicle',$variable,'id');
+				$final_result[$i++]=$this->db->GetByColum('vehicle',$variable['idVehicle'],'id');
 			}
 			#var_dump($final_result);
 			return $final_result;
