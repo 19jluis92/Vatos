@@ -69,7 +69,7 @@ class InventaryController extends Controller
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			
 			$this->loadProperties();
-			$this->smarty->assign('Clients',$this->toAssociativeArray($this->Client->all()));	
+			//$this->smarty->assign('Clients',$this->toAssociativeArray($this->Client->all()));	
 			$this->smarty->display('./views/Inventary/add.tpl');
 		}
 	}	
