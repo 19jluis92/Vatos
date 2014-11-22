@@ -53,18 +53,22 @@
 
             <div class="row">
                <div class="form-group input-group">
-						<label for="idcarworkshop" class="input-group-addon">Id Taller </label>
-						<input type="number"  class="form-control" name="idCarWorkShop" required="required" id="idcarworkshop">
+						<label for="idcarworkshop" class="input-group-addon"> Taller </label>
+						
+						<select id="idvehicleService" class="form-control serviceIdtaller"  required="required">
+    					<option value=''>-- none --</option> 
+    					</select>
+						
                </div>
                </br>
                	<div class="form-group input-group">
-						<label for="idvehicle"class="input-group-addon">Id Vehiculo</label>
-						<input type="number"  class="form-control" name="idVehicle" required="required" id="idvehicle">
+						<label for="idvehicle"class="input-group-addon">VIN  Vehiculo</label>
+						<input type="text"  class="form-control serviceIdVehicle" name="idVehicle" required="required" id="idvehicle" data-id="0" readonly>
                 </div>
                 </br>
                 <div class="form-group input-group">
-						<label for="idemployee" class="input-group-addon">Id Empleado</label>
-						<input type="number"  class="form-control" name="idEmployee" required="required" id="idemployee">
+						<label for="idemployee" class="input-group-addon">Empleado</label>
+						<input type="number"  class="form-control" name="idEmployee" required="required" id="idemployee" readonly>
 					</div>
               </div>
             <br />
@@ -141,8 +145,8 @@
             <br />
 
             <div class="form-group input-group">
-	  				<label for="idcarworkshop" class="input-group-addon">Id Taller</label>
-	  				<input type="number" name="idcarworkshop" required="required" class="form-control" maxlength="45" id="idcarworkshop" placeholder="Id Taller Automotriz">
+	  				<label for="idcarworkshop" class="input-group-addon">Taller</label>
+	  				<input type="text" name="idcarworkshop" required="required" class="form-control" maxlength="45" id="idcarworkshop"  data-id="0"readonly>
 				</div>
 			</fieldset>
 			

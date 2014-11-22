@@ -46,6 +46,8 @@ class CarWorkShopController extends Controller {
 
 				echo json_encode($this->model->all());
 			break;
+
+			
 			case 'delete':
 					//Validate User and permissions
 			$this->validateSession() ? $this->delete() : require('views/Error.html') ;

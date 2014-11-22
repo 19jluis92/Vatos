@@ -1,7 +1,7 @@
 
 $.get("index.php?controller=Client&view=ajax",function(e){
   
-  debugger;
+  
   var result = JSON.parse(e);
       var dd = $("#idcliente");
       for(var i in result){
@@ -20,7 +20,7 @@ $("#idcliente").on('change',function(e){
       var dd = $("#idvehicle");
       for(var i in result){
         var $op =  $("<option>");
-        $op.attr("value",result[i].id);
+        $op.attr("value",result[i][0].id);
         $op.text(result[i][0].vin);
         dd.append($op);
       }
@@ -30,17 +30,9 @@ $("#idcliente").on('change',function(e){
 });
 
 $("#idvehicle").on('change',function(e){
-	var id= $("#idvehicle").val();
-	debugger;
-	if(id>0)
-	$("#serviceForm").dialog({
-            width: 590,
-            height: 350,
-            show: "scale",
-            hide: "scale",
-            resizable: "false",
-            position: "center"     
-        });
+	$('.serviceIdVehicle').attr('data-id',$('#idvehicle').val());
+	$('.serviceIdVehicle').val($("#idvehicle option:selected").text());
+
 
 });
 
@@ -66,4 +58,26 @@ $("#ubicacion").on('click',function(e){
 	$('#RehubicacionModal').modal('show')
 	else
 		$('#error').modal('show');
+});
+
+
+
+$.get("index.php?controller=CarWorkShop&view=ajax",function(e){
+  
+  
+  var result = JSON.parse(e);
+      var dd = $("#idvehicleService");
+      for(var i in result){
+        var $op =  $("<option>");
+        $op.attr("value",result[i].id);
+        $op.text(result[i].name);
+        dd.append($op);
+      }
+
+});
+
+$('#idvehicleService').on('change',function(e){
+	$('#idcarworkshop').attr('value',$('#idvehicleService option:selected').text())
+	$('#idcarworkshop').attr('data-id',$('#idvehicleService option:selected').val())
+
 });
