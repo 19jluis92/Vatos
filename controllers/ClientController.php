@@ -34,6 +34,11 @@ class ClientController extends Controller{
 						//Validate User and permissions
 						$this->delete();
 						break;
+			case 'ajax':
+						//call Ajax
+						echo json_encode($this->model->all());
+						break;
+
 				default:
 						break;
 		}
@@ -202,6 +207,8 @@ class ClientController extends Controller{
 			require('views/Error.html');
 		}	
 	}
+
+	
 
 }	
 

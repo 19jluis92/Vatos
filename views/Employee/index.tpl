@@ -35,15 +35,6 @@
 					<th>
 						<a href="index.php?controller=employee&amp;sort=cellphone&amp;direction=asc">Cell Phone</a>
 					</th>
-					<th>
-						<a href="index.php?controller=employee&amp;sort=idCity&amp;direction=asc">IdCity</a>
-					</th>
-					<th>
-						<a href="index.php?controller=employee&amp;sort=idUser&amp;direction=asc">IdUser</a>
-					</th>
-					<th>
-						<a href="index.php?controller=employee&amp;sort=idCarWorkShop&amp;direction=asc">idCarWorkShop</a>
-					</th>
 					<th class="actions">Actions</th>
 				</tr>
 			</thead>
@@ -58,9 +49,7 @@
 					<td>{$user.address}</td>
 					<td>{$user.phone}</td>
 					<td>{$user.cellphone}</td>
-					<td>{$user.idCity}</td>
-					<td>{$user.idUser}</td>
-					<td>{$user.idCarWorkShop}</td>
+					
 					<td class="actions">
 						<a class="btn btn-default" href="index.php?controller=employee&view=details&id={$user.id}">View</a>				
 						<a class="btn btn-default" href="index.php?controller=employee&view=edit&id={$user.id}">Edit</a>		

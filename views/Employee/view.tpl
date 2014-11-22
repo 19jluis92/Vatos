@@ -28,11 +28,11 @@
 			</div>
 			<div class="large-2 larege-offset-1 columns numbers end">
 				<h6 class="subheader">Name</h6>
-				<p>{$user->Name}</p>
+				<p>{$user->name}</p>
 			</div>
 			<div class="large-2 larege-offset-1 columns numbers end">
 				<h6 class="subheader">LastName</h6>
-				<p>{$user->LastName}</p>
+				<p>{$user->lastName}</p>
 			</div>
 			<div class="large-2 larege-offset-1 columns numbers end">
 				<h6 class="subheader">NSS</h6>
@@ -40,7 +40,7 @@
 			</div>
 			<div class="large-2 larege-offset-1 columns numbers end">
 				<h6 class="subheader">idCity</h6>
-				<p>{$user->idCity}</p>
+				<p>{$City}</p>
 			</div>
 			<div class="large-2 larege-offset-1 columns numbers end">
 				<h6 class="subheader">address</h6>
@@ -52,15 +52,15 @@
 			</div>
 			<div class="large-2 larege-offset-1 columns numbers end">
 				<h6 class="subheader">cellphone</h6>
-				<p>{$user->cellphone}</p>
+				<p>{$user->cellPhone}</p>
 			</div>
 			<div class="large-2 larege-offset-1 columns numbers end">
 				<h6 class="subheader">iduser</h6>
-				<p>{$user->iduser}</p>
+				<p>{$Users}</p>
 			</div>
 			<div class="large-2 larege-offset-1 columns numbers end">
 				<h6 class="subheader">idCarWorkShop</h6>
-				<p>{$user->idCarWorkShop}</p>
+				<p>{$CarWorkShop}</p>
 			</div>
 
 		</div>

@@ -38,6 +38,12 @@ class VehiclesController extends Controller {
 						//Validate User and permissions
 			$this->delete();
 			break;
+
+			case 'ajaxById':
+
+					echo json_encode($this->model->getVehicleByClient($_GET['id']));
+					break;
+
 			default:
 			break;
 		}
