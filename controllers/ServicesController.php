@@ -43,6 +43,15 @@ class ServicesController extends Controller {
 						//Validate User and permissions
 			$this->delete();		
 			break;
+
+			case 'ajax':
+
+				echo json_encode($this->model->all());
+			break;
+
+			case 'createInventary':
+				$this->createInventary();
+			break;
 			default:
 			break;
 		}
@@ -122,7 +131,7 @@ class ServicesController extends Controller {
 			if($result)
 			{
 				unset($postError);
-				header("Location: index.php?controller=Service&view=details&id=$result->id");
+				
 				//$this->all();
 			}
 			else
@@ -139,6 +148,37 @@ class ServicesController extends Controller {
 		}
 	}
 
+
+	private function createInventary()
+	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+
+		//Validate Variables
+			$startDate = $this->validateDate($_POST['startDate']);
+			$endDate = $this->validateDate($_POST['endDate']);
+			$idEmployee = 1;//$this->validateNumber($_POST['idEmployee']);
+			$idCarWorkShop = $this->validateNumber($_POST['idvehicleService']);
+			$idVehicle = $this->validateNumber($_POST['idVehicle']);
+			var_dump($idCarWorkShop);
+			$result = $this->model->create($startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
+		//Insert Succesfull
+			if($result)
+			{
+				unset($postError);
+				
+				//$this->all();
+			}
+			else
+			{
+				$postError = true;
+				//$this->smarty->assign('error',$result);
+			}
+
+		} 
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+		
+		}
+	}
 	/**
 	*Update a service with the given post parameters 
 	*@param int $id  the existing service id

@@ -35,18 +35,16 @@
         <h4 class="modal-title">Servicio</h4>
       </div>
       <div class="modal-body">
-        <form method="post" accept-charset="utf-8" action="index.php?controller=Service&view=create">
-			<fieldset>
-				<legend>Agregar Servicio</legend>
+      				<legend>Agregar Servicio</legend>
 
 				<div class="row ">
                 <div class="form-group input-group">
 						<label for="startDate" class="input-group-addon">Fecha de inicio</label>
-						<input type="date" required="required" name="startDate" class="form-control">
+						<input type="date" required="required" name="startDate" class="form-control" id="startDate">
                 </div>
                 <div class="form-group input-group">
 						<label for="endDate" class="input-group-addon">Fecha de fin</label>
-						<input type="date" name="endDate" class="form-control"></select>
+						<input type="date" name="endDate" class="form-control" id="endDate"></select>
                 </div>  
               </div>
             <br />
@@ -72,15 +70,14 @@
 					</div>
               </div>
             <br />
-			</fieldset>
+			
 				
 			
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <a href="#" class="btn btn-primary" id="bto1">Save changes</a>
       </div>
-      </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -98,15 +95,15 @@
 				
 				<div class="form-group input-group">
 					<label for="mileage" class="input-group-addon">Millas</label>
-					<input type="number" name="mileage" required="required" step="0.01" id="mileage" class="form-control"></div>
+					<input type="number" name="mileage" required="required" step="0.01" id="mileage" class="form-control bloqIns"></div>
 					<div class="form-group input-group">
 						<label class="input-group-addon" for="fuel">Fuel</label>
-						<input type="number" name="fuel" required="required" step="0.01" id="fuel" class="form-control"></div>
+						<input type="number" name="fuel" required="required" step="0.01" id="fuel" class="form-control bloqIns"></div>
 						<div class="form-group input-group"><label class="input-group-addon" for="inspectiondate">Inspection Date</label>
-						<input class="form-control" type="date" name="inspectiondate" required="required" id="inspectiondate">
+						<input class="form-control bloqIns" type="date" name="inspectiondate" required="required" id="inspectiondate">
 						</div>
 						<div class="form-group input-group">
-							<label   for="type" class="input-group-addon">Type</label><input type="checkbox" name="type" id="type" class="form-control"></div>
+							<label   for="type" class="input-group-addon">Type</label><input type="checkbox" name="type" id="type" class="form-control bloqIns"></div>
 				</fieldset>
 						
 					
@@ -114,7 +111,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary"id="bto2">Save changes</button>
         </form>
       </div>
       
@@ -129,36 +126,59 @@
         <h4 class="modal-title">Servicio</h4>
       </div>
       <div class="modal-body">
- 		<form method="post" accept-charset="utf-8" action="index.php?controller=Location&view=create">
+		<form method="post" accept-charset="utf-8" action="index.php?controller=Relocation&view=create">
 			<fieldset>
-				<legend> Lugar</legend>
+				<legend>Agregar Relocacion</legend>
+
 				<div class="row">
-              <div class="form-group input-group">
-		  				<label for="id" class="input-group-addon">Id Lugar</label>
-		  				<input type="number" name="id" required="required" class="form-control" maxlength="45" id="id" placeholder="Id Lugar">
-               </div>
-               <div class="form-group input-group">              
-		  				<label for="name" class="input-group-addon">Nombre</label>
-		  				<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
-               </div>  
+					<div class="form-group input-group">
+						
+						<input type="hidden" name="id" required="required" class="form-control" id="id">
+					</div>
+					
+				</div>
+				<br />
+
+				<div class="row">
+                <div class="form-group input-group">
+                  <label class="input-group-addon" for="idService">id Servicio</label>
+						<select required="required"  id="idService"class="form-control" required="required">
+    				<option value=''>-- none --</option> </select>
+                </div>
+                <div class="form-group input-group">
+						<label class="input-group-addon" for="name">Fecha de relocacion</label>
+						<input type="date" class="form-control" name="relocationDate" required="required" id="relocationDate">
+                </div>
+
+                <div class="form-group input-group">
+						<label class="input-group-addon" for="idEmployee"> Empleado</label>
+						<input type="text" class="form-control" name="idEmployee" required="required" id="idEmployee" readonly>
+                </div>
+
+                <div class="form-group input-group">
+                  <label class="input-group-addon" >Departamento</label>
+                  <select required="required"  id="idDepartment"class="form-control">
+    				<option value=''>-- none --</option> </select>
+						
+                </div>
             </div>
             <br />
 
-            <div class="form-group input-group">
-	  				<label for="idcarworkshop" class="input-group-addon">Taller</label>
-	  				<input type="text" name="idcarworkshop" required="required" class="form-control" maxlength="45" id="idcarworkshop"  data-id="0"readonly>
-				</div>
+            <div class="form-group input-group">	  				
+					<label for="reason" class="input-group-addon">Razon</label>
+					<input type="textarea" name="reason" required="required" class="form-control" id="reason">
+				</div>  
+            <br />
+
 			</fieldset>
-			
-	
 			
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-       </form> 
+        <button type="submit" class="btn btn-primary" id="bto3">Save changes</button>
+     
       </div>
-      
+      </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

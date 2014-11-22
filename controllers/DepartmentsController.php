@@ -43,6 +43,12 @@ class DepartmentsController extends Controller {
 						//Validate User and permissions
 			$this->delete();		
 			break;
+
+			case 'ajax':
+
+				echo json_encode($this->model->all());
+			break;
+			
 			default:
 			break;
 		}
