@@ -155,7 +155,7 @@ $('#bto1').on('click',function(e){
 	}).done(function(e){
 		$('#bto1').remove();
 		$('.bloqserv').attr('readonly',true);
-			$('#error').modal('show');
+			$('#bien').modal('show');
 			onlyInspection();
 		});
 });
@@ -176,7 +176,7 @@ $('#bto2').on('click',function(e){
 	}).done(function(e){
 		$('#bto2').remove()
 		$('.bloqIns').attr('readonly',true);
-			$('#error').modal('show');
+			$('#bien').modal('show');
 		});
 });
 
@@ -196,6 +196,6 @@ $('#bto3').on('click',function(e){
 	}).done(function(e){
 		$('#bto3').remove()
 		$('.bloqIns').attr('readonly',true);
-			$('#error').modal('show');
+			$('#bien').modal('show');
 		});
 });
