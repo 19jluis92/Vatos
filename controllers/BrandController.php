@@ -19,7 +19,7 @@ class BrandController extends Controller {
 	*/
 	function run()
 	{
-		$this->validatePersmission("all");
+		$this->validatePersmission(["admin","superadmin"]);
 		$view = isset($_GET['view'])?$_GET['view']:'index';
 		switch($view)
 		{

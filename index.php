@@ -2,6 +2,7 @@
 	require('database/database.php');
 	global $db;
 	$db = new db();
+	require_once('database/User.php');
 	session_start();
 /*
 	$to = "lic.nancy.torres+web@gmail.com";

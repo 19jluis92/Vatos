@@ -2,6 +2,7 @@
 require_once('database/Role.php');
 require_once('models/Model.php');
 Class RolesModel extends Model{
+	private $tableName = 'role';
 	private $id;
 	private $name;
 
@@ -14,7 +15,7 @@ Class RolesModel extends Model{
 	*/
 	function all()
 	{
-		$elements = $this->db->all('role');
+		$elements = $this->db->all($this->tableName);
 		//get all elements (set the $elements variable with a states array)
 		return $elements;
 	}
@@ -26,7 +27,7 @@ Class RolesModel extends Model{
 	*/
 	function details($id)
 	{
-		if($result = $this->db->details('role', $id,NULL))
+		if($result = $this->db->details($this->tableName, $id,NULL))
 		{
 			$role = new Role($result['name'],$result['id']);
 			return $role;
@@ -47,7 +48,7 @@ Class RolesModel extends Model{
 	function create($name)
 	{
 		$role = new Role($name);
-		if($result = $this->db->insert("role" , $role,NULL))
+		if($result = $this->db->insert($tableName , $role,NULL))
 		{
 			return $result;
 		}
@@ -68,7 +69,7 @@ Class RolesModel extends Model{
 	{
 		$role = new Role($name,$id);
 		$role->id = $id;
-		if($result = $this->db->update("role" , $role,NULL))
+		if($result = $this->db->update($tableName , $role,NULL))
 			return true;
 		else{
 			echo $result;
@@ -83,7 +84,7 @@ Class RolesModel extends Model{
 	*/
 	function delete($id)
 	{
-		if($result = $this->db->delete("role" , $id,NULL))
+		if($result = $this->db->delete($tableName , $id,NULL))
 			return true;
 		else
 		{

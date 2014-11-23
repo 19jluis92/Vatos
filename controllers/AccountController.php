@@ -88,12 +88,18 @@ class AccountController extends Controller {
 	*/
 	public function logout()
 	{
-		session_unset();
+		if(isset($_SESSION['user']))
+			session_unset($_SESSION['user']);
+		if(isset($_SESSION['uid']))
+			session_unset($_SESSION['uid']);
+		if(isset($_SESSION['actualRole']))
+			session_unset($_SESSION['actualRole']);
 		session_destroy();
 		setcookie(session_name(),time()-3600);
+		setcookie('user',"",time()-3600);
 		header("Location: index.php");
 
-	}
+}
 
 	/**
 	*

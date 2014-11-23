@@ -61,7 +61,8 @@ class UsersController extends Controller{
 			//Validate Variables
 			$email   = $this->validateEmail($_POST['email']);
 			$password = $this->validateText($_POST['password']);
-			$result = $this->model->create($email, $password);
+			$idRole = $this->validateNumber($_POST['idRole']);
+			$result = $this->model->create($email, $password,$idRole);
 			//Insert Succesful
 			if($result)
 			{
@@ -137,7 +138,8 @@ class UsersController extends Controller{
 			$id = $this->validateText($_POST['id']);
 			$email = $this->validateText($_POST['email']);
 			$password = $this->validateText($_POST['password']);
-			$result = $this->model->edit($id,$email,$password);
+			$idRole = $this->validateNumber($_POST['idRole']);
+			$result = $this->model->edit($id,$email,$password,$idRole);
 			if($result)
 			{
 				unset($postError);
