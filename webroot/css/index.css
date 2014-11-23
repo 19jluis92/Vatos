@@ -89,8 +89,8 @@ hr.small {
 }
 
 .sidebar-nav li.nav-header{
-color : #999;
-background-color: #555;
+    color : #999;
+    background-color: #555;
 
 }
 
@@ -243,12 +243,39 @@ footer {
     background-color: #ededed;
 }
 
-.login div{
+.loginn{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+}
+
+.login .form-group{
  display: block !important;
  margin: 5px 0 15px 0 !important;
 }
 
 .login div input{
  display: block !important;
+ width:90% !important;
 
+}
+
+
+.tooltip{
+    text-indent: 0;
+}
+
+.summary-text{
+    max-height: 0px;
+    opacity:0;
+    -webkit-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+    margin-top: 10px;
+}
+
+.summary-text.active{
+
+    opacity: 1;
+    max-height: 1000px;
 }

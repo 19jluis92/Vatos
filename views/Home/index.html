@@ -54,7 +54,7 @@
                 </li>
                 <li class="nav-header">Iniciar Sesión</li>
                 <li>
-                    <form class="login navbar-form navbar-left" role="form"  method="post">
+                    <form class="login navbar-form" role="form" id="login-form"  method="post">
                       <?php
                       
                       
@@ -63,19 +63,18 @@
                         echo '<div class="form-group"><input type="text" placeholder="Email" class="form-control" name="name"   value='.$name.' readonly>
                       </div>
                       ';
-                      echo '<div class="form-group"><input type="password"  class="form-control" name="password"  value="******" readonly>
+                      echo '<div class="form-group"><input data-placement="bottom" type="password"  class="form-control" name="password"  value="******" readonly>
                       </div>
                       ';
-                      echo'<button  type="Post" class="btn btn-md btn-light"
-                      >Logout</button>
+                      echo'<button  type="Post" class="btn btn-md btn-light">Logout</button>
                       ';
                   }
                   else
                   {
-                    echo '<div class="form-group"><input type="text" placeholder="Email" class="form-control" name="name">
+                    echo '<div class="form-group"><input required type="email" placeholder="Email" class="form-control" name="name">
                   </div>
                   ';
-                  echo '<div class="form-group"><input type="password" placeholder="Password" class="form-control" name="password">
+                  echo '<div class="form-group"><input required data-placement="bottom" type="password" placeholder="Password" class="form-control" name="password">
                   </div>
                   ';
                   echo'<button type="submit" class="btn btn-lg btn-light"  value="login">Sign in</button>';
@@ -279,10 +278,11 @@
         <script>window.jQuery || document.write('<script src="webroot/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
 
         <script src="webroot/js/vendor/bootstrap.min.js"></script>
-
-
+        <script src="webroot/js/vendor/jquery.validate.1.13.1.min.js"></script>
+        <script src="webroot/js/vendor/jquery-validate.bootstrap-tooltip.js"></script>
 <!-- Custom Theme JavaScript -->
 <script>
+    $("#login-form").validate();
     // Closes the sidebar menu
     $("#menu-close").click(function(e) {
         e.preventDefault();
@@ -293,6 +293,17 @@
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    $.ajax({
+        url: "index.php?controller=home&view=autenticate",
+        data : $('form').serializeArray(),
+        success : function(result){
+            console.log(result);
+        },
+        error : function(result, errorCode, errorText){
+            console.log(result,errorCode,errorText);
+        }
     });
 
     // Scrolls to the selected menu item on the page
