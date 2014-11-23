@@ -19,6 +19,9 @@ class Controller
 		$this->smarty->debugging = false;
 		$this->smarty->caching = false;
 		$this->smarty->cache_lifetime = 0;
+		if($user = $this->LoggedIn())
+			$this->smarty->assign('role',$this->getActualRoleName($user));
+
 	}
 
 	/**
@@ -30,7 +33,6 @@ class Controller
 	{
 		$user = $this->LoggedIn();
 		if($user != null){
-			$this->smarty->assign('role',$this->getActualRoleName($user));
 			switch (gettype($roles)) {
 				case 'string':
 				if($roles == 'all')
