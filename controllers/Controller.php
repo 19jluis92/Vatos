@@ -19,7 +19,43 @@ class Controller
 		$this->smarty->caching = false;
 		$this->smarty->cache_lifetime = 0;
 	}
-/**
+
+	/**
+	* @param array/string $roles
+	* @return string $data
+	* Validate perrmission by rolename
+	*/
+	protected function validatePersmission($roles)
+	{
+		$user = this->LoggedIn();
+		if($user != null)
+			switch (gettype($roles)) {
+				case 'string':
+					return;
+				break;
+				case 'array':
+				# code...
+				break;
+				default:
+				
+				break;
+			}
+			header('location: index.php'); 
+		}
+
+	/**
+	* @param array/string $roles
+	* @return string $data
+	* Get the user if is logged In
+	*/
+	protected function getUser($roles)
+	{
+		return null;
+	}
+
+
+
+	/**
 	* @param string $data
 	* @return string $data
 	* Validate a string to be a number and clean it
@@ -147,7 +183,11 @@ class Controller
 
 	protected function LoggedIn()
 	{
-		return isset($_SESSION['user'])?$_SESSION['user']:null;
+		$logged_user = isset($_SESSION['user'])?$_SESSION['user']:null;
+		if($logged_user === null){
+			$logged_user = isset($_COOKIE['user'])?json_decode($_COOKIE['user']):null;
+		}
+		return $logged_user;
 	}
 
 	protected function validatePermissions($controller , $view)
@@ -208,10 +248,10 @@ class Controller
 		$data = array();
 		if (($handle = fopen("./test.csv", "r")) !== FALSE)
 		{
-		    while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
-		    {
-		        $data[] = $row;
-		    }
+			while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
+			{
+				$data[] = $row;
+			}
 		}
 		return $data;
 	}

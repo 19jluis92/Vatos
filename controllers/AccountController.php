@@ -1,5 +1,5 @@
 <?php
-require('controllers/Controller.php');
+require_once('controllers/Controller.php');
 class AccountController extends Controller {
 	private $model;
 	
@@ -31,6 +31,7 @@ class AccountController extends Controller {
 			$this->logout();		
 			break;
 			case 'profile':
+			$this->validatePersmission("all");
 						//Validate User and permissions
 			$this->details();		
 			break;
@@ -68,7 +69,7 @@ class AccountController extends Controller {
 			{
 				$_SESSION['uid'] = $user->id; 
 				$_SESSION['user'] = $user;
-				setcookie("user", $user);
+				setcookie("user", json_encode($user));
 				return true;
 			}
 

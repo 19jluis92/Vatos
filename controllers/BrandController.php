@@ -19,12 +19,13 @@ class BrandController extends Controller {
 	*/
 	function run()
 	{
+		$this->validatePersmission("all");
 		$view = isset($_GET['view'])?$_GET['view']:'index';
 		switch($view)
 		{
 			case 'index':case 'all':case 'list':
 						//Validate User and permissions
-			$this->all();	
+			$this->all();
 			break;
 			case 'details':
 						//Validate User and permissions
