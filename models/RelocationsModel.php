@@ -39,7 +39,7 @@ Class RelocationsModel extends Model{
 	{
 		if($result = $this->db->details('relocation', $id,NULL))
 		{
-			$Relocation = new Relocation($result['name']);
+			$Relocation = new Relocation($result['relocationDate'],$result['idEmployee'],$result['reason'],$result['idDepartment'],$result['idService']);
 			return $Relocation;
 		}
 		else{
@@ -108,6 +108,20 @@ Class RelocationsModel extends Model{
 		{
 			echo $result;
 			return false;
+		}
+		//delete element using the given $id
+		return true;
+	}
+
+	function GetByColum($tabla,$id,$colum){
+		if($result = $this->db->GetByColum($tabla,$id,$colum))
+		{
+			$Relocation = new Relocation($result['relocationDate'],$result['idEmployee'],$result['reason'],$result['idDepartment'],$result['idService']);
+			return $Relocation;
+		}
+		else{
+			echo $result;
+			return NULL;
 		}
 		//delete element using the given $id
 		return true;

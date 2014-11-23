@@ -39,7 +39,7 @@ Class ServicesModel extends Model{
 	{
 		if($result = $this->db->details('service', $id,NULL))
 		{
-			$Services = new Service($result['startDate'],$result['endDate'],$result['idEmployee'],$result['idCarWorkShop'],$result['idVehicle'],$result['ic']);
+			$Services = new Service($result['startDate'],$result['endDate'],$result['idEmployee'],$result['idCarWorkShop'],$result['idVehicle'],$result['id']);
 			return $Services;
 		}
 		else{

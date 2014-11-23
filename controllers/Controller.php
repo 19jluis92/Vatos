@@ -59,7 +59,7 @@ class Controller{
 	* @return string $data
 	* Validate a string to be a number and clean it
 	*/
-	function validateDate($date, $format = 'Y-m-d H:i:s')
+	function validateDate($date, $format = 'Y/m/d H:i:s')
 	{
 		if(!isset($data))
 			return '01/01/1900';

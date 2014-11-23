@@ -120,5 +120,18 @@ Class InspectionsModel extends Model{
 		return $bumps;
 	}
 
+	function GetByColum($table,$id,$colum){
+		if($result = $this->db->details('inspection', $id,NULL))
+		{
+			$Inspections = new Inspection($result['idService'],$result['mileage'],$result['fuel'],$result['inspectionDate'],$result['type'],$result['id']);
+			return $Inspections;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
+		//delete element using the given $id
+		return true;
+	}
 }
 ?>
