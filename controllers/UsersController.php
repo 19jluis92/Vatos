@@ -131,7 +131,7 @@ class UsersController extends Controller{
 	private function edit(){
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 
-		$id = $this->validateText($_POST['id']);
+		$id = $this->validateText($_GET['id']);
 		$email = $this->validateText($_POST['email']);
 		$password = $this->validateText($_POST['password']);
 		$result = $this->model->edit($id,$email,$password);
