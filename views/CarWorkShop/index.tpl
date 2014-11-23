@@ -1,6 +1,6 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}Vehiculos{/block}
-{block name=pageheader}Vehiculos{/block}
+{block name=title}Taller Automotriz{/block}
+{block name=pageheader}Taller Automotriz{/block}
 {block name=head}
 {/block}
 {block name=body}
@@ -17,6 +17,7 @@
             <tr>
                <th><a href="/vatoscake/carworkshop?sort=id&amp;direction=asc">Id</a></th>
                <th><a href="/vatoscake/carworkshop?sort=name&amp;direction=asc">Nombre</a></th>
+               <th><a href="/vatoscake/carworkshop?sort=idCity&amp;direction=asc">Ciudad</a></th>
                <th class="actions">Acciones</th>
             </tr>
          </thead>
@@ -26,6 +27,7 @@
             <tr>
                <td>{$carworkshop.id}</td>
                <td>{$carworkshop.name}</td>
+               <td>{$carworkshop.idCity}</td>
                <td class="actions">
                   <a href="index.php?controller=carworkshop&view=details&id={$carworkshop.id}">
                      Mostrar
@@ -36,7 +38,7 @@
                   <form action="index.php?controller=carworkshop&view=delete&id={$carworkshop.id}" name="post_carworkshop_{$carworkshop.id}" style="display:none;" method="post">
                      <input type="hidden" name="_method" value="POST">
                   </form>
-                  <a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_carworkshop_{$carworkshop.id}.submit(); } event.returnValue = false; return false;">Eliminar</a>
+                  <a  class="btn btn-default" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_carworkshop_{$carworkshop.id}.submit(); } event.returnValue = false; return false;">Eliminar</a>
                </td>
             </tr>
          </tbody>

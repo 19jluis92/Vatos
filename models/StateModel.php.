@@ -73,7 +73,6 @@ Class StateModel extends Model{
 		$State = new State($name, $idCountry,$id);
 		if($result = $this->db->update('state', $State,NULL))
 		{
-			var_dump($result)
 			return $result;
 
 		}

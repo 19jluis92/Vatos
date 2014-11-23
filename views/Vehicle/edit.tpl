@@ -19,7 +19,7 @@
             </div>
             <fieldset>
                <legend>
-                  Agregar Vehiculo
+                  Editar Vehiculo
                </legend>
 
                <div class="row">

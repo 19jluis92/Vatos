@@ -42,11 +42,13 @@ class UsersController extends Controller{
 						//Validate User and permissions
 			$this->delete();		
 			break;
-
 			case 'ajax':
 
 				echo json_encode($this->model->all());
 			break;
+			case 'massInsert':
+					$this->massInsert();
+					break;
 			default:
 			break;
 		}
@@ -190,5 +192,20 @@ class UsersController extends Controller{
 		return $result;
 	}
 
+	private function massInsert()
+	{
+		$model = $this->validateText($_GET['model']);
+		echo $model;
+		/*Work on this shit*/
+		$dataArray = $this->massiveInsertion();
+		
+		for($i = 0; $i < count($dataArray); $i++)
+		{ 
+			$email = $this->validateText($dataArray[$i][0]);
+			$password = $this->validateNumber($dataArray[$i][1]);
+			$result = $this->model->create($email, $password);
+		}
+		$this->all();
+	}
 }
 ?>

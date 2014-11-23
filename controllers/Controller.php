@@ -1,7 +1,9 @@
 <?php 
-class Controller{
+class Controller
+{
 	protected $smarty;
-	function __construct(){
+	function __construct()
+	{
 
 
 		// *nix style (note capital 'S')
@@ -184,7 +186,8 @@ class Controller{
 	}
 
 	/*HELPERS*/
-	protected function toAssociativeArray($array, $key='id' , $value='name'){
+	protected function toAssociativeArray($array, $key='id' , $value='name')
+	{
 		$result = [];
 		foreach ($array as &$valor) {
 			$result[$valor[$key]] = $valor[$value]; 
@@ -198,6 +201,19 @@ class Controller{
 			$result[$valor[$key]] = $valor[$value]; 
 		}
 		return $result;
+	}
+
+	protected function massiveInsertion()
+	{
+		$data = array();
+		if (($handle = fopen("./test.csv", "r")) !== FALSE)
+		{
+		    while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
+		    {
+		        $data[] = $row;
+		    }
+		}
+		return $data;
 	}
 
 }
