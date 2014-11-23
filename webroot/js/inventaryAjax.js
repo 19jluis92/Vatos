@@ -161,7 +161,7 @@ $('#bto1').on('click',function(e){
 });
 
 $('#bto2').on('click',function(e){
-	
+	debugger
 	
 	$.ajax({
 		url:'index.php?controller=inspection&view=createInventary',
