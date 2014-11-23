@@ -1,7 +1,9 @@
 <?php 
-class Controller{
+class Controller
+{
 	protected $smarty;
-	function __construct(){
+	function __construct()
+	{
 
 
 		// *nix style (note capital 'S')
@@ -145,7 +147,7 @@ class Controller{
 
 	protected function LoggedIn()
 	{
-		return isset($_SESSION['user']);
+		return isset($_SESSION['user'])?$_SESSION['user']:null;
 	}
 
 	protected function validatePermissions($controller , $view)
@@ -165,61 +167,27 @@ class Controller{
 		
 	}
 
-	public function createSession($name,$pass){
-		
-		if(isset($name) && isset($pass) )
-		{
-		
-		require('models/UsersModel.php');
-		$model = new UsersModel();
-		$name=$name;
-		$pass = $pass;
-		$user=$model->authentication($name,$pass);
-		//var_dump($user);
-		
-		if(isset($user)&&!isset($_SESSION['count']))
-		{
-		//var_dump($user);
-		
-		
-		$_SESSION['name'] = $user->email; 
-		if(isset($_SESSION['count']))
-			$_SESSION['count']++;
-		else
-			$_SESSION['count']=1;
 
-        //var_dump($_SESSION);
-
-		return true;
-		
-		
-		}
-
-		return false;
-		}
-		
-		
-		
-	}
 
 	function validateSession()
 	{
 		
-		$result = (!empty($_SESSION['name'])) ?  true : false;
+		$result = (!empty($_SESSION['uid'])) ?  true : false;
 		
 		
 		return $result;
 	}
 	function logout()
 	{
-	
-    session_destroy(); 
-  
-    header('location: index.php'); 
+		
+		session_destroy(); 
+		
+		header('location: index.php'); 
 	}
 
 	/*HELPERS*/
-	protected function toAssociativeArray($array, $key='id' , $value='name'){
+	protected function toAssociativeArray($array, $key='id' , $value='name')
+	{
 		$result = [];
 		foreach ($array as &$valor) {
 			$result[$valor[$key]] = $valor[$value]; 
@@ -233,6 +201,19 @@ class Controller{
 			$result[$valor[$key]] = $valor[$value]; 
 		}
 		return $result;
+	}
+
+	protected function massiveInsertion()
+	{
+		$data = array();
+		if (($handle = fopen("./test.csv", "r")) !== FALSE)
+		{
+		    while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
+		    {
+		        $data[] = $row;
+		    }
+		}
+		return $data;
 	}
 
 }

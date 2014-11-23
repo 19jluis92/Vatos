@@ -22,8 +22,10 @@ class HomeController extends Controller {
 		switch($view)
 		{
 			case 'index':
-			$this->result=$this->authenticationHome();//Validate User and permissions
 			$this->index();	
+			break;
+			case 'login':
+			$this->autenticate();
 			break;
 			default:
 			$this->index();	
@@ -39,7 +41,9 @@ class HomeController extends Controller {
 	*/
 	private function index()
 	{
-			require('views/Home/index.html');
+		$result = $this->loggedIn();
+		$this->smarty->assign('result',$result);
+		$this->smarty->display('./views/home/index.tpl');
 	}
 
 	/**
@@ -131,31 +135,46 @@ class HomeController extends Controller {
 		}
 	}
 
+
 	public function authenticationHome(){
+
+		$id = $this->validateEmail($_POST['name']);
+		$name = $this->validateText($_POST['password']);
+		$result = $this->model->edit($id,$name);	
+		//Insert Succesfull
+		if($result)
+		{
+			//Load view
+			require('views/Color/Edited.php');
+		}
+		else
+		{
+			require('views/Error.html');
+		}
 		
 		if(!empty( $_POST['name']) && !empty($_POST['password']) )
 		{
-		if( $_POST['password']!="******")
-		{
-			$result=$this->createSession($_POST['name'],$_POST['password']);
+			if( $_POST['password']!="******")
+			{
+				$result=$this->createSession($_POST['name'],$_POST['password']);
 			//var_dump($result);
-		
-			
 
-			if(is_bool($result))
+
+
+				if(is_bool($result))
 				{
-				$this->login=$_SESSION['name'];
+					$this->login=$_SESSION['name'];
 
 				}
-		$this->smarty->assign('result',$result);
-		return $result;
-		}
-		if(!empty( $_POST['name']) &&$_POST['password']=="******")
-			
+				$this->smarty->assign('result',$result);
+				return $result;
+			}
+			if(!empty( $_POST['name']) &&$_POST['password']=="******")
+
 				$this->LogoutHome();	
 		}
 
-					 
+
 		
 
 	}

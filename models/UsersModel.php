@@ -89,21 +89,15 @@ class UsersModel extends Model{
 
 
 
-	function authentication($name,$pass){
-		var_dump($name);
-		var_dump($pass);
-		if($result = $this->db->GetUserByName('user' , $name,$pass))
-			{
-			$user = new User($result['email'],$result['password']);
-			/*opcionales son de prueba*/
-			//var_dump($user);
-			return $user;
-		}
-		else{
+	function find($name,$pass){
+		if($result = $this->db->query('user' , "email='$name' AND password = '$pass'"))
+		{
+			if(count($result) > 0){
+				$user = new User($result[0]['email'],$result[0]['password'],$result[0]['id']);
+				return $user;	
+			}
 			
-			return null;
-		}
-		
+		}		
 		return null;
 	}
 

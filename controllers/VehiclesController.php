@@ -43,7 +43,9 @@ class VehiclesController extends Controller {
 
 					echo json_encode($this->model->getVehicleByClient($_GET['id']));
 					break;
-
+			case 'massInsert':
+				$this->massInsert();
+				break;
 			default:
 			break;
 		}
@@ -227,6 +229,24 @@ class VehiclesController extends Controller {
 		$this->models = new CarModel();
 		require('models/CarTypesModel.php');
 		$this->carTypes = new CarTypesModel();
+	}
+
+	private function massInsert()
+	{
+
+		$dataArray = $this->massiveInsertion();		
+		for($i = 0; $i < count($dataArray); $i++)
+		{ 
+			$vin   		 = $this->validateText($dataArray[$i][0]);
+			$model 		 = $this->validateNumber($dataArray[$i][1]);
+			$color		 = $this->validateNumber($dataArray[$i][2]);
+			$year		 = $this->validateNumber($dataArray[$i][3]);
+			$type  		 = $this->validateNumber($dataArray[$i][4]);
+			$conditions  = $this->validateText($dataArray[$i][5]);
+			$plates	     = $this->validateNumber($dataArray[$i][6]);
+			$result = $this->model->create($vin, $model, $color, $year , $type, $conditions, $plates);
+		}
+		$this->all();
 	}
 
 }

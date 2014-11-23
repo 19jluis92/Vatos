@@ -8,6 +8,7 @@ class AccountController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/AccountModel.php');
 		$this->model = new AccountModel();
 	}
@@ -44,38 +45,53 @@ class AccountController extends Controller {
 	*Show all the Countries of the database
 	*@return null nothing returned but view loaded
 	*/
-	private function login()
-	{
-		
-		//get all the Brand
-		$user = (isset($_POST['user'])?$_POST['user']:'');
-		$user = $this->validateText($user);
-		$_SESSION['user'] = $user;
-		//Query Succesfull
-		if(isset($user))
+	public function login(){
+		$email = $this->validateEmail($_POST['name']);
+		$password = $this->validateText($_POST['password']);
+		if($this->validateUser($email, $password))
 		{
-			//Load view
-			require('views/Account/session.php');
+			echo json_encode($_SESSION['user']);
+			return;
 		}
-		else
-		{
-			//Ohh well... :(
-			require('views/Error.html');
-		}
+		echo json_encode(null);
 	}
+
+	private function validateUser($name,$pass){
+		
+		if(isset($name) && isset($pass) )
+		{
+
+			require('models/UsersModel.php');
+			$model = new UsersModel();
+			$user=$model->find($name,$pass);
+			if($user != null)
+			{
+				$_SESSION['uid'] = $user->id; 
+				$_SESSION['user'] = $user;
+				setcookie("user", $user);
+				return true;
+			}
+
+			return false;
+		}
+		
+		
+		
+	}
+
 
 	/**
 	*Show the Brand details with the given post parameters 
 	*@param int id the Brand id
 	*@return null nothing returned but view loaded
 	*/
-	private function logout()
+	public function logout()
 	{
 		session_unset();
 		session_destroy();
 		setcookie(session_name(),time()-3600);
-		require('views/Home/Index.php');
-	
+		header("Location: index.php");
+
 	}
 
 	/**

@@ -9,6 +9,7 @@
       <h3>Acciones</h3>
       <ul class="list-group">
          <li><a class="list-group-item" href="index.php?controller=vehicle">Mostrar todos los vehiculos</a></li>
+         <li><a class="list-group-item" href="index.php?controller=vehicle&view=massInsert">Insercion Masiva</a></li>
       </ul>
    </div>
    <div class="col-md-10">

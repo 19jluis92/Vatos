@@ -25,8 +25,23 @@ class db{
 		return true;
 	}
 
-	public function query($query){
-
+	public function query($table,$predicate = ''){
+		if ($predicate == '') 
+			$result = $this->db_driver->query("SELECT * FROM $table");	
+		else
+			$result = $this->db_driver->query("SELECT * FROM $table WHERE $predicate");
+		
+		if(!empty($this->db_driver->error)){
+			echo  $this->db_driver->error;
+			return [];
+		}
+		else{
+			$list =[];
+			while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+				$list[] = $row;
+			}
+			return $list;
+		}
 	}
 
 	public function all($table)
