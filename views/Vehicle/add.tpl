@@ -9,7 +9,17 @@
       <h3>Acciones</h3>
       <ul class="list-group">
          <li><a class="list-group-item" href="index.php?controller=vehicle">Mostrar todos los vehiculos</a></li>
-         <li><a class="list-group-item" href="index.php?controller=vehicle&view=massInsert">Insercion Masiva</a></li>
+         <li>
+          <a class="list-group-item" href="#">Insercion Masiva
+          </a>
+          <form action="index.php?controller=vehicle&view=massInsert" method="post" enctype="multipart/form-data">
+            <span class="btn btn-default btn-file">
+            Browse <input type="file" name="csv" value="">
+            </span>
+            <input class="btn btn-default btn-file" type="submit" name="submit" value="Save" />
+          </form>
+        </li>
+</form>
       </ul>
    </div>
    <div class="col-md-10">

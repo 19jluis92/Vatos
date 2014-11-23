@@ -233,10 +233,10 @@ class VehiclesController extends Controller {
 
 	private function massInsert()
 	{
-
 		$dataArray = $this->massiveInsertion();		
 		for($i = 0; $i < count($dataArray); $i++)
-		{ 
+		{
+			/*Perdon por esto de aqui :(, lo arreglare despues*/
 			$vin   		 = $this->validateText($dataArray[$i][0]);
 			$model 		 = $this->validateNumber($dataArray[$i][1]);
 			$color		 = $this->validateNumber($dataArray[$i][2]);
