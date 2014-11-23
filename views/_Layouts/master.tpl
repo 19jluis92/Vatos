@@ -118,6 +118,7 @@
                 </div>
               </div>
               <ul class="sidebar-menu">
+              {if $role == 'admin'}
                 <li class="treeview">
                   <a href="#">
                     <i class="fa fa-edit"></i> <span>User</span>
@@ -279,6 +280,7 @@
                   <li><a href="index.php?controller=brand&view=create"><i class="fa fa-angle-double-right"></i>Marca</a></li>
                 </ul>
               </li>
+              {/if}
               <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Cuenta</span>
                 <i class="fa fa-angle-left pull-right"></i></a>
 

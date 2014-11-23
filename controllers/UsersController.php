@@ -3,6 +3,8 @@ require('controllers/Controller.php');
 require('mail.php');
 class UsersController extends Controller{
 	private $model;
+	private $roles;
+
 	/**
 	* Execute Actions based on the action selected from user in Query Args
 	*/
@@ -44,11 +46,11 @@ class UsersController extends Controller{
 			break;
 			case 'ajax':
 
-				echo json_encode($this->model->all());
+			echo json_encode($this->model->all());
 			break;
 			case 'massInsert':
-					$this->massInsert();
-					break;
+			$this->massInsert();
+			break;
 			default:
 			break;
 		}
@@ -59,8 +61,8 @@ class UsersController extends Controller{
 			//Validate Variables
 			$email   = $this->validateEmail($_POST['email']);
 			$password = $this->validateText($_POST['password']);
-			$result = $this->model->create($email, $password);
-			
+			$idRole = $this->validateNumber($_POST['idRole']);
+			$result = $this->model->create($email, $password,$idRole);
 			//Insert Succesful
 			if($result)
 			{
@@ -78,6 +80,8 @@ class UsersController extends Controller{
 
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$this->loadProperties();
+			$this->smarty->assign('roles',$this->toAssociativeArray($this->roles->all()));
 			if(isset($name))
 				$this->smarty->assign('name',$name);
 			$this->smarty->display('./views/User/add.tpl');
@@ -129,13 +133,13 @@ class UsersController extends Controller{
 	* @return null, view rendered
 	*/
 	private function edit(){
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
-
-		$id = $this->validateText($_GET['id']);
-		$email = $this->validateText($_POST['email']);
-		$password = $this->validateText($_POST['password']);
-		$result = $this->model->edit($id,$email,$password);
-		if($result)
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT')
+		{
+			$id = $this->validateText($_GET['id']);
+			$email = $this->validateText($_POST['email']);
+			$password = $this->validateText($_POST['password']);
+			$result = $this->model->edit($id,$email,$password);
+			if($result)
 			{
 				unset($postError);
 				header("Location: index.php?controller=user");
@@ -183,7 +187,7 @@ class UsersController extends Controller{
 		else
 		{
 			//Ohh well... :(
-				$this->smarty->display('./views/error.tpl');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -205,5 +209,12 @@ class UsersController extends Controller{
 		}
 		$this->all();
 	}
+
+	private function loadProperties(){
+		require('models/RolesModel.php');
+		$this->roles = new RolesModel();
+	}
+
+
 }
 ?>

@@ -26,7 +26,7 @@ class UsersModel extends Model{
 	{
 		if($result = $this->db->details('user', $id,NULL))
 		{
-			$user = new User($result['email'], $result['password'],$result['id']);
+			$user = new User($result['email'], $result['password'], $result['idRole'],$result['id']);
 			return $user;
 		}
 		else
@@ -41,10 +41,10 @@ class UsersModel extends Model{
 	* @param string $email
 	* @param string $password
 	*/
-	function create($email, $password)
+	function create($email, $password,$idRole)
 	{	
 		global $db;
-		$user = new User($email, $password);
+		$user = new User($email, $password,$idRole);
 		if($result = $db->insert('user', $user,NULL))
 		{
 			return $result;
@@ -59,9 +59,9 @@ class UsersModel extends Model{
 	* @param string $email
 	* @param string $password
 	*/
-	function edit($id,$email,$password)
+	function edit($id,$email,$password,$idRole)
 	{		
-		$user = new User($email,$password);
+		$user = new User($email,$password,$idRole);
 		$user->id = $id;
 		if($result = $this->db->update('user' , $user,NULL))
 			return true;
@@ -93,13 +93,14 @@ class UsersModel extends Model{
 		if($result = $this->db->query('user' , "email='$name' AND password = '$pass'"))
 		{
 			if(count($result) > 0){
-				$user = new User($result[0]['email'],$result[0]['password'],$result[0]['id']);
+				$user = new User($result[0]['email'],$result[0]['password'],$result[0]['idRole'],$result[0]['id']);
 				return $user;	
 			}
 			
 		}		
 		return null;
 	}
+
 
 }
 

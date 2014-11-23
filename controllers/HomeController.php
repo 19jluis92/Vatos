@@ -41,7 +41,7 @@ class HomeController extends Controller {
 	*/
 	private function index()
 	{
-		$result = $this->loggedIn();
+		$result = $this->LoggedIn();
 		$this->smarty->assign('result',$result);
 		$this->smarty->display('./views/home/index.tpl');
 	}

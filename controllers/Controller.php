@@ -9,6 +9,7 @@ class Controller
 		// *nix style (note capital 'S')
 		//require_once('../libs/Smarty.class.php');
 		require '/libs/Smarty.class.php';
+		require_once('database/User.php');
 		$this->smarty = new Smarty();
 		$this->smarty->setTemplateDir($_SERVER['DOCUMENT_ROOT'].'/views/');
 		$this->smarty->setCompileDir($_SERVER['DOCUMENT_ROOT'].'/views_c/');
@@ -19,7 +20,78 @@ class Controller
 		$this->smarty->caching = false;
 		$this->smarty->cache_lifetime = 0;
 	}
-/**
+
+	/**
+	* @param array/string $roles
+	* @return string $data
+	* Validate perrmission by rolename
+	*/
+	protected function validatePersmission($roles)
+	{
+		$user = $this->LoggedIn();
+		if($user != null){
+			$this->smarty->assign('role',$this->getActualRoleName($user));
+			switch (gettype($roles)) {
+				case 'string':
+				if($roles == 'all')
+					return;
+				else{
+					if($this->userInRole($user,$roles))
+						return;
+				}
+				break;
+				case 'array':
+				foreach ($roles as $key => $value) {
+					if($this->userInRole($user,$value))
+						return;	
+				}
+				break;
+				default:
+				
+				break;
+			}
+		}
+		header('location: index.php'); 
+	}
+	
+
+	/**
+	* @param User $user
+	* @param string $role
+	* @return string $data
+	* Validate perrmission by rolename
+	*/
+	protected function getActualRoleName($user)
+	{
+		require_once('models/RolesModel.php');
+		$roles = new RolesModel();
+		if(isset($_SESSION['actualRole']))
+			return $_SESSION['actualRole'];
+		$result = $roles->get('role',[['','id','=',$user->idRole]]);
+		if(count($result) > 0)
+			$_SESSION['actualRole'] = $result[0]['name']; 
+		return $_SESSION['actualRole'];
+		return null;
+	}
+
+	/**
+	* @param User $user
+	* @param string $role
+	* @return string $data
+	* Validate perrmission by rolename
+	*/
+	protected function userInRole($user, $role)
+	{
+		require_once('models/RolesModel.php');
+		$roles = new RolesModel();
+		$result = $roles->get('role',[['','name','=',$role]]);
+		if(count($result) > 0)
+			return $user->idRole == $result[0]['id']; 
+		return false;
+	}
+
+
+	/**
 	* @param string $data
 	* @return string $data
 	* Validate a string to be a number and clean it
@@ -147,43 +219,16 @@ class Controller
 
 	protected function LoggedIn()
 	{
-		return isset($_SESSION['user'])?$_SESSION['user']:null;
-	}
+		require_once('database/User.php');
+		$logged_user = isset($_SESSION['user'])?$_SESSION['user']:null;
 
-	protected function validatePermissions($controller , $view)
-	{
-		/* valida los permisos de acuerdo a la base de datos*/
-		if(isset($controller) &&  isset($view) ){
-			if($controller !== '' && $view !== '')
-			{
-			//validar si tiene permisos en la base de datos
-				return true;
-			}
-			else 
-				return false;
+		if($logged_user === null){
+			$logged_user = isset($_COOKIE['user'])?json_decode($_COOKIE['user']):null;
 		}
-		else 
-			return false;
-		
+		return $logged_user;
 	}
 
 
-
-	function validateSession()
-	{
-		
-		$result = (!empty($_SESSION['uid'])) ?  true : false;
-		
-		
-		return $result;
-	}
-	function logout()
-	{
-		
-		session_destroy(); 
-		
-		header('location: index.php'); 
-	}
 
 	/*HELPERS*/
 	protected function toAssociativeArray($array, $key='id' , $value='name')
@@ -209,6 +254,10 @@ class Controller
 		$data = array();
 		if($_FILES['csv']['error'] == 0)
 		{
+			while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
+			{
+				$data[] = $row;
+			}
 		    //$name = $_FILES['csv']['name'];
 			$tmp = explode('.', $_FILES['csv']['name']);
 		   $ext = strtolower(end($tmp));
