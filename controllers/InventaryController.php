@@ -195,7 +195,7 @@ class InventaryController extends Controller
 		//Insert Succesfull
 			if($result)
 			{
-				unset($postError);
+				//unset($postError);
 				
 			}
 			else
@@ -206,6 +206,7 @@ class InventaryController extends Controller
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			$id = $this->validateNumber($_GET['id']);
+			if(isset($id))
 			$inspection = $this->Inspection->GetByColum('inspection',$id,'idService');
 
 		//select Succesfull
@@ -218,8 +219,12 @@ class InventaryController extends Controller
 			}
 			else
 			{
-				$this->smarty->display('./views/error.tpl');
+				$inspection = $this->Inspection->create();
+				$this->smarty->assign('inspection',$inspection);
+				$this->smarty->display('./views/Inventary/inspectionEdit.tpl');
 			}
+
+			
 
 		}
 	}
