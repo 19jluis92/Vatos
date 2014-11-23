@@ -116,7 +116,8 @@ Class RelocationsModel extends Model{
 	function GetByColum($tabla,$id,$colum){
 		if($result = $this->db->GetByColum($tabla,$id,$colum))
 		{
-			$Relocation = new Relocation($result['relocationDate'],$result['idEmployee'],$result['reason'],$result['idDepartment'],$result['idService']);
+			var_dump($result);
+			$Relocation = new Relocation($result[0]['relocationDate'],$result[0]['idEmployee'],$result[0]['reason'],$result[0]['idDepartment'],$result[0]['idService']);
 			return $Relocation;
 		}
 		else{

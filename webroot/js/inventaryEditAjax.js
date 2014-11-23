@@ -12,7 +12,7 @@ $.ajax({
 		chargeDataService();
 	});
 
-	inspectionEdit();	
+	
 });
 
 function chargeDataService(){
