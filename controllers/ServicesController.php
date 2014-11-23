@@ -156,7 +156,7 @@ class ServicesController extends Controller {
 		//Validate Variables
 			$startDate = $this->validateDate($_POST['startDate']);
 			$endDate = $this->validateDate($_POST['endDate']);
-			$idEmployee = 3;//$this->validateNumber($_POST['idEmployee']);
+			$idEmployee = $this->validateNumber($_POST['idEmployee']);
 			$idCarWorkShop = $this->validateNumber($_POST['idvehicleService']);
 			$idVehicle = $this->validateNumber($_POST['idVehicle']);
 			var_dump($idCarWorkShop);

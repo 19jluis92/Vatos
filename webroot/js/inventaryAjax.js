@@ -37,6 +37,7 @@ $("#idvehicle").on('change',function(e){
 });
 
 $("#servicio").on('click',function(e){
+
 	var id= $("#idvehicle").val();
 	if(id>0)
 	$('#myModal').modal('show')
@@ -47,15 +48,29 @@ $("#servicio").on('click',function(e){
 $("#inspeccion").on('click',function(e){
 	var id= $("#idvehicle").val();
 	if(id>0)
-	$('#InspeccionModal').modal('show')
+	{
+
+		var exist =$('#bto1').length;
+		if(exist==0)
+			$('#InspeccionModal').modal('show');
+		else
+		$('#error').modal('show');
+	}
 	else
 		$('#error').modal('show');
 });
 
 $("#ubicacion").on('click',function(e){
 	var id= $("#idvehicle").val();
-	if(id>0)
-	$('#RehubicacionModal').modal('show')
+		if(id>0)
+	{
+
+		var exist =$('#bto2').length;
+		if(exist==0)
+			$('#RehubicacionModal').modal('show');
+		else
+		$('#error').modal('show');
+	}
 	else
 		$('#error').modal('show');
 });
@@ -110,9 +125,23 @@ $.get("index.php?controller=service&view=ajax",function(e){
 
 });
 
+function onlyInspection(){
+	$.get("index.php?controller=service&view=ajax",function(e){
+  
+  
+  var result = JSON.parse(e);
+    
+      for(var i in result){
+      
+        $(".idservins").attr('value',result[i].id);
+      }
+
+});
+}
+
 $('#bto1').on('click',function(e){
 	
-	debugger;
+	
 	$.ajax({
 		url:'index.php?controller=service&view=createInventary',
 		type:'POST',
@@ -124,7 +153,49 @@ $('#bto1').on('click',function(e){
 		idEmployee: 3,//$('#idemployee').val(),
 		}
 	}).done(function(e){
+		$('#bto1').remove();
 		$('.bloqserv').attr('readonly',true);
+			$('#error').modal('show');
+			onlyInspection();
+		});
+});
+
+$('#bto2').on('click',function(e){
+	
+	
+	$.ajax({
+		url:'index.php?controller=inspection&view=createInventary',
+		type:'POST',
+		data:{
+		idService : $('#idServiceInspection').val(),
+		mileage : $('#mileage').val() ,
+		fuel : $('#fuel').val(),
+		inspectionDate : $('#inspectiondate').val() ,
+		type: $('#type').val(),
+		}
+	}).done(function(e){
+		$('#bto2').remove()
+		$('.bloqIns').attr('readonly',true);
+			$('#error').modal('show');
+		});
+});
+
+$('#bto3').on('click',function(e){
+	
+	
+	$.ajax({
+		url:'index.php?controller=relocation&view=createInventary',
+		type:'POST',
+		data:{
+		relocationDate : $('#relocationDate').val() ,
+		idEmployee : 3,//$('idEmployee').val(),
+		reason : $('#reason').val(),
+		idDepartment : $('#idDepartment option:selected').val() ,
+		idService: $('#idServiceInspection').val(),
+		}
+	}).done(function(e){
+		$('#bto3').remove()
+		$('.bloqIns').attr('readonly',true);
 			$('#error').modal('show');
 		});
 });
