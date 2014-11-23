@@ -32,7 +32,7 @@ Class CarWorkShopModel extends Model{
 			$CarWorkShop = new CarWorkShop($result['name'],$result['address'],$result['idCity'],$result['id']);
 			/*opcionales son de prueba*/
 			var_dump($CarWorkShop);
-			return $brand;
+			return $CarWorkShop;
 		}
 		else{
 			echo $result;
@@ -47,9 +47,9 @@ Class CarWorkShopModel extends Model{
 	*@param string $name
 	* @return bool transaction result
 	*/
-	function create($name, $address, $city)
+	function create($name, $address, $idCity)
 	{
-		$CarWorkShop = new CarWorkShop($name, $address, $city);
+		$CarWorkShop = new CarWorkShop($name, $address, $idCity);
 		if($result = $this->db->insert("CarWorkShop", $CarWorkShop,NULL))
 			{
 			/*opcionales son de prueba*/

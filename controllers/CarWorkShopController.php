@@ -68,7 +68,7 @@ class CarWorkShopController extends Controller {
 		
 		//get all the CarWorkShop
 		$result = $this->model->all();	
-		$this->smarty->assign('carworkshop',$result);
+		$this->smarty->assign('carworkshops',$result);
 		//Query Succesfull
 		if(isset($result))
 		{
@@ -92,7 +92,7 @@ class CarWorkShopController extends Controller {
 	private function details()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$carworkshop = $this->model->details($id);
 
 		//Insert Succesfull
@@ -126,7 +126,7 @@ class CarWorkShopController extends Controller {
 	      //Insert Succesful
 			if($result)
 			{
-	         	unset($postError);
+	         unset($postError);
 				header("Location: index.php?controller=carworkshop&view=details&id=$result->id");
 			}
 			else
@@ -197,7 +197,7 @@ class CarWorkShopController extends Controller {
 	private function delete()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)

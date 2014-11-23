@@ -24,7 +24,7 @@ Class CitiesModel extends Model{
 	{
 		if($result = $this->db->details('city', $id,NULL))
 		{
-			$Model = new City($result['name'],$result['idState']);
+			$Model = new City($result['name'],$result['idState'],$result['id']);
 			/*opcionales son de prueba*/
 			var_dump($Model);
 			return $Model;
@@ -45,12 +45,10 @@ Class CitiesModel extends Model{
 	*/
 	function create($name,$idState)
 	{
-		$this->name = $name;
-		$this->idState = $idState;
 		$city = new City($name,$idState);
 		if($result = $this->db->insert('city' , $city,NULL))
 		{
-			return true;
+			return $result;
 		}
 		else{
 			echo $result;
@@ -73,7 +71,7 @@ Class CitiesModel extends Model{
 		$city = new City($name,$idState);
 		$city->id = $id;
 		if($result = $this->db->update('city' , $city,NULL))
-			return true;
+			return $result;
 		else{
 			echo $result;
 			return false;

@@ -8,6 +8,7 @@
 		<h3>Acciones</h3>
 		<ul class="list-group">
 			<li><a  class="list-group-item" href="index.php?controller=user&view=create">Nuevo Usuario</a></li>
+			<li><a  class="list-group-item" href="index.php?controller=user&view=massInsert&model=user">Insercion Masiva</a></li>
 		</ul>
 	</div>
 	<div class="col-md-10">

@@ -9,6 +9,7 @@ class CitiesController extends Controller {
 	*/
 	function __construct()
 	{
+		parent::__construct();
 		require('models/CitiesModel.php');
 		$this->model = new CitiesModel();
 	}
@@ -63,16 +64,19 @@ class CitiesController extends Controller {
 		
 		//get all the cities
 		$result = $this->model->all();	
+		$this->smarty->assign('cities',$result);
 		//Query Succesfull
 		if(isset($result))
 		{
 			//Load view
-			require('views/City/Index.php');
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			$this->smarty->display('./views/City/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -84,17 +88,19 @@ class CitiesController extends Controller {
 	private function details()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$result = $this->model->details($id);	
+		$id = $this->validateNumber($_GET['id']);
+		$city = $this->model->details($id);	
 		//Insert Succesfull
-		if($result)
+		if($city != NULL)
 		{
 			//Load view
-			require('views/City/Details.php');
+			$this->smarty->assign('city',$city);
+			$this->smarty->display('./views/City/view.tpl');
 		}
 		else
 		{
 			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -106,19 +112,30 @@ class CitiesController extends Controller {
 	*/
 	private function create()
 	{
-		//Validate Variables
-		$name = $this->validateText($_POST['name']);
-		$idState = $this->validateNumber($_POST['idState']);
-		$result = $this->model->create($name,$idState);	
-		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/City/Created.php');
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
+		{	
+			echo "string";
+			//Validate Variables
+			$name = $this->validateText($_POST['name']);
+			$idState = $this->validateNumber($_POST['idState']);
+			$result = $this->model->create($name,$idState);
+			//Insert Succesfull
+			if($result)
+			{
+				//Load view
+				header("Location: index.php?controller=city&view=index");
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error',$result);
+			}
 		}
-		else
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
 		{
-			require('views/Error.html');
+			$this->loadProperties();
+			$this->smarty->assign('states',$this->parcheAlCageDeChelis($this->states->all()));
+			$this->smarty->display('./views/City/add.tpl');
 		}
 	}
 
@@ -131,23 +148,50 @@ class CitiesController extends Controller {
 	*/
 	private function edit()
 	{
-		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$name = $this->validateText($_POST['name']);
-		$idState = $this->validateNumber($_POST['idState']);
-		$result = $this->model->edit($id,$name,$idState);	
-		//Insert Succesfull
-		if($result)
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') 
 		{
-			//Load view
-			require('views/City/Edited.php');
-		}
-		else
-		{
-			require('views/Error.html');
-		}
-	}
+			//Validate Variables
+			$id = $this->validateNumber($_GET['id']);
+			$name = $this->validateText($_POST['name']);
+			echo $name;
+			$idState = $this->validateNumber($_POST['idState']);
+			echo $idState;
+			$result = $this->model->edit($id,$name,$idState);	
 
+			//Insert Succesfull
+			if($result)
+			{
+				//Load view
+				unset($postError);
+				header("Location: index.php?controller=city");
+			}
+			else
+			{
+				require('views/Error.html');
+				//$postError = true;
+				//$this->smarty->assign('error','no se pudo :(');
+			}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+			$id = $this->validateNumber($_GET['id']);
+			$city = $this->model->details($id);
+			//select Succesfull
+			if($city != NULL)
+			{
+				$this->loadProperties();
+				$this->smarty->assign('states',$this->parcheAlCageDeChelis($this->states->all()));
+				$this->smarty->assign('city',$city);
+				$this->smarty->display('./views/City/edit.tpl');
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+
+		}
+
+	}
+     
 	/**
 	*Delete a city with the given post parameters 
 	*@param name the city name
@@ -156,18 +200,23 @@ class CitiesController extends Controller {
 	private function delete()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
-			require('views/City/Deleted.php');
+			header("Location: index.php?controller=city&deleted=true");
 		}
 		else
 		{
 			require('views/Error.html');
 		}
+	}
+
+	private function loadProperties(){
+		require('models/StateModel.php');
+		$this->states = new StateModel();
 	}
 
 }

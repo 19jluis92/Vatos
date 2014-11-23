@@ -9,7 +9,7 @@
 		public $characteristics;
 		public $plates;
 
-		function __construct($vin, $model, $color, $year, $type, $conditions, $plates,$id=0)
+		function __construct($vin, $model, $color, $year, $type, $conditions, $plates,$id = 0)
 		{
 			$this->id=$id;
 			$this->vin = $vin;
