@@ -1,17 +1,15 @@
 <?php  
 	class Relocation{
 		public $id;
-		public $name;
 		public $relocationDate;
 		public $idEmployee;
 		public $reason;
 		public $idDepartment;
 		public $idService;
 
-		function __construct($name, $relocationDate, $idEmployee, $reason, $idDepartment, $idService)
+		function __construct($relocationDate, $idEmployee, $reason, $idDepartment, $idService,$id=0)
 		{
-			$this->id=0;
-			$this->name = $name;
+			$this->id=$id;
 			$this->relocationDate = $relocationDate;
 			$this->idEmployee = $idEmployee;
 			$this->reason = $reason;

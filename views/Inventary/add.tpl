@@ -40,11 +40,11 @@
 				<div class="row ">
                 <div class="form-group input-group">
 						<label for="startDate" class="input-group-addon">Fecha de inicio</label>
-						<input type="date" required="required" name="startDate" class="form-control" id="startDate">
+						<input type="date" required="required" name="startDate" class="form-control bloqserv" id="startDate">
                 </div>
                 <div class="form-group input-group">
 						<label for="endDate" class="input-group-addon">Fecha de fin</label>
-						<input type="date" name="endDate" class="form-control" id="endDate"></select>
+						<input type="date" name="endDate" class="form-control bloqserv" id="endDate"></select>
                 </div>  
               </div>
             <br />
@@ -53,7 +53,7 @@
                <div class="form-group input-group">
 						<label for="idcarworkshop" class="input-group-addon"> Taller </label>
 						
-						<select id="idvehicleService" class="form-control serviceIdtaller"  required="required">
+						<select id="idvehicleService" class="form-control bloqserv"  required="required">
     					<option value=''>-- none --</option> 
     					</select>
 						
@@ -61,12 +61,12 @@
                </br>
                	<div class="form-group input-group">
 						<label for="idvehicle"class="input-group-addon">VIN  Vehiculo</label>
-						<input type="text"  class="form-control serviceIdVehicle" name="idVehicle" required="required" id="idvehicle" data-id="0" readonly>
+						<input type="text"  class="form-control serviceIdVehicle bloqserv" name="idVehicle" required="required" id="idvehicle" data-id="0" readonly>
                 </div>
                 </br>
                 <div class="form-group input-group">
 						<label for="idemployee" class="input-group-addon">Empleado</label>
-						<input type="number"  class="form-control" name="idEmployee" required="required" id="idemployee" readonly>
+						<input type="number"  class="form-control bloqserv" name="idEmployee" required="required" id="idemployee" readonly>
 					</div>
               </div>
             <br />
@@ -86,14 +86,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Servicio</h4>
+        <h4 class="modal-title">Inspeccion</h4>
       </div>
       <div class="modal-body">
-   <form method="post" accept-charset="utf-8" action="index.php?controller=Inspection&view=create">
-			<fieldset>
+  
 				<legend>Inspeccion</legend>
 				
 				<div class="form-group input-group">
+				 <label for="idService" class="input-group-addon">ID servicio</label>
+							<input type="number" class="form-control idservins" name="idService" required="required" step="0.01" id="idServiceInspection" readonly>
+                	</div>
+                	<div class="form-group input-group">
 					<label for="mileage" class="input-group-addon">Millas</label>
 					<input type="number" name="mileage" required="required" step="0.01" id="mileage" class="form-control bloqIns"></div>
 					<div class="form-group input-group">
@@ -104,15 +107,15 @@
 						</div>
 						<div class="form-group input-group">
 							<label   for="type" class="input-group-addon">Type</label><input type="checkbox" name="type" id="type" class="form-control bloqIns"></div>
-				</fieldset>
+			
 						
 					
 			
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary"id="bto2">Save changes</button>
-        </form>
+        <a href="#"class="btn btn-primary"id="bto2">Save changes</a>
+     
       </div>
       
     </div><!-- /.modal-content -->
@@ -126,8 +129,7 @@
         <h4 class="modal-title">Servicio</h4>
       </div>
       <div class="modal-body">
-		<form method="post" accept-charset="utf-8" action="index.php?controller=Relocation&view=create">
-			<fieldset>
+		
 				<legend>Agregar Relocacion</legend>
 
 				<div class="row">
@@ -142,22 +144,21 @@
 				<div class="row">
                 <div class="form-group input-group">
                   <label class="input-group-addon" for="idService">id Servicio</label>
-						<select required="required"  id="idService"class="form-control" required="required">
-    				<option value=''>-- none --</option> </select>
+						<input type="number" class="form-control idservins" name="idService" required="required" step="0.01" id="idServiceInspection" readonly>
                 </div>
                 <div class="form-group input-group">
 						<label class="input-group-addon" for="name">Fecha de relocacion</label>
-						<input type="date" class="form-control" name="relocationDate" required="required" id="relocationDate">
+						<input type="date" class="form-control bloqrelo" name="relocationDate" required="required" id="relocationDate">
                 </div>
 
                 <div class="form-group input-group">
 						<label class="input-group-addon" for="idEmployee"> Empleado</label>
-						<input type="text" class="form-control" name="idEmployee" required="required" id="idEmployee" readonly>
+						<input type="text" class="form-control bloqrelo" name="idEmployee" required="required" id="idEmployee" readonly>
                 </div>
 
                 <div class="form-group input-group">
                   <label class="input-group-addon" >Departamento</label>
-                  <select required="required"  id="idDepartment"class="form-control">
+                  <select required="required"  id="idDepartment"class="form-control bloqrelo">
     				<option value=''>-- none --</option> </select>
 						
                 </div>
@@ -166,19 +167,19 @@
 
             <div class="form-group input-group">	  				
 					<label for="reason" class="input-group-addon">Razon</label>
-					<input type="textarea" name="reason" required="required" class="form-control" id="reason">
+					<input type="textarea" name="reason" required="required" class="form-control bloqrelo" id="reason">
 				</div>  
             <br />
 
-			</fieldset>
+		
 			
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="bto3">Save changes</button>
+        <a  class="btn btn-primary" id="bto3">Save changes</a>
      
       </div>
-      </form>
+    
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -187,6 +188,15 @@
     <div class="modal-content">
    <p>
    	Por Favor Rellena los campos anteriores.
+   </p> 
+    </div>
+  </div>
+</div>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="bien">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+   <p>
+   	Guardado en Sistema.
    </p> 
     </div>
   </div>

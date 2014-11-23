@@ -43,6 +43,11 @@ class RelocationsController extends Controller {
 						//Validate User and permissions
 			$this->delete();		
 			break;
+
+			case 'createInventary':
+				$this->createInventary();
+				break;
+
 			default:
 			break;
 		}
@@ -111,7 +116,32 @@ class RelocationsController extends Controller {
 	*@param  int $idService  (POST)
 	*@return null nothing returned but view loaded
 	*/
-	private function create()
+	private function createInventary()
+	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+			//Validate Variables
+		$relocationDate = $this->validateDate($_POST['relocationDate']);
+		$idEmployee = $this->validateNumber($_POST['idEmployee']);
+		$reason = $this->validateText($_POST['reason']);
+		$idDepartment = $this->validateNumber($_POST['idDepartment']);
+		$idService = $this->validateNumber($_POST['idService']);
+		$result = $this->model->create($relocationDate,$idEmployee,$reason,$idDepartment,$idService);	
+		//Insert Succesfull
+		if($result)
+		{
+			//Load view
+			
+			
+		}
+		else
+		{
+			require('views/Error.html');
+		}
+		}
+		
+		
+	}
+private function create()
 	{
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 			//Validate Variables
@@ -141,7 +171,6 @@ class RelocationsController extends Controller {
 		}
 		
 	}
-
 	/**
 	*Update a relocation with the given post parameters 
 	*@param  int $id (POST)

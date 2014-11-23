@@ -41,6 +41,11 @@ class InspectionsController extends Controller {
 						//Validate User and permissions
 			$this->delete();		
 			break;
+
+			case 'createInventary':
+				json_encode($this->createInventary());
+				break;
+
 			default:
 			break;
 		}
@@ -135,6 +140,30 @@ class InspectionsController extends Controller {
 		}
 	}
 
+		private function createInventary()
+	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+		//Validate Variables
+			$idService = $this->validateNumber($_POST['idService']);
+			$mileage = $this->validateFloat($_POST['mileage']);
+			$fuel = $this->validateFloat($_POST['fuel']);
+			$inspectionDate = $this->validateDate($_POST['inspectionDate']);
+			$type = $this->validateBool($_POST['type']);
+			$result = $this->model->create($idService , $mileage , $fuel , $inspectionDate , $type);	
+			if($result)
+			{
+				return true;
+				//$this->all();
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error',$result);
+			}
+
+		} 
+		
+	}
 	/**
 	*Update a inspection with the given post parameters 
 	*@param int $id (post)
