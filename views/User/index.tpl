@@ -7,8 +7,20 @@
 	<div class="actions col-md-2">
 		<h3>Acciones</h3>
 		<ul class="list-group">
-			<li><a  class="list-group-item" href="index.php?controller=user&view=create">Nuevo Usuario</a></li>
-			<li><a  class="list-group-item" href="index.php?controller=user&view=massInsert&model=user">Insercion Masiva</a></li>
+			<li>
+				<a  class="list-group-item" href="index.php?controller=user&view=create">Nuevo Usuario
+				</a>
+			</li>
+			<li>
+          <a class="list-group-item" href="#">Insercion Masiva
+          </a>
+          <form action="index.php?controller=user&view=massInsert" method="post" enctype="multipart/form-data">
+            <span class="btn btn-default btn-file">
+            Browse <input type="file" name="csv" value="">
+            </span>
+            <input class="btn btn-default btn-file" type="submit" name="submit" value="Save" />
+          </form>
+        </li>
 		</ul>
 	</div>
 	<div class="col-md-10">

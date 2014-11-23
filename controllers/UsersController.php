@@ -199,13 +199,11 @@ class UsersController extends Controller{
 
 	private function massInsert()
 	{
-		$model = $this->validateText($_GET['model']);
-		echo $model;
-		/*Work on this shit*/
 		$dataArray = $this->massiveInsertion();
 		
 		for($i = 0; $i < count($dataArray); $i++)
-		{ 
+		{
+			/*Perdon por esto de aqui :(, lo arreglare despues*/
 			$email = $this->validateText($dataArray[$i][0]);
 			$password = $this->validateNumber($dataArray[$i][1]);
 			$result = $this->model->create($email, $password);

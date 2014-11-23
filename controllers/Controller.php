@@ -242,7 +242,8 @@ class Controller
 
 	protected function parcheAlCageDeChelis($array, $key='id' , $value='Name'){
 		$result = [];
-		foreach ($array as &$valor) {
+		foreach ($array as &$valor)
+		{
 			$result[$valor[$key]] = $valor[$value]; 
 		}
 		return $result;
@@ -251,16 +252,33 @@ class Controller
 	protected function massiveInsertion()
 	{
 		$data = array();
-		if (($handle = fopen("./test.csv", "r")) !== FALSE)
+		if($_FILES['csv']['error'] == 0)
 		{
 			while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
 			{
 				$data[] = $row;
 			}
+		    //$name = $_FILES['csv']['name'];
+			$tmp = explode('.', $_FILES['csv']['name']);
+		   $ext = strtolower(end($tmp));
+		   $type = $_FILES['csv']['type'];
+		   $tmpName = $_FILES['csv']['tmp_name'];
+	    // check the file is a csv
+	      if($ext === 'csv')
+	      {
+	  	      $file = $_FILES['csv']['tmp_name']; 
+	    		$handle = fopen($file,"r");
+
+				if (($handle = fopen($file, "r")) !== FALSE)
+				{
+				    while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
+				    {
+				        $data[] = $row;
+				    }
+				}
+				return $data;
+		    }
 		}
-		return $data;
 	}
-
 }
-
 ?>
