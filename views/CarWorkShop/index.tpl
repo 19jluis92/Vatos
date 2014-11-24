@@ -29,16 +29,14 @@
                <td>{$carworkshop.name}</td>
                <td>{$carworkshop.idCity}</td>
                <td class="actions">
-                  <a href="index.php?controller=carworkshop&view=details&id={$carworkshop.id}">
-                     Mostrar
-                  </a>           
-                  <a href="index.php?controller=carworkshop&view=edit&id={$carworkshop.id}">
-                     Editar
-                  </a>     
+                   <div class="btn-group" role="group" aria-label="...">
+                  <a  class="btn btn-default" href="index.php?controller=carworkshop&view=details&id={$carworkshop.id}">Ver</a>           
+                  <a  class="btn btn-default" href="index.php?controller=carworkshop&view=edit&id={$carworkshop.id}">Editar</a>     
                   <form action="index.php?controller=carworkshop&view=delete&id={$carworkshop.id}" name="post_carworkshop_{$carworkshop.id}" style="display:none;" method="post">
                      <input type="hidden" name="_method" value="POST">
                   </form>
                   <a  class="btn btn-default" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_carworkshop_{$carworkshop.id}.submit(); } event.returnValue = false; return false;">Eliminar</a>
+                  </div>
                </td>
             </tr>
          </tbody>

@@ -25,12 +25,10 @@ Class CitiesModel extends Model{
 		if($result = $this->db->details('city', $id,NULL))
 		{
 			$Model = new City($result['name'],$result['idState'],$result['id']);
-			/*opcionales son de prueba*/
-			var_dump($Model);
 			return $Model;
 		}
-		else{
-			echo $result;
+		else
+		{
 			return NULL;
 		}
 		//delete element using the given $id

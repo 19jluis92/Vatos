@@ -28,15 +28,13 @@ Class LocationModel extends Model{
 	{
 		if($result = $this->db->details('location' , $id,NULL))
 		{
-			$Location = new Location($result['name']);
+			$Location = new Location($result['name'],$result['idCarWorkShop'],$result['id']);
 			return $Location;
 		}
-		else{
-			echo $result;
-			return NULL;
+		else
+		{
+			return false;
 		}
-		//delete element using the given $id
-		return true;
 	}
 
 	/**
@@ -49,11 +47,10 @@ Class LocationModel extends Model{
 		$Location = new Location($name, $carWorkShop);
 		if($result = $this->db->insert('location', $Location,NULL))
 		{
-			return true;
+			return $result;
 		}
-		else{
-			echo $result;
-			
+		else
+		{
 			return false;
 		}
 	}
@@ -64,13 +61,15 @@ Class LocationModel extends Model{
 	*@param string $name (state name) 
 	* @return bool transaction result
 	*/
-	function edit($name, $carWorkShop)
+	function edit($id,$name, $carWorkShop)
 	{
-		$Location = new Location($name, $carWorkShop);
+		$Location = new Location($name, $carWorkShop,$id);
 		if($result = $this->db->update('location', $Location,NULL))
-			return true;
-		else{
-			echo $result;
+		{			
+			return $result;
+		}
+		else
+		{
 			return false;
 		}
 	}

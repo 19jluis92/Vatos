@@ -133,7 +133,7 @@ class DepartmentsController extends Controller {
 			if(isset($name))
 				$this->smarty->assign('name',$name);
 			$this->loadProperties();
-				$this->smarty->assign('locations',$this->toAssociativeArray($this->locations->all()));
+			$this->smarty->assign('locations',$this->toAssociativeArray($this->locations->all()));
 			$this->smarty->display('./views/Department/add.tpl');
 		}
 	}
@@ -171,7 +171,9 @@ class DepartmentsController extends Controller {
 		//select Succesfull
 			if($department != NULL)
 			{
-			//Load view
+				//Load view
+				$this->loadProperties();
+			$this->smarty->assign('locations',$this->toAssociativeArray($this->locations->all()));
 				$this->smarty->assign('department',$department);
 				$this->smarty->display('./views/Department/edit.tpl');
 			}

@@ -84,7 +84,7 @@ class LocationController extends Controller {
 	private function details()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->details($id);	
 		//Insert Succesfull
 		if(isset($result))
@@ -153,15 +153,17 @@ class LocationController extends Controller {
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 
 		//Validate Variables
+		$id = $this->validateNumber($_GET['id']);
 		$name = $this->validateText($_POST['name']);
 		$idCarWorkShop = $this->validateText($_POST['idCarWorkShop']);
-		$result = $this->model->edit($name, $idCarWorkShop);	
+		$result = $this->model->edit($id, $name, $idCarWorkShop);	
+		var_dump($result);
 		//Insert Succesfull
 		if($result)
 		{
 			//Load view
 			unset($postError);
-				header("Location: index.php?controller=Location");
+			header("Location: index.php?controller=Location");
 		}
 		else
 		{
@@ -170,12 +172,14 @@ class LocationController extends Controller {
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			$id = $this->validateNumber($_GET['id']);
-			$user = $this->model->details($id);
+			$location = $this->model->details($id);
 		//select Succesfull
-			if($user != NULL)
+			if($location != NULL)
 			{
 			//Load view
-				$this->smarty->assign('user',$user);
+				$this->loadProperties();
+			$this->smarty->assign('carWorkShops',$this->toAssociativeArray($this->carWorkShops->all()));
+				$this->smarty->assign('location',$location);
 				$this->smarty->display('./views/Location/edit.tpl');
 			}
 			else

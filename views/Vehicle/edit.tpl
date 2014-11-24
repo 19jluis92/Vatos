@@ -1,5 +1,5 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}Agregar Vehiculo{/block}
+{block name=title}Editar Vehiculo{/block}
 {block name=pageheader}Vehiculos{/block}
 {block name=head}
 {/block}
@@ -70,7 +70,7 @@
       </div>          
       <br />
    </fieldset>
-   <button type="submit" class="btn btn-primary pull-right">Enviar</button>
+   <button type="submit" class="btn btn-default pull-right">Enviar</button>
 </form>
 </div>
 </div>
