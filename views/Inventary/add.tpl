@@ -59,9 +59,9 @@
                   <input type="text"  class="form-control serviceIdVehicle bloqserv" name="idVehicle" required="required" id="idvehicle" data-id="0" readonly>
                 </div>
               
-                <div hidden class="form-group input-group">
-                  <label for="idemployee" class="input-group-addon">Empleado</label>
-                  <input type="number"  class="form-control bloqserv" name="idEmployee" required="required" id="idemployee" readonly>
+                <div  class="form-group input-group">
+                  
+                  <input type="hidden"  class="form-control bloqserv" name="idEmployee" required="required" id="idemployee" readonly>
                 </div>
 
                 <a href="#"class="btn btn-primary"id="bto1">Save changes</a>
@@ -135,8 +135,8 @@
                 </div>
 
                 <div class="form-group input-group">
-            <label class="input-group-addon" for="idEmployee"> Empleado</label>
-            <input type="text" class="form-control bloqrelo" name="idEmployee" required="required" id="idEmployee" readonly>
+           
+            <input type="hidden"  class="form-control bloqrelo" name="idEmployee" required="required" id="idEmployee" readonly>
                 </div>
 
                 <div class="form-group input-group">
@@ -159,3 +159,8 @@
   </div>
 </div>
 {/block}
+{block name=scripts}
+ {literal}
+<script  src="webroot/js/inventaryAjax.js" ></script>
+ {/literal}
+ {/block}

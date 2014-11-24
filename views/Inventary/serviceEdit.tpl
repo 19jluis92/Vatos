@@ -5,10 +5,7 @@
 				<legend>Edit Service</legend>
 				<div class="form-group input-group">
 					<label class="input-group-addon" for="id">Id Servicio</label>
-					<select   name="idserviceForm" required="required" id="idserviceForm" class="form-control">
-                    <option value=''>-- none --</option>
-                    {html_options options=$service->id selected=$service->id}
-                    </select>
+					<input type="number" name="idEmployee" required="required" id="idemployee" value="{$service->id}" class="form-control" readonly>
 				</div>
 				<div class="form-group input-group">
 					<label class="input-group-addon" for="startDate">Start Date</label>

@@ -121,9 +121,9 @@ Class InspectionsModel extends Model{
 	}
 
 	function GetByColum($table,$id,$colum){
-		if($result = $this->db->details('inspection', $id,NULL))
+		if($result = $this->db->GetByColum('inspection', $id,$colum))
 		{
-			$Inspections = new Inspection($result['idService'],$result['mileage'],$result['fuel'],$result['inspectionDate'],$result['type'],$result['id']);
+			$Inspections = new Inspection($result[0]['idService'],$result[0]['mileage'],$result[0]['fuel'],$result[0]['inspectionDate'],$result[0]['type'],$result[0]['id']);
 			return $Inspections;
 		}
 		else{
