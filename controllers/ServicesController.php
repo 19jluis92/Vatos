@@ -122,6 +122,7 @@ class ServicesController extends Controller {
 
 		//Validate Variables
 			$startDate = $this->validateDate($_POST['startDate']);
+			var_dump($startDate);
 			$endDate = $this->validateDate($_POST['endDate']);
 			$idEmployee = $this->validateNumber($_POST['idEmployee']);
 			$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
@@ -141,17 +142,23 @@ class ServicesController extends Controller {
 			}
 
 		} 
-		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
-			if(isset($name))
-				$this->smarty->assign('name',$name);
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
+		{
+			$this->loadProperties();
+			$this->smarty->assign('carWorkShops',$this->toAssociativeArray($this->carWorkShops->all()));
+			$this->smarty->assign('vehicles',$this->toAssociativeArray($this->vehicles->all(),'id','vin'));
+			$this->smarty->assign('employees',$this->toAssociativeArray($this->employees->all()));
 			$this->smarty->display('./views/Service/add.tpl');
 		}
 	}
 	private function loadProperties(){
 		
 		require('models/EmployeesModel.php');
-		$this->Employees = new EmployeesModel();
-		
+		$this->employees = new EmployeesModel();
+		require('models/CarWorkShopModel.php');
+		$this->carWorkShops = new CarWorkShopModel();
+		require('models/VehiclesModel.php');
+		$this->vehicles = new VehiclesModel();
 	}
 
 	private function createInventary()
@@ -262,7 +269,6 @@ class ServicesController extends Controller {
 				$this->smarty->display('./views/error.tpl');
 		}
 	}
-
 }
 
 ?>

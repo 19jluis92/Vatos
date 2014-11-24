@@ -37,7 +37,7 @@
 					<input type="text" name="address" required="required" id="address" class="form-control" >
 				</div>
 				<div class="input number required">
-					<label for="NSS" class="input-group-addon">NSS</label>
+					<label for="nss" class="input-group-addon">NSS</label>
 					<input type="text" name="nss" required="required" id="nss" class="form-control" >
 				</div>
 				<div class="input number required">
