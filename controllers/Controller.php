@@ -19,8 +19,11 @@ class Controller
 		$this->smarty->debugging = false;
 		$this->smarty->caching = false;
 		$this->smarty->cache_lifetime = 0;
-		if($user = $this->LoggedIn())
-			$this->smarty->assign('role',$this->getActualRoleName($user));
+		if($user = $this->LoggedIn()){
+			$actualRole = $this->getActualRoleName($user);
+			$actualRole = $actualRole == null ? '':$actualRole;
+			$this->smarty->assign('role',$actualRole);
+		}
 
 	}
 
@@ -262,24 +265,24 @@ class Controller
 			}
 		    //$name = $_FILES['csv']['name'];
 			$tmp = explode('.', $_FILES['csv']['name']);
-		   $ext = strtolower(end($tmp));
-		   $type = $_FILES['csv']['type'];
-		   $tmpName = $_FILES['csv']['tmp_name'];
+			$ext = strtolower(end($tmp));
+			$type = $_FILES['csv']['type'];
+			$tmpName = $_FILES['csv']['tmp_name'];
 	    // check the file is a csv
-	      if($ext === 'csv')
-	      {
-	  	      $file = $_FILES['csv']['tmp_name']; 
-	    		$handle = fopen($file,"r");
+			if($ext === 'csv')
+			{
+				$file = $_FILES['csv']['tmp_name']; 
+				$handle = fopen($file,"r");
 
 				if (($handle = fopen($file, "r")) !== FALSE)
 				{
-				    while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
-				    {
-				        $data[] = $row;
-				    }
+					while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
+					{
+						$data[] = $row;
+					}
 				}
 				return $data;
-		    }
+			}
 		}
 	}
 }

@@ -118,7 +118,10 @@
                 </div>
               </div>
               <ul class="sidebar-menu">
-              {if $role == 'admin'}
+                {if $role == 'admin' || $role == 'superadmin' || $role == 'user'}
+                <li><a href="index.php?controller=area"><i class="fa fa-edit"></i>Áreas</a></li>     
+                {/if}
+                {if $role == 'admin'}
                 <li class="treeview">
                   <a href="#">
                     <i class="fa fa-edit"></i> <span>User</span>
@@ -241,12 +244,12 @@
                   <li><a href="index.php?controller=state&view=create"><i class="fa fa-angle-double-right"></i>Estado</a></li>
                 </ul>
               </li>
-              <li><a href="#"><i class="fa fa-edit"></i> <span>Sucursales</span>
+              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Sucursales</span>
                 <i class="fa fa-angle-left pull-right"></i></a>
 
                 <ul class="treeview-menu">
-                  <li><a href="index.php?controller=carworkshop" ><i class="fa fa-angle-double-right"></i> carworkshop</a></li>
-                  <li><a href="index.php?controller=carworkshop&view=create"><i class="fa fa-angle-double-right"></i>carworkshop</a></li>
+                  <li><a href="index.php?controller=carworkshop" ><i class="fa fa-angle-double-right"></i> Mostrar Sucursal</a></li>
+                  <li><a href="index.php?controller=carworkshop&view=create"><i class="fa fa-angle-double-right"></i>Agregar</a></li>
                 </ul>
               </li>
               <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>workshopphone</span>
@@ -293,53 +296,53 @@
           </section>
         </div>
         <div class="right-side">
-        <section class="content-header">
-                    <h1>
-                        {block name=pageheader}Dashboard{/block}
-                        <small>{block name=pagesubheader}control panel{/block}</small>
-                    </h1>
+          <section class="content-header">
+            <h1>
+              {block name=pageheader}Dashboard{/block}
+              <small>{block name=pagesubheader}control panel{/block}</small>
+            </h1>
                     <!--<ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li class="active">Dashboard</li>
-                    </ol>-->
-                </section>
-          <h1 class="page-header"></h1>
-          <section class="content">
-            {block name=body}{/block} 
-          </section>
-        </div>
-      </div>
-      <footer>
-        <p>&copy; Company 2014</p>
-      </footer>
-    </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="webroot/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+                      </ol>-->
+                    </section>
+                    <h1 class="page-header"></h1>
+                    <section class="content">
+                      {block name=body}{/block} 
+                    </section>
+                  </div>
+                </div>
+                <footer>
+                  <p>&copy; Company 2014</p>
+                </footer>
+              </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+              <script>window.jQuery || document.write('<script src="webroot/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
 
-    <script src="webroot/js/vendor/bootstrap.min.js"></script>
+              <script src="webroot/js/vendor/bootstrap.min.js"></script>
 
-    <script src="webroot/js/main.js"></script>
-    <script src="webroot/js/ajax.js"></script>
-    <script src="webroot/js/inventaryAjax.js"></script>
-    <script src="webroot/js/inventaryEditAjax.js"></script>
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    {literal}
-    <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
-    <script type="text/javascript">
-      $( document ).ready(function() {
-        $('a[data-dropdown="true"]').on('click',function(e) {
-          $(this).next('div').slideToggle().show();
-          $(this).next('div').addClass('active');
-        });
-      });
-    </script>
-    {/literal}
-    {block name=scripts}{/block}
-  </body>
-  </html>
+              <script src="webroot/js/main.js"></script>
+              <script src="webroot/js/ajax.js"></script>
+              <script src="webroot/js/inventaryAjax.js"></script>
+              <script src="webroot/js/inventaryEditAjax.js"></script>
+              <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+              {literal}
+              <script>
+                (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+                  function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+                e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+                e.src='//www.google-analytics.com/analytics.js';
+                r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+                ga('create','UA-XXXXX-X');ga('send','pageview');
+              </script>
+              <script type="text/javascript">
+                $( document ).ready(function() {
+                  $('a[data-dropdown="true"]').on('click',function(e) {
+                    $(this).next('div').slideToggle().show();
+                    $(this).next('div').addClass('active');
+                  });
+                });
+              </script>
+              {/literal}
+              {block name=scripts}{/block}
+            </body>
+            </html>
