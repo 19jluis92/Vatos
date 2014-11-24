@@ -14,6 +14,7 @@ class InventaryController extends Controller
 	}
 
 	 function run(){
+	 	//$this->validatePersmission(["user","admin","superadmin"]);
 	 	$view = isset($_GET['view'])?$_GET['view']:'index';
 		switch($view)
 		{
@@ -144,7 +145,7 @@ class InventaryController extends Controller
 		$id = $this->validateNumber($_GET['id']);
 		$startDate = $this->validateDate($_POST['startDate']);
 		$endDate = $this->validateDate($_POST['endDate']);
-		$idEmployee = $this->validateNumber($_POST['idEmployee']);
+		$idEmployee = $this->LoggedIn();
 		$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
 		$idVehicle = $this->validateNumber($_POST['idVehicle']);
 
@@ -170,6 +171,8 @@ class InventaryController extends Controller
 
 				$this->smarty->assign('Vehicle',$this->toAssociativeArray($this->Vehicle->all(),'id','vin'));
 				$this->smarty->assign('CarWorkShop',$this->toAssociativeArray($this->CarWorkShop->all()));
+				$this->$service->idEmployee = $this->LoggedIn();
+				var_dump($service);
 				$this->smarty->assign('service',$service);
 				$this->smarty->display('./views/Inventary/serviceEdit.tpl');
 			}

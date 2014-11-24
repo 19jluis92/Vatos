@@ -141,7 +141,7 @@ function onlyInspection(){
 
 $('#bto1').on('click',function(e){
 	
-	
+	debugger;
 	$.ajax({
 		url:'index.php?controller=service&view=createInventary',
 		type:'POST',
@@ -155,13 +155,13 @@ $('#bto1').on('click',function(e){
 	}).done(function(e){
 		$('#bto1').remove();
 		$('.bloqserv').attr('readonly',true);
-			$('#bien').modal('show');
+			
 			onlyInspection();
 		});
 });
 
 $('#bto2').on('click',function(e){
-	debugger
+	
 	
 	$.ajax({
 		url:'index.php?controller=inspection&view=createInventary',

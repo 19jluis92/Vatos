@@ -147,19 +147,29 @@ class ServicesController extends Controller {
 			$this->smarty->display('./views/Service/add.tpl');
 		}
 	}
-
+	private function loadProperties(){
+		
+		require('models/EmployeesModel.php');
+		$this->Employees = new EmployeesModel();
+		
+	}
 
 	private function createInventary()
 	{
+		$this->loadProperties();
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 
 		//Validate Variables
 			$startDate = $this->validateDate($_POST['startDate']);
 			$endDate = $this->validateDate($_POST['endDate']);
-			$idEmployee = $this->validateNumber($_POST['idEmployee']);
+			$idEmp=  $this->LoggedIn();
+			
+			$idEmp=$this->Employees->getByColumn($idEmp->id,'idUser');
+			
+			$idEmployee = $idEmp[0]['id'];
 			$idCarWorkShop = $this->validateNumber($_POST['idvehicleService']);
 			$idVehicle = $this->validateNumber($_POST['idVehicle']);
-			var_dump($idCarWorkShop);
+			//var_dump($idCarWorkShop);
 			$result = $this->model->create($startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
 		//Insert Succesfull
 			if($result)

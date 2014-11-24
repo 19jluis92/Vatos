@@ -106,5 +106,9 @@ class EmployeesModel  extends Model
 		//delete element using the given $id
 		return true;
 	}
+
+	function getByColumn($id,$column){
+		return $this->db->GetByColum('employee',$id,$column);
+	}
 }
 ?>
