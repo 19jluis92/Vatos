@@ -118,6 +118,7 @@ class InspectionsController extends Controller {
 			$mileage = $this->validateFloat($_POST['mileage']);
 			$fuel = $this->validateFloat($_POST['fuel']);
 			$inspectionDate = $this->validateDate($_POST['inspectionDate']);
+			var_dump($inspectionDate);
 			$type = $this->validateBool($_POST['type']);
 			$result = $this->model->create($idService , $mileage , $fuel , $inspectionDate , $type);	
 			if($result)

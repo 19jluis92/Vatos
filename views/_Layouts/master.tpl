@@ -320,29 +320,29 @@
 
               <script src="webroot/js/vendor/bootstrap.min.js"></script>
 
-              <script src="webroot/js/main.js"></script>
-              <script src="webroot/js/ajax.js"></script>
-              <script src="webroot/js/inventaryAjax.js"></script>
-              <script src="webroot/js/inventaryEditAjax.js"></script>
-              <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-              {literal}
-              <script>
-                (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-                  function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-                e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-                e.src='//www.google-analytics.com/analytics.js';
-                r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-                ga('create','UA-XXXXX-X');ga('send','pageview');
-              </script>
-              <script type="text/javascript">
-                $( document ).ready(function() {
-                  $('a[data-dropdown="true"]').on('click',function(e) {
-                    $(this).next('div').slideToggle().show();
-                    $(this).next('div').addClass('active');
-                  });
-                });
-              </script>
-              {/literal}
-              {block name=scripts}{/block}
-            </body>
-            </html>
+    <script src="webroot/js/main.js"></script>
+    <script src="webroot/js/ajax.js"></script>
+    <script  src="webroot/js/inventaryAjax.js" ></script>
+    <!--script src="webroot/js/inventaryEditAjax.js"></script -->
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    {literal}
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
+    <script type="text/javascript">
+      $( document ).ready(function() {
+        $('a[data-dropdown="true"]').on('click',function(e) {
+          $(this).next('div').slideToggle().show();
+          $(this).next('div').addClass('active');
+        });
+      });
+    </script>
+    {/literal}
+    {block name=scripts}{/block}
+  </body>
+  </html>

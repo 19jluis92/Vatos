@@ -59,7 +59,7 @@
                   <input type="text"  class="form-control serviceIdVehicle bloqserv" name="idVehicle" required="required" id="idvehicle" data-id="0" readonly>
                 </div>
               
-                <div class="form-group input-group">
+                <div hidden class="form-group input-group">
                   <label for="idemployee" class="input-group-addon">Empleado</label>
                   <input type="number"  class="form-control bloqserv" name="idEmployee" required="required" id="idemployee" readonly>
                 </div>
@@ -118,7 +118,7 @@
         <div class="row">
           <div class="form-group input-group">
             
-            <input type="hidden" name="id" required="required" class="form-control" id="id">
+            <input type="hidden" name="id" required="required" class="form-control " id="id">
           </div>
           
         </div>
@@ -158,6 +158,4 @@
     </div>
   </div>
 </div>
-
-
 {/block}

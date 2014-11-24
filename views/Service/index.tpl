@@ -32,7 +32,7 @@
 					<td>{$service.id}</td>
 					<td>{$service.startDate}</td>
 					<td>{$service.endDate}</td>
-					<td>{$service.idVarWorkShop}</td>
+					<td>{$service.idCarWorkShop}</td>
 					<td>{$service.idVehicle}</td>
 					<td>{$service.idEmployee}</td>
 					<td class="actions">

@@ -132,11 +132,12 @@ class EmployeesController extends Controller
 			require('views/Error.html');
 		}
 		}
-		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
-			if(isset($name))
-				$this->smarty->assign('name',$name);
-			
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
+		{
 			$this->loadProperties();
+			$this->smarty->assign('City',$this->toAssociativeArray($this->City->all()));
+			$this->smarty->assign('Users',$this->toAssociativeArray($this->Users->all(),'id','email'));
+			$this->smarty->assign('CarWorkShop',$this->toAssociativeArray($this->CarWorkShop->all()));
 			$this->smarty->display('./views/Employee/add.tpl');
 		}
 	}
@@ -158,7 +159,7 @@ class EmployeesController extends Controller
 	{
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$name = $this->validateText($_POST['name']);
 		$lastName = $this->validateText($_POST['lastName']);
 		$nss =  $this->validateText($_POST['nss']);
@@ -169,6 +170,7 @@ class EmployeesController extends Controller
 		$idUser = $this->validateNumber($_POST['idUser']);
 		$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
 		$result = $this->model->edit($id,$name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop);
+		var_dump($result);
 		if($result)
 		{
 			//Load view

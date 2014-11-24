@@ -106,7 +106,12 @@ class RelocationsController extends Controller {
 			$this->smarty->display('./views/error.tpl');
 		}
 	}
-
+private function loadProperties(){
+		
+		require('models/EmployeesModel.php');
+		$this->Employees = new EmployeesModel();
+		
+	}
 	/**
 	*Create a relocation with the given post parameters 
 	*@param  string $relocationDate (POST)
@@ -118,10 +123,16 @@ class RelocationsController extends Controller {
 	*/
 	private function createInventary()
 	{
+		$this->loadProperties();
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 			//Validate Variables
 		$relocationDate = $this->validateDate($_POST['relocationDate']);
-		$idEmployee = $this->validateNumber($_POST['idEmployee']);
+		$idEmp=  $this->LoggedIn();
+			
+			$idEmp=$this->Employees->getByColumn($idEmp->id,'idUser');
+			
+			$idEmployee = $idEmp[0]['id'];
+		
 		$reason = $this->validateText($_POST['reason']);
 		$idDepartment = $this->validateNumber($_POST['idDepartment']);
 		$idService = $this->validateNumber($_POST['idService']);

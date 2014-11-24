@@ -16,52 +16,67 @@
 		
 			<fieldset>
 				<legend>Agregar Empleado</legend>
-				
-				<div class="input number required">
-					<label for="name" class="input-group-addon">Nombre</label>
-					<input type="text" name="name" required="required" id="name" class="form-control" >
-				</div>
-				<div class="input number required">
-					<label for="lastName" class="input-group-addon">Apellido</label>
-					<input type="text" name="lastName" required="required" id="lastName" class="form-control" >
-				</div>
-				<div class="input number required">
-					<label for="idCity" class="input-group-addon">Ciudad</label>
+				<div class="row">
+              <div class="col-md-6">
+                 <label for="name" class="input-group-addon">Nombre</label>
+					<input type="text" name="name" required="required" id="name" class="form-control" placeholder="Nombre" maxlength="15" >
+              </div>
+
+              <div class="col-md-3">
+               	<label for="lastName" class="input-group-addon">Apellido</label>
+					<input type="text" name="lastName" required="required" id="lastName" class="form-control" placeholder="Apellido" maxlength="15" >
+	           </div>
+	           <div class="col-md-3">
+	               <label for="idCity" class="input-group-addon">Ciudad</label>
 					<select name="idCity" required="required" id="idCity" class="form-control">
                     <option value=''>-- none --</option>
                     {html_options options=$City}
                  </select>
-				</div>
-				<div class="input number required">
-					<label for="address" class="input-group-addon">address</label>
-					<input type="text" name="address" required="required" id="address" class="form-control" >
-				</div>
-				<div class="input number required">
-					<label for="NSS" class="input-group-addon">NSS</label>
-					<input type="text" name="nss" required="required" id="nss" class="form-control" >
-				</div>
-				<div class="input number required">
-					<label for="phone" class="input-group-addon">phone</label>
-					<input type="phone" name="phone" required="required" id="phone" class="form-control" >
-				</div>
-				<div class="input number required">
-					<label for="cellphone" class="input-group-addon">Cell phone</label>
-					<input type="phone" name="cellPhone" required="required" id="cellPhone" class="form-control" >
-				</div>
-				<div class="input number required">
-					<label for="idUser" class="input-group-addon">Usuario</label>
+	            </div>
+         	</div>
+         	<br>
+
+				<div class="row">
+              <div class="col-md-6">
+                 <label for="address" class="input-group-addon">Direccion</label>
+					<input type="text" name="address" required="required" id="address" class="form-control" placeholder="Direccion" maxlength="25">
+              </div>
+
+              <div class="col-md-3">
+               	<label for="nss" class="input-group-addon">NSS</label>
+					<input type="text" name="nss" required="required" id="nss" class="form-control" placeholder="NSS" maxlength="25">
+	           </div>
+	           <div class="col-md-3">
+	               <label for="phone" class="input-group-addon">Telefono</label>
+					<input type="text" name="phone" required="required" id="phone" class="form-control" 
+					placeholder="Telefono" maxlength="10">
+	            </div>
+         	</div>
+				<br>
+
+				<div class="row">
+              <div class="col-md-6">
+                 <label for="cellphone" class="input-group-addon">Celular</label>
+					<input type="phone" name="cellPhone" required="required" id="cellPhone" class="form-control" placeholder="Celular" maxlength="10">
+              </div>
+
+              <div class="col-md-3">
+               	<label for="idUser" class="input-group-addon">Usuario</label>
 					<select name="idUser" required="required" id="idUser" class="form-control">
                     <option value=''>-- none --</option>
                     {html_options options=$Users}
                      </select>
-				</div>
-				<div class="input number required">
-					<label for="idCarWorkShop" class="input-group-addon">idCarWorkShop</label>
+	           </div>
+	           <div class="col-md-3">
+	               <label for="idCarWorkShop" class="input-group-addon">idCarWorkShop</label>
 					<select name="idCarWorkShop" required="required" id="idCarWorkShop" class="form-control">
                     <option value=''>-- none --</option>
                     {html_options options=$CarWorkShop}
                      </select>
-				</div>
+	            </div>
+         	</div>
+         	<br>
+
 				</fieldset>
-				<button type="submit">Submit</button></form></div>
+				<button class="btn btn-default pull-right" type="submit">Submit</button></form></div>
 				{/block}

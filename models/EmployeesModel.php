@@ -17,12 +17,6 @@ class EmployeesModel  extends Model
 	private $idUser;
 	private $idCarWorkShop;
 
-	/** navigation Properties
-	*/
-	private $user;
-	private $city;
-	private $carWorkShop;
-
 	function __construct(){
 		parent::__construct();
 	}
@@ -63,12 +57,14 @@ class EmployeesModel  extends Model
 	*/
 	function edit($id,$name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop)
 	{
-		$employee = new Employee($name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop);
+		$employee = new Employee($name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop,$id);
 		$employee->id = $id;
 		if($result = $this->db->update('employee' , $employee,NULL))
-			return true;
-		else{
-			echo $result;
+		{		
+			return $employee;
+		}
+		else
+		{
 			return false;
 		}
 		
@@ -105,6 +101,10 @@ class EmployeesModel  extends Model
 		}
 		//delete element using the given $id
 		return true;
+	}
+
+	function getByColumn($id,$column){
+		return $this->db->GetByColum('employee',$id,$column);
 	}
 }
 ?>

@@ -29,16 +29,25 @@
 
             <div class="row">
                <div class="col-md-4">
-						<label for="idcarworkshop" class="input-group-addon">Id Taller </label>
-						<input type="number"  class="form-control" name="idCarWorkShop" required="required" id="idcarworkshop">
+                  <label for="idCarWorkShop" class="input-group-addon">Taller</label>
+                  <select name="idCarWorkShop" required="required" id="idCarWorkShop" class="form-control">
+                    <option value=''>-- none --</option>
+                    {html_options options=$carWorkShops}
+                 </select>
                </div>
                	<div class="col-md-4">
-						<label for="idvehicle"class="input-group-addon">Id Vehiculo</label>
-						<input type="number"  class="form-control" name="idVehicle" required="required" id="idvehicle">
+						<label for="idVehicle" class="input-group-addon">Vehiculo</label>
+                  <select name="idVehicle" required="required" id="idVehicle" class="form-control">
+                    <option value=''>-- none --</option>
+                    {html_options options=$vehicles}
+                 </select>
                 </div>
                 <div class="col-md-4">
-						<label for="idemployee" class="input-group-addon">Id Empleado</label>
-						<input type="number"  class="form-control" name="idEmployee" required="required" id="idemployee">
+						<label for="idEmployee" class="input-group-addon">Empleado</label>
+                  <select name="idEmployee" required="required" id="idEmployee" class="form-control">
+                    <option value=''>-- none --</option>
+                    {html_options options=$employees}
+                 </select>
 					</div>
               </div>
             <br />
