@@ -1,19 +1,51 @@
-$("#idvehicle").on('change',function(e){
+$.get("index.php?controller=Client&view=ajax",function(e){
+  
+  
+  var result = JSON.parse(e);
+      var dd = $("#idcliente");
+      for(var i in result){
+        var $op =  $("<option>");
+        $op.attr("value",result[i].id);
+        $op.text(result[i].Name);
+        dd.append($op);
+      }
+
+});
+
+$("#idcliente").on('change',function(e){
+	var id= $("#idcliente").val();
+	$.get("index.php?controller=vehicle&view=ajaxById&id="+id,function(e){
+  	var result = JSON.parse(e);
+      var dd = $("#idvehicle");
+      for(var i in result){
+        var $op =  $("<option>");
+        $op.attr("value",result[i][0].id);
+        $op.text(result[i][0].vin);
+        dd.append($op);
+      }
+
+});
+
+});
+
+$("#idserviceForm").on('change',function(e){
 
 $.ajax({
 	url: "index.php?controller=inventory&view=serviceEdit",
-	data: { id : $("#idvehicle").val() },
+	data: { id : $("#idserviceForm option:selected").val() },
 	type: 'GET',
 
 	}).done(function(e){
 		
 		$('#serviceForm child').remove();
-		$('#serviceForm').append(e);	
-		chargeDataService();
+		$('#serviceForm').append(e);		
+		inspectionEdit();	
 	});
 
 	
 });
+
+$('#idvehicle').on('change',chargeDataService());
 
 function chargeDataService(){
 	$.get("index.php?controller=service&view=ajax",function(e){
@@ -29,28 +61,15 @@ function chargeDataService(){
       }
 
 });
-	inspectionEdit();	
+	
 }
 
-$("#idserviceForm").on('change',function(e){
-	$.ajax({
-	url: "index.php?controller=inventory&view=serviceEdit",
-	data: { id : $("#idvehicle").val() },
-	type: 'GET',
 
-	}).done(function(e){
-		
-		$('#serviceForm child').remove();
-		$('#serviceForm').append(e);	
-		chargeDataService();
-	});
-	inspectionEdit();	
-})
 function inspectionEdit(){
-
+debugger;
 	$.ajax({
 	url: "index.php?controller=inventory&view=inpectionEdit",
-	data: { id : $("#idserviceForm selected:option").val() },
+	data: { id : $("#idserviceForm option:selected").val()},
 	type: 'GET',
 
 	}).done(function(e){
@@ -79,7 +98,7 @@ function ubicationEdit(){
 
 	$.ajax({
 	url: "index.php?controller=inventory&view=ubicationEdit",
-	data: { id : $("#idserviceForm").val() },
+	data: { id :$("#idserviceForm option:selected").val() },
 	type: 'GET',
 
 	}).done(function(e){

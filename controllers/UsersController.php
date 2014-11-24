@@ -1,6 +1,6 @@
 <?php 
-require('controllers/Controller.php');
-require('mail.php');
+require_once('controllers/Controller.php');
+require_once('mail.php');
 class UsersController extends Controller{
 	private $model;
 	private $roles;
@@ -11,7 +11,7 @@ class UsersController extends Controller{
 	function __construct()
 	{
 		parent::__construct();
-		require('models/UsersModel.php');
+		require_once('models/UsersModel.php');
 		$this->model = new UsersModel();
 	}
 	
@@ -156,7 +156,8 @@ class UsersController extends Controller{
 		//select Succesfull
 			if($user != NULL)
 			{
-			//Load view
+				$this->loadProperties();
+				$this->smarty->assign('roles',$this->toAssociativeArray($this->roles->all()));
 				$this->smarty->assign('user',$user);
 				$this->smarty->display('./views/User/edit.tpl');
 			}
@@ -203,18 +204,18 @@ class UsersController extends Controller{
 		for($i = 0; $i < count($dataArray); $i++)
 		{
 			/*Perdon por esto de aqui :(, lo arreglare despues*/
-			$email = $this->validateText($dataArray[$i][0]);
-			$password = $this->validateNumber($dataArray[$i][1]);
-			$result = $this->model->create($email, $password);
+				$email = $this->validateText($dataArray[$i][0]);
+				$password = $this->validateNumber($dataArray[$i][1]);
+				$result = $this->model->create($email, $password);
+			}
+			$this->all();
 		}
-		$this->all();
+
+		private function loadProperties(){
+			require_once('models/RolesModel.php');
+			$this->roles = new RolesModel();
+		}
+
+
 	}
-
-	private function loadProperties(){
-		require('models/RolesModel.php');
-		$this->roles = new RolesModel();
-	}
-
-
-}
-?>
+	?>

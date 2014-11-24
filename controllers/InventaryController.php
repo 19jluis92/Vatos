@@ -163,17 +163,18 @@ class InventaryController extends Controller
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			$id = $this->validateNumber($_GET['id']);
-			$service = $this->Service->details($id);
+			
+			$serviceok = $this->Service->details($id);
 		//select Succesfull
-			if($service != NULL)
+			if($serviceok != NULL)
 			{
 			//Load view
 
 				$this->smarty->assign('Vehicle',$this->toAssociativeArray($this->Vehicle->all(),'id','vin'));
 				$this->smarty->assign('CarWorkShop',$this->toAssociativeArray($this->CarWorkShop->all()));
-				$this->$service->idEmployee = $this->LoggedIn();
-				var_dump($service);
-				$this->smarty->assign('service',$service);
+				//$this->$serviceok->idEmployee = $this->LoggedIn();
+				//var_dump($service);
+				$this->smarty->assign('service',$serviceok);
 				$this->smarty->display('./views/Inventary/serviceEdit.tpl');
 			}
 			else
@@ -216,7 +217,7 @@ class InventaryController extends Controller
 			if($inspection != NULL)
 			{
 			//Load view
-
+				
 				$this->smarty->assign('inspection',$inspection);
 				$this->smarty->display('./views/Inventary/inspectionEdit.tpl');
 			}
@@ -246,8 +247,7 @@ class InventaryController extends Controller
 		//Insert Succesfull
 		if($result)
 			{
-				unset($postError);
-				header("Location: index.php?controller=Relocation");
+				
 			}
 			else
 			{

@@ -112,5 +112,22 @@ Class ServicesModel extends Model{
 		//delete element using the given $id
 		return true;
 	}
+
+	function GetByColum($id,$colum){
+		if($result = $this->db->GetByColum('service', $id,$colum))
+		{
+			//var_dump($result);
+			//$Inspections =   new Service($result['startDate'],$result['endDate'],$result['idEmployee'],$result['idCarWorkShop'],$result['idVehicle'],$result['id']);
+			return $result;
+		}
+		else{
+			echo $result;
+			return NULL;
+		}
+		//delete element using the given $id
+		return true;
+	}
+
+
 }
 ?>
