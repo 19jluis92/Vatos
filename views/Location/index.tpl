@@ -28,19 +28,21 @@
 				</tr>
 			</thead>
 			<tbody>
-				{foreach item=user from=$users}
+				{foreach item=location from=$locations}
 
 				<tr>
-					<td>{$user.id}</td>
-					<td>{$user.name}</td>
-					<td>{$user.idCarWorkShop}</td>
+					<td>{$location.id}</td>
+					<td>{$location.name}</td>
+					<td>{$location.idCarWorkShop}</td>
 					<td class="actions">
-						<a href="index.php?controller=Location&view=details&id={$user.id}">Mostrar</a>				
-						<a href="index.php?controller=Location&view=edit&id={$user.id}">Editar</a>		
-						<form action="index.php?controller=Location&view=delete&id={$user.id}" name="post_user_{$user.id}" style="display:none;" method="POST">
-							<input type="hidden" name="_method" value="POST">
-						</form>
-						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # $user.id?&quot;)) { document.post_Location_{$user.id}.submit(); } event.returnValue = false; return false;">Eliminar</a>
+						<div class="btn-group" role="group" aria-label="...">
+                  <a  class="btn btn-default" href="index.php?controller=location&view=details&id={$location.id}">Ver</a>           
+                  <a  class="btn btn-default" href="index.php?controller=location&view=edit&id={$location.id}">Editar</a>     
+                  <form action="index.php?controller=location&view=delete&id={$location.id}" name="post_location_{$location.id}" style="display:none;" method="post">
+                     <input type="hidden" name="_method" value="POST">
+                  </form>
+                  <a  class="btn btn-default" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_location_{$location.id}.submit(); } event.returnValue = false; return false;">Eliminar</a>
+                  </div>
 					</td>
 				</tr>
 			</tbody>

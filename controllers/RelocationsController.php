@@ -106,12 +106,6 @@ class RelocationsController extends Controller {
 			$this->smarty->display('./views/error.tpl');
 		}
 	}
-private function loadProperties(){
-		
-		require('models/EmployeesModel.php');
-		$this->Employees = new EmployeesModel();
-		
-	}
 	/**
 	*Create a relocation with the given post parameters 
 	*@param  string $relocationDate (POST)
@@ -121,38 +115,7 @@ private function loadProperties(){
 	*@param  int $idService  (POST)
 	*@return null nothing returned but view loaded
 	*/
-	private function createInventary()
-	{
-		$this->loadProperties();
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
-			//Validate Variables
-		$relocationDate = $this->validateDate($_POST['relocationDate']);
-		$idEmp=  $this->LoggedIn();
-			
-			$idEmp=$this->Employees->getByColumn($idEmp->id,'idUser');
-			
-			$idEmployee = $idEmp[0]['id'];
-		
-		$reason = $this->validateText($_POST['reason']);
-		$idDepartment = $this->validateNumber($_POST['idDepartment']);
-		$idService = $this->validateNumber($_POST['idService']);
-		$result = $this->model->create($relocationDate,$idEmployee,$reason,$idDepartment,$idService);	
-		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			
-			
-		}
-		else
-		{
-			require('views/Error.html');
-		}
-		}
-		
-		
-	}
-private function create()
+	private function create()
 	{
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 			//Validate Variables
@@ -167,7 +130,7 @@ private function create()
 		{
 			//Load view
 			unset($postError);
-				header("Location: index.php?controller=Relocation");
+			header("Location: index.php?controller=Relocation");
 			
 		}
 		else
@@ -178,6 +141,10 @@ private function create()
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			if(isset($name))
 				$this->smarty->assign('name',$name);
+			$this->loadProperties();
+			$this->smarty->assign('Employees',$this->toAssociativeArray($this->Employees->all()));
+			$this->smarty->assign('services',$this->toAssociativeArray($this->services->all(),'id','id'));
+			$this->smarty->assign('departments',$this->toAssociativeArray($this->departments->all()));
 			$this->smarty->display('./views/Relocation/add.tpl');
 		}
 		
@@ -253,6 +220,46 @@ private function create()
 		{
 			require('views/Error.html');
 		}
+	}
+
+	private function loadProperties()
+	{
+		require('models/EmployeesModel.php');
+		$this->Employees = new EmployeesModel();
+		require('models/ServicesModel.php');
+		$this->services = new ServicesModel();
+		require('models/DepartmentsModel.php');
+		$this->departments = new DepartmentsModel();
+	}
+	
+	private function createInventary()
+	{
+		$this->loadProperties();
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
+		{
+			//Validate Variables
+			$relocationDate = $this->validateDate($_POST['relocationDate']);
+			$idEmp=  $this->LoggedIn();
+				
+			$idEmp=$this->Employees->getByColumn($idEmp->id,'idUser');
+				
+			$idEmployee = $idEmp[0]['id'];
+			
+			$reason = $this->validateText($_POST['reason']);
+			$idDepartment = $this->validateNumber($_POST['idDepartment']);
+			$idService = $this->validateNumber($_POST['idService']);
+			$result = $this->model->create($relocationDate,$idEmployee,$reason,$idDepartment,$idService);	
+			//Insert Succesfull
+			if($result)
+			{
+				//Load view
+			}
+			else
+			{
+				require('views/Error.html');
+			}
+		}
+	
 	}
 
 }

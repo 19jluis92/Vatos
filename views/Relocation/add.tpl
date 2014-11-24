@@ -19,42 +19,43 @@
 
 				<div class="row">
 					<div class="col-md-6">
-						<label for="id" class="input-group-addon">Id Relocacion</label>
-						<input type="number" name="id" required="required" class="form-control" id="id">
+						<label for="relocationDate" class="input-group-addon">relocationDate</label>
+						<input type="date" name="relocationDate" required="required" class="form-control" id="relocationDate">
 					</div>
 					<div class="col-md-6">
-                  <label class="input-group-addon" for="name" class="input-group-addon">Nombre</label>
-                  <input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">  				
-					</div>
-				</div>
+                  <label for ="idEmployee" class="input-group-addon">Empleado</label>
+                  <select name="idEmployee" required="required" class="form-control" id="idEmployee" placeholder="id Employee">
+                   <option value=''>-- none --</option>
+                  {html_options options=$Employees}
+                  </select>
+   				</div>
+            </div>
 				<br />
 
-				<div class="row">
-                <div class="col-md-3">
-                  <label class="input-group-addon" for="idService">id Servicio</label>
-						<input type="number" class="form-control" name="idService" required="required" id="idService">
-                </div>
-                <div class="col-md-3">
-						<label class="input-group-addon" for="name">Fecha de relocacion</label>
-						<input type="date" class="form-control" name="relocationDate" required="required" id="relocationDate">
-                </div>
-
-                <div class="col-md-3">
-						<label class="input-group-addon" for="idEmployee">id Empleado</label>
-						<input type="number" class="form-control" name="idEmployee" required="required" id="idEmployee">
-                </div>
-
-                <div class="col-md-3">
-                  <label class="input-group-addon" for="idDepartment">id Departmento</label>
-						<input type="number" class="form-control" name="idDepartment" required="required" id="idDepartment">
-                </div>
+            <div class="row">
+               <div class="col-md-6">
+                   <label for ="idService" class="input-group-addon">Servicio</label>
+                  <select name="idService" required="required" class="form-control" id="idService" placeholder="id Employee">
+                   <option value=''>-- none --</option>
+                  {html_options options=$services}
+                  </select>
+               </div>
+               <div class="col-md-6">
+                  <label for ="idDepartment" class="input-group-addon">Departamento</label>
+                  <select name="idDepartment" required="required" class="form-control" id="idDepartment" placeholder="idDepartment">
+                   <option value=''>-- none --</option>
+                  {html_options options=$departments}
+                  </select>
+               </div>
             </div>
             <br />
 
-            <div class="form-group input-group">	  				
-					<label for="reason" class="input-group-addon">Razon</label>
-					<input type="textarea" name="reason" required="required" class="form-control" id="reason">
-				</div>  
+            <div class="row">
+               <div class="col-md-12">	  				
+   					<label for="reason" class="input-group-addon">Razon</label>
+   					<input type="textarea" name="reason" required="required" class="form-control" id="reason" maxlength="200">
+   				</div>  
+            </div>
             <br />
 
 			</fieldset>

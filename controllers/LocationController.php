@@ -66,7 +66,7 @@ class LocationController extends Controller {
 			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
 				$this->smarty->assign('deleted',true);
 			
-			$this->smarty->assign('users',$result);
+			$this->smarty->assign('locations',$result);
 			$this->smarty->display('./views/Location/index.tpl');
 		}
 		else
@@ -117,19 +117,28 @@ class LocationController extends Controller {
 		if($result)
 		{
 			//Load view
-			require('views/Location/Created.php');
+			header("Location: index.php?controller=location");
 		}
 		else
 		{
-			require('views/Error.html');
+			$postError = true;
+			$this->smarty->assign('error','no se pudo :(');
 		}
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			if(isset($name))
 				$this->smarty->assign('name',$name);
+			$this->loadProperties();
+			$this->smarty->assign('carWorkShops',$this->toAssociativeArray($this->carWorkShops->all()));
 			$this->smarty->display('./views/Location/add.tpl');
 		}
 		
+	}
+
+	private function loadProperties()
+	{
+		require('models/CarWorkShopModel.php');
+		$this->carWorkShops = new CarWorkShopModel();
 	}
 
 	/**
@@ -185,7 +194,7 @@ class LocationController extends Controller {
 	private function delete()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)

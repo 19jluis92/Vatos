@@ -16,13 +16,22 @@
 			</div>
 			<fieldset>
 			<legend>Add Department</legend>
-				<div class="input text required">
-					<label for="name" class="input-group-addon">Name</label>
+				<div class="row">
+                <div class="col-md-8">
+                  <label for="name" class="input-group-addon">Name</label>
 					<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name">
-				</div>
-				<div class="input number required"><label for="idlocation" class="input-group-addon">Id Location</label><input type="number" name="idLocation" required="required" id="idlocation" class="form-control" maxlength="45"></div>
+                </div>
+                <div class="col-md-4">
+                   <label for="idLocation" class="input-group-addon">Location</label>
+                  <select name="idLocation" required="required" id="idLocation" class="form-control">
+                    <option value=''>-- none --</option>
+                    {html_options options=$locations}
+                 </select>
+                </div>  
+              </div>
+              <br />
 			</fieldset>
-			<button class="btn btn-default" type="submit">Submit</button>
+			<button class="btn btn-default pull-right" type="submit">Submit</button>
 		</form>
 	</div>
 </div>

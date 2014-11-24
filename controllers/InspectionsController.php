@@ -118,13 +118,12 @@ class InspectionsController extends Controller {
 			$mileage = $this->validateFloat($_POST['mileage']);
 			$fuel = $this->validateFloat($_POST['fuel']);
 			$inspectionDate = $this->validateDate($_POST['inspectionDate']);
-			var_dump($inspectionDate);
 			$type = $this->validateBool($_POST['type']);
-			$result = $this->model->create($idService , $mileage , $fuel , $inspectionDate , $type);	
+			$result = $this->model->create($idService , $mileage , $fuel , $inspectionDate , $type);
 			if($result)
 			{
 				unset($postError);
-				header("Location: index.php?controller=Inspection&view=details&id=$result->id");
+				header("Location: index.php?controller=Inspection");
 				//$this->all();
 			}
 			else
@@ -134,9 +133,12 @@ class InspectionsController extends Controller {
 			}
 
 		} 
-		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
+		{
 			if(isset($name))
 				$this->smarty->assign('name',$name);
+			$this->loadProperties();
+			$this->smarty->assign('services',$this->toAssociativeArray($this->services->all(),'id','id'));
 			$this->smarty->display('./views/Inspection/add.tpl');
 		}
 	}
@@ -238,6 +240,11 @@ class InspectionsController extends Controller {
 		}
 	}
 
+	private function loadProperties()
+	{
+		require('models/ServicesModel.php');
+		$this->services = new ServicesModel();
+	}
 }
 
 ?>

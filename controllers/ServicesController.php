@@ -145,7 +145,7 @@ class ServicesController extends Controller {
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
 		{
 			$this->loadProperties();
-			$this->smarty->assign('carWorkShops',$this->toAssociativeArray($this->carWorkShops->all()));
+			$this->smarty->assign('services',$this->toAssociativeArray($this->services->all()));
 			$this->smarty->assign('vehicles',$this->toAssociativeArray($this->vehicles->all(),'id','vin'));
 			$this->smarty->assign('employees',$this->toAssociativeArray($this->employees->all()));
 			$this->smarty->display('./views/Service/add.tpl');
@@ -156,7 +156,7 @@ class ServicesController extends Controller {
 		require('models/EmployeesModel.php');
 		$this->employees = new EmployeesModel();
 		require('models/CarWorkShopModel.php');
-		$this->carWorkShops = new CarWorkShopModel();
+		$this->services = new CarWorkShopModel();
 		require('models/VehiclesModel.php');
 		$this->vehicles = new VehiclesModel();
 	}

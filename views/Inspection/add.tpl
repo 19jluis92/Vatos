@@ -8,7 +8,7 @@
 	<div class="actions col-md-2">
 		<h3>Acciones</h3>
 		<ul class="list-group">
-			<li><a class="list-group-item" href="index.php?controller=Inspection">Mostrar clientes</a>
+			<li><a class="list-group-item" href="index.php?controller=Inspection">Mostrar inspecciones</a>
 			</li>
 		</ul>
 	</div>
@@ -18,12 +18,15 @@
 				<legend>Agregar Inspection</legend>
 					<div class="row">
 						<div class="col-md-4">
-	                  <label for="idService" class="input-group-addon">ID servicio</label>
-							<input type="number" class="form-control" name="idService" required="required" step="0.01" id="idService">
+	                  <label for="idService" class="input-group-addon">Servicio</label>
+                  <select name="idService" required="required" id="idService" class="form-control">
+                    <option value=''>-- none --</option>
+                    {html_options options=$services}
+                 </select>
                 	</div>
                 	<div class="col-md-4">
 	                  <label for="mileage" class="input-group-addon">Kilometraje</label>
-							<input type="number" class="form-control" name="mileage" required="required" step="0.01" id="mileage">
+							<input type="number" class="form-control" name="mileage" required="required" id="mileage">
                 	</div>
 	               <div class="col-md-4">
 	               	<label for="fuel" class="input-group-addon">Fuel</label>
@@ -33,12 +36,12 @@
               		<br />
 	               <div class="row">
 	               	<div class="col-md-8">
-	                  	<label class="input-group-addon" for="inspectiondate">Inspection Date</label>
-								<input class="form-control" type="date" name="inspectiondate" required="required" id="inspectiondate">
+	                  	<label class="input-group-addon" for="inspectionDate">Inspection Date</label>
+								<input class="form-control" type="date" name="inspectionDate" required="required" id="inspectionDate">
 	                	</div>
 	                	<div class="col-md-4">
 	                		<label class="input-group-addon" for="type">Type</label>
-	                		<input class="form-control" type="checkbox" name="type" id="type">
+	                		<input class="form-control" type="text" name="type" id="type">
 	                	</div>  
 	               </div>
               		<br />

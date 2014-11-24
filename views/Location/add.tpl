@@ -16,20 +16,22 @@
 			<fieldset>
 				<legend>Agregar Lugar</legend>
 				<div class="row">
-              <div class="col-md-4">
-		  				<label for="id" class="input-group-addon">Id Lugar</label>
-		  				<input type="number" name="id" required="required" class="form-control" maxlength="45" id="id" placeholder="Id Lugar">
-               </div>
-               <div class="col-md-8">              
+              <div class="col-md-8">
 		  				<label for="name" class="input-group-addon">Nombre</label>
-		  				<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
+                  <input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
+               </div>
+               <div class="col-md-4">              
+                  <label for ="idCarWorkShop" class="input-group-addon">idCarWorkShop</label>
+                  <select name="idCarWorkShop" required="required" class="form-control" id="idCarWorkShop" placeholder="idCarWorkShop">
+                   <option value=''>-- none --</option>
+                  {html_options options=$carWorkShops}
                </div>  
             </div>
             <br />
 
             <div class="form-group input-group">
-	  				<label for="idcarworkshop" class="input-group-addon">Id Taller</label>
-	  				<input type="number" name="idcarworkshop" required="required" class="form-control" maxlength="45" id="idcarworkshop" placeholder="Id Taller Automotriz">
+	  				
+            </select>
 				</div>
 			</fieldset>
 			<button class="pull-right" type="submit">Submit</button>
