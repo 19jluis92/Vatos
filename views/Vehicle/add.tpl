@@ -12,7 +12,7 @@
          <li>
           <a class="list-group-item" href="#">Insercion Masiva
           </a>
-          <form action="index.php?controller=vehicle&view=massInsert" method="post" enctype="multipart/form-data">
+          <form action="index.php?controller=vehicle&view=massInsert" method="post" enctype="multipart/form-data" >
             <span class="btn btn-default btn-file">
             Browse <input type="file" name="csv" value="">
             </span>
@@ -24,7 +24,7 @@
    </div>
    <div class="col-md-10">
       <div class="vehicle form-horizontal large-10 medium-9 columns">
-         <form role="form" method="post" accept-charset="utf-8" action="index.php?controller=Vehicle&view=create">
+         <form role="form" method="post" id="login-form" accept-charset="utf-8" action="index.php?controller=Vehicle&view=create">
             <div style="display:none;">
                <input type="hidden" name="_method" value="POST">
             </div>

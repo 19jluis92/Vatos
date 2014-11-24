@@ -157,6 +157,12 @@
 			//Create controller and execute it
 			$controller = new AccountController ();
 			break;
+	case 'area':
+			//Load controller file
+			require('controllers/AreasController.php');
+			//Create controller and execute it
+			$controller = new AreaController ();
+			break;
 	case  'inventory':
 			//Load controller file
 			require('controllers/InventaryController.php');

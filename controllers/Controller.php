@@ -19,8 +19,11 @@ class Controller
 		$this->smarty->debugging = false;
 		$this->smarty->caching = false;
 		$this->smarty->cache_lifetime = 0;
-		if($user = $this->LoggedIn())
-			$this->smarty->assign('role',$this->getActualRoleName($user));
+		if($user = $this->LoggedIn()){
+			$actualRole = $this->getActualRoleName($user);
+			$actualRole = $actualRole == null ? '':$actualRole;
+			$this->smarty->assign('role',$actualRole);
+		}
 
 	}
 
@@ -135,15 +138,17 @@ class Controller
 	* @return string $data
 	* Validate a string to be a number and clean it
 	*/
-	function validateDate($date, $format = 'Y/m/d H:i:s')
+	function validateDate($date, $format = 'Y-m-d')
 	{
-		if(!isset($data))
-			return '01/01/1900';
-		$d = DateTime::createFromFormat($format, $date);
-		if( $d && $d->format($format) == $date)
-			return $date;
-		else
-			return '01/01/1900';
+    	$d = DateTime::createFromFormat($format, $date);
+    	if ($d && $d->format($format) == $date)
+    	{
+    		return $date;
+    	}
+    	else
+    	{
+    		return false;
+    	}
 	}
 
 
@@ -262,24 +267,24 @@ class Controller
 			}
 		    //$name = $_FILES['csv']['name'];
 			$tmp = explode('.', $_FILES['csv']['name']);
-		   $ext = strtolower(end($tmp));
-		   $type = $_FILES['csv']['type'];
-		   $tmpName = $_FILES['csv']['tmp_name'];
+			$ext = strtolower(end($tmp));
+			$type = $_FILES['csv']['type'];
+			$tmpName = $_FILES['csv']['tmp_name'];
 	    // check the file is a csv
-	      if($ext === 'csv')
-	      {
-	  	      $file = $_FILES['csv']['tmp_name']; 
-	    		$handle = fopen($file,"r");
+			if($ext === 'csv')
+			{
+				$file = $_FILES['csv']['tmp_name']; 
+				$handle = fopen($file,"r");
 
 				if (($handle = fopen($file, "r")) !== FALSE)
 				{
-				    while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
-				    {
-				        $data[] = $row;
-				    }
+					while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
+					{
+						$data[] = $row;
+					}
 				}
 				return $data;
-		    }
+			}
 		}
 	}
 }
