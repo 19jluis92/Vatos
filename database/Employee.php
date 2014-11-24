@@ -11,7 +11,7 @@
 		public $idUser;
 		public $idCarWorkShop;
 
-		function __construct($id=0,$name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop)
+		function __construct($name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop,$id = 0)
 		{
 			$this->id=$id;
 			$this->name = $name;

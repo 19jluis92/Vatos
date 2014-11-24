@@ -118,12 +118,13 @@ class ServicesController extends Controller {
 	*/
 	private function create()
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
+		{
 
 		//Validate Variables
-			$startDate = $this->validateDate($_POST['startDate']);
+			$startDate = ($_POST['startDate']);
 			var_dump($startDate);
-			$endDate = $this->validateDate($_POST['endDate']);
+			$endDate = $_POST['endDate'];
 			$idEmployee = $this->validateNumber($_POST['idEmployee']);
 			$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
 			$idVehicle = $this->validateNumber($_POST['idVehicle']);
