@@ -186,6 +186,17 @@ class db{
 		}
 	}
 
+	public function getUserPassword($email)
+	{
+		$email = $this->db_driver->escape_string($email);
+		if ($email != NULL)
+		{
+			$result = $this->db_driver->query("SELECT `password` FROM `user` WHERE email = '$email' ");
+			$model_array = mysqli_fetch_array($result);
+		}
+		return $model_array;
+	}
+
 	public function GetByColum($table , $name,$column)
 	{
 		$name = $this->db_driver->escape_string($name);

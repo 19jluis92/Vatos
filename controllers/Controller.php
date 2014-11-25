@@ -19,12 +19,17 @@ class Controller
 		$this->smarty->debugging = false;
 		$this->smarty->caching = false;
 		$this->smarty->cache_lifetime = 0;
-		if($user = $this->LoggedIn()){
+		$user = $this->LoggedIn();
+		if ($user == NULL) {
+			$actualRole = "";
+		}
+		else
+		{
 			$actualRole = $this->getActualRoleName($user);
 			$actualRole = $actualRole == null ? '':$actualRole;
-			$this->smarty->assign('role',$actualRole);
 		}
-
+		$this->smarty->assign('role',$actualRole);
+		
 	}
 
 	/**

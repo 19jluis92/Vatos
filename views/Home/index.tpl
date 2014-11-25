@@ -69,6 +69,7 @@
                       {/if}
                   </form>
               </li>
+              <li class="nav-header"><a href="index.php?controller=user&view=password">Recuperar Contraseña</a></li>
           </ul>
       </nav>
 
