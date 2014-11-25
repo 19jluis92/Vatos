@@ -119,8 +119,9 @@ class ClientController extends Controller{
 		{
 			//Load view
 			$message = 'Bienvenido Vato';
-				$mail = new Mail($email, $message);
-				$mail->send_mail();
+			$message = 'Bienvenido Vato su usuario es: '.$email.'y su password: '.$password.' ';
+		  $subject = 'Registro en Sistema de Taller Automotriz';
+			$mail = new Mail($email, $subject,$message);
 			
 			header("Location: index.php?controller=client&view=details&id=$result->id");
 			
@@ -216,16 +217,10 @@ class ClientController extends Controller{
 		}	
 	}
 
-	private function loadProperties(){
-	
+	private function loadProperties()
+	{	
 		require('models/UsersModel.php');
 		$this->Users = new UsersModel();
-		
-		
-		
 	}
-	
-
 }	
-
 ?>
