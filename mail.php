@@ -1,5 +1,5 @@
 <?php  
-require 'PHPMailer/PHPMailerAutoload.php';
+require 'Mailer/PHPMailerAutoload.php';
    class mail
    {
       function __construct($email, $email_subject ,$message)
