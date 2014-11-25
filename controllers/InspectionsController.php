@@ -1,5 +1,5 @@
 <?php
-require('controllers/Controller.php');
+require_once('controllers/Controller.php');
 class InspectionsController extends Controller {
 	private $model;
 	/**
@@ -8,7 +8,7 @@ class InspectionsController extends Controller {
 	function __construct()
 	{
 		parent::__construct();
-		require('models/InspectionsModel.php');
+		require_once('models/InspectionsModel.php');
 		$this->model = new InspectionsModel();
 	}
 
@@ -241,7 +241,7 @@ class InspectionsController extends Controller {
 
 	private function loadProperties()
 	{
-		require('models/ServicesModel.php');
+		require_once('models/ServicesModel.php');
 		$this->services = new ServicesModel();
 	}
 }

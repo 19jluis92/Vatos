@@ -99,5 +99,23 @@ class ClientModel extends Model
 		}
 		
 	}
+
+	function getClientByVehicle($id){
+	if($result = $this->db->GetByColum('clientvehicle' , ''+$id,'idVehicle'))
+		{
+			$final_result;
+			$i=0;
+			foreach ($result as  $variable) {
+				# code...
+				$final_result[$i++]=$this->db->GetByColum('client',$variable['idClient'],'id');
+			}
+			#var_dump($final_result);
+			return $final_result;
+		}
+		else{
+			
+			return false;
+		}
+	}
 }
 ?>

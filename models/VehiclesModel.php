@@ -127,5 +127,6 @@ Class VehiclesModel extends Model{
 			return false;
 		}
 	}
+	
 }
 ?>

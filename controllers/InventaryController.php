@@ -8,6 +8,12 @@ class InventaryController extends Controller
 {
 	private $model;
 	private $Client;
+	private	$Vehicle;
+	private	$Service;
+	private	$CarWorkShop;
+	private	$Inspection;
+	private	$relocation;
+	private	$Employees;
 	function __construct()
 	{
 		parent::__construct();
@@ -95,14 +101,22 @@ class InventaryController extends Controller
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
 		{
-			//$id = $this->validateNumber($_GET['id']);
-			#$client = $this->model->details($id);
-
+			$id = $this->validateNumber($_GET['id']);
+			$this->loadProperties();
+			$service = $this->Service->details($id);
+			$inspections = $this->Inspection->get('inspection',[['','idService','=',$service->idService,]]);
+			$reolcations = $this->relocation->get('relocation',[['','idService','=',$service->idService,]]);
+			$vehicle = $this->Vehicle->details($service->idVehicle);
+			$client = $this->Client->getClientByVehicle($service->idVehicle);
+			var_dump($inspections);
+			var_dump($relocations);
 			//select Succesfull
 			if(true)
 			{
 				#var_dump($client);
-				//$this->smarty->assign('id',$id);
+				$this->smarty->assign('service',$service);
+				$this->smarty->assign('vehicle',$vehicle);
+				$this->smarty->assign('client',$client);
 				$this->smarty->display('./views/Inventary/edit.tpl');
 			}
 			else
@@ -243,7 +257,7 @@ class InventaryController extends Controller
 			if($inspection != NULL)
 			{
 			//Load view
-				
+				var_dump($inspection);
 				$this->smarty->assign('inspection',$inspection);
 				$this->smarty->display('./views/Inventary/inspectionEdit.tpl');
 			}
