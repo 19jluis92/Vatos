@@ -1,5 +1,6 @@
 <?php
 require('controllers/Controller.php');
+require_once('mail.php');
 class ClientController extends Controller{
 	private $model;
 	
@@ -100,20 +101,27 @@ class ClientController extends Controller{
 	*/
 	private function create()
 	{
+		$this->loadProperties();
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
 			//Validate Variables
+			
 			$name= $this->validateText($_POST['name']);
 			$lastName= $this->validateNumber($_POST['lastName']);
 			$rfc= $this->validateNumber($_POST['rfc']);
 			$email=$this->validateEmail($_POST['email']);
 			$address=$this->validateNumber($_POST['address']);
+			$password=$_POST['password'];
+			$resultUser=$this->Users->create($email,$password,2);
 			$result = $this->model->create($name,$lastName,$rfc, $email, $address);
 		//Insert Succesful
-		if($result)
+		if($result&&$resultUser)
 		{
 			//Load view
-			unset($postError);
+			$message = 'Bienvenido Vato';
+				$mail = new Mail($email, $message);
+				$mail->send_mail();
+			
 			header("Location: index.php?controller=client&view=details&id=$result->id");
 			
 		}
@@ -208,6 +216,14 @@ class ClientController extends Controller{
 		}	
 	}
 
+	private function loadProperties(){
+	
+		require('models/UsersModel.php');
+		$this->Users = new UsersModel();
+		
+		
+		
+	}
 	
 
 }	

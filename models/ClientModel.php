@@ -87,5 +87,17 @@ class ClientModel extends Model
 			return false;
 		}
 	}
+
+	function GetByColum($id,$colum){
+		if($result = $this->db->GetByColum('client', $id,$colum))
+		{
+			return $result;
+		}
+		else{
+			
+			return NULL;
+		}
+		
+	}
 }
 ?>

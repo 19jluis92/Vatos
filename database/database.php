@@ -190,8 +190,10 @@ class db{
 	{
 		$name = $this->db_driver->escape_string($name);
 		$column = $this->db_driver->escape_string($column);
+		
 		if($name != NULL){
 			$result = $this->db_driver->query("SELECT * FROM $table WHERE $column = '$name'");
+			#echo("SELECT * FROM $table WHERE $column = '$name'");
 			if(!empty($this->db_driver->error)){
 				echo  $this->db_driver->error;
 				return false;

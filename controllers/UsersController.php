@@ -88,6 +88,26 @@ class UsersController extends Controller{
 		}
 		
 	}
+
+	private function createUserByClient($email,$password,$idRole)
+	{
+			
+			$result = $this->model->create($email, $password,$idRole);
+			//Insert Succesful
+			if($result)
+			{
+				//Load view
+				$message = 'Bienvenido Vato su usuario:'.$email.'su password:'.$password.' ';
+				$mail = new Mail($email, $message);
+				$mail->send_mail();
+				return true;
+				
+			}
+			else
+			{
+				return false;
+			}
+	}
 	/**
 	*@param $id
 	*@param return null

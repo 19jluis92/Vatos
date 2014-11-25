@@ -218,7 +218,7 @@ class Controller
 		$regex='(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$';
 		if(preg_match($regex, $data))
 		{
-			return true;
+			return $data;
 		}
 		return false;
 
