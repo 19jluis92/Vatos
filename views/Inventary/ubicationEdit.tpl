@@ -3,28 +3,30 @@
 		<fieldset>
 			<legend>rehubicacion</legend>
 			<div class="input number required">
-					<label for="id">Id Relocation</label>
-					<input type="number" name="id" required="required" id="id">
+					
+					<input class="form-control" type="hidden" name="id" required="required" id="id">
 				</div>
 				<div class="input number required">
-					<label for="name">relocationDate</label>
-					<input type="date" name="relocationDate" required="required" id="relocationDate">
+					<label class="input-group-addon" for="name">Fecha de relocacion</label>
+					<input class="form-control" type="date" name="relocationDate" required="required" id="relocationDate">
 				</div>
 				<div class="input number required">
-					<label for="idEmployee">idEmployee</label>
-					<input type="number" name="idEmployee" required="required" id="idEmployee">
+					
+					<input class="form-control"  type="hidden" name="idEmployee" required="required" id="idEmployee">
 				</div>
 				<div class="input number required">
-					<label for="reason">reason</label>
-					<input type="text" name="reason" required="required" id="reason">
+					<label class="input-group-addon" for="reason">rason</label>
+					<input class="form-control"  type="text" name="reason" required="required" id="reason">
 				</div>
+				<div class="form-group input-group">
+					<label class="input-group-addon" >Departamento</label>
+					<select required="required"  id="idDepartment"class="form-control bloqrelo">
+						<option value=''>-- none --</option> </select>
+
+					</div>
 				<div class="input number required">
-					<label for="idDepartment">idDepartment</label>
-					<input type="number" name="idDepartment" required="required" id="idDepartment">
-				</div>
-				<div class="input number required">
-					<label for="idService">idService</label>
-					<input type="number" name="idService" required="required" id="idService">
+					
+					<input class="form-control" type="hidden" name="idService" required="required" id="idService">
 				</div>
 	</fieldset>
 	<button type="submit">Submit
