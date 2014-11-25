@@ -95,7 +95,6 @@
 	{block name=scripts}
 	{literal}
 	<script type="text/javascript">
-
 		var areas = {
 			init: function(){
 				this.bind();

@@ -2,7 +2,7 @@
 require('controllers/Controller.php');
 class LocationController extends Controller {
 	private $model;
-	
+	private $tableName;
 	/**
 	*Default constructor , include and create the model
 	*/
@@ -11,6 +11,7 @@ class LocationController extends Controller {
 		parent::__construct();
 		require('models/LocationModel.php');
 		$this->model = new LocationModel();
+		$this->tableName = 'location';
 	}
 
 	/**
