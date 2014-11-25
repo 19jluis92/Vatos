@@ -6,6 +6,7 @@ class db{
 	function __construct(){
 		require("database_config.inc");
 		$this->db_driver = new mysqli($host,$user,$pass,$db);
+		$this->db_driver->set_charset("utf8");
 		if($this->db_driver->connect_error){
 			die('error de conexión a la base de datos');
 		}	
@@ -30,7 +31,6 @@ class db{
 			$result = $this->db_driver->query("SELECT * FROM $table");	
 		else
 			$result = $this->db_driver->query("SELECT * FROM $table WHERE $predicate");
-		
 		if(!empty($this->db_driver->error)){
 			echo  $this->db_driver->error;
 			return [];

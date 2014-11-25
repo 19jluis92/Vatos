@@ -120,7 +120,8 @@
 						type: "POST",
 						data : {id: $workshopid},
 						success:function(result){
-							alert(result);
+							var res = JSON.parse(result);
+							console.log(JSON.parse(result));
 						},
 						error:function(){
 							alert("error al mostrar los datos");
