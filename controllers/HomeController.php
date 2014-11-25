@@ -34,7 +34,7 @@ class HomeController extends Controller {
 				
 				switch ($opc) {
 					case 1:
-						# code...
+						$this->EmployeeView();
 						break;
 
 					case 2:
@@ -43,7 +43,7 @@ class HomeController extends Controller {
 						break;
 					
 					case 3:
-						# code...
+						$this->EmployeeView();
 						break;
 					default:
 						$this->index();	
@@ -52,6 +52,9 @@ class HomeController extends Controller {
 			}
 			break;
 
+			case 'employee':
+			$this->EmployeeView();
+			break;
 
 			default:
 			$this->index();	
@@ -243,6 +246,31 @@ class HomeController extends Controller {
 
 	}
 
+	public function EmployeeView()
+	{
+		$this->LoadProperties();
+		
+		
+		$cosas = array();
+		
+		$cosas = $this->Services->GetByColum('0000-00-00 00:00:00','endDate');
+		$cosas2 = $this->Services->GetByColum('','endDate');
+		if(!is_array($cosas2))
+			$cosas2=array();
+		if(!is_array($cosas))
+			$cosas=array();
+
+		$cosas3=array_merge($cosas, $cosas2);
+	
+		
+			
+				$this->smarty->assign('Users',$this->toAssociativeArray($this->Employee->all()));
+				$this->smarty->assign('CarWorkShop',$this->toAssociativeArray($this->CarWorkShop->all()));
+			$this->smarty->assign('services',$cosas3);
+			
+			$this->smarty->display('./views/_Layouts/dashboardAdmin.tpl');
+	}
+
 	public function LoadProperties(){
 		require('models/ClientModel.php');
 		$this->Client = new ClientModel();
@@ -250,6 +278,10 @@ class HomeController extends Controller {
 		$this->Vehicle = new VehiclesModel();
 		require('models/ServicesModel.php');
 		$this->Services = new ServicesModel();
+		require('models/CarWorkShopModel.php');
+		$this->CarWorkShop = new CarWorkShopModel();
+		require('models/EmployeesModel.php');
+		$this->Employee = new EmployeesModel();
 	}
 
 }
