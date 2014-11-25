@@ -155,8 +155,7 @@ class InspectionsController extends Controller {
 			$result = $this->model->create($idService , $mileage , $fuel , $inspectionDate , $type);	
 			if($result)
 			{
-				return true;
-				//$this->all();
+				echo json_encode($result);
 			}
 			else
 			{
