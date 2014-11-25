@@ -1,4 +1,4 @@
-{extends file="../_Layouts/master.tpl"}
+﻿{extends file="../_Layouts/master.tpl"}
 {block name=title}Inventario{/block}
 {block name=head}
 {/block}
@@ -70,6 +70,32 @@
   </div>
   <div class="col-sm-4">
     <h2>Servicio</h2>
+      <div class="form-horizontal" role="form">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Comienzo</label>
+        <div class="col-sm-10">
+          <p class="form-control-static">{$service->startDate}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Fin</label>
+        <div class="col-sm-10">
+          <p class="form-control-static">{$service->endDate}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Atendió</label>
+        <div class="col-sm-10">
+          <p class="form-control-static">{$service->idEmployee}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Tienda</label>
+        <div class="col-sm-10">
+          <p class="form-control-static">{$service->idCarWorkShop}</p>
+        </div>
+      </div>
+    </div>
   </div>    
 </div>
 <div class="form-group input-group">
