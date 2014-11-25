@@ -106,9 +106,10 @@ class VehiclesController extends Controller {
 	*/
 	private function create()
 	{
-
+		
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
+			$this->loadProperties();
 			//Validate Variables
 			$vin   		 = $this->validateText($_POST['vin']);
 			$model 		 = $this->validateNumber($_POST['model']);
@@ -117,11 +118,12 @@ class VehiclesController extends Controller {
 			$type  		 = $this->validateNumber($_POST['type']);
 			$conditions  = $this->validateText($_POST['conditions']);
 			$plates	     = $this->validateNumber($_POST['plates']);
-			
+			$idClient	= $this->validateNumber($_POST['idClient']);
+
 			$result = $this->model->create($vin, $model, $color, $year , $type, $conditions, $plates);
-			var_dump($result);
+			$clientVehicleResult = $this->clientVehicle->create($result->id,$idClient);
 			//Insert Succesful
-			if($result)
+			if($result && $clientVehicleResult)
 			{
 				header("Location: index.php?controller=vehicle&view=index");
 			}
@@ -135,6 +137,7 @@ class VehiclesController extends Controller {
 		{
 			$this->loadProperties();
 			$this->smarty->assign('colors',$this->toAssociativeArray($this->colors->all()));
+			$this->smarty->assign('clients',$this->toAssociativeArray($this->clients->all(),'id','Name'));
 			$this->smarty->assign('carTypes',$this->toAssociativeArray($this->carTypes->all()));
 			$this->smarty->assign('models',$this->toAssociativeArray($this->models->all()));
 			$this->smarty->display('./views/Vehicle/add.tpl');
@@ -222,14 +225,21 @@ class VehiclesController extends Controller {
 	}
 
 
-	private function loadProperties(){
+	private function loadProperties()
+	{
 		require('models/ColorsModel.php');
-		$this->colors = new ColorsModel();
 		require('models/CarModel.php');
-		$this->models = new CarModel();
 		require('models/CarTypesModel.php');
+		require('models/ClientModel.php');
+		require('models/ClientVehiclesModel.php');
+		$this->colors = new ColorsModel();
+		$this->models = new CarModel();
 		$this->carTypes = new CarTypesModel();
+		$this->clients = new ClientModel();
+		$this->clientVehicle = new ClientVehiclesModel();
 	}
+
+		
 
 	private function massInsert()
 	{

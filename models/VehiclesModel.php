@@ -13,7 +13,6 @@ Class VehiclesModel extends Model{
 
 	function __construct(){
 		parent::__construct();
-
 	}
 	/**
 	*method to list all vehicles

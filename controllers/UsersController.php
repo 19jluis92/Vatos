@@ -72,6 +72,7 @@ class UsersController extends Controller{
 			{
 				//Load view
 				$message = 'Bienvenido Vato';
+				$message = 'Bienvenido Vato su usuario es: '.$email.'y su password: '.$password.' ';
 			  $subject = 'Registro en Sistema de Taller Automotriz';
 				$mail = new Mail($email, $subject,$message);
 				header("Location: index.php?controller=user");
@@ -92,7 +93,7 @@ class UsersController extends Controller{
 		}
 		
 	}
-
+	/*Unsure what this is for
 	private function createUserByClient($email,$password,$idRole)
 	{
 			
@@ -111,13 +112,13 @@ class UsersController extends Controller{
 			{
 				return false;
 			}
-	}
+	}*/
 	/**
 	*@param $id
 	*@param return null
 	**/
 	private function delete(){
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);
 		if($result)
 		{

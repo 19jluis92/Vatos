@@ -53,7 +53,7 @@
 						<form action="index.php?controller=client&view=delete&id={$client.id}" name="post_client_{$client.id}" style="display:none;" method="POST">
 							<input type="hidden" name="_method" value="POST">
 						</form>
-						<a class="btn btn-default" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_client_{$client.id}.submit(); } event.returnValue = false; return false;">Delete</a>
+						<a class="btn btn-default" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_client_{$client.id}.submit(); } event.returnValue = false; return false;">Eliminar</a>
 					</div>
 						
 					</td>
@@ -63,7 +63,7 @@
 		</table>
 		<div class="paginator">
 			<ul class="pagination">
-				<li class="prev disabled"><a href="">&lt; previous</a></li><li class="next disabled"><a href="">next &gt;</a></li>		</ul>
+				<li class="prev disabled"><a href="">&lt; Anterior</a></li><li class="next disabled"><a href="">Siguiente &gt;</a></li>		</ul>
 				<p>1 of 1</p>
 			</div>
 		</div>
