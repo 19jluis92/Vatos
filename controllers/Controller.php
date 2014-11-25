@@ -143,7 +143,7 @@ class Controller
 	* @return string $data
 	* Validate a string to be a number and clean it
 	*/
-	function validateDate($date, $format = 'Y-m-d')
+	function validateDate($date, $format = 'd/m/Y')
 	{
     	$d = DateTime::createFromFormat($format, $date);
     	if ($d && $d->format($format) == $date)
@@ -223,7 +223,7 @@ class Controller
 		$regex='(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$';
 		if(preg_match($regex, $data))
 		{
-			return true;
+			return $data;
 		}
 		return false;
 

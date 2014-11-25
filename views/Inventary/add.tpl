@@ -6,14 +6,14 @@
 <div class="row">
   <div class="col-md-12">
 
-  <table class="table" cellpadding="0" cellspacing="0" id="inventory-table">
+    <table class="table" cellpadding="0" cellspacing="0" id="inventory-table">
       <thead>
         <tr>
           <th></th>
           <th><a href="/vatoscake/client?sort=id&amp;direction=asc">Nombre</a></th>
           <th><a href="/vatoscake/client?sort=name&amp;direction=asc">RFC</a></th>
           <th><a href="/vatoscake/client?sort=name&amp;direction=asc">Dirección</a></th>
-         <!-- <th class="actions">Acciones</th>-->
+          <!-- <th class="actions">Acciones</th>-->
         </tr>
       </thead>
       <tbody>
@@ -43,106 +43,106 @@
 
     <option value=''>-- none --</option>  
     </select>
-</div>  -->
-<div class="form-group input-group">
-  <label class="input-group-addon">Vehicle</label>
-  <select id="idvehicle"class="form-control">
-    <option value=''>-- none --</option> 
-    </select>
-</div>
-
-
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Service
-        </a>
-      </h4>
+  </div>  -->
+  <form id="frm-inventory">
+    <div class="form-group input-group">
+      <label class="input-group-addon">Vehicle</label>
+      <select id="idvehicle"class="form-control">
+        <option value=''>-- none --</option> 
+      </select>
     </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-      
-              <legend>Agregar Servicio</legend>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Service
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
 
-                <div class="form-group input-group">
-                  <label for="startDate" class="input-group-addon">Fecha de inicio</label>
-                  <input type="text" required="required" name="startDate" class="date form-control bloqserv" id="startDate">
-                </div>
-                <div class="form-group input-group">
-                  <label for="endDate" class="input-group-addon">Fecha de fin</label>
-                  <input type="text" name="endDate" class="date form-control bloqserv" id="endDate">
-                </div>  
-              
+            <legend>Agregar Servicio</legend>
 
-              
-               <div class="form-group input-group">
-                <label for="idcarworkshop" class="input-group-addon"> Taller </label>
+            <div class="form-group input-group">
+              <label for="startDate" class="input-group-addon">Fecha de entrada</label>
+              <input type="text" disabled="disabled" required="required" name="startDate" class="date form-control bloqserv" id="startDate">
+            </div>
+            <div class="form-group input-group">
+              <label for="endDate" class="input-group-addon">Fecha de salida</label>
+              <input type="text"  disabled="disabled" name="endDate" class="date form-control bloqserv" id="endDate">
+            </div>  
 
-                <select id="idvehicleService" class="form-control bloqserv"  required="required">
-                  <option value=''>-- none --</option> 
-                </select>
-               </div>
-                
-                <div class="form-group input-group">
-                  <label for="idvehicle"class="input-group-addon">VIN  Vehiculo</label>
-                  <input type="text"  class="form-control serviceIdVehicle bloqserv" name="idVehicle" required="required" id="idvehicle" data-id="0" readonly>
-                </div>
-              
-                <div  class="form-group input-group">
-                  
-                  <input type="hidden"  class="form-control bloqserv" name="idEmployee" required="required" id="idemployee" readonly>
-                </div>
 
-                <a href="#"class="btn btn-primary disabled" id="bto1">Siguiente</a>
+
+            <div class="form-group input-group">
+              <label for="idcarworkshop" class="input-group-addon"> Taller </label>
+
+              <select id="idvehicleService" class="form-control bloqserv"  required="required">
+                <option value=''>-- none --</option> 
+              </select>
+            </div>
+
+            <div class="form-group input-group">
+              <label for="idvehicle"class="input-group-addon">VIN  Vehiculo</label>
+              <input type="text"  class="form-control serviceIdVehicle bloqserv" name="idVehicle" required="required" id="idvehicle" data-id="0" readonly>
+            </div>
+
+            <div  class="form-group input-group">
+
+              <input type="hidden"  class="form-control bloqserv" name="idEmployee" required="required" id="idemployee" readonly>
+            </div>
+
+            <a href="#"class="btn btn-primary disabled" id="bto1">Siguiente</a>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingTwo">
-      <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse"  href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-         Inspeccion
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="panel-body">
-      
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+          <h4 class="panel-title">
+            <a class="collapsed" data-toggle="collapse"  href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+             Inspeccion
+           </a>
+         </h4>
+       </div>
+       <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div class="panel-body">
+
          <legend>Inspeccion</legend>
-        
-        <div class="form-group input-group">
-         <label for="idService" class="input-group-addon">ID servicio</label>
-              <input type="number" class="form-control idservins" name="idService" required="required" step="0.01" id="idServiceInspection" readonly>
-                  </div>
-                  <div class="form-group input-group">
+
+         <div class="form-group input-group">
+           <label for="idService" class="input-group-addon">ID servicio</label>
+           <input type="number" class="form-control idservins" name="idService" required="required" step="0.01" id="idServiceInspection" readonly>
+         </div>
+         <div class="form-group input-group">
           <label for="mileage" class="input-group-addon">Millas</label>
           <input type="number" name="mileage" required="required" step="0.01" id="mileage" class="form-control bloqIns"></div>
           <div class="form-group input-group">
             <label class="input-group-addon" for="fuel">Fuel</label>
             <input type="number" name="fuel" required="required" step="0.01" id="fuel" class="form-control bloqIns"></div>
-            <div class="form-group input-group"><label class="input-group-addon" for="inspectiondate">Inspection Date</label>
-            <input class="form-control bloqIns" type="date" name="inspectiondate" required="required" id="inspectiondate">
+            <div class="form-group input-group"><label class="input-group-addon" for="inspectiondate">Fecha de Chequeo</label>
+              <input class="date form-control bloqIns"  disabled="disabled" type="text" name="inspectiondate" required="required" id="inspectiondate">
             </div>
             <div class="form-group input-group">
-              <label   for="type" class="input-group-addon">Type</label><input type="checkbox" name="type" id="type" class="bloqIns"></div>
-      
-            <a href="#"class="btn btn-primary"id="bto2">Save changes</a>
-          
-    
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingThree">
-      <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse"  href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-         Ubicacion
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <label   for="type" class="input-group-addon">Salida</label><input type="checkbox" disabled="disabled" name="type" id="type" class="bloqIns"></div>
+
+              <a href="#"class="btn btn-primary"id="bto2">Guardar</a>
+
+
+            </div>
+          </div>
+        </div>
+        <!-- 
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse"  href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+               Ubicacion
+             </a>
+           </h4>
+         </div>
+  <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
       <div class="panel-body">
                 <legend>Agregar Relocacion</legend>
 
@@ -186,16 +186,19 @@
       <a  class="btn btn-primary" id="bto3">Save changes</a>
 
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
+</form>
 </div>
 </div>
 {/block}
 {block name=scripts}
- {literal}
+{literal}
+<script src="webroot/js/vendor/jquery.validate.1.13.1.min.js"></script>
+<script src="webroot/js/vendor/jquery-validate.bootstrap-tooltip.js"></script>
 <script  src="webroot/js/inventory.js" ></script>
 <script>        $('input.date').datepicker();
 </script>
- {/literal}
- {/block}
+{/literal}
+{/block}
