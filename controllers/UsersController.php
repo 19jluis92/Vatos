@@ -49,8 +49,11 @@ class UsersController extends Controller{
 			echo json_encode($this->model->all());
 			break;
 			case 'massInsert':
-			$this->massInsert();
-			break;
+						$this->massInsert();
+						break;
+			case 'password':
+						$this->recoverPassword();
+						break;
 			default:
 			break;
 		}
@@ -150,7 +153,8 @@ class UsersController extends Controller{
 				$this->smarty->assign('error','no se pudo :(');
 			}
 		}
-		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
+		{
 			$id = $this->validateNumber($_GET['id']);
 			$user = $this->model->details($id);
 		//select Succesfull
@@ -165,7 +169,6 @@ class UsersController extends Controller{
 			{
 				$this->smarty->display('./views/error.tpl');
 			}
-
 		}
 	}
 	/**
@@ -189,6 +192,29 @@ class UsersController extends Controller{
 		{
 			//Ohh well... :(
 			$this->smarty->display('./views/error.tpl');
+		}
+	}
+	private function recoverPassword()
+	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT')
+		{
+			$email = $_POST['email'];
+			$result = $this->model->findUserByEmail($email);
+			if ($result!= NULL)
+			{
+				$message = 'Contraseña: '.$result[0];
+				$mail = new Mail($email, $message);
+				$mail->send_mail();
+				header("Location: index.php?");
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
+		{
+				$this->smarty->display('./views/User/recover.tpl');
 		}
 	}
 

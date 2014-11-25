@@ -17,6 +17,11 @@ class UsersModel extends Model{
 		//get all elements (set the $elements variable with a states array)
 		return $this->db->all('user');
 	}
+
+	function findUserByEmail($email)
+	{
+		return $this->db->getUserPassword($email);
+	}
 	/**
 	*method for show  User details
 	*@param string User

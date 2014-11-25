@@ -150,7 +150,8 @@ class LocationController extends Controller {
 	*/
 	private function edit()
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT')
+		{
 
 		//Validate Variables
 		$id = $this->validateNumber($_GET['id']);
