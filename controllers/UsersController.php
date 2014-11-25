@@ -71,13 +71,14 @@ class UsersController extends Controller{
 			{
 				//Load view
 				$message = 'Bienvenido Vato';
-				$mail = new Mail($email, $message);
+			  $subject = 'Registro en Sistema de Taller Automotriz';
+				$mail = new Mail($email, $subject,$message);
 				$mail->send_mail();
-				require('views/User/Created.php');
+				header("Location: index.php?controller=user");
 			}
 			else
 			{
-				require('views/Error.html');
+				$this->smarty->display('./views/error.tpl');
 			}
 
 
@@ -104,7 +105,7 @@ class UsersController extends Controller{
 		}
 		else
 		{
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 	/**
@@ -203,7 +204,8 @@ class UsersController extends Controller{
 			if ($result!= NULL)
 			{
 				$message = 'Contraseña: '.$result[0];
-				$mail = new Mail($email, $message);
+			  $subject = 'Recuperacion de Contraseña Vatos Car Service';
+				$mail = new Mail($email, $subject,$message);
 				$mail->send_mail();
 				header("Location: index.php?");
 			}
@@ -232,7 +234,8 @@ class UsersController extends Controller{
 			/*Perdon por esto de aqui :(, lo arreglare despues*/
 				$email = $this->validateText($dataArray[$i][0]);
 				$password = $this->validateNumber($dataArray[$i][1]);
-				$result = $this->model->create($email, $password);
+				$idRole = $this->validateNumber($dataArray[$i][2]);
+				$result = $this->model->create($email, $password,$idRole);
 			}
 			$this->all();
 		}

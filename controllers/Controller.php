@@ -266,10 +266,6 @@ class Controller
 		$data = array();
 		if($_FILES['csv']['error'] == 0)
 		{
-			while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
-			{
-				$data[] = $row;
-			}
 		    //$name = $_FILES['csv']['name'];
 			$tmp = explode('.', $_FILES['csv']['name']);
 			$ext = strtolower(end($tmp));
