@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="webroot/css/bootstrap.min.css">
   <link rel="stylesheet" href="webroot/css/theme.css">
   <link rel="stylesheet" href="webroot/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="webroot/css/datepicker3.css">
   <link rel="stylesheet" href="webroot/css/main.css">
   <style type="text/css">
   </style>
@@ -318,8 +319,9 @@
               </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
               <script>window.jQuery || document.write('<script src="webroot/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
 
-              <script src="webroot/js/vendor/bootstrap.min.js"></script>
-
+    <script src="webroot/js/vendor/bootstrap.min.js"></script>
+    <script src="webroot/js/vendor/bootstrap-datepicker.js"></script>
+    <script src="webroot/js/vendor/bootstrap-datepicker.es.js"></script>
     <script src="webroot/js/main.js"></script>
     <script src="webroot/js/ajax.js"></script>
  

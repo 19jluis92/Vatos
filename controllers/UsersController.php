@@ -49,8 +49,11 @@ class UsersController extends Controller{
 			echo json_encode($this->model->all());
 			break;
 			case 'massInsert':
-			$this->massInsert();
-			break;
+						$this->massInsert();
+						break;
+			case 'password':
+						$this->recoverPassword();
+						break;
 			default:
 			break;
 		}
@@ -68,13 +71,14 @@ class UsersController extends Controller{
 			{
 				//Load view
 				$message = 'Bienvenido Vato';
-				$mail = new Mail($email, $message);
+			  $subject = 'Registro en Sistema de Taller Automotriz';
+				$mail = new Mail($email, $subject,$message);
 				$mail->send_mail();
-				require('views/User/Created.php');
+				header("Location: index.php?controller=user");
 			}
 			else
 			{
-				require('views/Error.html');
+				$this->smarty->display('./views/error.tpl');
 			}
 
 
@@ -121,7 +125,7 @@ class UsersController extends Controller{
 		}
 		else
 		{
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 	/**
@@ -170,7 +174,8 @@ class UsersController extends Controller{
 				$this->smarty->assign('error','no se pudo :(');
 			}
 		}
-		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
+		{
 			$id = $this->validateNumber($_GET['id']);
 			$user = $this->model->details($id);
 		//select Succesfull
@@ -185,7 +190,6 @@ class UsersController extends Controller{
 			{
 				$this->smarty->display('./views/error.tpl');
 			}
-
 		}
 	}
 	/**
@@ -211,6 +215,30 @@ class UsersController extends Controller{
 			$this->smarty->display('./views/error.tpl');
 		}
 	}
+	private function recoverPassword()
+	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT')
+		{
+			$email = $_POST['email'];
+			$result = $this->model->findUserByEmail($email);
+			if ($result!= NULL)
+			{
+				$message = 'Contraseña: '.$result[0];
+			  $subject = 'Recuperacion de Contraseña Vatos Car Service';
+				$mail = new Mail($email, $subject,$message);
+				$mail->send_mail();
+				header("Location: index.php?");
+			}
+			else
+			{
+				$this->smarty->display('./views/error.tpl');
+			}
+		}
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
+		{
+				$this->smarty->display('./views/User/recover.tpl');
+		}
+	}
 
 	public function authenticationForUser($name,$pass){
 		$result = $this->model->authentication($name,$pass);
@@ -226,7 +254,8 @@ class UsersController extends Controller{
 			/*Perdon por esto de aqui :(, lo arreglare despues*/
 				$email = $this->validateText($dataArray[$i][0]);
 				$password = $this->validateNumber($dataArray[$i][1]);
-				$result = $this->model->create($email, $password);
+				$idRole = $this->validateNumber($dataArray[$i][2]);
+				$result = $this->model->create($email, $password,$idRole);
 			}
 			$this->all();
 		}

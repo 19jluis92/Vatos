@@ -19,12 +19,17 @@ class Controller
 		$this->smarty->debugging = false;
 		$this->smarty->caching = false;
 		$this->smarty->cache_lifetime = 0;
-		if($user = $this->LoggedIn()){
+		$user = $this->LoggedIn();
+		if ($user == NULL) {
+			$actualRole = "";
+		}
+		else
+		{
 			$actualRole = $this->getActualRoleName($user);
 			$actualRole = $actualRole == null ? '':$actualRole;
-			$this->smarty->assign('role',$actualRole);
 		}
-
+		$this->smarty->assign('role',$actualRole);
+		
 	}
 
 	/**
@@ -261,10 +266,6 @@ class Controller
 		$data = array();
 		if($_FILES['csv']['error'] == 0)
 		{
-			while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
-			{
-				$data[] = $row;
-			}
 		    //$name = $_FILES['csv']['name'];
 			$tmp = explode('.', $_FILES['csv']['name']);
 			$ext = strtolower(end($tmp));

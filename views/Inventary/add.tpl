@@ -3,17 +3,50 @@
 {block name=head}
 {/block}
 {block name=body}
+<div class="row">
+  <div class="col-md-12">
 
-<div class="form-group input-group">
-	<label class="input-group-addon">Cliente</label>
-	<select id="idcliente"class="form-control">
+  <table class="table" cellpadding="0" cellspacing="0" id="inventory-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th><a href="/vatoscake/client?sort=id&amp;direction=asc">Nombre</a></th>
+          <th><a href="/vatoscake/client?sort=name&amp;direction=asc">RFC</a></th>
+          <th><a href="/vatoscake/client?sort=name&amp;direction=asc">Dirección</a></th>
+         <!-- <th class="actions">Acciones</th>-->
+        </tr>
+      </thead>
+      <tbody>
+        {foreach item=client from=$clients}
+        <tr>
+          <td><a data-id="{$client.id}" href="#" class="element-option"><i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i></a></td>
+          <td>{$client.Name}</td>
+          <td>{$client.RFC}</td>
+          <td>{$client.address}</td>
+         <!-- <td class="actions">
+            <div class="btn-group" role="group" aria-label="...">
+              <a  class="btn btn-default" href="index.php?controller=CarWorkShop&view=details&id={$client.id}">Ver</a>       
+              <a  class="btn btn-default" href="index.php?controller=CarWorkShop&view=edit&id={$client.id}">Editar</a>   
+              <form action="index.php?controller=CarWorkShop&view=delete&id={$client.id}" name="post_carworkshop_{$client.id}" style="display:none;" method="post">
+                <input type="hidden" name="_method" value="POST">
+              </form>
+              <a  class="btn btn-default" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_carworkshop_{$client.id}.submit(); } event.returnValue = false; return false;">Eliminar</a>
+            </div>
+          </td>-->
+        </tr>
+        {/foreach}
+      </tbody>
+    </table>
+<!--<div class="form-group input-group">
+  <label class="input-group-addon">Cliente</label>
+  <select id="idcliente"class="form-control">
 
     <option value=''>-- none --</option>  
     </select>
-</div>	
+</div>  -->
 <div class="form-group input-group">
-	<label class="input-group-addon">Vehicle</label>
-	<select id="idvehicle"class="form-control">
+  <label class="input-group-addon">Vehicle</label>
+  <select id="idvehicle"class="form-control">
     <option value=''>-- none --</option> 
     </select>
 </div>
@@ -28,21 +61,19 @@
         </a>
       </h4>
     </div>
-    <div id="collapseOne" CLASS="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
       
               <legend>Agregar Servicio</legend>
 
-              <div class="row ">
                 <div class="form-group input-group">
                   <label for="startDate" class="input-group-addon">Fecha de inicio</label>
-                  <input type="date" required="required" name="startDate" class="form-control bloqserv" id="startDate">
+                  <input type="text" required="required" name="startDate" class="date form-control bloqserv" id="startDate">
                 </div>
                 <div class="form-group input-group">
                   <label for="endDate" class="input-group-addon">Fecha de fin</label>
-                  <input type="date" name="endDate" class="form-control bloqserv" id="endDate">
+                  <input type="text" name="endDate" class="date form-control bloqserv" id="endDate">
                 </div>  
-              </div>
               
 
               
@@ -64,14 +95,14 @@
                   <input type="hidden"  class="form-control bloqserv" name="idEmployee" required="required" id="idemployee" readonly>
                 </div>
 
-                <a href="#"class="btn btn-primary"id="bto1">Save changes</a>
+                <a href="#"class="btn btn-primary disabled" id="bto1">Siguiente</a>
       </div>
     </div>
   </div>
-  <div CLASS="PANEL PANEL-default">
-    <div CLASS="panel-heading" role="tab" id="headingTwo">
-      <h4 CLASS="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse"  href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
          Inspeccion
         </a>
       </h4>
@@ -95,7 +126,7 @@
             <input class="form-control bloqIns" type="date" name="inspectiondate" required="required" id="inspectiondate">
             </div>
             <div class="form-group input-group">
-              <label   for="type" class="input-group-addon">Type</label><input type="checkbox" name="type" id="type" class="form-control bloqIns"></div>
+              <label   for="type" class="input-group-addon">Type</label><input type="checkbox" name="type" id="type" class="bloqIns"></div>
       
             <a href="#"class="btn btn-primary"id="bto2">Save changes</a>
           
@@ -106,12 +137,12 @@
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        <a class="collapsed" data-toggle="collapse"  href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
          Ubicacion
         </a>
       </h4>
     </div>
-    <div id="collapseThree" CLASS="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
       <div class="panel-body">
                 <legend>Agregar Relocacion</legend>
 
@@ -158,9 +189,13 @@
     </div>
   </div>
 </div>
+</div>
+</div>
 {/block}
 {block name=scripts}
  {literal}
-<script  src="webroot/js/inventaryAjax.js" ></script>
+<script  src="webroot/js/inventory.js" ></script>
+<script>        $('input.date').datepicker();
+</script>
  {/literal}
  {/block}
