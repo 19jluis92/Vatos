@@ -1,8 +1,9 @@
 <?php
-require('controllers/Controller.php');
+require_once('controllers/Controller.php');
 class ServicesController extends Controller {
 	private $model;
-	
+	private $employees;
+
 
 	/**
 	*Default constructor , include and create the model
@@ -10,7 +11,7 @@ class ServicesController extends Controller {
 	function __construct()
 	{
 		parent::__construct();
-		require('models/ServicesModel.php');
+		require_once('models/ServicesModel.php');
 		$this->model = new ServicesModel();
 	}
 
@@ -153,11 +154,11 @@ class ServicesController extends Controller {
 	}
 	private function loadProperties(){
 		
-		require('models/EmployeesModel.php');
+		require_once('models/EmployeesModel.php');
 		$this->employees = new EmployeesModel();
-		require('models/CarWorkShopModel.php');
+		require_once('models/CarWorkShopModel.php');
 		$this->services = new CarWorkShopModel();
-		require('models/VehiclesModel.php');
+		require_once('models/VehiclesModel.php');
 		$this->vehicles = new VehiclesModel();
 	}
 
@@ -167,28 +168,33 @@ class ServicesController extends Controller {
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 
 		//Validate Variables
-			$startDate = $this->validateDate($_POST['startDate']);
+			$now = new DateTime();
+			$startDate = $now->format('Y-m-d H:i:s');
 			$endDate = $this->validateDate($_POST['endDate']);
-			$idEmp=  $this->LoggedIn();
-			
-			$idEmp=$this->Employees->getByColumn($idEmp->id,'idUser');
-			
-			$idEmployee = $idEmp[0]['id'];
 			$idCarWorkShop = $this->validateNumber($_POST['idvehicleService']);
 			$idVehicle = $this->validateNumber($_POST['idVehicle']);
+			$idEmp=  $this->LoggedIn();
+			require_once('models/EmployeesModel.php');
+			$this->employees = new EmployeesModel();
+			$idEmp=$this->employees->getByColumn($idEmp->id,'idUser');
+			if(count($idEmp) == 0){
+				header('HTTP/1.1 500 Internal Server Error');
+			}
+			$idEmployee = $idEmp[0]['id'];
+			
 			//var_dump($idCarWorkShop);
 			$result = $this->model->create($startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
 		//Insert Succesfull
 			if($result)
 			{
 				unset($postError);
-				
+				echo json_encode($result);
 				//$this->all();
 			}
 			else
 			{
 				$postError = true;
-				//$this->smarty->assign('error',$result);
+				header('HTTP/1.1 500 Internal Server Error');
 			}
 
 		} 
@@ -196,6 +202,7 @@ class ServicesController extends Controller {
 		
 		}
 	}
+
 	/**
 	*Update a service with the given post parameters 
 	*@param int $id  the existing service id
@@ -212,7 +219,8 @@ class ServicesController extends Controller {
 
 		//Validate Variables
 		$id = $this->validateNumber($_GET['id']);
-		$startDate = $this->validateDate($_POST['startDate']);
+		$now = new DateTime();
+		$startDate = $now->format('Y-m-d H:i:s');
 		$endDate = $this->validateDate($_POST['endDate']);
 		$idEmployee = $this->validateNumber($_POST['idEmployee']);
 		$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);

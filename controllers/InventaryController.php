@@ -14,45 +14,62 @@ class InventaryController extends Controller
 		
 	}
 
-	 function run(){
+	function run(){
 	 	//$this->validatePersmission(["user","admin","superadmin"]);
-	 	$view = isset($_GET['view'])?$_GET['view']:'index';
+		$view = isset($_GET['view'])?$_GET['view']:'index';
 		switch($view)
 		{
 			case 'index':
-			            $this->all();
+			$this->all();
 			break;
 			case 'create':
 						//Validate User and permissions
-						$this->create();		
-						break;
+			$this->create();		
+			break;
 			case 'edit':
 						//Validate User and permissions
-						$this->edit();
-						break;
+			$this->edit();
+			break;
 			case 'delete':
 						//Validate User and permissions
-						$this->delete();
-						break;
+			$this->delete();
+			break;
 
 			case 'serviceEdit':
-					$this->serviceEdit();
-					break;
+			$this->serviceEdit();
+			break;
 
 			case 'inpectionEdit':
-				$this->inspectionEdit();
-				break;
+			$this->inspectionEdit();
+			break;
 
 			case 'ubicationEdit':
-				$this->ubicationEdit();
-				break;
+			$this->ubicationEdit();
+			break;
 
 			default:
-						break;
+			break;
 
 		}
-	 }
+	}
 	public function all(){
+		$this->loadProperties();
+		$this->Service = new ServicesModel();
+		$result = $this->Service->all();	
+		//Query Succesfull
+		if(isset($result))
+		{
+			$this->smarty->assign('services',$result);
+				//Load view
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			$this->smarty->display('./views/Inventary/index.tpl');
+		}
+		else
+		{
+			//Ohh well... :(
+			$this->smarty->display('./views/error.tpl');
+		}		
 
 	}
 
@@ -147,20 +164,20 @@ class InventaryController extends Controller
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 
 		//Validate Variables
-		$id = $this->validateNumber($_GET['id']);
-		$startDate = $this->validateDate($_POST['startDate']);
-		$endDate = $this->validateDate($_POST['endDate']);
-		$idEmp=  $this->LoggedIn();
+			$id = $this->validateNumber($_GET['id']);
+			$startDate = $this->validateDate($_POST['startDate']);
+			$endDate = $this->validateDate($_POST['endDate']);
+			$idEmp=  $this->LoggedIn();
 			
-		$idEmp=$this->Employees->getByColumn($idEmp->id,'idUser');
+			$idEmp=$this->Employees->getByColumn($idEmp->id,'idUser');
 			
-		$idEmployee = $idEmp[0]['id'];
-		$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
-		$idVehicle = $this->validateNumber($_POST['idVehicleService']);
+			$idEmployee = $idEmp[0]['id'];
+			$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
+			$idVehicle = $this->validateNumber($_POST['idVehicleService']);
 
-		$result = $this->Service->edit($id, $startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
+			$result = $this->Service->edit($id, $startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
 		//Insert Succesfull
-		if($result)
+			if($result)
 			{
 				unset($postError);				
 			}
@@ -220,7 +237,7 @@ class InventaryController extends Controller
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			$id = $this->validateNumber($_GET['id']);
 			if(isset($id))
-			$inspection = $this->Inspection->GetByColum('inspection',$id,'idService');
+				$inspection = $this->Inspection->GetByColum('inspection',$id,'idService');
 
 		//select Succesfull
 			if($inspection != NULL)
@@ -244,19 +261,19 @@ class InventaryController extends Controller
 		$this->loadProperties();
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$relocationDate = $this->validateDate($_POST['relocationDate']);
-		$idEmp=  $this->LoggedIn();
+			$id = $this->validateNumber($_POST['id']);
+			$relocationDate = $this->validateDate($_POST['relocationDate']);
+			$idEmp=  $this->LoggedIn();
 			
 			$idEmp=$this->Employees->getByColumn($idEmp->id,'idUser');
 			
 			$idEmployee = $idEmp[0]['id'];
-		$reason = $this->validateText($_POST['reason']);
-		$idDepartment = $this->validateNumber($_POST['idDepartment']);
-		$idService = $this->validateNumber($_POST['idService']);
-		$result = $this->relocation->edit($id,$relocationDate,$idEmployee,$reason,$idDepartment,$idService);	
+			$reason = $this->validateText($_POST['reason']);
+			$idDepartment = $this->validateNumber($_POST['idDepartment']);
+			$idService = $this->validateNumber($_POST['idService']);
+			$result = $this->relocation->edit($id,$relocationDate,$idEmployee,$reason,$idDepartment,$idService);	
 		//Insert Succesfull
-		if($result)
+			if($result)
 			{
 				
 			}
