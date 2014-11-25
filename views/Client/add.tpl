@@ -37,7 +37,14 @@
 	               </div>
 	            </div>
               <br />
+				<div class="row">
 
+	               <div class="col-md-12">
+	               	<label for="address" class="input-group-addon">Password</label>
+					<input type="password" name="password" required="password" id="password" class="form-control" maxlength="45" placeholder="password">
+	               </div>
+	            </div>
+	           <br />
                <div class="row">
 
 	               <div class="col-md-12">

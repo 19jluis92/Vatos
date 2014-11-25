@@ -27,6 +27,9 @@ class HomeController extends Controller {
 			case 'login':
 			$this->autenticate();
 			break;
+			case 'client':
+				$this->ClientView();
+				break;
 			default:
 			$this->index();	
 			break;
@@ -183,6 +186,30 @@ class HomeController extends Controller {
 		$this->logout();
 		//$this->result=true;
 		
+	}
+
+	public function ClientView()
+	{
+		$this->LoadProperties();
+		$user=  $this->LoggedIn();
+		
+		$Clients=$this->Client->GetByColum($user->email,'email');
+		$cliente=$this->Client->details($Clients[0]['id']);
+		$this->smarty->assign('client',$cliente);
+		//var_dump($cliente);
+		$carros=$this->Vehicle->getVehicleByClient($cliente->id);
+		$this->smarty->assign('vehicles',$carros);
+		$this->smarty->display('./views/_Layouts/dashboardclient.tpl');
+
+	}
+
+	public function LoadProperties(){
+		require('models/ClientModel.php');
+		$this->Client = new ClientModel();
+		require('models/VehiclesModel.php');
+		$this->Vehicle = new VehiclesModel();
+		require('models/ServicesModel.php');
+		$this->Vehicle = new ServicesModel();
 	}
 
 }

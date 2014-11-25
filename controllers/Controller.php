@@ -223,7 +223,7 @@ class Controller
 		$regex='(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$';
 		if(preg_match($regex, $data))
 		{
-			return true;
+			return $data;
 		}
 		return false;
 
@@ -266,10 +266,6 @@ class Controller
 		$data = array();
 		if($_FILES['csv']['error'] == 0)
 		{
-			while(($row = fgetcsv($handle, 1000, ",")) !== FALSE)
-			{
-				$data[] = $row;
-			}
 		    //$name = $_FILES['csv']['name'];
 			$tmp = explode('.', $_FILES['csv']['name']);
 			$ext = strtolower(end($tmp));
