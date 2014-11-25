@@ -2,7 +2,7 @@
 require('controllers/Controller.php');
 class LocationController extends Controller {
 	private $model;
-	private $tableName;
+	
 	/**
 	*Default constructor , include and create the model
 	*/
@@ -11,7 +11,6 @@ class LocationController extends Controller {
 		parent::__construct();
 		require('models/LocationModel.php');
 		$this->model = new LocationModel();
-		$this->tableName = 'location';
 	}
 
 	/**
@@ -46,14 +45,15 @@ class LocationController extends Controller {
 			case 'getByCarWorkShop':
 			$this->getByCarWorkShop();
 			break;
-
 			default:
 			break;
 		}
 	}
 
+
+
 	/**
-	*Show all the Countries of the database
+	*Show all the Locations by carworkshop
 	*@return null nothing returned but view loaded
 	*/
 	private function getByCarWorkShop()
@@ -64,9 +64,8 @@ class LocationController extends Controller {
 	}
 
 
-
 	/**
-	*Show all the Countries of the database
+	*Show all the Locations of the database
 	*@return null nothing returned but view loaded
 	*/
 	private function all()
@@ -82,13 +81,13 @@ class LocationController extends Controller {
 			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
 				$this->smarty->assign('deleted',true);
 			
-			$this->smarty->assign('users',$result);
+			$this->smarty->assign('locations',$result);
 			$this->smarty->display('./views/Location/index.tpl');
 		}
 		else
 		{
 			//Ohh well... :(
-			$this->smarty->display('./views/error.tpl');
+				$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -100,7 +99,7 @@ class LocationController extends Controller {
 	private function details()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->details($id);	
 		//Insert Succesfull
 		if(isset($result))
@@ -126,26 +125,35 @@ class LocationController extends Controller {
 	{
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 			//Validate Variables
-			$name = $this->validateText($_POST['name']);
-			$idCarWorkShop = $this->validateText($_POST['idCarWorkShop']);
-			$result = $this->model->create($name, $idCarWorkShop);	
+		$name = $this->validateText($_POST['name']);
+		$idCarWorkShop = $this->validateText($_POST['idCarWorkShop']);
+		$result = $this->model->create($name, $idCarWorkShop);	
 		//Insert Succesfull
-			if($result)
-			{
+		if($result)
+		{
 			//Load view
-				require('views/Location/Created.php');
-			}
-			else
-			{
-				require('views/Error.html');
-			}
+			header("Location: index.php?controller=location");
+		}
+		else
+		{
+			$postError = true;
+			$this->smarty->assign('error','no se pudo :(');
+		}
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			if(isset($name))
 				$this->smarty->assign('name',$name);
+			$this->loadProperties();
+			$this->smarty->assign('carWorkShops',$this->toAssociativeArray($this->carWorkShops->all()));
 			$this->smarty->display('./views/Location/add.tpl');
 		}
 		
+	}
+
+	private function loadProperties()
+	{
+		require('models/CarWorkShopModel.php');
+		$this->carWorkShops = new CarWorkShopModel();
 	}
 
 	/**
@@ -160,29 +168,33 @@ class LocationController extends Controller {
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 
 		//Validate Variables
-			$name = $this->validateText($_POST['name']);
-			$idCarWorkShop = $this->validateText($_POST['idCarWorkShop']);
-			$result = $this->model->edit($name, $idCarWorkShop);	
+		$id = $this->validateNumber($_GET['id']);
+		$name = $this->validateText($_POST['name']);
+		$idCarWorkShop = $this->validateText($_POST['idCarWorkShop']);
+		$result = $this->model->edit($id, $name, $idCarWorkShop);	
+		var_dump($result);
 		//Insert Succesfull
-			if($result)
-			{
+		if($result)
+		{
 			//Load view
-				unset($postError);
-				header("Location: index.php?controller=Location");
-			}
-			else
-			{
-				require('views/Error.html');
-			}
+			unset($postError);
+			header("Location: index.php?controller=Location");
+		}
+		else
+		{
+			require('views/Error.html');
+		}
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			$id = $this->validateNumber($_GET['id']);
-			$user = $this->model->details($id);
+			$location = $this->model->details($id);
 		//select Succesfull
-			if($user != NULL)
+			if($location != NULL)
 			{
 			//Load view
-				$this->smarty->assign('user',$user);
+				$this->loadProperties();
+			$this->smarty->assign('carWorkShops',$this->toAssociativeArray($this->carWorkShops->all()));
+				$this->smarty->assign('location',$location);
 				$this->smarty->display('./views/Location/edit.tpl');
 			}
 			else
@@ -201,7 +213,7 @@ class LocationController extends Controller {
 	private function delete()
 	{
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
+		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
 		if($result)
@@ -217,3 +229,5 @@ class LocationController extends Controller {
 }
 
 ?>
+
+

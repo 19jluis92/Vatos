@@ -28,18 +28,14 @@ Class CarWorkShopModel extends Model{
 	function details($id)
 	{
 		if($result = $this->db->details('carworkshop', $id,NULL))
-			{
+		{
 			$CarWorkShop = new CarWorkShop($result['name'],$result['address'],$result['idCity'],$result['id']);
-			/*opcionales son de prueba*/
-			var_dump($CarWorkShop);
 			return $CarWorkShop;
 		}
-		else{
-			echo $result;
-			return NULL;
+		else
+		{
+			return false;
 		}
-		//delete element using the given $id
-		return true;
 	}
 
 	/**

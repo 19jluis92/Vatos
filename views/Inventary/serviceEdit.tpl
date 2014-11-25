@@ -1,21 +1,18 @@
-<div class="brand col-md-10">
-		<form method="post" class="form-horizontal" accept-charset="utf-8" action="index.php?controller=Service&view=edit&id={$service->id}">
+<div id="serviceChild" class="brand col-md-10">
+		<form method="post" class="form-horizontal" accept-charset="utf-8" action="index.php?controller=inventory&view=serviceEdit&id={$service->id}">
 
 			<fieldset>
 				<legend>Edit Service</legend>
 				<div class="form-group input-group">
 					<label class="input-group-addon" for="id">Id Servicio</label>
-					<select   name="idserviceForm" required="required" id="idserviceForm" class="form-control">
-                    <option value=''>-- none --</option>
-                    {html_options options=$service->id selected=$service->id}
-                    </select>
+					<input type="number" name="idservicio" required="required" id="idservicio" value="{$service->id}" class="form-control" readonly>
 				</div>
 				<div class="form-group input-group">
 					<label class="input-group-addon" for="startDate">Start Date</label>
 					<input type="date" required="required" name="startDate" value="{$service->startDate}" class="form-control"> 
 				</div>
 				<div class="form-group input-group">
-					<label class="input-group-addon" for="endDate">Start Date</label>
+					<label class="input-group-addon" for="endDate">End Date</label>
 					<input type="date" name="endDate" value="{$service->endDate}" class="form-control">
 				</div>
 				<div class="form-group input-group">
@@ -33,8 +30,8 @@
                     </select>
 				</div>
 				<div class="form-group input-group">
-				<label class="input-group-addon" for="idemployee">Id Employee</label>
-				<input type="number" name="idEmployee" required="required" id="idemployee" value="{$service->idEmployee}" class="form-control" readonly>
+				
+				<input type="hidden" name="idEmployee" required="required" id="idemployee" value="{$service->idEmployee}" class="form-control" readonly>
 				</div>
 			</fieldset>
 			<button type="submit">Submit</button>

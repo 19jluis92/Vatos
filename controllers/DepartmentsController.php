@@ -132,6 +132,8 @@ class DepartmentsController extends Controller {
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			if(isset($name))
 				$this->smarty->assign('name',$name);
+			$this->loadProperties();
+			$this->smarty->assign('locations',$this->toAssociativeArray($this->locations->all()));
 			$this->smarty->display('./views/Department/add.tpl');
 		}
 	}
@@ -169,7 +171,9 @@ class DepartmentsController extends Controller {
 		//select Succesfull
 			if($department != NULL)
 			{
-			//Load view
+				//Load view
+				$this->loadProperties();
+			$this->smarty->assign('locations',$this->toAssociativeArray($this->locations->all()));
 				$this->smarty->assign('department',$department);
 				$this->smarty->display('./views/Department/edit.tpl');
 			}
@@ -201,6 +205,13 @@ class DepartmentsController extends Controller {
 		{
 			$this->smarty->display('./views/error.tpl');
 		}
+	}
+
+	private function loadProperties()
+	{
+		require('models/LocationModel.php');
+		$this->locations = new LocationModel();
+
 	}
 
 }

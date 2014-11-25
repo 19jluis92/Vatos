@@ -1,5 +1,5 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}My Page Title{/block}
+{block name=title}Departamento{/block}
 {block name=head}
 {/block}
 {block name=body}
@@ -19,15 +19,27 @@
 		</ul>
 	</div>
 	<div class="department form large-10 medium-9 columns">
-		<form method="post" accept-charset="utf-8" action="index.php?controller=department&view=edit&id={$department->id}">
+		<form role="form" method="post" accept-charset="utf-8" action="index.php?controller=department&view=edit&id={$department->id}">
 		<input type="hidden" name="_method" value="PUT"></div>	
 			<fieldset>
-				<legend>Edit department</legend>
-				<div class="input text required"><label for="name" class="input-group-addon">Name</label><input type="text" name="name" required="required" maxlength="45" class="form-control" id="name" value="{$department->name}"></div>
-				<div class="input number required"><label class="input-group-addon" for="idLocation">Id Location</label><input type="number" name="idLocation" required="required" id="idLocation" value="{$department->idLocation}"  maxlength="45" class="form-control"></div>
+				<legend>Editar departmento</legend>
+				<div class="row">
+					<div class="col-md-8">
+						<label for="name" class="input-group-addon">Nombre</label><input type="text" name="name" required="required" maxlength="45" class="form-control" id="name" value="{$department->name}">
+					</div>
+					<div class="col-md-4">
+						<label for ="idLocation" 	class="input-group-addon">idLocation</label>
+            <select name="idLocation" required="required" class="form-control" id="idLocation" placeholder="Lugar">
+                   <option value=''>-- none --</option>
+                  {html_options selected=$department->idLocation options=$locations}
+            </select>
+					</div>
+				</div>					
+				<br />
 			</fieldset>
-			<button class="btn btn-default" type="submit">Submit</button>
-		</form>
+		<button type="submit" class="btn btn-default pull-right">Enviar</button>
+	</form>
+	</div>
 	</div>
 </div>
 </div>

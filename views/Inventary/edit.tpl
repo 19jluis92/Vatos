@@ -17,6 +17,14 @@
     <option value=''>-- none --</option> 
     </select>
 </div>
+<div>
+  <label class="input-group-addon" for="id">Id Servicio</label>
+  <select   name="idserviceForm" required="required" id="idserviceForm" class="form-control">
+    <option value=''>-- none --</option>
+   
+  </select>
+</div>
+
 </br>
 
 <div CLASS="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -71,3 +79,10 @@
 </div>
 
 {/block}
+{/block}
+{block name=scripts}
+ {literal}
+   
+    <script src="webroot/js/inventaryEditAjax.js"></script>
+ {/literal}
+ {/block}

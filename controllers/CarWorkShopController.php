@@ -50,7 +50,7 @@ class CarWorkShopController extends Controller {
 			
 			case 'delete':
 					//Validate User and permissions
-			$this->validateSession() ? $this->delete() : require('views/Error.html') ;
+				$this->delete();
 			break;
 			default:
 			break;
@@ -65,7 +65,6 @@ class CarWorkShopController extends Controller {
 	*/
 	private function all()
 	{
-		
 		//get all the CarWorkShop
 		$result = $this->model->all();	
 		$this->smarty->assign('carworkshops',$result);
@@ -135,7 +134,8 @@ class CarWorkShopController extends Controller {
 				$this->smarty->assign('error',$result);
 			}
 		}
-		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
+		{
 			$this->loadProperties();
 			$this->smarty->assign('cities',$this->toAssociativeArray($this->cities->all()));
 			$this->smarty->display('./views/CarWorkShop/add.tpl');
@@ -154,6 +154,7 @@ class CarWorkShopController extends Controller {
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT')
 		{
 			//Validate Variables
+			$id = $this->validateText($_GET['id']);
 			$name = $this->validateText($_POST['name']);
 			$address = $this->validateText($_POST['address']);
 			$idCity = $this->validateNumber($_POST['idCity']);
@@ -171,13 +172,16 @@ class CarWorkShopController extends Controller {
 				$this->smarty->assign('error','no se pudo :(');
 			}
 		}
-		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
+		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))
+		{
 			$id = $this->validateNumber($_GET['id']);
 			$carworkshop = $this->model->details($id);
 		//select Succesfull
 			if($carworkshop != NULL)
 			{
-			//Load view
+				//Load view
+				$this->loadProperties();
+			$this->smarty->assign('cities',$this->toAssociativeArray($this->cities->all()));
 				$this->smarty->assign('carworkshop',$carworkshop);
 				$this->smarty->display('./views/carworkshop/edit.tpl');
 			}
@@ -199,25 +203,14 @@ class CarWorkShopController extends Controller {
 		//Validate Variables
 		$id = $this->validateNumber($_GET['id']);
 		$result = $this->model->delete($id);	
-		//Insert Succesfull
-		if($result)
-		{
-			//Load view
-			require('views/CarWorkShop/Deleted.php');
-		}
-		else
-		{
-			require('views/Error.html');
-		}
+		$result ? header("Location: index.php?controller=carworkshop") : $this->smarty->display('./views/error.tpl') ;
 	}
 
-		private function loadProperties(){
+	private function loadProperties()
+	{
 		require('models/CitiesModel.php');
 		$this->cities = new CitiesModel();
-		
 	}
-
-
 }
 
 ?>

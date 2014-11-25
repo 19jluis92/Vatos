@@ -1,5 +1,6 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}My Page Title{/block}
+{block name=title}Departamentos{/block}
+{block name=pageheader}Departamentos{/block}
 {block name=head}
 {/block}
 {block name=body}
@@ -12,7 +13,7 @@
 		</ul>
 	</div>
 	<div class="col-md-10">
-		<table class="col-md-10" cellpadding="0" cellspacing="0">
+		<table class="table" cellpadding="0" cellspacing="0">
 			<thead>
 				<tr>
 					<th><a href="index.php?controller=Department&sort=id&amp;direction=asc">Id</a></th>
@@ -30,7 +31,7 @@
 					<td>{$department.idLocation}</td>
 					<td class="actions">
 					<div class="btn-group" role="group" aria-label="...">
-					<a href="index.php?controller=Department&view=details&id={$department.id}">Ver</a>				
+					<a class="btn btn-default" href="index.php?controller=Department&view=details&id={$department.id}">Ver</a>				
 						<a class="btn btn-default"  href="index.php?controller=Department&view=edit&id={$department.id}">Editar</a>		
 						<form action="index.php?controller=Department&view=delete&id={$department.id}" name="post_department_{$department.id}" style="display:none;" method="post">
 							<input type="hidden" name="_method" value="POST">
