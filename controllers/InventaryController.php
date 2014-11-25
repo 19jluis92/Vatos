@@ -111,9 +111,6 @@ class InventaryController extends Controller
 			//select Succesfull
 			if(isset($service))
 			{
-				var_dump($client);
-				var_dump($vehicle);
-				var_dump($service);
 				$this->smarty->assign('service',$service);
 				$this->smarty->assign('vehicle',$vehicle);
 				$this->smarty->assign('client',$client);
