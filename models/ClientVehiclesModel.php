@@ -10,6 +10,9 @@ Class ClientVehiclesModel extends Model
     parent::__construct();
   }
 
+  function all(){
+    return $this->db->all('clientvehicle');
+  }
   /**
   *method for create new ClientVehicle (required on vehicles) 
   *@param string $name
@@ -26,6 +29,11 @@ Class ClientVehiclesModel extends Model
     {
       return false;
     }
+  }
+
+  function clientVehicles()
+  {
+    
   }
 }
 ?>
