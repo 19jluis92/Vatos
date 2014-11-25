@@ -42,6 +42,9 @@ class LocationController extends Controller {
 						//Validate User and permissions
 			$this->delete();		
 			break;
+			case 'getByCarWorkShop':
+			$this->getByCarWorkShop();
+			break;
 			default:
 			break;
 		}
@@ -50,7 +53,19 @@ class LocationController extends Controller {
 
 
 	/**
-	*Show all the Countries of the database
+	*Show all the Locations by carworkshop
+	*@return null nothing returned but view loaded
+	*/
+	private function getByCarWorkShop()
+	{
+		$id = 1;
+		$json = html_entity_decode(json_encode($this->model->get($this->tableName , [["","idCarWorkShop","=",$id]] )));
+		echo $json;
+	}
+
+
+	/**
+	*Show all the Locations of the database
 	*@return null nothing returned but view loaded
 	*/
 	private function all()
@@ -215,3 +230,5 @@ class LocationController extends Controller {
 }
 
 ?>
+
+
