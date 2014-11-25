@@ -28,8 +28,31 @@ class HomeController extends Controller {
 			$this->autenticate();
 			break;
 			case 'dashboard':
-				$this->ClientView();
-				break;
+			{
+				$userRole=  $this->LoggedIn();
+				$opc = (int)$userRole->idRole;
+				
+				switch ($opc) {
+					case 1:
+						# code...
+						break;
+
+					case 2:
+
+						$this->ClientView();
+						break;
+					
+					case 3:
+						# code...
+						break;
+					default:
+						$this->index();	
+						break;
+				}
+			}
+			break;
+
+
 			default:
 			$this->index();	
 			break;
@@ -220,7 +243,7 @@ class HomeController extends Controller {
 			$this->smarty->assign('services',$servicios);
 		
 
-		$this->smarty->display('./views/_Layouts/dashboardclient.tpl');
+	$this->smarty->display('./views/_Layouts/dashboardclient.tpl');
 
 	}
 
