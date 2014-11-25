@@ -104,19 +104,21 @@ class InventaryController extends Controller
 			$id = $this->validateNumber($_GET['id']);
 			$this->loadProperties();
 			$service = $this->Service->details($id);
-			$inspections = $this->Inspection->get('inspection',[['','idService','=',$service->idService,]]);
-			$reolcations = $this->relocation->get('relocation',[['','idService','=',$service->idService,]]);
+			$inspections = $this->Inspection->get('inspection',[['','idService','=',$service->id]]);
+			$relocations = $this->relocation->get('relocation',[['','idService','=',$service->id]]);
 			$vehicle = $this->Vehicle->details($service->idVehicle);
 			$client = $this->Client->getClientByVehicle($service->idVehicle);
-			var_dump($inspections);
-			var_dump($relocations);
 			//select Succesfull
-			if(true)
+			if(isset($service))
 			{
-				#var_dump($client);
+				var_dump($client);
+				var_dump($vehicle);
+				var_dump($service);
 				$this->smarty->assign('service',$service);
 				$this->smarty->assign('vehicle',$vehicle);
 				$this->smarty->assign('client',$client);
+				$this->smarty->assign('relocations',$relocations);
+				$this->smarty->assign('inspections',$inspections);
 				$this->smarty->display('./views/Inventary/edit.tpl');
 			}
 			else
