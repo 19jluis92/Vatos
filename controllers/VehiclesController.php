@@ -261,8 +261,6 @@ class VehiclesController extends Controller {
 		
 	}
 
-		
-
 	private function massInsert()
 	{
 		$dataArray = $this->massiveInsertion();		

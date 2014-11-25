@@ -1,6 +1,6 @@
 <?php 
 require_once('controllers/Controller.php');
-require("./PHPMailer/class.phpmailer.php");
+require("./Mailer/class.phpmailer.php");
 require_once('mail.php');
 class UsersController extends Controller{
 	private $model;
