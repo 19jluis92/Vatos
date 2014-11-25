@@ -1,5 +1,5 @@
 <?php
-require('controllers/Controller.php');
+require_once('controllers/Controller.php');
 
 /**
 * 
@@ -7,6 +7,7 @@ require('controllers/Controller.php');
 class InventaryController extends Controller
 {
 	private $model;
+	private $Client;
 	function __construct()
 	{
 		parent::__construct();
@@ -62,6 +63,7 @@ class InventaryController extends Controller
 			$result = true;
 			if($result)
 			{
+
 				//Load view
 				unset($postError);
 				header("Location: index.php?controller=Home&view=index");
@@ -118,23 +120,25 @@ class InventaryController extends Controller
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			
 			$this->loadProperties();
-			//$this->smarty->assign('Clients',$this->toAssociativeArray($this->Client->all()));	
+			$this->smarty->assign('clients',$this->Client->all());	
 			$this->smarty->display('./views/Inventary/add.tpl');
 		}
 	}	
 
 	private function loadProperties(){
-		require('models/VehiclesModel.php');
+		require_once('models/ClientModel.php');
+		$this->Client= new ClientModel();
+		require_once('models/VehiclesModel.php');
 		$this->Vehicle = new VehiclesModel();
-		require('models/ServicesModel.php');
+		require_once('models/ServicesModel.php');
 		$this->Service = new ServicesModel();
-		require('models/CarWorkShopModel.php');
+		require_once('models/CarWorkShopModel.php');
 		$this->CarWorkShop = new CarWorkShopModel();
-		require('models/InspectionsModel.php');
+		require_once('models/InspectionsModel.php');
 		$this->Inspection = new InspectionsModel();
-		require('models/RelocationsModel.php');
+		require_once('models/RelocationsModel.php');
 		$this->relocation = new RelocationsModel();
-		require('models/EmployeesModel.php');
+		require_once('models/EmployeesModel.php');
 		$this->Employees = new EmployeesModel();
 	}
 

@@ -1,3 +1,9 @@
+function getValueByHashParameter(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(window.location.hash);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
 
 $.get("index.php?controller=Client&view=ajax",function(e){
   
@@ -13,11 +19,25 @@ $.get("index.php?controller=Client&view=ajax",function(e){
 
 });
 
-$("#idcliente").on('change',function(e){
-	var id= $("#idcliente").val();
+$("#inventory-table .element-option").on("click",function(e){
+					e.preventDefault();
+					$("#inventory-table tr").removeClass("info");
+					$(this).parents("tr").addClass("active info");
+					$("#inventory-table .element-option i").removeClass("glyphicon-check");
+					$("#inventory-table .element-option i").addClass("glyphicon-unchecked");
+					$(this).find("i").removeClass("glyphicon-unchecked").addClass("glyphicon-check");
+					window.location.hash = "?clientid="+$(this).attr("data-id");
+					return false;
+				});		
+
+$(window).on('hashchange',function(e){
+	var id= getValueByHashParameter("clientid");
+	if(isNaN(parseInt(id)))
+		return;
 	$.get("index.php?controller=vehicle&view=ajaxById&id="+id,function(e){
   	var result = JSON.parse(e);
       var dd = $("#idvehicle");
+      dd.html("<option value=''>-- none --</option>");
       for(var i in result){
         var $op =  $("<option>");
         $op.attr("value",result[i][0].id);
@@ -30,6 +50,10 @@ $("#idcliente").on('change',function(e){
 });
 
 $("#idvehicle").on('change',function(e){
+	if($(this).val() != '')
+		$("#bto1").removeClass("disabled");
+	else
+		$("#bto1").addClass("disabled");
 	$('.serviceIdVehicle').attr('data-id',$('#idvehicle').val());
 	$('.serviceIdVehicle').val($("#idvehicle option:selected").text());
 
@@ -140,8 +164,12 @@ function onlyInspection(){
 }
 
 $('#bto1').on('click',function(e){
+	e.preventDefault();
+	$("#collapseTwo").collapse('show');
 	
-	
+});
+
+$('#bto2').on('click',function(e){
 	$.ajax({
 		url:'index.php?controller=service&view=createInventary',
 		type:'POST',
@@ -155,29 +183,25 @@ $('#bto1').on('click',function(e){
 	}).done(function(e){
 		$('#bto1').remove();
 		$('.bloqserv').attr('readonly',true);
-			
 			onlyInspection();
+				$.ajax({
+					url:'index.php?controller=inspection&view=createInventary',
+					type:'POST',
+					data:{
+					idService : $('#idServiceInspection').val(),
+					mileage : $('#mileage').val() ,
+					fuel : $('#fuel').val(),
+					inspectionDate : $('#inspectiondate').val() ,
+					type: $('#type').val(),
+					}
+					}).done(function(e){
+						$('#bto2').remove()
+						$('.bloqIns').attr('readonly',true);
+							$('#bien').modal('show');
+						});
 		});
-});
-
-$('#bto2').on('click',function(e){
 	
 	
-	$.ajax({
-		url:'index.php?controller=inspection&view=createInventary',
-		type:'POST',
-		data:{
-		idService : $('#idServiceInspection').val(),
-		mileage : $('#mileage').val() ,
-		fuel : $('#fuel').val(),
-		inspectionDate : $('#inspectiondate').val() ,
-		type: $('#type').val(),
-		}
-	}).done(function(e){
-		$('#bto2').remove()
-		$('.bloqIns').attr('readonly',true);
-			$('#bien').modal('show');
-		});
 });
 
 $('#bto3').on('click',function(e){
