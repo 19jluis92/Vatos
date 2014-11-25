@@ -27,7 +27,7 @@ class HomeController extends Controller {
 			case 'login':
 			$this->autenticate();
 			break;
-			case 'client':
+			case 'dashboard':
 				$this->ClientView();
 				break;
 			default:
@@ -197,8 +197,29 @@ class HomeController extends Controller {
 		$cliente=$this->Client->details($Clients[0]['id']);
 		$this->smarty->assign('client',$cliente);
 		//var_dump($cliente);
+		if(!isset($carros))
+			$carros=array();
+
 		$carros=$this->Vehicle->getVehicleByClient($cliente->id);
+		
+		if(isset($carros))
+		{
+
 		$this->smarty->assign('vehicles',$carros);
+		$servicios= array();
+
+		foreach ($carros as $variable) {
+			# code...
+			
+			$array=$this->Services->GetByColum($variable[0]['id'],'idVehicle');
+			if(isset($array))$servicios=array_merge($array, $servicios);
+			
+		}
+		}
+		if(isset($servicios))
+			$this->smarty->assign('services',$servicios);
+		
+
 		$this->smarty->display('./views/_Layouts/dashboardclient.tpl');
 
 	}
@@ -209,7 +230,7 @@ class HomeController extends Controller {
 		require('models/VehiclesModel.php');
 		$this->Vehicle = new VehiclesModel();
 		require('models/ServicesModel.php');
-		$this->Vehicle = new ServicesModel();
+		$this->Services = new ServicesModel();
 	}
 
 }
