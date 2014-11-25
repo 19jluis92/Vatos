@@ -34,6 +34,9 @@ class RelocationsController extends Controller {
 			case 'create':
 						//Validate User and permissions
 			$this->create();		
+			case 'createAjax':
+						//Validate User and permissions
+			$this->createAjax();		
 			break;
 			case 'edit':
 						//Validate User and permissions
@@ -45,8 +48,8 @@ class RelocationsController extends Controller {
 			break;
 
 			case 'createInventary':
-				$this->createInventary();
-				break;
+			$this->createInventary();
+			break;
 
 			default:
 			break;
@@ -65,7 +68,7 @@ class RelocationsController extends Controller {
 		//get all the relocations
 		$result = $this->model->all();	
 		//Query Succesfull
-	if(isset($result))
+		if(isset($result))
 		{
 			//Load view
 			
@@ -78,7 +81,7 @@ class RelocationsController extends Controller {
 		else
 		{
 			//Ohh well... :(
-				$this->smarty->display('./views/error.tpl');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 
@@ -119,24 +122,24 @@ class RelocationsController extends Controller {
 	{
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 			//Validate Variables
-		$relocationDate = $this->validateDate($_POST['relocationDate']);
-		$idEmployee = $this->validateNumber($_POST['idEmployee']);
-		$reason = $this->validateText($_POST['reason']);
-		$idDepartment = $this->validateNumber($_POST['idDepartment']);
-		$idService = $this->validateNumber($_POST['idService']);
-		$result = $this->model->create($relocationDate,$idEmployee,$reason,$idDepartment,$idService);	
+			$relocationDate = $this->validateDate($_POST['relocationDate']);
+			$idEmployee = $this->validateNumber($_POST['idEmployee']);
+			$reason = $this->validateText($_POST['reason']);
+			$idDepartment = $this->validateNumber($_POST['idDepartment']);
+			$idService = $this->validateNumber($_POST['idService']);
+			$result = $this->model->create($relocationDate,$idEmployee,$reason,$idDepartment,$idService);	
 		//Insert Succesfull
-		if($result)
-		{
+			if($result)
+			{
 			//Load view
-			unset($postError);
-			header("Location: index.php?controller=Relocation");
-			
-		}
-		else
-		{
-			require('views/Error.html');
-		}
+				unset($postError);
+				header("Location: index.php?controller=Relocation");
+
+			}
+			else
+			{
+				require('views/Error.html');
+			}
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			if(isset($name))
@@ -149,6 +152,49 @@ class RelocationsController extends Controller {
 		}
 		
 	}
+
+	/**
+	*Create a relocation with the given post parameters 
+	*@param  string $relocationDate (POST)
+	*@param  int idEmployee  (POST)
+	*@param  string $reason  (POST)
+	*@param  int $idDepartment (POST)
+	*@param  int $idService  (POST)
+	*@return null nothing returned but view loaded
+	*/
+	private function createAjax()
+	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+			//Validate Variables
+			$relocationDate = $this->validateDate($_POST['relocationDate']);
+			$idEmp=  $this->LoggedIn();
+			require_once('models/EmployeesModel.php');
+			$this->employees = new EmployeesModel();
+			$idEmp=$this->employees->getByColumn($idEmp->id,'idUser');
+			if(count($idEmp) == 0){
+				header('HTTP/1.1 500 Internal Server Error');
+			}
+			$idEmployee = $idEmp[0]['id'];
+			$reason = $this->validateText($_POST['reason']);
+			$idDepartment = $this->validateNumber($_POST['idDepartment']);
+			$idService = $this->validateNumber($_POST['idService']);
+			$result = $this->model->create($relocationDate,$idEmployee,$reason,$idDepartment,$idService);	
+		//Insert Succesfull
+			if($result)
+			{
+			//Load view
+				echo json_encode($result);
+
+			}
+			else
+			{
+				header('HTTP/1.1 500 Internal Server Error');
+			}
+
+		}
+
+	}
+
 	/**
 	*Update a relocation with the given post parameters 
 	*@param  int $id (POST)
@@ -163,15 +209,15 @@ class RelocationsController extends Controller {
 	{
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 		//Validate Variables
-		$id = $this->validateNumber($_POST['id']);
-		$relocationDate = $this->validateDate($_POST['relocationDate']);
-		$idEmployee = $this->validateNumber($_POST['idEmployee']);
-		$reason = $this->validateText($_POST['reason']);
-		$idDepartment = $this->validateNumber($_POST['idDepartment']);
-		$idService = $this->validateNumber($_POST['idService']);
-		$result = $this->model->edit($id,$relocationDate,$idEmployee,$reason,$idDepartment,$idService);	
+			$id = $this->validateNumber($_POST['id']);
+			$relocationDate = $this->validateDate($_POST['relocationDate']);
+			$idEmployee = $this->validateNumber($_POST['idEmployee']);
+			$reason = $this->validateText($_POST['reason']);
+			$idDepartment = $this->validateNumber($_POST['idDepartment']);
+			$idService = $this->validateNumber($_POST['idService']);
+			$result = $this->model->edit($id,$relocationDate,$idEmployee,$reason,$idDepartment,$idService);	
 		//Insert Succesfull
-		if($result)
+			if($result)
 			{
 				unset($postError);
 				header("Location: index.php?controller=Relocation");
@@ -212,7 +258,7 @@ class RelocationsController extends Controller {
 		$id = $this->validateNumber($_POST['id']);
 		$result = $this->model->delete($id);	
 		//Insert Succesfull
-			if($result)
+		if($result)
 		{
 			header("Location: index.php?controller=Relocation&deleted=true");
 		}
@@ -240,9 +286,9 @@ class RelocationsController extends Controller {
 			//Validate Variables
 			$relocationDate = $this->validateDate($_POST['relocationDate']);
 			$idEmp=  $this->LoggedIn();
-				
+
 			$idEmp=$this->Employees->getByColumn($idEmp->id,'idUser');
-				
+
 			$idEmployee = $idEmp[0]['id'];
 			
 			$reason = $this->validateText($_POST['reason']);
@@ -259,7 +305,7 @@ class RelocationsController extends Controller {
 				require('views/Error.html');
 			}
 		}
-	
+
 	}
 
 }

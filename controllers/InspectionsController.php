@@ -33,6 +33,10 @@ class InspectionsController extends Controller {
 						//Validate User and permissions
 			$this->create();		
 			break;
+			case 'createAjax':
+						//Validate User and permissions
+			$this->createAjax();		
+			break;
 			case 'edit':
 						//Validate User and permissions
 			$this->edit();		
@@ -141,6 +145,41 @@ class InspectionsController extends Controller {
 			$this->smarty->assign('services',$this->toAssociativeArray($this->services->all(),'id','id'));
 			$this->smarty->display('./views/Inspection/add.tpl');
 		}
+	}
+
+
+/**
+	*Create a inspection with the given post parameters 
+	*@param int idService 
+	*@param float mileage 
+	*@param float fuel 
+	*@param string inspectionDate datetime value inspection date 
+	*@param bool type 
+	*@return null nothing returned but view loaded
+	*/
+	private function createAjax()
+	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+		//Validate Variables
+			$idService = $this->validateNumber($_POST['idService']);
+			$mileage = $this->validateFloat($_POST['mileage']);
+			$fuel = $this->validateFloat($_POST['fuel']);
+			$inspectionDate = $this->validateDate($_POST['inspectionDate']);
+			$type = $this->validateNumber($_POST['type']);
+			$result = $this->model->create($idService , $mileage , $fuel , $inspectionDate , $type);
+			if($result)
+			{
+				echo json_encode($result);
+				//$this->all();
+			}
+			else
+			{
+				$postError = true;
+				$this->smarty->assign('error',$result);
+			}
+
+		} 
+		
 	}
 
 		private function createInventary()

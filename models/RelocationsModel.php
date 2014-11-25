@@ -64,7 +64,7 @@ Class RelocationsModel extends Model{
 		$Relocation = new Relocation($relocationDate, $idEmployee, $reason, $idDepartment, $idService);
 		if($result = $this->db->insert('relocation' , $Relocation,NULL))
 		{
-			return true;
+			return $result;
 		}
 		else{
 			echo $result;
