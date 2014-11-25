@@ -63,15 +63,36 @@
          </thead> <tbody>
             {foreach item=vehicle from=$vehicles}
             <tr>
-               <td>{$vehicle.id}</td>
-               <td>{$vehicle.vin}</td>
-               <td>{$vehicle.idModel}</td>
-               <td>{$vehicle.idColor}</td>
+               <td>{$vehicle[0]['id']}</td>
+               <td>{$vehicle[0].vin}</td>
+               <td>{$vehicle[0].idModel}</td>
+               <td>{$vehicle[0].idColor}</td>
             </tr>
             {/foreach}
          </tbody>
       </table>
+      <table class="table" cellpadding="0" cellspacing="0">
+			<thead>
+				<tr>
+					<th><a href="index.php?controller=service?sort=id&amp;direction=asc">Id</a></th>
+					<th><a href="index.php?controller=service?sort=startDate&amp;direction=asc">Fecha de Inicio</a></th>
+					<th><a href="index.php?controller=service?sort=endDate&amp;direction=asc">Fecha de Fin</a></th>
+					<th><a href="index.php?controller=service?sort=idVehicle&amp;direction=asc">Id del Vehiculo</a></th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				{foreach item=service from=$services}
 
+				<tr>
+					<td>{$service.id}</td>
+					<td>{$service.startDate}</td>
+					<td>{$service.endDate}</td>
+					<td>{$service.idVehicle}</td>
+				</tr>
+			</tbody>
+			{/foreach}
+		</table>
 		<div class="paginator">
 			<ul class="pagination">
 				<li class="prev disabled"><a href="">&lt; previous</a></li><li class="next disabled"><a href="">next &gt;</a></li>		</ul>

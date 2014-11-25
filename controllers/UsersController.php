@@ -1,5 +1,6 @@
 <?php 
 require_once('controllers/Controller.php');
+require("./PHPMailer/class.phpmailer.php");
 require_once('mail.php');
 class UsersController extends Controller{
 	private $model;
@@ -73,7 +74,6 @@ class UsersController extends Controller{
 				$message = 'Bienvenido Vato';
 			  $subject = 'Registro en Sistema de Taller Automotriz';
 				$mail = new Mail($email, $subject,$message);
-				$mail->send_mail();
 				header("Location: index.php?controller=user");
 			}
 			else
@@ -226,7 +226,6 @@ class UsersController extends Controller{
 				$message = 'Contraseña: '.$result[0];
 			  $subject = 'Recuperacion de Contraseña Vatos Car Service';
 				$mail = new Mail($email, $subject,$message);
-				$mail->send_mail();
 				header("Location: index.php?");
 			}
 			else
@@ -254,8 +253,7 @@ class UsersController extends Controller{
 			/*Perdon por esto de aqui :(, lo arreglare despues*/
 				$email = $this->validateText($dataArray[$i][0]);
 				$password = $this->validateNumber($dataArray[$i][1]);
-				$idRole = $this->validateNumber($dataArray[$i][2]);
-				$result = $this->model->create($email, $password,$idRole);
+				$result = $this->model->create($email, $password);
 			}
 			$this->all();
 		}
