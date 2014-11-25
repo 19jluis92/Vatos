@@ -173,10 +173,6 @@ class HomeController extends Controller {
 
 				$this->LogoutHome();	
 		}
-
-
-		
-
 	}
 
 	public function LogoutHome(){

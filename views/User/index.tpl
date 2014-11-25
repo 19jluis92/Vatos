@@ -1,5 +1,6 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}My Page Title{/block}
+{block name=title}Usuarios{/block}
+{block name=pageheader}Usuarios{/block}
 {block name=head}
 {/block}
 {block name=body}
