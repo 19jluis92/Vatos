@@ -121,6 +121,16 @@
               <ul class="sidebar-menu">
                 {if $role == 'admin' || $role == 'superadmin' || $role == 'user'}
                 <li><a href="index.php?controller=area"><i class="fa fa-edit"></i>Áreas</a></li>     
+                <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-edit"></i> <span>Servicio</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="index.php?controller=inventory"><i class="fa fa-angle-double-right"></i>Mostrar todos los servicios</a></li>
+                    <li><a href="index.php?controller=inventory&view=create"><i class="fa fa-angle-double-right"></i>Agregar</a></li>
+                  </ul>
+                </li>
                 {/if}
                 {if $role == 'admin'}
                 <li class="treeview">
@@ -130,7 +140,7 @@
                   </a>
                   <ul class="treeview-menu">
                     <li><a href="index.php?controller=user"><i class="fa fa-angle-double-right"></i>Mostrar todos los Usuarios</a></li>
-                    <li><a href="index.php?controller=user&view=create"><i class="fa fa-angle-double-right"></i>Usuario</a></li>
+                    <li><a href="index.php?controller=user&view=create"><i class="fa fa-angle-double-right"></i>Agregar</a></li>
                   </ul>
                 </li>
                 <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Vehiculo</span>
