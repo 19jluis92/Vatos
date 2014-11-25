@@ -10,6 +10,8 @@ class VehiclesController extends Controller {
 		parent::__construct();
 		require('models/VehiclesModel.php');
 		$this->model = new VehiclesModel();
+		require('models/ClientVehiclesModel.php');
+		$this->clientVehicle = new ClientVehiclesModel();
 	}
 	
 	function run()
@@ -21,6 +23,9 @@ class VehiclesController extends Controller {
 			case 'list':
 						//Validate User and permissions
 			$this->all();
+			case 'clientvhicles':
+						//Validate User and permissions
+						$this->allClientVehicles();
 			break;
 			case 'details':
 						//Validate User and permissions
@@ -73,6 +78,25 @@ class VehiclesController extends Controller {
 			$this->smarty->display('./views/error.tpl');
 		}
 	}
+
+	private function allClientVehicles()
+	{
+		//Get all the Vehicles
+		$result = $this->clientVehicle->all();
+		$this->smarty->assign('clientVehicles',$result);
+		if(isset($result))
+		{
+			//Load view
+			if(isset($_GET['deleted']) && $_GET['deleted']==true) 			
+				$this->smarty->assign('deleted',true);
+			$this->smarty->display('./views/Clientvehicle/index.tpl');
+		}
+		else
+		{
+			//Ohh well... :(
+			$this->smarty->display('./views/error.tpl');
+		}
+	}
 	/**
 	* Show details of car given it's Id
 	* @param id
@@ -109,7 +133,6 @@ class VehiclesController extends Controller {
 		
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
-			$this->loadProperties();
 			//Validate Variables
 			$vin   		 = $this->validateText($_POST['vin']);
 			$model 		 = $this->validateNumber($_POST['model']);
@@ -231,12 +254,11 @@ class VehiclesController extends Controller {
 		require('models/CarModel.php');
 		require('models/CarTypesModel.php');
 		require('models/ClientModel.php');
-		require('models/ClientVehiclesModel.php');
 		$this->colors = new ColorsModel();
 		$this->models = new CarModel();
 		$this->carTypes = new CarTypesModel();
 		$this->clients = new ClientModel();
-		$this->clientVehicle = new ClientVehiclesModel();
+		
 	}
 
 		
