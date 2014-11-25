@@ -37,7 +37,7 @@ $.ajax({
 
 	}).done(function(e){
 		
-		$('#serviceForm child').remove();
+		$('#serviceForm #serviceChild').remove();
 		$('#serviceForm').append(e);		
 		inspectionEdit();	
 	});
@@ -74,7 +74,7 @@ debugger;
 
 	}).done(function(e){
 		
-		$('#inspectionForm child').remove();
+		$('#inspectionForm #inspectionChild').remove();
 		$('#inspectionForm').append(e);	
 		 ubicationEdit();	
 	});
@@ -103,8 +103,11 @@ function ubicationEdit(){
 
 	}).done(function(e){
 		
-		$('#relocationForm child').remove();
-		$('#relocationForm').append(e);		
+		$('#relocationForm #relocationChild').remove();
+		$('#relocationForm').append(e);
+
+		$("#idServiceInspection").attr('value',$("#idserviceForm option:selected").val());		
+		$("idService").attr('value',$("#idserviceForm option:selected").val());		
 	});
 }
 
@@ -119,4 +122,65 @@ $("#ubicacionEdit").on('click',function(e){
 	
 			$('#RehubicacionModal').modal('show');
 		
+});
+
+$('#bto1').on('click',function(e){
+	
+	
+	$.ajax({
+		url:'index.php?controller=service&view=createInventary',
+		type:'POST',
+		data:{
+		startDate : $('#startDate').val() ,
+		endDate : $('#endDate').val(),
+		idvehicleService : 1,
+		idVehicle : $('#idvehicle option:selected').val(),
+		idEmployee: 3,//$('#idemployee').val(),
+		}
+	}).done(function(e){
+		$('#bto1').remove();
+		$('.bloqserv').attr('readonly',true);
+			
+			//onlyInspection();
+		});
+});
+
+$('#bto2').on('click',function(e){
+	
+	
+	$.ajax({
+		url:'index.php?controller=inspection&view=createInventary',
+		type:'POST',
+		data:{
+		idService : $('#idServiceInspection').val(),
+		mileage : $('#mileage').val() ,
+		fuel : $('#fuel').val(),
+		inspectionDate : $('#inspectiondate').val() ,
+		type: $('#type').val(),
+		}
+	}).done(function(e){
+		$('#bto2').remove()
+		$('.bloqIns').attr('readonly',true);
+			$('#bien').modal('show');
+		});
+});
+
+$('#bto3').on('click',function(e){
+	
+	
+	$.ajax({
+		url:'index.php?controller=relocation&view=createInventary',
+		type:'POST',
+		data:{
+		relocationDate : $('#relocationDate').val() ,
+		idEmployee : 3,//$('idEmployee').val(),
+		reason : $('#reason').val(),
+		idDepartment : $('#idDepartment option:selected').val() ,
+		idService: $('#idServiceInspection').val(),
+		}
+	}).done(function(e){
+		$('#bto3').remove()
+		$('.bloqIns').attr('readonly',true);
+			$('#bien').modal('show');
+		});
 });

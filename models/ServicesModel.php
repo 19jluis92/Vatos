@@ -121,7 +121,7 @@ Class ServicesModel extends Model{
 			return $result;
 		}
 		else{
-			echo $result;
+			
 			return NULL;
 		}
 		//delete element using the given $id

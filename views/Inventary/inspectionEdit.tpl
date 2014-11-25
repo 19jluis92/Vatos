@@ -1,9 +1,9 @@
-<div class="inspection form large-10 medium-9 columns">
-		<form method="post" accept-charset="utf-8" class="form-horizontal"  action="index.php?controller=Inspection&view=edit&id={$inspection->id}">
+<div id="inspectionChild" class="inspection form large-10 medium-9 columns">
+		<form method="post" accept-charset="utf-8" class="form-horizontal"  action="index.php?controller=inventory&view=inspectionEdit&id={$inspection->id}">
 			<fieldset>
 				<legend>Add Inspection</legend>
 				<div class="form-group input-group">
-					<label  class="input-group-addon" for="idservice">Id Service</label><input type="number"  disabled name="idService" required="required" id="idservice" value="{$inspection->idService}" class="form-control">
+					<label  class="input-group-addon" for="idservice">Id Service</label><input type="number"  disabled name="idService" required="required" id="idService" value="{$inspection->idService}" class="form-control">
 				</div>
 				<div class="form-group input-group">
 					<label  class="input-group-addon" for="mileage">Mileage</label>

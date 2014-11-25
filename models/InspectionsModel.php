@@ -127,7 +127,7 @@ Class InspectionsModel extends Model{
 			return $Inspections;
 		}
 		else{
-			echo $result;
+			
 			return NULL;
 		}
 		//delete element using the given $id

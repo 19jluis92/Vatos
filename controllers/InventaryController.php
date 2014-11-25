@@ -134,7 +134,8 @@ class InventaryController extends Controller
 		$this->Inspection = new InspectionsModel();
 		require('models/RelocationsModel.php');
 		$this->relocation = new RelocationsModel();
-		
+		require('models/EmployeesModel.php');
+		$this->Employees = new EmployeesModel();
 	}
 
 	public function serviceEdit(){
@@ -145,9 +146,13 @@ class InventaryController extends Controller
 		$id = $this->validateNumber($_GET['id']);
 		$startDate = $this->validateDate($_POST['startDate']);
 		$endDate = $this->validateDate($_POST['endDate']);
-		$idEmployee = $this->LoggedIn();
+		$idEmp=  $this->LoggedIn();
+			
+		$idEmp=$this->Employees->getByColumn($idEmp->id,'idUser');
+			
+		$idEmployee = $idEmp[0]['id'];
 		$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
-		$idVehicle = $this->validateNumber($_POST['idVehicle']);
+		$idVehicle = $this->validateNumber($_POST['idVehicleService']);
 
 		$result = $this->Service->edit($id, $startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
 		//Insert Succesfull
@@ -179,7 +184,7 @@ class InventaryController extends Controller
 			}
 			else
 			{
-				$this->smarty->display('./views/error.tpl');
+				$this->smarty->display('./views/Inventary/serviceCreate.tpl');
 			}
 
 		}
@@ -223,9 +228,7 @@ class InventaryController extends Controller
 			}
 			else
 			{
-				$inspection = $this->Inspection->create();
-				$this->smarty->assign('inspection',$inspection);
-				$this->smarty->display('./views/Inventary/inspectionEdit.tpl');
+				$this->smarty->display('./views/Inventary/inspectionCreate.tpl');
 			}
 
 			
@@ -239,7 +242,11 @@ class InventaryController extends Controller
 		//Validate Variables
 		$id = $this->validateNumber($_POST['id']);
 		$relocationDate = $this->validateDate($_POST['relocationDate']);
-		$idEmployee = $this->validateNumber($_POST['idEmployee']);
+		$idEmp=  $this->LoggedIn();
+			
+			$idEmp=$this->Employees->getByColumn($idEmp->id,'idUser');
+			
+			$idEmployee = $idEmp[0]['id'];
 		$reason = $this->validateText($_POST['reason']);
 		$idDepartment = $this->validateNumber($_POST['idDepartment']);
 		$idService = $this->validateNumber($_POST['idService']);
@@ -267,7 +274,8 @@ class InventaryController extends Controller
 			}
 			else
 			{
-				$this->smarty->display('./views/error.tpl');
+				$this->smarty->display('./views/Inventary/ubicationCreate.tpl');
+				//$this->smarty->display('./views/error.tpl');
 			}
 
 		}

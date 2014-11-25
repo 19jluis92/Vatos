@@ -1,10 +1,10 @@
-<div class="bump form large-10 medium-9 columns">
-	<form method="post" accept-charset="utf-8" action="index.php?controller=Relocation&view=edit&id={$user->id}">
+<div id="relocationChild" class="bump form large-10 medium-9 columns">
+	<form method="post" accept-charset="utf-8" action="index.php?controller=inventory&view=ubicationEdit&id={$user->id}">
 		<fieldset>
 			<legend>rehubicacion</legend>
 			<div class="input number required">
 					
-					<input class="form-control" type="hidden" name="id" required="required" id="id">
+					
 				</div>
 				<div class="input number required">
 					<label class="input-group-addon" for="name">Fecha de relocacion</label>

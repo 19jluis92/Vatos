@@ -121,7 +121,7 @@ Class RelocationsModel extends Model{
 			return $Relocation;
 		}
 		else{
-			echo $result;
+			
 			return NULL;
 		}
 		//delete element using the given $id

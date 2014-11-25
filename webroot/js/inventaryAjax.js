@@ -141,7 +141,7 @@ function onlyInspection(){
 
 $('#bto1').on('click',function(e){
 	
-	debugger;
+	
 	$.ajax({
 		url:'index.php?controller=service&view=createInventary',
 		type:'POST',
