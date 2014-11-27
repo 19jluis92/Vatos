@@ -56,7 +56,6 @@ class InventaryController extends Controller
 			case 'editRelocation':
 			$this->ubicationEdit();
 			break;
-
 			default:
 			break;
 
@@ -141,6 +140,8 @@ class InventaryController extends Controller
 		}
 	}
 
+
+
 	public function view(){
 		$id = $this->validateNumber($_GET['id']);
 		$this->loadProperties();
@@ -164,6 +165,8 @@ class InventaryController extends Controller
 			$this->smarty->display('./views/error.tpl');
 		}
 	}
+
+
 
 	public function delete(){
 		

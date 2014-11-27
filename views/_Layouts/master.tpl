@@ -120,6 +120,7 @@
               </div>
               <ul class="sidebar-menu">
                 {if $role == 'admin' || $role == 'superadmin' || $role == 'user'}
+                <li><a href="index.php?controller=home&view=dashboard"><i class="fa fa-edit"></i>Panel</a></li>     
                 <li><a href="index.php?controller=area"><i class="fa fa-edit"></i>Áreas</a></li>     
                 <li class="treeview">
                   <a href="#">

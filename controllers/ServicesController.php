@@ -47,11 +47,13 @@ class ServicesController extends Controller {
 
 			case 'ajax':
 
-				echo json_encode($this->model->all());
+			echo json_encode($this->model->all());
 			break;
-
+			case 'closeService':
+			$this->closeService();
+			break;
 			case 'createInventary':
-				$this->createInventary();
+			$this->createInventary();
 			break;
 			default:
 			break;
@@ -210,7 +212,7 @@ class ServicesController extends Controller {
 
 		} 
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
-		
+
 		}
 	}
 
@@ -229,16 +231,16 @@ class ServicesController extends Controller {
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 
 		//Validate Variables
-		$id = $this->validateNumber($_GET['id']);
-		$now = new DateTime();
-		$startDate = $now->format('Y-m-d H:i:s');
-		$endDate = $this->validateDate($_POST['endDate']);
-		$idEmployee = $this->validateNumber($_POST['idEmployee']);
-		$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
-		$idVehicle = $this->validateNumber($_POST['idVehicle']);
-		$result = $this->model->edit($id, $startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
+			$id = $this->validateNumber($_GET['id']);
+			$now = new DateTime();
+			$startDate = $now->format('Y-m-d H:i:s');
+			$endDate = $this->validateDate($_POST['endDate']);
+			$idEmployee = $this->validateNumber($_POST['idEmployee']);
+			$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
+			$idVehicle = $this->validateNumber($_POST['idVehicle']);
+			$result = $this->model->edit($id, $startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
 		//Insert Succesfull
-		if($result)
+			if($result)
 			{
 				unset($postError);
 				header("Location: index.php?controller=Service");
@@ -267,6 +269,35 @@ class ServicesController extends Controller {
 		}
 	}
 
+
+	private function closeService()
+	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
+
+		//Validate Variables
+			
+			$id = $this->validateNumber($_POST['id']);
+			$service = $this->model->details($id);	
+			$now = new DateTime();
+			$endDate = $now->format('Y-m-d H:i:s');
+			$startDate = $service->startDate;
+			$idEmployee = $service->idEmployee;
+			$idCarWorkShop = $service->idCarWorkShop;
+			$idVehicle = $service->idVehicle;
+			$result = $this->model->edit($id, $startDate, $endDate , $idEmployee , $idCarWorkShop , $idVehicle);	
+		//Insert Succesfull
+			if($result)
+			{
+				echo $result;
+			}
+			else
+			{
+				echo false;
+			}
+		}
+
+	}
+
 	/**
 	*Delete a service with the given post parameters 
 	*@param int id the service name (POST)
@@ -285,7 +316,7 @@ class ServicesController extends Controller {
 		}
 		else
 		{
-				$this->smarty->display('./views/error.tpl');
+			$this->smarty->display('./views/error.tpl');
 		}
 	}
 }

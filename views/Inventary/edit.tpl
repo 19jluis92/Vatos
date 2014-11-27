@@ -81,7 +81,7 @@
       <div class="form-group">
         <label class="col-sm-2 control-label">Fin*</label>
         <div class="col-sm-10">
-        {if $service->endDate == null}
+        {if strtotime($service->endDate) }
           <p class="form-control-static">{$service->endDate|date_format:"%d/%m/%Y %H:%M:%S"}</p>
           {else}
           <input type="button" id="btn-out-service" value="salida" class="btn btn-default">
@@ -112,7 +112,9 @@
       <a class="collapsed" data-toggle="collapse"  href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
        Inspecciones
      </a>
-     <a data-toggle="modal" data-target="#create-inspection" class="pull-right" id="new-inspection" href="#">Nuevo</a>       
+     {if !strtotime($service->endDate) }
+     <a data-toggle="modal" data-target="#create-inspection" class="pull-right" id="new-inspection" href="#">Nuevo</a>
+     {/if}
    </h4>
  </div>
  <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
@@ -139,12 +141,9 @@
           <td>{$inspecion.inspectionDate|date_format:"%d/%m/%Y %H:%M:%S"}</td>
           <td>{$inspecion.type}</td>
           <td class="actions">
-            <a href="index.php?controller=Inventory&view=details&id={$inspecion.id}">View</a>       
+{if !strtotime($service->endDate) }            
             <a class="edit" href="#{$inspecion.id}">Edit</a>    
-            <form action="index.php?controller=Inventory&view=delete&id={$inspecion.id}" name="post_inspecion_{$inspecion.id}" style="display:none;" method="post">
-              <input type="hidden" name="_method" value="POST">
-            </form>
-            <a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_inspecion_{$inspecion.id}.submit(); } event.returnValue = false; return false;">Delete</a>
+{/if}
           </td>
         </tr>
         {/foreach}
@@ -161,8 +160,9 @@
       <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
         Reubicaciones
       </a>
+      {if !strtotime($service->endDate) }
       <a class="pull-right" data-toggle="modal" data-target="#create-relocation" id="new-relocation" href="#">Nuevo</a>       
-
+       {/if}
     </h4>
   </div>
   <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
@@ -187,12 +187,9 @@
             <td>{$relocation.idDepartment}</td>
             <td>{$relocation.idEmployee}</td>
             <td class="actions">
-              <a href="index.php?controller=Inventory&view=details&id={$relocation.id}">View</a>       
+            {if !strtotime($service->endDate) }
               <a class="edit" href="#{$relocation.id}">Edit</a>    
-              <form action="index.php?controller=Inventory&view=delete&id={$relocation.id}" name="post_relocation_{$relocation.id}" style="display:none;" method="post">
-                <input type="hidden" name="_method" value="POST">
-              </form>
-              <a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_relocation_{$relocation.id}.submit(); } event.returnValue = false; return false;">Delete</a>
+              {/if}
             </td>
           </tr>
           {/foreach}
@@ -366,12 +363,12 @@
       closeService : function(){
         $.ajax({
             type: 'POST',
-            url: "?controller=inventory&view=closeService",
-            data: data,
+            url: "?controller=service&view=closeService",
+            data: {id: $("#service-id").val()},
             success: function (result) {
               if(JSON.parse(result) != null)
               {
-                  
+                window.location.reload();  
               }
               else{
                 alert("error");
@@ -382,7 +379,7 @@
             }
           });
         
-      }
+      },
       saveEditRelocation : function (e) {
         e.preventDefault();
         var $form = $(this).parents(".modal").find("form");
@@ -527,7 +524,7 @@
         });
         }
       },getRow : function (result) {
-        var template = '<tr> <td>{id}</td><td>{mileage}</td><td>{fuel}</td><td>{inspectionDate}</td><td>{type}</td><td class="actions">  <a href="index.php?controller=Inventory&view=details&id={id}">View</a><a class="edit" href="#{id}">Edit</a>      <form action="index.php?controller=Inventory&view=delete&id={id}" name="post_relocation_{id}" style="display:none;" method="post">    <input type="hidden" name="_method" value="POST">  </form>  <a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_relocation_{id}.submit(); } event.returnValuefalse; return false;">Delete</a></td></tr>';
+        var template = '<tr> <td>{id}</td><td>{mileage}</td><td>{fuel}</td><td>{inspectionDate}</td><td>{type}</td><td class="actions"><a class="edit" href="#{id}">Edit</a></td></tr>';
         var resTemplate = template.replace('{id}',result.id);
         resTemplate = resTemplate.replace('{mileage}',result.mileage);
         resTemplate = resTemplate.replace('{fuel}',result.fuel);
@@ -536,7 +533,7 @@
         return resTemplate;
       },
       getRelocationRow:function(result){
-        var template = '<tr><td>{$relocation.relocationDate}</td><td>{$relocation.reason}</td><td>{$relocation.idDepartment}</td><td>{$relocation.idEmployee}</td><td class="actions"><a href="index.php?controller=Inventory&view=details&id={$relocation.id}">View</a><a href="#{$relocation.id}">Edit</a>    <form action="index.php?controller=Inventory&view=delete&id={$relocation.id}" name="post_relocation_{$relocation.id}" style="display:none;" method="post"><input type="hidden" name="_method" value="POST"></form><a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_relocation_{$relocation.id}.submit(); } event.returnValue = false; return false;">Delete</a></td></tr>';
+        var template = '<tr><td>{$relocation.relocationDate}</td><td>{$relocation.reason}</td><td>{$relocation.idDepartment}</td><td>{$relocation.idEmployee}</td><td class="actions"><a href="#{$relocation.id}">Edit</a></td></tr>';
         var resTemplate = template.replace('{$relocation.id}',result.id);
         resTemplate = resTemplate.replace('{$relocation.reason}',result.reason);
         resTemplate = resTemplate.replace('{$relocation.idDepartment}',result.idDepartment);
