@@ -47,13 +47,11 @@
 
 		<div class="col-sm-8">
 			<h2>Áreas</h2>
-			<table class="table" cellpadding="0" cellspacing="0">
+			<table class="table" id="areas-table" cellpadding="0" cellspacing="0">
 				<thead>
 					<tr>
 						<th></th>
-						<th><a href="/vatoscake/carworkshop?sort=id&amp;direction=asc">Id</a></th>
 						<th><a href="/vatoscake/carworkshop?sort=name&amp;direction=asc">Nombre</a></th>
-						<th><a href="/vatoscake/carworkshop?sort=name&amp;direction=asc">Dirección</a></th>
 						<th class="actions">Acciones</th>
 					</tr>
 				</thead>
@@ -96,8 +94,10 @@
 	{literal}
 	<script type="text/javascript">
 		var areas = {
+			actualWorkshop : null,
 			init: function(){
 				this.bind();
+				this.loadData();
 			},
 			bind : function(){
 				$(window).on("hashchange",this.loadData);
@@ -109,24 +109,42 @@
 					$(this).find("i").removeClass("glyphicon-unchecked").addClass("glyphicon-check");
 					window.location.hash = "carworkshop="+$(this).attr("data-id");
 					return false;
+				});
+				$("#areas-table").on("click",".element-option",function(e){
+					e.preventDefault();
+					$(this).parents("tr").addClass("active info");
+					$("#areas-table .element-option i").removeClass("glyphicon-check");
+					$("#areas-table .element-option i").addClass("glyphicon-unchecked");
+					$(this).find("i").removeClass("glyphicon-unchecked").addClass("glyphicon-check");
+					var hash = window.location.hash.substr(0, window.location.hash.indexOf("?"));
+					hash = hash == undefined? window.location.hash: hash;
+					window.location.hash = hash+"&area="+$(this).attr("data-id");
+					return false;
 				})		
 			},
 			loadData : function(){
 				var $workshopid= areas.getParameter("carworkshop") ;
-				if($workshopid != null)
+				if($workshopid != null && $workshopid != areas.actualWorkshop){
+					areas.actualWorkshop = $workshopid;
 					$.ajax({
 						url : "index.php?controller=location&view=getByCarWorkShop",
 						type: "POST",
 						data : {id: $workshopid},
 						success:function(result){
 							var res = JSON.parse(result);
-							console.log(JSON.parse(result));
+							console.log(result);
+							for(var i in res){
+								var $tr = $("<tr>");
+								$("#areas-table").append($tr.html('<td><a data-id='+res[i].id+' href="#" class="element-option"><i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i></a></td><td>'+res[i].name+'</td>'));
+							}
 						},
 						error:function(){
 							alert("error al mostrar los datos");
 						}
 
 					});
+				}
+
 			},
 			getParameter : function (paramName) {
 				if(window.location.hash == '' || window.location.hash == '#')

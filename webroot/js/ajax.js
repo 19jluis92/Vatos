@@ -1,4 +1,4 @@
-function nuevoAjax()
+/*function nuevoAjax()
 {
 var xmlhttp;
 if (window.XMLHttpRequest)
@@ -28,7 +28,7 @@ xmlhttp.onreadystatechange=function()
 }
 xmlhttp.open("GET","index.php?controller=Piece&view=ajax",true);
 xmlhttp.send();
-
+*/
 
 $.get("index.php?controller=Piece&view=ajax",function(e){
 	var result = JSON.parse(e);

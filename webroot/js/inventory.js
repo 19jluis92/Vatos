@@ -105,8 +105,6 @@ $("#ubicacion").on('click',function(e){
 
 
 $.get("index.php?controller=CarWorkShop&view=ajax",function(e){
-
-
 	var result = JSON.parse(e);
 	var dd = $("#idvehicleService");
 	for(var i in result){

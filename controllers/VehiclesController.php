@@ -159,7 +159,6 @@ class VehiclesController extends Controller {
 			$conditions  = $this->validateText($_POST['conditions']);
 			$plates	     = $this->validateNumber($_POST['plates']);
 			$idClient	= $this->validateNumber($_POST['idClient']);
-*
 			$result = $this->model->create($vin, $model, $color, $year , $type, $conditions, $plates);
 			$clientVehicleResult = $this->clientVehicle->create($result->id,$idClient);
 			//Insert Succesful

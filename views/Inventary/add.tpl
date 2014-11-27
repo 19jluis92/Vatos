@@ -198,7 +198,13 @@
 <script src="webroot/js/vendor/jquery.validate.1.13.1.min.js"></script>
 <script src="webroot/js/vendor/jquery-validate.bootstrap-tooltip.js"></script>
 <script  src="webroot/js/inventory.js" ></script>
-<script>        $('input.date').datepicker();
+<script>
+   $('input.date-time').datetimepicker({
+   useSeconds : true,
+          format: 'DD/MM/YYYY HH:mm:ss',
+              use24hours: true,        
+          language: "es"
+           });
 </script>
 {/literal}
 {/block}
