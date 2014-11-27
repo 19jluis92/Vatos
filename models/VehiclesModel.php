@@ -125,6 +125,16 @@ Class VehiclesModel extends Model{
 			
 			return false;
 		}
+
+		function getAttribute($table ,$id, $attribute)
+		{
+			echo "string";
+			$result = $this->db->getAttributeWithForeignKey($table, $id, $attribute);
+			var_dump($table);
+			var_dump($id);
+			var_dump($attribute);
+			var_dump($result);
+		}
 	}
 	
 }

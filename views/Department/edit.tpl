@@ -12,7 +12,7 @@
 				<form action="index.php?controller=department&view=delete&id={$department->id}" name="post_54684496c4fdf026147299" style="display:none;" method="post">
 					<input type="hidden" name="_method" value="POST">
 				</form>
-				<a  class="list-group-item" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_54684496c4fdf026147299.submit(); } event.returnValue = false; return false;">Delete
+				<a  class="list-group-item" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_54684496c4fdf026147299.submit(); } event.returnValue = false; return false;">Eliminar
 				</a>
 			</li>
 			<li><a class="list-group-item" href="index.php?controller=department">Mostrar Departamentos</a></li>
@@ -25,10 +25,10 @@
 				<legend>Editar departmento</legend>
 				<div class="row">
 					<div class="col-md-8">
-						<label for="name" class="input-group-addon">Nombre</label><input type="text" name="name" required="required" maxlength="45" class="form-control" id="name" value="{$department->name}">
+						<label for="name" class="input-group-addon">Nombre*</label><input type="text" name="name" required="required" maxlength="45" class="form-control" id="name" value="{$department->name}">
 					</div>
 					<div class="col-md-4">
-						<label for ="idLocation" 	class="input-group-addon">idLocation</label>
+						<label for ="idLocation" 	class="input-group-addon">Locacion*</label>
             <select name="idLocation" required="required" class="form-control" id="idLocation" placeholder="Lugar">
                    <option value=''>-- none --</option>
                   {html_options selected=$department->idLocation options=$locations}

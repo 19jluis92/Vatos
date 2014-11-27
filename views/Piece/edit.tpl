@@ -23,7 +23,7 @@
 		<div style="display:none;"><input type="hidden" name="_method" value="PUT"></div>
 			<fieldset>
 				<legend>Editar Piezas</legend>
-				<div class="input text required"><label class="input-group-addon" for="name">Name</label><input type="text" name="name" required="required" maxlength="45" id="name" value="{$piece->name}"  class="form-control"></div>
+				<div class="input text required"><label class="input-group-addon" for="name">Name*</label><input type="text" name="name" required="required" maxlength="45" id="name" value="{$piece->name}"  class="form-control"></div>
 			</fieldset>
 			<button class="btn btn-default" type="submit">Submit</button>
 		</form>

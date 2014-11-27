@@ -15,11 +15,11 @@
 			<fieldset>
 				<legend>Agregar Modelo</legend>
 				<div class="form-group input-group">
-	  				<label for="name" class="input-group-addon">Nombre</label>
+	  				<label for="name" class="input-group-addon">Nombre*</label>
 	  				<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
 				</div>
 				<div class="input number required">
-				<label for="idbrand">Id Brand</label>
+				<label for="idbrand"> Brand*</label>
 					<select  name="idBrand" required="required" id="idbrand">
 					    <option value=''>-- none --</option>
     					{html_options options=$brands}

@@ -18,29 +18,29 @@
 				<legend>Agregar Inspection</legend>
 					<div class="row">
 						<div class="col-md-4">
-	                  <label for="idService" class="input-group-addon">Servicio</label>
+	                  <label for="idService" class="input-group-addon">Servicio*</label>
                   <select name="idService" required="required" id="idService" class="form-control">
                     <option value=''>-- none --</option>
                     {html_options options=$services}
                  </select>
                 	</div>
                 	<div class="col-md-4">
-	                  <label for="mileage" class="input-group-addon">Kilometraje</label>
+	                  <label for="mileage" class="input-group-addon">Kilometraje*</label>
 							<input type="number" class="form-control" name="mileage" required="required" id="mileage">
                 	</div>
 	               <div class="col-md-4">
-	               	<label for="fuel" class="input-group-addon">Fuel</label>
+	               	<label for="fuel" class="input-group-addon">Fuel*</label>
 							<input class="form-control" type="number" name="fuel" required="required" step="0.01" id="fuel">
 	                </div>  
               		</div>
               		<br />
 	               <div class="row">
 	               	<div class="col-md-8">
-	                  	<label class="input-group-addon" for="inspectionDate">Inspection Date</label>
+	                  	<label class="input-group-addon" for="inspectionDate">Inspection Date*</label>
 								<input class="form-control" type="date" name="inspectionDate" required="required" id="inspectionDate">
 	                	</div>
 	                	<div class="col-md-4">
-	                		<label class="input-group-addon" for="type">Type</label>
+	                		<label class="input-group-addon" for="type">Type*</label>
 	                		<input class="form-control" type="text" name="type" id="type">
 	                	</div>  
 	               </div>

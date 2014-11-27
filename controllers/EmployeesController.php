@@ -129,7 +129,7 @@ class EmployeesController extends Controller
 		else
 		{
 			//Ohh well... :(
-			require('views/Error.html');
+			$this->smarty->display('./views/error.tpl');
 		}
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError))

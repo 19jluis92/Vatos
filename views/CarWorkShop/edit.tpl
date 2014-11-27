@@ -24,11 +24,11 @@
 
                <div class="row">
                   <div class="col-md-8">
-                      <label for="name" class="input-group-addon">Nombre</label>
+                      <label for="name" class="input-group-addon">Nombre*</label>
                       <input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre" value="{$carworkshop->name}">
                   </div>
                    <div class="col-md-4">              
-                      <label for ="idCity" class="input-group-addon">Ciudad</label>
+                      <label for ="idCity" class="input-group-addon">Ciudad*</label>
                       <select name="idCity" required="required" class="form-control" id="idCity" placeholder="idCity">
                        <option value=''>-- none --</option>
                       {html_options options=$cities}
@@ -39,7 +39,7 @@
 
             <div class="row">
                <div class="col-md-12">
-                   <label for="address" class="input-group-addon">Nombre</label>
+                   <label for="address" class="input-group-addon">direccion*</label>
                       <input type="text" name="address" required="required" class="form-control" maxlength="45" id="address" placeholder="Direccion" value="{$carworkshop->address}">
               </div>
             </div>

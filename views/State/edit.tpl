@@ -28,11 +28,11 @@
 		<fieldset>
 			<legend>Edit State</legend>
 		<div class="form-group input-group">
-			<label for="name" class="input-group-addon">Name</label>
+			<label for="name" class="input-group-addon">Nombre*</label>
 			<input type="text" name="name" required="required" id="name" value="{$state->name}" class="form-control">
 		</div>
 		<div class="form-group input-group">
-			<label for="idCountry" class="input-group-addon">Pais</label>
+			<label for="idCountry" class="input-group-addon">Pais*</label>
          <select name="idCountry" required="required" id="idCountry" class="form-control">
            <option value=''>-- none --</option>
            {html_options options=$countries}

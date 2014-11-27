@@ -24,11 +24,11 @@
 
               <div class="row">
                 <div class="col-md-8">
-                  <label for="name" class="input-group-addon">Nombre</label>
+                  <label for="name" class="input-group-addon">Nombre*</label>
                   <input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
                 </div>
                 <div class="col-md-4">
-                  <label for="idState" class="input-group-addon">Estado</label>
+                  <label for="idState" class="input-group-addon">Estado*</label>
                   <select name="idState" required="required" id="idState" class="form-control">
                     <option value=''>-- none --</option>
                     {html_options options=$states}

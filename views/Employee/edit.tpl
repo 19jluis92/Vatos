@@ -28,48 +28,48 @@
 	<form method="post" class="form-horizontal" accept-charset="utf-8" action="index.php?controller=employee&view=edit&id={$user->id}">
 		<fieldset>
 
-			<legend>Edit employee</legend>
+			<legend>Editar Empleado</legend>
 		
 				<div class="input number required">
-					<label for="name" class="input-group-addon">Nombre</label>
+					<label for="name" class="input-group-addon">Nombre*</label>
 					<input type="text" name="name" required="required" id="name" class="form-control" >
 				</div>
 				<div class="input number required">
-					<label for="lastName" class="input-group-addon">Apellido</label>
+					<label for="lastName" class="input-group-addon">Apellido*</label>
 					<input type="text" name="lastName" required="required" id="lastName" class="form-control" >
 				</div>
 				<div class="input number required">
-					<label for="idCity" class="input-group-addon">Ciudad</label>
+					<label for="idCity" class="input-group-addon">Ciudad*</label>
 					<select name="idCity" required="required" id="idCity" class="form-control">
                     <option value=''>-- none --</option>
                     {html_options options=$City}
                  </select>
 				</div>
 				<div class="input number required">
-					<label for="address" class="input-group-addon">address</label>
+					<label for="address" class="input-group-addon">direccion*</label>
 					<input type="text" name="address" required="required" id="address" class="form-control" >
 				</div>
 				<div class="input number required">
-					<label for="NSS" class="input-group-addon">NSS</label>
+					<label for="NSS" class="input-group-addon">NSS*</label>
 					<input type="text" name="nss" required="required" id="nss" class="form-control" >
 				</div>
 				<div class="input number required">
-					<label for="phone" class="input-group-addon">phone</label>
+					<label for="phone" class="input-group-addon">Telefono*</label>
 					<input type="phone" name="phone" required="required" id="phone" class="form-control" >
 				</div>
 				<div class="input number required">
-					<label for="cellphone" class="input-group-addon">Cell phone</label>
+					<label for="cellphone" class="input-group-addon">Celular*</label>
 					<input type="phone" name="cellPhone" required="required" id="cellPhone" class="form-control" >
 				</div>
 				<div class="input number required">
-					<label for="idUser" class="input-group-addon">Usuario</label>
+					<label for="idUser" class="input-group-addon">Usuario*</label>
 					<select name="idUser" required="required" id="idUser" class="form-control">
                     <option value=''>-- none --</option>
                     {html_options options=$Users}
                      </select>
 				</div>
 				<div class="input number required">
-					<label for="idCarWorkShop" class="input-group-addon">idCarWorkShop</label>
+					<label for="idCarWorkShop" class="input-group-addon">Tienda*</label>
 					<select name="idCarWorkShop" required="required" id="idCarWorkShop" class="form-control">
                     <option value=''>-- none --</option>
                     {html_options options=$CarWorkShop}

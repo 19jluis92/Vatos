@@ -68,7 +68,17 @@ class ServicesController extends Controller {
 	{
 		
 		//get all the services
-		$result = $this->model->all();	
+		$result = $this->model->all();
+		$this->loadProperties();
+		foreach ($result as &$service)
+		{
+			$carWorkShopName = $this->CarWorkShopModel->details($service['idCarWorkShop']);
+			$service['idCarWorkShop'] = $carWorkShopName->name;
+			$vehicleVIN = $this->vehicles->details($service['idVehicle']);
+			$service['idVehicle'] = $vehicleVIN->vin;
+			$employeeName = $this->employees->details($service['idEmployee']);
+			$service['idEmployee'] = $employeeName->name;
+		}
 		//Query Succesfull
 		if(isset($result))
 		{
@@ -158,6 +168,7 @@ class ServicesController extends Controller {
 		$this->employees = new EmployeesModel();
 		require_once('models/CarWorkShopModel.php');
 		$this->services = new CarWorkShopModel();
+		$this->CarWorkShopModel = new CarWorkShopModel();
 		require_once('models/VehiclesModel.php');
 		$this->vehicles = new VehiclesModel();
 	}

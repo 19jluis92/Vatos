@@ -19,7 +19,7 @@
 			<legend>Agregar Golpe
 			</legend>
 			<div class="form-group input-group">
-				<label class="input-group-addon" for="idpiece">Pieza
+				<label class="input-group-addon" for="idpiece">Pieza*
 				</label>
 				<select name="idPiece" required="required" id="idpiece" class="form-control">
 					    <option value=''>-- none --</option>
@@ -27,7 +27,7 @@
 				</select>
 			</div>
 			<div class="form-group input-group">
-			<label for="idseverity" class="input-group-addon">Severidad
+			<label for="idseverity" class="input-group-addon">Severidad*
 			</label>
 			<select name="idSeverity" required="required" id="idseverity" class="form-control">
 			<option value=''>-- none --</option>
@@ -35,7 +35,7 @@
 			</select>
 		</div>
 		<div class="form-group input-group">
-			<label for="idinspection" class="input-group-addon">Inspección
+			<label for="idinspection" class="input-group-addon">Inspección*
 			</label>
 			<select name="idInspection" required="required" id="idinspection" class="form-control">
 			<option value=''>-- none --</option>

@@ -27,6 +27,18 @@
                <th>
                   <a href="index.php?controller=vehicle&amp;sort=color&amp;direction=asc">Color</a>
                </th>
+               <th>
+                  <a href="index.php?controller=vehicle&amp;sort=year&amp;direction=asc">Anio</a>
+               </th>
+               <th>
+                  <a href="index.php?controller=vehicle&amp;sort=type&amp;direction=asc">Tipo</a>
+               </th>
+               <th>
+                  <a href="index.php?controller=vehicle&amp;sort=characteristics&amp;direction=asc">Caracteristicas</a>
+               </th>
+               <th>
+                  <a href="index.php?controller=vehicle&amp;sort=plates&amp;direction=asc">Placas</a>
+               </th>
                <th class="actions">Acciones</th>
             </tr>
          </thead> <tbody>
@@ -36,6 +48,10 @@
                <td>{$vehicle.vin}</td>
                <td>{$vehicle.idModel}</td>
                <td>{$vehicle.idColor}</td>
+               <td>{$vehicle.year}</td>
+               <td>{$vehicle.idCarType}</td>
+               <td>{$vehicle.characteristics}</td>
+               <td>{$vehicle.plates}</td>
                <td class="actions">
                <div class="btn-group" role="group" aria-label="...">
                   <a  class="btn btn-default" href="index.php?controller=Vehicle&view=details&id={$vehicle.id}">Ver</a>           

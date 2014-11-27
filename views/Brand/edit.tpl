@@ -13,9 +13,9 @@
 					<form action="index.php?controller=Brand&view=delete&id={$brand->id}" name="post_54684496c4fdf026147299" style="display:none;" method="post">
 						<input type="hidden" name="_method" value="POST">
 					</form>
-					<a class="list-group-item" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_54684496c4fdf026147299.submit(); } event.returnValue = false; return false;">Delete</a>
+					<a class="list-group-item" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_54684496c4fdf026147299.submit(); } event.returnValue = false; return false;">Eliminar</a>
 				</li>
-				<li><a class="list-group-item" href="index.php?controller=Brand">List Brand</a></li>
+				<li><a class="list-group-item" href="index.php?controller=Brand">Marca</a></li>
 			</ul>
 		</div>
 		<div class="brand col-md-10">
@@ -23,7 +23,7 @@
 			<fieldset>
 				<legend>Editar Marca</legend>
 				<div class="form-group input-group">
-				<label class="input-group-addon" for="name">Nombre</label>
+				<label class="input-group-addon" for="name">Nombre*</label>
 				<input type="text" name="name" required="required" maxlength="45" id="name" value="{$brand->name}" class="form-control">
 				</div>
 				</fieldset>

@@ -63,7 +63,14 @@ class CitiesController extends Controller {
 	{
 		
 		//get all the cities
-		$result = $this->model->all();	
+		$result = $this->model->all();
+		$this->loadProperties();
+		foreach($result as &$city)
+		{
+ 			$modelName = $this->states->details($city['idState']);
+ 			$city['idState'] = $modelName->name;
+		}
+
 		$this->smarty->assign('cities',$result);
 		//Query Succesfull
 		if(isset($result))
@@ -89,7 +96,7 @@ class CitiesController extends Controller {
 	{
 		//Validate Variables
 		$id = $this->validateNumber($_GET['id']);
-		$city = $this->model->details($id);	
+		$city = $this->model->details($id);
 		//Insert Succesfull
 		if($city != NULL)
 		{
