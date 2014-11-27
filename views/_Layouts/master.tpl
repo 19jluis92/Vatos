@@ -330,8 +330,8 @@
               <script>window.jQuery || document.write('<script src="webroot/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
 
     <script src="webroot/js/vendor/bootstrap.min.js"></script>
-    <script src="webroot/js/vendor/bootstrap-datepicker.js"></script>
-    <script src="webroot/js/vendor/bootstrap-datepicker.es.js"></script>
+    <script src="webroot/js/vendor/moment.min.js"></script>
+    <script src="webroot/js/vendor/bootstrap-datetimepicker.js"></script>
     <script src="webroot/js/main.js"></script>
     <script src="webroot/js/ajax.js"></script>
  

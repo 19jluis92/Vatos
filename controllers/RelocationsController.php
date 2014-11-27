@@ -166,7 +166,7 @@ class RelocationsController extends Controller {
 	{
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 			//Validate Variables
-			$relocationDate = $this->validateDate($_POST['relocationDate']);
+			$relocationDate = $this->validateDate($_POST['relocationDate'],'d/m/Y H:i:s');
 			$idEmp=  $this->LoggedIn();
 			require_once('models/EmployeesModel.php');
 			$this->employees = new EmployeesModel();

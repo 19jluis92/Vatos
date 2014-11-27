@@ -1,35 +1,34 @@
-<div id="relocationChild" class="bump form large-10 medium-9 columns">
-	<form method="post" accept-charset="utf-8" action="index.php?controller=inventory&view=ubicationEdit&id={$user->id}">
-		<fieldset>
-			<legend>rehubicacion</legend>
-			<div class="input number required">
-					
-					
-				</div>
-				<div class="input number required">
-					<label class="input-group-addon" for="name">Fecha de relocacion</label>
-					<input class="form-control" type="date" name="relocationDate" required="required" id="relocationDate">
-				</div>
-				<div class="input number required">
-					
-					<input class="form-control"  type="hidden" name="idEmployee" required="required" id="idEmployee">
-				</div>
-				<div class="input number required">
-					<label class="input-group-addon" for="reason">rason</label>
-					<input class="form-control"  type="text" name="reason" required="required" id="reason">
-				</div>
-				<div class="form-group input-group">
-					<label class="input-group-addon" >Departamento</label>
-					<select required="required"  id="idDepartment"class="form-control bloqrelo">
-						<option value=''>-- none --</option> </select>
+        <form role="form" method="post" id="relocation-edit-form" accept-charset="utf-8" action="index.php?controller=relocation&view=create">
+          <fieldset>
+          <input type="hidden" name="id" id="id" value="{$relocation->id}">
+            <input type="hidden" name="idService" id="idService" value="{$relocation->idService}">
+            <div class="row">
+              <div class="form-group input-group">
+                <label for="relocationDate" class="input-group-addon">Fecha *</label>
+                <input value="{$relocation->relocationDate|date_format:"%d/%m/%Y %H:%M:%S"}" type="text" name="relocationDate" required="required" class="date-time form-control" id="relocationDate">
+              </div>
+              <div class="form-group input-group">
+                <label for ="idDepartment" class="input-group-addon">Departamento *</label>
+                <select name="idDepartment" required="required" class="form-control" id="idDepartment" placeholder="idDepartment">
+                 <option value=''>-- none --</option>
+                 {html_options selected=$relocation->idDepartment options=$departments}
+               </select>
+             </div>
+             <div class="form-group input-group">
+              <label for="reason" class="input-group-addon">Razón *</label>
+              <textarea name="reason" required="required" class="form-control" id="reason" maxlength="200">{$relocation->reason}</textarea>
+            </div>  
+          </div>
+        </fieldset>
+      </form>
 
-					</div>
-				<div class="input number required">
-					
-					<input class="form-control" type="hidden" name="idService" required="required" id="idService">
-				</div>
-	</fieldset>
-	<button type="submit">Submit
-	</button>
-</form>
-</div>
+      {literal}
+			<script type="text/javascript">
+				$('#relocation-edit-form #relocationDate').datetimepicker({
+					useSeconds : true,
+					format: 'DD/MM/YYYY HH:mm:ss',
+			        use24hours: true,        
+					language: "es" });
+
+			</script>
+			{/literal}

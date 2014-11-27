@@ -28,6 +28,9 @@ class InventaryController extends Controller
 			case 'index':
 			$this->all();
 			break;
+			case 'details':
+						//Validate User and permissions
+			$this->view();		
 			case 'create':
 						//Validate User and permissions
 			$this->create();		
@@ -45,11 +48,11 @@ class InventaryController extends Controller
 			$this->serviceEdit();
 			break;
 
-			case 'inpectionEdit':
+			case 'editInspection':
 			$this->inspectionEdit();
 			break;
 
-			case 'ubicationEdit':
+			case 'editRelocation':
 			$this->ubicationEdit();
 			break;
 
@@ -126,6 +129,30 @@ class InventaryController extends Controller
 		}
 	}
 
+	public function view(){
+		$id = $this->validateNumber($_GET['id']);
+		$this->loadProperties();
+		$service = $this->Service->details($id);
+		$inspections = $this->Inspection->get('inspection',[['','idService','=',$service->id]]);
+		$relocations = $this->relocation->get('relocation',[['','idService','=',$service->id]]);
+		$vehicle = $this->Vehicle->details($service->idVehicle);
+		$client = $this->Client->getClientByVehicle($service->idVehicle);
+			//select Succesfull
+		if(isset($service))
+		{
+			$this->smarty->assign('service',$service);
+			$this->smarty->assign('vehicle',$vehicle);
+			$this->smarty->assign('client',$client);
+			$this->smarty->assign('relocations',$relocations);
+			$this->smarty->assign('inspections',$inspections);
+			$this->smarty->display('./views/Inventary/view.tpl');
+		}
+		else
+		{
+			$this->smarty->display('./views/error.tpl');
+		}
+	}
+
 	public function delete(){
 		
 	}
@@ -181,9 +208,7 @@ class InventaryController extends Controller
 			$startDate = $this->validateDate($_POST['startDate']);
 			$endDate = $this->validateDate($_POST['endDate']);
 			$idEmp=  $this->LoggedIn();
-			
 			$idEmp=$this->Employees->getByColumn($idEmp->id,'idUser');
-			
 			$idEmployee = $idEmp[0]['id'];
 			$idCarWorkShop = $this->validateNumber($_POST['idCarWorkShop']);
 			$idVehicle = $this->validateNumber($_POST['idVehicleService']);
@@ -232,31 +257,31 @@ class InventaryController extends Controller
 			$idService = $this->validateNumber($_POST['idService']);
 			$mileage = $this->validateFloat($_POST['mileage']);
 			$fuel = $this->validateFloat($_POST['fuel']);
-			$inspectionDate = $this->validateDate($_POST['inspectionDate']);
+			$inspectionDate = $this->validateDate($_POST['inspectionDate'],'d/m/Y H:i:s');
+			//echo $inspectionDate ." --  ".$_POST['inspectionDate'] ;
 			$type = $this->validateBool($_POST['type']);
 			$result = $this->Inspection->edit($id,$idService,$mileage,$fuel,$inspectionDate,$type);	
 		//Insert Succesfull
 			if($result)
 			{
+				echo json_encode($result);
 				//unset($postError);
 				
 			}
 			else
 			{
-				$postError = true;
-				$this->smarty->assign('error','no se pudo :(');
+				header('HTTP/1.1 500 Internal Server Error');
 			}
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			$id = $this->validateNumber($_GET['id']);
 			if(isset($id))
-				$inspection = $this->Inspection->GetByColum('inspection',$id,'idService');
+				$inspection = $this->Inspection->GetByColum('inspection',$id,'id');
 
 		//select Succesfull
 			if($inspection != NULL)
 			{
 			//Load view
-				var_dump($inspection);
 				$this->smarty->assign('inspection',$inspection);
 				$this->smarty->display('./views/Inventary/inspectionEdit.tpl');
 			}
@@ -275,7 +300,7 @@ class InventaryController extends Controller
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
 		//Validate Variables
 			$id = $this->validateNumber($_POST['id']);
-			$relocationDate = $this->validateDate($_POST['relocationDate']);
+			$relocationDate = $this->validateDate($_POST['relocationDate'],'d/m/Y H:i:s');
 			$idEmp=  $this->LoggedIn();
 			
 			$idEmp=$this->Employees->getByColumn($idEmp->id,'idUser');
@@ -288,7 +313,7 @@ class InventaryController extends Controller
 		//Insert Succesfull
 			if($result)
 			{
-				
+				echo json_encode($result);	
 			}
 			else
 			{
@@ -298,17 +323,21 @@ class InventaryController extends Controller
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			$id = $this->validateNumber($_GET['id']);
-			$user = $this->relocation->GetByColum('relocation',$id,'idService');
+			$relocation = $this->relocation->GetByColum('relocation',$id,'id');
 		//select Succesfull
-			if($user != NULL)
+			if($relocation != NULL)
 			{
 			//Load view
-				$this->smarty->assign('user',$user);
+				require('models/DepartmentsModel.php');
+				$departments = new DepartmentsModel();
+				$this->smarty->assign('departments',$this->toAssociativeArray($departments->all()));
+				$this->smarty->assign('relocation',$relocation);
 				$this->smarty->display('./views/Inventary/ubicationEdit.tpl');
 			}
 			else
 			{
-				$this->smarty->display('./views/Inventary/ubicationCreate.tpl');
+
+				header('HTTP/1.1 500 Internal Server Error');
 				//$this->smarty->display('./views/error.tpl');
 			}
 

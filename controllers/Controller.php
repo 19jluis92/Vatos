@@ -148,7 +148,7 @@ class Controller
     	$d = DateTime::createFromFormat($format, $date);
     	if ($d && $d->format($format) == $date)
     	{
-    		return $date;
+    		return $d->format("Y-m-d H:i:s");
     	}
     	else
     	{

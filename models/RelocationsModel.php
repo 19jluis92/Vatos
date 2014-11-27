@@ -85,10 +85,10 @@ Class RelocationsModel extends Model{
 	*/
 	function edit($id,$relocationDate,$idEmployee,$reason,$idDepartment,$idService)
 	{
-		$Relocation = new Relocation($relocationDate, $idEmployee, $reason, $idDepartment, $idService);
+		$Relocation = new Relocation($relocationDate, $idEmployee, $reason, $idDepartment, $idService,$id);
 		$Relocation->id = $id;
 		if($result = $this->db->update('relocation', $Relocation,NULL))
-			return true;
+			return $Relocation;
 		else{
 			echo $result;
 			return false;
@@ -117,7 +117,7 @@ Class RelocationsModel extends Model{
 		if($result = $this->db->GetByColum($tabla,$id,$colum))
 		{
 			//var_dump($result);
-			$Relocation = new Relocation($result[0]['relocationDate'],$result[0]['idEmployee'],$result[0]['reason'],$result[0]['idDepartment'],$result[0]['idService']);
+			$Relocation = new Relocation($result[0]['relocationDate'],$result[0]['idEmployee'],$result[0]['reason'],$result[0]['idDepartment'],$result[0]['idService'],$result[0]['id']);
 			return $Relocation;
 		}
 		else{
