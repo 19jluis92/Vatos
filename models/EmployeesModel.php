@@ -37,6 +37,7 @@ class EmployeesModel  extends Model
 	{
 		global $db;
 		$employee = new Employee($name,$lastName,$nss,$address,$phone,$cellPhone,$idCity,$idUser,$idCarWorkShop);
+		var_dump($employee);
 		if($result = $db->insert('employee' , $employee,NULL))
 			return true;
 		else{
@@ -87,10 +88,11 @@ class EmployeesModel  extends Model
 		return $elements;
 	}
 
-	function details($id){
+	function details($id)
+	{
 		if($result = $this->db->details('employee' , $id,NULL))
-			{
-			$employee = new Employee($result['id'],$result['name'],$result['lastName'],$result['nss'],$result['address'],$result['phone'],$result['cellphone'],$result['idCity'],$result['idUser'],$result['idCarWorkShop']);
+		{
+			$employee = new Employee($result['name'],$result['lastName'],$result['nss'],$result['address'],$result['phone'],$result['cellphone'],$result['idCity'],$result['idUser'],$result['idCarWorkShop'],$result['id']);
 			return $employee;
 		}
 		else

@@ -75,7 +75,7 @@ class InventaryController extends Controller
 			$vehicleVIN = $this->Vehicle->details($inventary['idVehicle']);
 			$inventary['idVehicle'] = $vehicleVIN->vin;
 			$employeeName = $this->Employees->details($inventary['idEmployee']);
-			$inventary['idEmployee'] = $employeeName->name;		
+			$inventary['idEmployee'] = $employeeName->lastName;		
     }
 		//Query Succesfull
 		if(isset($result))

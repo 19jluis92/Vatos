@@ -1,6 +1,6 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}Marcas{/block}
-{block name=pageheader}Marcas{/block}
+{block name=title}Talleres{/block}
+{block name=pageheader}Talleres{/block}
 {block name=head}
 {/block}
 {block name=body}
@@ -61,7 +61,7 @@
 			</table>
 
 			<h2>Secciones</h2>
-			<table class="table" cellpadding="0" cellspacing="0">
+			<table id="sections-table" class="table" cellpadding="0" cellspacing="0">
 				<thead>
 					<tr>
 						<th></th>
@@ -95,6 +95,7 @@
 	<script type="text/javascript">
 		var areas = {
 			actualWorkshop : null,
+			actualArea: null,
 			init: function(){
 				this.bind();
 				this.loadData();
@@ -117,8 +118,8 @@
 					$("#areas-table .element-option i").removeClass("glyphicon-check");
 					$("#areas-table .element-option i").addClass("glyphicon-unchecked");
 					$(this).find("i").removeClass("glyphicon-unchecked").addClass("glyphicon-check");
-					var hash = window.location.hash.substr(0, window.location.hash.indexOf("?"));
-					hash = hash == undefined? window.location.hash: hash;
+					var hash = window.location.hash.substr(0, window.location.hash.indexOf("&"));
+					hash = hash == undefined || hash == ''? window.location.hash: hash;
 					window.location.hash = hash+"&area="+$(this).attr("data-id");
 					return false;
 				})		
@@ -129,14 +130,38 @@
 					areas.actualWorkshop = $workshopid;
 					$.ajax({
 						url : "index.php?controller=location&view=getByCarWorkShop",
-						type: "POST",
+						type: "GET",
 						data : {id: $workshopid},
 						success:function(result){
 							var res = JSON.parse(result);
-							console.log(result);
+							//console.log(result);
+							$("#areas-table").html("");
 							for(var i in res){
 								var $tr = $("<tr>");
-								$("#areas-table").append($tr.html('<td><a data-id='+res[i].id+' href="#" class="element-option"><i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i></a></td><td>'+res[i].name+'</td>'));
+								$html =  '<tr><td><a data-id="'+res[i].id+'" href="#" class="element-option"><i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i></a></td><td>'+res[i].name+'</td><td class="actions"><div class="btn-group" role="group" aria-label="..."><a  class="btn btn-default" href="index.php?controller=location&view=details&id='+res[i].id+'">Ver</a><a  class="btn btn-default" href="index.php?controller=location&view=edit&id='+res[i].id+'">Editar</a><form action="index.php?controller=location&view=delete&id='+res[i].id+'" name="post_location_'+res[i].id+'" style="display:none;" method="post"><input type="hidden" name="_method" value="POST"></form><a  class="btn btn-default" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_location_'+res[i].id+'.submit(); } event.returnValue = false; return false;">Eliminar</a></div></td></tr>';
+								$("#areas-table").append($html);
+							}
+						},
+						error:function(){
+							alert("error al mostrar los datos");
+						}
+
+					});
+				}
+				var $area=areas.getParameter("area");
+				if($area != null && $area != areas.actualArea){
+					$.ajax({
+						url : "index.php?controller=department&view=getByLocation",
+						type: "GET",
+						data : {id: $area},
+						success:function(result){
+							var res = JSON.parse(result);
+							//console.log(result);
+							$("#sections-table").html("");
+							for(var i in res){
+								var $tr = $("<tr>");
+								$html =  '<tr><td><a data-id="'+res[i].id+'" href="#" class="element-option"><i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i></a></td><td>'+res[i].name+'</td><td class="actions"><div class="btn-group" role="group" aria-label="..."><a  class="btn btn-default" href="index.php?controller=department&view=details&id='+res[i].id+'">Ver</a><a  class="btn btn-default" href="index.php?controller=department&view=edit&id='+res[i].id+'">Editar</a><form action="index.php?controller=department&view=delete&id='+res[i].id+'" name="post_department_'+res[i].id+'" style="display:none;" method="post"><input type="hidden" name="_method" value="POST"></form><a  class="btn btn-default" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_department_'+res[i].id+'.submit(); } event.returnValue = false; return false;">Eliminar</a></div></td></tr>';
+								$("#sections-table").append($html);
 							}
 						},
 						error:function(){
