@@ -17,7 +17,7 @@
 			<fieldset>
 			<legend>Agregar Severidad</legend>
 				<div class="input text required">
-					<label for="name" class="input-group-addon">Nombre</label>
+					<label for="name" class="input-group-addon">Nombre*</label>
 					<input type="text" name="name" required="required"  id="name" class="form-control" maxlength="45">
 				</div>
 			</fieldset>

@@ -15,12 +15,12 @@
 			<fieldset>
 				<legend>Agregar Estado</legend>
 					<div class="form-group input-group">
-		  				<label for="name" class="input-group-addon">Nombre</label>
+		  				<label for="name" class="input-group-addon">Nombre*</label>
 		  				<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
 					</div>
 
 					<div class="form-group input-group">
-		  				<label for="idCountry" class="input-group-addon">Pais</label>
+		  				<label for="idCountry" class="input-group-addon">Pais*</label>
                   <select name="idCountry" required="required" id="idCountry" class="form-control">
                     <option value=''>-- none --</option>
                     {html_options options=$countries}

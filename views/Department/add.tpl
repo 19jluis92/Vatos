@@ -18,11 +18,11 @@
 			<legend>Add Department</legend>
 				<div class="row">
                 <div class="col-md-8">
-                  <label for="name" class="input-group-addon">Name</label>
+                  <label for="name" class="input-group-addon">Nombre*</label>
 					<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name">
                 </div>
                 <div class="col-md-4">
-                   <label for="idLocation" class="input-group-addon">Location</label>
+                   <label for="idLocation" class="input-group-addon">Ubicacion*</label>
                   <select name="idLocation" required="required" id="idLocation" class="form-control">
                     <option value=''>-- none --</option>
                     {html_options options=$locations}

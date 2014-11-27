@@ -33,14 +33,14 @@
 
             <div class="row">
               <div class="col-md-8">
-                <label for ="idClient" class="input-group-addon">Cliente</label>
+                <label for ="idClient" class="input-group-addon">Cliente*</label>
                <select name="idClient" required="required" class="form-control" id="idClient">
                  <option value=''>-- none --</option>
                 {html_options options=$clients}
           </select>
               </div>
               <div class="col-md-4">
-                <label for="vin" class="input-group-addon">Vin</label>
+                <label for="vin" class="input-group-addon">Vin*</label>
                 <input type="text" name="vin" required="required" class="form-control" maxlength="45" id="vin" placeholder="VIN">
               </div>  
             </div>
@@ -48,7 +48,7 @@
 
           <div class="row">
              <div class="col-md-6">
-                <label for="type" class="input-group-addon">Tipo</label>
+                <label for="type" class="input-group-addon">Tipo*</label>
                 <select name="type" required="required" id="type" class="form-control">
                   <option value=''>-- none --</option>
                   {html_options options=$carTypes}
@@ -56,14 +56,14 @@
             </div>
 
             <div class="col-md-3">
-             <label for="model" class="input-group-addon">Model</label>
+             <label for="model" class="input-group-addon">Model*</label>
              <select name="model" required="required" class="form-control" maxlength="45" id="model" placeholder="Modelo">
                  <option value=''>-- none --</option>
                 {html_options options=$models}
           </select>
           </div>
           <div class="col-md-3">
-             <label for="conditions" class="input-group-addon">Condiciones</label>
+             <label for="conditions" class="input-group-addon">Condiciones*</label>
              <input type="text" name="conditions" required="required" class="form-control" maxlength="45" id="conditions" placeholder="Condiciones">
           </div>
        </div>
@@ -71,15 +71,15 @@
 
        <div class="row">
         <div class="col-md-6">
-          <label for="plates" class="input-group-addon">Placas</label>
+          <label for="plates" class="input-group-addon">Placas*</label>
           <input type="text" name="plates" required="required" class="form-control" maxlength="45" id="plates" placeholder="Placas">
        </div>
        <div class="col-md-4">
-          <label for="year" class="input-group-addon">Año</label>
+          <label for="year" class="input-group-addon">Año*</label>
           <input type="number" name="year" class="form-control" required="required" id="year" placeholder="1985" pattern="[0-9]*" value="1900">
        </div>  
        <div class="col-md-2">
-          <label for ="color" class="input-group-addon">Color</label>
+          <label for ="color" class="input-group-addon">Color*</label>
           <select name="color" required="required" class="form-control" id="color" placeholder="Color">
                  <option value=''>-- none --</option>
                 {html_options options=$colors}

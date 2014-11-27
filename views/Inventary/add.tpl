@@ -66,18 +66,18 @@
             <legend>Agregar Servicio</legend>
 
             <div class="form-group input-group">
-              <label for="startDate" class="input-group-addon">Fecha de entrada</label>
+              <label for="startDate" class="input-group-addon">Fecha de entrada*</label>
               <input type="text" disabled="disabled" required="required" name="startDate" class="date form-control bloqserv" id="startDate">
             </div>
             <div class="form-group input-group">
-              <label for="endDate" class="input-group-addon">Fecha de salida</label>
+              <label for="endDate" class="input-group-addon">Fecha de salida*</label>
               <input type="text"  disabled="disabled" name="endDate" class="date form-control bloqserv" id="endDate">
             </div>  
 
 
 
             <div class="form-group input-group">
-              <label for="idcarworkshop" class="input-group-addon"> Taller </label>
+              <label for="idcarworkshop" class="input-group-addon"> Taller* </label>
 
               <select id="idvehicleService" class="form-control bloqserv"  required="required">
                 <option value=''>-- none --</option> 
@@ -85,7 +85,7 @@
             </div>
 
             <div class="form-group input-group">
-              <label for="idvehicle"class="input-group-addon">VIN  Vehiculo</label>
+              <label for="idvehicle"class="input-group-addon">VIN  Vehiculo*</label>
               <input type="text"  class="form-control serviceIdVehicle bloqserv" name="idVehicle" required="required" id="idvehicle" data-id="0" readonly>
             </div>
 

@@ -8,31 +8,31 @@
     <h2>Cliente</h2>
     <div class="form-horizontal" role="form">
       <div class="form-group">
-        <label class="col-sm-2 control-label">Nombre</label>
+        <label class="col-sm-2 control-label">Nombre*</label>
         <div class="col-sm-10">
           <p class="form-control-static">{$client[0][0]['Name']}</p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Apellido</label>
+        <label class="col-sm-2 control-label">Apellido*</label>
         <div class="col-sm-10">
           <p class="form-control-static">{$client[0][0]['LastName']}</p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Email</label>
+        <label class="col-sm-2 control-label">Email*</label>
         <div class="col-sm-10">
           <p class="form-control-static">{$client[0][0]['email']}</p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">RFC</label>
+        <label class="col-sm-2 control-label">RFC*</label>
         <div class="col-sm-10">
           <p class="form-control-static">{$client[0][0]['RFC']}</p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Dirección</label>
+        <label class="col-sm-2 control-label">Dirección*</label>
         <div class="col-sm-10">
           <p class="form-control-static">{$client[0][0]['address']}</p>
         </div>
@@ -43,25 +43,25 @@
     <h2>Vehiculo</h2>
     <div class="form-horizontal" role="form">
       <div class="form-group">
-        <label class="col-sm-2 control-label">VIN</label>
+        <label class="col-sm-2 control-label">VIN*</label>
         <div class="col-sm-10">
           <p class="form-control-static">{$vehicle->vin}</p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Año</label>
+        <label class="col-sm-2 control-label">Año*</label>
         <div class="col-sm-10">
           <p class="form-control-static">{$vehicle->year}</p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Caracteristicas</label>
+        <label class="col-sm-2 control-label">Caracteristicas*</label>
         <div class="col-sm-10">
           <p class="form-control-static">{$vehicle->characteristics}</p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Placas</label>
+        <label class="col-sm-2 control-label">Placas*</label>
         <div class="col-sm-10">
           <p class="form-control-static">{$vehicle->plates}</p>
         </div>
@@ -72,25 +72,25 @@
     <h2>Servicio</h2>
     <div class="form-horizontal" role="form">
       <div class="form-group">
-        <label class="col-sm-2 control-label">Comienzo</label>
+        <label class="col-sm-2 control-label">Comienzo*</label>
         <div class="col-sm-10">
           <p class="form-control-static">{$service->startDate}</p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Fin</label>
+        <label class="col-sm-2 control-label">Fin*</label>
         <div class="col-sm-10">
           <p class="form-control-static">{$service->endDate}</p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Atendió</label>
+        <label class="col-sm-2 control-label">Atendió*</label>
         <div class="col-sm-10">
           <p class="form-control-static">{$service->idEmployee}</p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Tienda</label>
+        <label class="col-sm-2 control-label">Tienda*</label>
         <div class="col-sm-10">
           <p class="form-control-static">{$service->idCarWorkShop}</p>
         </div>
@@ -212,20 +212,20 @@
             <input type="hidden" name="idService" id="idService" value="{$service->id}">
             <div class="row">
               <div class="form-group input-group">
-                <label for="mileage" class="input-group-addon">Kilometraje</label>
+                <label for="mileage" class="input-group-addon">Kilometraje*</label>
                 <input type="number" class="form-control" name="mileage" required="required" id="mileage">
               </div>
               <div class="form-group input-group">
-                <label for="fuel" class="input-group-addon">Gasolina</label>
+                <label for="fuel" class="input-group-addon">Gasolina*</label>
                 <input class="form-control" type="number" name="fuel" required="required" step="0.01" id="fuel">
               </div>  
               <div class="form-group input-group">
 
-                <label class="input-group-addon" for="inspectionDate">Inspection Date</label>
+                <label class="input-group-addon" for="inspectionDate">Inspection Date*</label>
                 <input class="form-control date" type="text" name="inspectionDate" required="required" id="inspectionDate">
               </div>
               <div class="form-group input-group">
-                <label class="input-group-addon" for="type">Type</label>
+                <label class="input-group-addon" for="type">Type*</label>
                 <select class="form-control" id="type" name="type">
                   <option value="0">Entrada</option>
                   <option value="1">Salida</option>

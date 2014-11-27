@@ -17,11 +17,11 @@
 				<legend>Agregar Lugar</legend>
 				<div class="row">
               <div class="col-md-8">
-		  				<label for="name" class="input-group-addon">Nombre</label>
+		  				<label for="name" class="input-group-addon">Nombre*</label>
                   <input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
                </div>
                <div class="col-md-4">              
-                  <label for ="idCarWorkShop" class="input-group-addon">idCarWorkShop</label>
+                  <label for ="idCarWorkShop" class="input-group-addon">idCarWorkShop*</label>
                   <select name="idCarWorkShop" required="required" class="form-control" id="idCarWorkShop" placeholder="idCarWorkShop">
                    <option value=''>-- none --</option>
                   {html_options options=$carWorkShops}

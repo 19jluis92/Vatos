@@ -17,11 +17,11 @@
 
 				<div class="row">
                 <div class="col-md-6">
-						<label for="startDate" class="input-group-addon">Fecha de inicio</label>
+						<label for="startDate" class="input-group-addon">Fecha de inicio*</label>
 						<input type="date" required="required" name="startDate" class="form-control">
                 </div>
                 <div class="col-md-6">
-						<label for="endDate" class="input-group-addon">Fecha de fin</label>
+						<label for="endDate" class="input-group-addon">Fecha de fin*</label>
 						<input type="date" name="endDate" class="form-control"></select>
                 </div>  
               </div>
@@ -29,21 +29,21 @@
 
             <div class="row">
                <div class="col-md-4">
-                  <label for="idCarWorkShop" class="input-group-addon">Taller</label>
+                  <label for="idCarWorkShop" class="input-group-addon">Taller*</label>
                   <select name="idCarWorkShop" required="required" id="idCarWorkShop" class="form-control">
                     <option value=''>-- none --</option>
                     {html_options options=$carWorkShops}
                  </select>
                </div>
                	<div class="col-md-4">
-						<label for="idVehicle" class="input-group-addon">Vehiculo</label>
+						<label for="idVehicle" class="input-group-addon">Vehiculo*</label>
                   <select name="idVehicle" required="required" id="idVehicle" class="form-control">
                     <option value=''>-- none --</option>
                     {html_options options=$vehicles}
                  </select>
                 </div>
                 <div class="col-md-4">
-						<label for="idEmployee" class="input-group-addon">Empleado</label>
+						<label for="idEmployee" class="input-group-addon">Empleado*</label>
                   <select name="idEmployee" required="required" id="idEmployee" class="form-control">
                     <option value=''>-- none --</option>
                     {html_options options=$employees}

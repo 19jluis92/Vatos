@@ -16,7 +16,7 @@
 			<fieldset>
 			<legend>Agregar Color</legend>
 				<div class="form-group input-group">
-	  				<label for="name" class="input-group-addon">Nombre</label>
+	  				<label for="name" class="input-group-addon">Nombre*</label>
 	  				<input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
 				</div>
 			</fieldset>
