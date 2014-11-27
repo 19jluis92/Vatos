@@ -52,6 +52,9 @@
                 <li>
                     <a href="#contact">Contacto</a>
                 </li>
+                <li>
+                    <a href="./index.php?controller=home&view=dashboard">Home</a>
+                </li>
                 <li class="nav-header">Iniciar Sesión</li>
                 <li>
                     <form class="login navbar-form" role="form" id="login-form"  method="post">
