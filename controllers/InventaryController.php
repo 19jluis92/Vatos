@@ -64,7 +64,18 @@ class InventaryController extends Controller
 	public function all(){
 		$this->loadProperties();
 		$this->Service = new ServicesModel();
-		$result = $this->Service->all();	
+		$result = $this->Service->all();
+		$this->loadProperties();
+    foreach ($result as &$inventary)
+    {
+	   
+			$CarWorkShopName = $this->CarWorkShop->details($inventary['idCarWorkShop']);
+			$inventary['idCarWorkShop'] = $CarWorkShopName->name;
+			$vehicleVIN = $this->Vehicle->details($inventary['idVehicle']);
+			$inventary['idVehicle'] = $vehicleVIN->vin;
+			$employeeName = $this->Employees->details($inventary['idEmployee']);
+			$inventary['idEmployee'] = $employeeName->name;		
+    }
 		//Query Succesfull
 		if(isset($result))
 		{
