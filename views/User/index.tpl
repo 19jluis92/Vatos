@@ -17,9 +17,9 @@
           </a>
           <form action="index.php?controller=user&view=massInsert" method="post" enctype="multipart/form-data">
             <span class="btn btn-default btn-file">
-            Browse <input type="file" name="csv" value="">
+            Elegir Archivo ... <input type="file" name="csv" value="">
             </span>
-            <input class="btn btn-default btn-file" type="submit" name="submit" value="Save" />
+            <input class="btn btn-default btn-file" type="submit" name="submit" value="Insertar" />
           </form>
         </li>
 		</ul>
