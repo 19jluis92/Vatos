@@ -168,14 +168,6 @@
                   <li><a href="index.php?controller=client&view=create"><i class="fa fa-angle-double-right"></i>Clientes</a></li>
                 </ul>
               </li>
-              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>bump</span>
-                <i class="fa fa-angle-left pull-right"></i></a>
-
-                <ul class="treeview-menu">
-                  <li><a href="index.php?controller=bump" ><i class="fa fa-angle-double-right"></i>Mostrar todos los Bumb</a></li>
-                  <li><a href="index.php?controller=bump&view=create"><i class="fa fa-angle-double-right"></i>Bumb</a></li>
-                </ul>
-              </li>
               <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Ciudad</span>
                 <i class="fa fa-angle-left pull-right"></i></a>
 
@@ -295,14 +287,6 @@
                 </ul>
               </li>
               {/if}
-              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Cuenta</span>
-                <i class="fa fa-angle-left pull-right"></i></a>
-
-                <ul class="treeview-menu">
-                  <li><a href="index.php?controller=account" ><i class="fa fa-angle-double-right"></i>Mostrar Cuentas</a></li>
-                  <li><a href="index.php?controller=account&view=create"><i class="fa fa-angle-double-right"></i>Cuenta</a></li>
-                </ul>
-              </li>
             </ul>
           </section>
         </div>
