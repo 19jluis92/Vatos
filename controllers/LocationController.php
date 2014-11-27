@@ -74,6 +74,12 @@ class LocationController extends Controller {
 		
 		//get all the Location
 		$result = $this->model->all();	
+		$this->loadProperties();
+		foreach ($result as &$location)
+		{
+			$locationName = $this->carWorkShops->details($location['idCarWorkShop']);
+			$location['idCarWorkShop'] = $locationName->name;
+		}
 		//Query Succesfull
 		if(isset($result))
 		{

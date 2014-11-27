@@ -135,7 +135,7 @@
                 {if $role == 'admin'}
                 <li class="treeview">
                   <a href="#">
-                    <i class="fa fa-edit"></i> <span>Usuario</span>
+                    <i class="fa fa-edit"></i> <span>User</span>
                     <i class="fa fa-angle-left pull-right"></i>
                   </a>
                   <ul class="treeview-menu">
@@ -152,7 +152,7 @@
                   <li><a href="index.php?controller=vehicle&view=create"><i class="fa fa-angle-double-right"></i>Vehiculo</a></li>
                 </ul>
               </li>
-              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Empleado</span>
+              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Employee</span>
                 <i class="fa fa-angle-left pull-right"></i></a>
 
                 <ul class="treeview-menu">
@@ -160,7 +160,7 @@
                   <li><a href="index.php?controller=Employee&view=create"><i class="fa fa-angle-double-right"></i>Empleado</a></li>
                 </ul>
               </li>
-              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Cliente</span>
+              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Client</span>
                 <i class="fa fa-angle-left pull-right"></i></a>
 
                 <ul class="treeview-menu">
@@ -168,12 +168,12 @@
                   <li><a href="index.php?controller=client&view=create"><i class="fa fa-angle-double-right"></i>Clientes</a></li>
                 </ul>
               </li>
-              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Golpes</span>
+              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>bump</span>
                 <i class="fa fa-angle-left pull-right"></i></a>
 
                 <ul class="treeview-menu">
                   <li><a href="index.php?controller=bump" ><i class="fa fa-angle-double-right"></i>Mostrar todos los Bumb</a></li>
-                  <li><a href="index.php?controller=bump&view=create"><i class="fa fa-angle-double-right"></i>Nuevo Golpe</a></li>
+                  <li><a href="index.php?controller=bump&view=create"><i class="fa fa-angle-double-right"></i>Bumb</a></li>
                 </ul>
               </li>
               <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Ciudad</span>
@@ -185,11 +185,11 @@
                 </ul>
               </li>
               <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Tipo</span>
-                <i class="fa fa-angle-left pull-right"></i>Tipo de Carros</a>
+                <i class="fa fa-angle-left pull-right"></i> de carro</a>
 
                 <ul class="treeview-menu">
-                  <li><a href="index.php?controller=cartype" ><i class="fa fa-angle-double-right"></i>Mostrar todos los tipos de carros</a></li>
-                  <li><a href="index.php?controller=cartype&view=create"><i class="fa fa-angle-double-right"></i>Nuevo Tipo Carro</a></li>
+                  <li><a href="index.php?controller=cartype" ><i class="fa fa-angle-double-right"></i>Mostrar todos los carros</a></li>
+                  <li><a href="index.php?controller=cartype&view=create"><i class="fa fa-angle-double-right"></i>Carro</a></li>
                 </ul>
               </li>
               <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>color</span>
@@ -263,21 +263,20 @@
                   <li><a href="index.php?controller=carworkshop&view=create"><i class="fa fa-angle-double-right"></i>Agregar</a></li>
                 </ul>
               </li>
-              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Telefono Tienda</span>
+              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>workshopphone</span>
                 <i class="fa fa-angle-left pull-right"></i></a>
 
                 <ul class="treeview-menu">
-                  <li><a href="index.php?controller=workshopphone" ><i class="fa fa-angle-double-right"></i>Mostrar Telefonos</a></li>
-                  <li><a href="index.php?controller=workshopphone&view=create"><i class="fa fa-angle-double-right"></i>
-                   Agregar </a></li>
+                  <li><a href="index.php?controller=workshopphone" ><i class="fa fa-angle-double-right"></i>Mostrar workshopphone</a></li>
+                  <li><a href="index.php?controller=workshopphone&view=create"><i class="fa fa-angle-double-right"></i>workshopphone</a></li>
                 </ul>
               </li>
               <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>location</span>
                 <i class="fa fa-angle-left pull-right"></i></a>
 
                 <ul class="treeview-menu">
-                  <li><a href="index.php?controller=location" ><i class="fa fa-angle-double-right"></i>Mostrar Ubicacion</a></li>
-                  <li><a href="index.php?controller=location&view=create"><i class="fa fa-angle-double-right"></i>Ubicacion</a></li>
+                  <li><a href="index.php?controller=location" ><i class="fa fa-angle-double-right"></i>Mostrar location</a></li>
+                  <li><a href="index.php?controller=location&view=create"><i class="fa fa-angle-double-right"></i>location</a></li>
                 </ul>
               </li>
               <li  class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Modelo de Auto</span>
@@ -296,7 +295,6 @@
                 </ul>
               </li>
               {/if}
-               {if $role == 'admin' || $role == 'superadmin' }
               <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Cuenta</span>
                 <i class="fa fa-angle-left pull-right"></i></a>
 
@@ -305,7 +303,6 @@
                   <li><a href="index.php?controller=account&view=create"><i class="fa fa-angle-double-right"></i>Cuenta</a></li>
                 </ul>
               </li>
-               {/if}
             </ul>
           </section>
         </div>

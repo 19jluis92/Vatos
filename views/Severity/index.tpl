@@ -11,7 +11,7 @@
 			<li><a class="list-group-item" href="index.php?controller=Severity&view=create">Nueva Severidad</a></li>
 		</ul>
 	</div>
-	<div  class="col-md-10"
+	<div  class="col-md-10">
 		<table class="table" cellpadding="0" cellspacing="0">
 			<thead>
 				<tr>

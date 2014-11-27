@@ -67,6 +67,13 @@ class CarWorkShopController extends Controller {
 	{
 		//get all the CarWorkShop
 		$result = $this->model->all();	
+		$this->loadProperties();
+		foreach ($result as &$city)
+		{
+			$cityName = $this->cities->details($city['idCity']);
+			$city['idCity'] = $cityName->name;
+		}
+
 		$this->smarty->assign('carworkshops',$result);
 		//Query Succesfull
 		if(isset($result))
@@ -214,3 +221,4 @@ class CarWorkShopController extends Controller {
 }
 
 ?>
+cities
