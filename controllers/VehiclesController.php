@@ -23,7 +23,7 @@ class VehiclesController extends Controller {
 			case 'list':
 						//Validate User and permissions
 			$this->all();
-			case 'clientvhicles':
+			case 'clientvehicles':
 						//Validate User and permissions
 						$this->allClientVehicles();
 			break;
@@ -84,6 +84,7 @@ class VehiclesController extends Controller {
 		//Get all the Vehicles
 		$result = $this->clientVehicle->all();
 		$this->smarty->assign('clientVehicles',$result);
+		
 		if(isset($result))
 		{
 			//Load view

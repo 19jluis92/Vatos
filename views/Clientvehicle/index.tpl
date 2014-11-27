@@ -1,13 +1,27 @@
 {extends file="../_Layouts/master.tpl"}
-{block name=title}Vehiculos{/block}
-{block name=pageheader}Vehiculos{/block}
+{block name=title}Mis vehiculos{/block}
+{block name=pageheader}Mis vehiculos{/block}
 {block name=head}
 {/block}
 {block name=body}
-
-   {if isset($deleted)}
-   <script type="text/javascript">
-      alert("eliminación correcta");
-   </script>
-   {/if}
-   {/block}
+<div class="row">
+  <div class="col-md-12">
+    <h2>Mis Vehiculos</h2>
+    <table class="table" cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th>IdClient</th>
+          <th>IdVehicle</th>
+        </tr>
+      </thead>
+      <tbody>
+        {foreach item=clientVehicle from=$clientVehicles}
+        <tr>
+          <td>{$clientVehicle.idClient}</td>
+          <td>{$clientVehicle.idVehicle}</td>
+        </tr>
+        {/foreach}
+      </tbody>
+    </table>
+  </div>
+{/block}
