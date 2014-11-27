@@ -43,7 +43,10 @@ class DepartmentsController extends Controller {
 						//Validate User and permissions
 			$this->delete();		
 			break;
+			case 'getByLocation':
 
+				$this->getByLocation();
+			break;
 			case 'ajax':
 
 				echo json_encode($this->model->all());
@@ -54,6 +57,16 @@ class DepartmentsController extends Controller {
 		}
 	}
 
+	/**
+	*Show all the Locations by carworkshop
+	*@return null nothing returned but view loaded
+	*/
+	private function getByLocation()
+	{
+		$id = $this->validateNumber($_GET['id']);
+		$json = html_entity_decode(json_encode($this->model->GetByColumn($id,"idLocation")));
+		echo $json;
+	}
 
 
 	/**
