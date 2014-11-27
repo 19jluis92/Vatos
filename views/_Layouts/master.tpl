@@ -76,13 +76,15 @@
                     {/if}
                     <!-- User image -->
                     <li class="user-header bg-light-blue">
-                      <img src="img/avatar3.png" class="img-circle" alt="User Image" />
+                      
+       
+        
                       <p>
-                        Jane Doe - Web Developer
-                        <small>Member since Nov. 2012</small>
+                        Sesion
+                        
                       </p>
                     </li>
-                    <!-- Menu Body -->
+                    <!-- Menu Body 
                     <li class="user-body">
                       <div class="col-xs-4 text-center">
                         <a href="#">Followers</a>
@@ -94,13 +96,14 @@
                         <a href="#">Friends</a>
                       </div>
                     </li>
-                    <!-- Menu Footer-->
+                     Menu Footer-->
                     <li class="user-footer">
                       <div class="pull-left">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                        
                       </div>
                       <div class="pull-right">
-                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                        
+                        <a href="#"  class="btn btn-default btn-flat" data-toggle="modal" data-target="#logout-modal" >Cerrar Sesión</a>
                       </div>
                     </li>
                   </ul>
