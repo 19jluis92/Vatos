@@ -59,7 +59,7 @@ class LocationController extends Controller {
 	*/
 	private function getByCarWorkShop()
 	{
-		$id = 1;
+		$id = $this->validateNumber($_GET['id']);
 		$json = html_entity_decode(json_encode($this->model->get($this->tableName , [["","idCarWorkShop","=",$id]] )));
 		echo $json;
 	}

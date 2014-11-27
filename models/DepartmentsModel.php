@@ -95,5 +95,20 @@ Class DepartmentsModel extends Model{
 		//delete element using the given $id
 		return true;
 	}
+
+	function GetByColumn($id,$column){
+		if($result = $this->db->GetByColum('department',$id,$column))
+		{
+			//var_dump($result);
+			//$Inspections =   new Service($result['startDate'],$result['endDate'],$result['idEmployee'],$result['idCarWorkShop'],$result['idVehicle'],$result['id']);
+			return $result;
+		}
+		else{
+			
+			return NULL;
+		}
+		//delete element using the given $id
+		return true;
+	}
 }
 ?>
