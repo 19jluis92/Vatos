@@ -187,7 +187,7 @@
                   <li><a href="index.php?controller=cartype&view=create"><i class="fa fa-angle-double-right"></i>Carro</a></li>
                 </ul>
               </li>
-              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>color</span>
+              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Color</span>
                 <i class="fa fa-angle-left pull-right"></i></a>
 
                 <ul class="treeview-menu">
@@ -258,20 +258,12 @@
                   <li><a href="index.php?controller=carworkshop&view=create"><i class="fa fa-angle-double-right"></i>Agregar</a></li>
                 </ul>
               </li>
-              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>workshopphone</span>
-                <i class="fa fa-angle-left pull-right"></i></a>
-
-                <ul class="treeview-menu">
-                  <li><a href="index.php?controller=workshopphone" ><i class="fa fa-angle-double-right"></i>Mostrar workshopphone</a></li>
-                  <li><a href="index.php?controller=workshopphone&view=create"><i class="fa fa-angle-double-right"></i>workshopphone</a></li>
-                </ul>
-              </li>
               <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>location</span>
                 <i class="fa fa-angle-left pull-right"></i></a>
 
                 <ul class="treeview-menu">
-                  <li><a href="index.php?controller=location" ><i class="fa fa-angle-double-right"></i>Mostrar location</a></li>
-                  <li><a href="index.php?controller=location&view=create"><i class="fa fa-angle-double-right"></i>location</a></li>
+                  <li><a href="index.php?controller=location" ><i class="fa fa-angle-double-right"></i>Mostrar Lugar</a></li>
+                  <li><a href="index.php?controller=location&view=create"><i class="fa fa-angle-double-right"></i>Lugar</a></li>
                 </ul>
               </li>
               <li  class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Modelo de Auto</span>

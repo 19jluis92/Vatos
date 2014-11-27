@@ -261,14 +261,21 @@ class HomeController extends Controller {
 			$cosas=array();
 
 		$cosas3=array_merge($cosas, $cosas2);
-	
 		
-			
-				$this->smarty->assign('Users',$this->toAssociativeArray($this->Employee->all()));
-				$this->smarty->assign('CarWorkShop',$this->toAssociativeArray($this->CarWorkShop->all()));
-			$this->smarty->assign('services',$cosas3);
-			
-			$this->smarty->display('./views/_Layouts/dashboardAdmin.tpl');
+		foreach ($cosas3 as &$service)
+		{
+			$carWorkShopName = $this->CarWorkShop->details($service['idCarWorkShop']);
+			$service['idCarWorkShop'] = $carWorkShopName->name;
+			$vehicleVIN = $this->Vehicle->details($service['idVehicle']);
+			$service['idVehicle'] = $vehicleVIN->vin;
+			$employeeName = $this->Employee->details($service['idEmployee']);
+			$service['idEmployee'] = $employeeName->name;
+		}
+		$this->smarty->assign('Users',$this->toAssociativeArray($this->Employee->all()));
+		$this->smarty->assign('CarWorkShop',$this->toAssociativeArray($this->CarWorkShop->all()));
+		$this->smarty->assign('services',$cosas3);
+		
+		$this->smarty->display('./views/_Layouts/dashboardAdmin.tpl');
 	}
 
 	public function LoadProperties(){
