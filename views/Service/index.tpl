@@ -19,9 +19,9 @@
 					<th><a href="index.php?controller=service?sort=id&amp;direction=asc">Id</a></th>
 					<th><a href="index.php?controller=service?sort=startDate&amp;direction=asc">Fecha de Inicio</a></th>
 					<th><a href="index.php?controller=service?sort=endDate&amp;direction=asc">Fecha de Fin</a></th>
-					<th><a href="index.php?controller=service?sort=idCarWorkShop&amp;direction=asc">Id del Taller</a></th>
-					<th><a href="index.php?controller=service?sort=idVehicle&amp;direction=asc">Id del Vehiculo</a></th>
-					<th><a href="index.php?controller=service?sort=idEmployee&amp;direction=asc">Id Empleado</a></th>
+					<th><a href="index.php?controller=service?sort=idCarWorkShop&amp;direction=asc">Taller</a></th>
+					<th><a href="index.php?controller=service?sort=idVehicle&amp;direction=asc">VIN del Vehiculo</a></th>
+					<th><a href="index.php?controller=service?sort=idEmployee&amp;direction=asc">Empleado</a></th>
 					<th class="actions">Acciones</th>
 				</tr>
 			</thead>
