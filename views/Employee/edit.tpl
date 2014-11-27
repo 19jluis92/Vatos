@@ -16,7 +16,7 @@
 				</a>
 
 			</li>
-			<li><a class="list-group-item"  href="index.php?controller=employee">List Bump
+			<li><a class="list-group-item"  href="index.php?controller=employee">Listar Empleados
 			</a>
 		</li>
 		
@@ -31,11 +31,27 @@
 		
 				<div class="input number required">
 					<label for="name" class="input-group-addon">Nombre*</label>
-					<input type="text" name="name" required="required" id="name" class="form-control" >
+					<input type="text" name="name" required="required" id="name" class="form-control" value="{$employee->name}" >
 				</div>
 				<div class="input number required">
 					<label for="lastName" class="input-group-addon">Apellido*</label>
-					<input type="text" name="lastName" required="required" id="lastName" class="form-control" >
+					<input type="text" name="lastName" required="required" id="lastName" class="form-control" value="{$employee->lastName}">
+				<div class="input number required">
+					<label for="NSS" class="input-group-addon">NSS*</label>
+					<input type="text" name="nss" required="required" id="nss" class="form-control" value="{$employee->nss}">
+				</div>
+				</div>
+				<div class="input number required">
+					<label for="address" class="input-group-addon">direccion*</label>
+					<input type="text" name="address" required="required" id="address" class="form-control" value="{$employee->address}" >
+				</div>
+				<div class="input number required">
+					<label for="phone" class="input-group-addon">Telefono*</label>
+					<input type="phone" name="phone" required="required" id="phone" class="form-control" value="{$employee->phone}">
+				</div>
+				<div class="input number required">
+					<label for="cellphone" class="input-group-addon">Celular*</label>
+					<input type="phone" name="cellPhone" required="required" id="cellPhone" class="form-control" value="{$employee->name}">
 				</div>
 				<div class="input number required">
 					<label for="idCity" class="input-group-addon">Ciudad*</label>
@@ -44,28 +60,9 @@
                     {html_options options=$City}
                  </select>
 				</div>
-				<div class="input number required">
-					<label for="address" class="input-group-addon">direccion*</label>
-					<input type="text" name="address" required="required" id="address" class="form-control" >
-				</div>
-				<div class="input number required">
-					<label for="NSS" class="input-group-addon">NSS*</label>
-					<input type="text" name="nss" required="required" id="nss" class="form-control" >
-				</div>
-				<div class="input number required">
-					<label for="phone" class="input-group-addon">Telefono*</label>
-					<input type="phone" name="phone" required="required" id="phone" class="form-control" >
-				</div>
-				<div class="input number required">
-					<label for="cellphone" class="input-group-addon">Celular*</label>
-					<input type="phone" name="cellPhone" required="required" id="cellPhone" class="form-control" >
-				</div>
-				<div class="input number required">
-					<label for="idemployee" class="input-group-addon">Usuario*</label>
-					<select name="idemployee" required="required" id="idemployee" class="form-control">
-                    <option value=''>-- none --</option>
-                    {html_options options=$employees}
-                     </select>
+				<div class="input number required read-only">
+					<label for="cellphone" class="input-group-addon">Usuario*</label>
+					<input type="phone" name="cellPhone" required="required" id="cellPhone" class="form-control" value="{$employee->idUser}">
 				</div>
 				<div class="input number required">
 					<label for="idCarWorkShop" class="input-group-addon">Tienda*</label>
@@ -74,10 +71,9 @@
                     {html_options options=$CarWorkShop}
                      </select>
 				</div>
-	</fieldset>
-	<button type="submit" class="btn btn-default" >Submit
-	</button>
-</form>
+		</fieldset>
+		<button type="submit" class="btn btn-default" >Enviar</button>
+	</form>
 </div>
 
 </div>
