@@ -29,7 +29,8 @@ class Controller
 			$actualRole = $actualRole == null ? '':$actualRole;
 		}
 		$this->smarty->assign('role',$actualRole);
-		
+		$this->smarty->assign('user',$user);
+
 	}
 
 	/**

@@ -186,16 +186,15 @@ class EmployeesController extends Controller
 		}
 		if($_SERVER['REQUEST_METHOD'] === 'GET' || isset($postError)){
 			$id = $this->validateNumber($_GET['id']);
-			$user = $this->model->details($id);
+			$employee = $this->model->details($id);
 		//select Succesfull
-			if($user != NULL)
+			if($employee != NULL)
 			{
 			//Load view
 				$this->loadProperties();
 				$this->smarty->assign('City',$this->toAssociativeArray($this->City->all()));
-				$this->smarty->assign('Users',$this->toAssociativeArray($this->Users->all()));
 				$this->smarty->assign('CarWorkShop',$this->toAssociativeArray($this->CarWorkShop->all()));
-				$this->smarty->assign('user',$user);
+				$this->smarty->assign('employee',$employee);
 				$this->smarty->display('./views/Employee/edit.tpl');
 			}
 			else

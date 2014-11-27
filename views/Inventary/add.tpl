@@ -116,16 +116,13 @@
            <input type="number" class="form-control idservins" name="idService" required="required" step="0.01" id="idServiceInspection" readonly>
          </div>
          <div class="form-group input-group">
-          <label for="mileage" class="input-group-addon">Millas</label>
+          <label for="mileage" class="input-group-addon">Millas*</label>
           <input type="number" name="mileage" required="required" step="0.01" id="mileage" class="form-control bloqIns"></div>
           <div class="form-group input-group">
-            <label class="input-group-addon" for="fuel">Fuel</label>
+            <label class="input-group-addon" for="fuel">Gasolina*</label>
             <input type="number" name="fuel" required="required" step="0.01" id="fuel" class="form-control bloqIns"></div>
-            <div class="form-group input-group"><label class="input-group-addon" for="inspectiondate">Fecha de Chequeo</label>
-              <input class="date form-control bloqIns"  disabled="disabled" type="text" name="inspectiondate" required="required" id="inspectiondate">
-            </div>
-            <div class="form-group input-group">
-              <label   for="type" class="input-group-addon">Salida</label><input type="checkbox" disabled="disabled" name="type" id="type" class="bloqIns"></div>
+            
+            
 
               <a href="#"class="btn btn-primary"id="bto2">Guardar</a>
 

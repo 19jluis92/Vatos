@@ -41,7 +41,7 @@
                    <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="glyphicon glyphicon-user"></i>
-                      <span>Jane Doe <i class="caret"></i></span>
+                      <span>{$user->email} <i class="caret"></i></span>
                     </a>
                     <ul class="dropdown-menu">
                       {if isset($loggedin)}
@@ -76,9 +76,9 @@
                     {/if}
                     <!-- User image -->
                     <li class="user-header bg-light-blue">
-                      <img src="img/avatar3.png" class="img-circle" alt="User Image" />
+                      <img src="webroot/img/avatar.png" class="img-circle" alt="User Image" />
                       <p>
-                        Usuario
+                        {$user->email}
                         <small></small>
                       </p>
                     </li>
@@ -100,7 +100,7 @@
                         <!--<a href="#" class="btn btn-default btn-flat">Profile</a>-->
                       </div>
                       <div class="pull-right">
-                        <a href="index.php?controller=account&view=logout" class="btn btn-default btn-flat">Sign out</a>
+                        <a href="index.php?controller=account&view=logout" class="btn btn-default btn-flat">Salir</a>
                       </div>
                     </li>
                   </ul>

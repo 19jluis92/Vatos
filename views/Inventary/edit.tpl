@@ -70,6 +70,7 @@
   </div>
   <div class="col-sm-4">
     <h2>Servicio</h2>
+    <input type="hidden" value="{$service->id}" id="service-id" > 
     <div class="form-horizontal" role="form">
       <div class="form-group">
         <label class="col-sm-2 control-label">Comienzo*</label>
@@ -83,7 +84,7 @@
         {if $service->endDate == null}
           <p class="form-control-static">{$service->endDate|date_format:"%d/%m/%Y %H:%M:%S"}</p>
           {else}
-          <input type="button" value="salida" class="btn btn-default">
+          <input type="button" id="btn-out-service" value="salida" class="btn btn-default">
         {/if}
         </div>
       </div>
@@ -360,7 +361,28 @@
         $("#btn-edit-relocation").on("click",this.saveEditRelocation);
         $("#tbl-inspections").on("click",".edit",this.editInspection);
         $("#tbl-relocations").on("click",".edit",this.editRelocation);
+        $("#btn-out-service").on("click",this.closeService);
       },
+      closeService : function(){
+        $.ajax({
+            type: 'POST',
+            url: "?controller=inventory&view=closeService",
+            data: data,
+            success: function (result) {
+              if(JSON.parse(result) != null)
+              {
+                  
+              }
+              else{
+                alert("error");
+              }
+            },
+            error : function (argument) {
+              alert("error :" + argument);
+            }
+          });
+        
+      }
       saveEditRelocation : function (e) {
         e.preventDefault();
         var $form = $(this).parents(".modal").find("form");

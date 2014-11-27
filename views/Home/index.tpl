@@ -52,6 +52,9 @@
                 <li>
                     <a href="#contact">Contacto</a>
                 </li>
+                <li>
+                    <a href="./index.php?controller=home&view=dashboard">Home</a>
+                </li>
                 <li class="nav-header">Iniciar Sesión</li>
                 <li>
                     <form class="login navbar-form" role="form" id="login-form"  method="post">
@@ -64,7 +67,7 @@
                       <a href="#"  id="btn-submit">Iniciar Sesión</a>
                       <div class="summary-text alert alert-warning" role="alert">Datos no válidos.</div>
                       {else}
-                      <div class="form-group">Bienvenido <a href="">Usuario</a></div>
+                      <div class="form-group">Bienvenido <a href="?controller=home&view=dashboard">Panel</a></div>
                       <a href="#" data-toggle="modal" data-target="#logout-modal" >Cerrar Sesión</a>
                       {/if}
                   </form>
