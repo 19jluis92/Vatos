@@ -75,17 +75,16 @@ class EmployeesController extends Controller
 	private function details()
 	{
 		//Validate Variables
-	$id = $this->validateNumber($_GET['id']);
-			$user = $this->model->details($id);
+		$id = $this->validateNumber($_GET['id']);
+		$employee = $this->model->details($id);
 		//select Succesfull
-		if($user != NULL)
-			{
+		if($employee != NULL)
+		{
 			//Load view
-				$this->loadProperties();
-				$this->smarty->assign('City',$this->toAssociativeArray($this->City->all()));
-				$this->smarty->assign('Users',$this->toAssociativeArray($this->Users->all()));
-				$this->smarty->assign('CarWorkShop',$this->toAssociativeArray($this->CarWorkShop->all()));
-				$this->smarty->assign('user',$user);
+			$this->loadProperties();
+			$this->smarty->assign('City',$this->toAssociativeArray($this->City->all()));
+			$this->smarty->assign('CarWorkShop',$this->toAssociativeArray($this->CarWorkShop->all()));
+			$this->smarty->assign('employee',$employee);
 			$this->smarty->display('./views/Employee/view.tpl');
 		}
 		else

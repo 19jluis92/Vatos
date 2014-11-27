@@ -3,13 +3,12 @@
 {block name=head}
 {/block}
 {block name=body}
-<div class="container-fluid">
 <div class="row">
 	<div class="actions col-md-2">
 		<h3>Acciones</h3>
 		<ul class="list-group">
 			<li>
-				<form action="index.php?controller=employee&view=delete&id={$user->id}" name="post_54684496c4fdf026147299" style="display:none;" method="post">
+				<form action="index.php?controller=employee&view=delete&id={$employee->id}" name="post_54684496c4fdf026147299" style="display:none;" method="post">
 					<input type="hidden" name="_method" value="POST">
 
 				</form>
@@ -25,7 +24,7 @@
 	
 </div>
 <div class="brand col-md-10">
-	<form method="post" class="form-horizontal" accept-charset="utf-8" action="index.php?controller=employee&view=edit&id={$user->id}">
+	<form method="post" class="form-horizontal" accept-charset="utf-8" action="index.php?controller=employee&view=edit&id={$employee->id}">
 		<fieldset>
 
 			<legend>Editar Empleado</legend>
@@ -62,10 +61,10 @@
 					<input type="phone" name="cellPhone" required="required" id="cellPhone" class="form-control" >
 				</div>
 				<div class="input number required">
-					<label for="idUser" class="input-group-addon">Usuario*</label>
-					<select name="idUser" required="required" id="idUser" class="form-control">
+					<label for="idemployee" class="input-group-addon">Usuario*</label>
+					<select name="idemployee" required="required" id="idemployee" class="form-control">
                     <option value=''>-- none --</option>
-                    {html_options options=$Users}
+                    {html_options options=$employees}
                      </select>
 				</div>
 				<div class="input number required">
@@ -81,7 +80,6 @@
 </form>
 </div>
 
-</div>
 </div>
 
 {/block}
