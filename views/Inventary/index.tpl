@@ -19,9 +19,9 @@
 					<th><a href="index.php?controller=service?sort=id&amp;direction=asc">Id</a></th>
 					<th><a href="index.php?controller=service?sort=startDate&amp;direction=asc">Fecha de Inicio</a></th>
 					<th><a href="index.php?controller=service?sort=endDate&amp;direction=asc">Fecha de Fin</a></th>
-					<th><a href="index.php?controller=service?sort=idCarWorkShop&amp;direction=asc">Id del Taller</a></th>
-					<th><a href="index.php?controller=service?sort=idVehicle&amp;direction=asc">Id del Vehiculo</a></th>
-					<th><a href="index.php?controller=service?sort=idEmployee&amp;direction=asc">Id Empleado</a></th>
+					<th><a href="index.php?controller=service?sort=idCarWorkShop&amp;direction=asc">Taller</a></th>
+					<th><a href="index.php?controller=service?sort=idVehicle&amp;direction=asc">VIN del Vehiculo</a></th>
+					<th><a href="index.php?controller=service?sort=idEmployee&amp;direction=asc">Empleado</a></th>
 					<th class="actions">Acciones</th>
 				</tr>
 			</thead>
@@ -36,12 +36,12 @@
 					<td>{$service.idVehicle}</td>
 					<td>{$service.idEmployee}</td>
 					<td class="actions">
-						<a href="index.php?controller=Inventory&view=details&id={$service.id}">View</a>				
-						<a href="index.php?controller=Inventory&view=edit&id={$service.id}">Edit</a>		
+						<a class="btn btn-default" href="index.php?controller=Inventory&view=details&id={$service.id}">View</a>				
+						<a class="btn btn-default" href="index.php?controller=Inventory&view=edit&id={$service.id}">Edit</a>		
 						<form action="index.php?controller=Inventory&view=delete&id={$service.id}" name="post_service_{$service.id}" style="display:none;" method="post">
 							<input type="hidden" name="_method" value="POST">
 						</form>
-						<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_service_{$service.id}.submit(); } event.returnValue = false; return false;">Delete</a>
+						<a class="btn btn-default" href="#" onclick="if (confirm(&quot;Are you sure you want to delete # 1?&quot;)) { document.post_service_{$service.id}.submit(); } event.returnValue = false; return false;">Delete</a>
 					</td>
 				</tr>
 			</tbody>
