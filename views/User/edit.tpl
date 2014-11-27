@@ -29,17 +29,17 @@
 			<fieldset>
 				<legend>Editar Usuario</legend>
 				<div class="form-group input-group">
-					<label for="email" class="input-group-addon">Email
+					<label for="email" class="input-group-addon">Email*
 					</label>
 					<input type="email" name="email" value="{$user->email}" required="required" id="email" placeholder="Email" class="form-control">
 				</div>
 				<div class="form-group input-group">
-					<label for="password" class="input-group-addon">Password
+					<label for="password" class="input-group-addon">Password*
 					</label>
 					<input type="password" name="password" required="required" id="password" value="{$user->password}" placeholder="Password" class="form-control">
 				</div>
 				<div class="form-group input-group">
-					<label for="idRole" class="input-group-addon">Rol
+					<label for="idRole" class="input-group-addon">Rol*
 					</label>
 					<select name="idRole" required="required" id="idRole" class="form-control">
 						<option value=''>-- none --</option>

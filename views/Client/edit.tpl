@@ -31,22 +31,22 @@
 					<legend>Editar cliente</legend>
 					<div class="row">
 	               <div class="col-md-6">
-	                	<label for="name" class="input-group-addon">Nombre</label>
+	                	<label for="name" class="input-group-addon">Nombre*</label>
 							<input type="text" name="name" required="required" id="name" class="form-control" maxlength="45" placeholder="Nombre" value="{$client->name}">
 	               </div>
 	               <div class="col-md-6">
-							<label for="lastName" class="input-group-addon">Apellidos</label>
+							<label for="lastName" class="input-group-addon">Apellidos*</label>
 							<input type="text" name="lastName" required="required" id="lastName" class="form-control" maxlength="45" placeholder="Apellidos" value="{$client->lastName}">
 	               </div>  
               	</div>
                <br />
                <div class="row">
 	              <div class="col-md-6">
-							<label for="rfc" class="input-group-addon">RFC</label>
+							<label for="rfc" class="input-group-addon">RFC*</label>
 							<input type="text" name="rfc" required="required" id="rfc" class="form-control" maxlength="45" placeholder="RFC" value="{$client->rfc}">
 	               </div>
 	               <div class="col-md-6">
-	                	<label for="email" class="input-group-addon">Correo Electronico</label>
+	                	<label for="email" class="input-group-addon">Correo Electronico*</label>
 							<input type="text" name="email" required="required" id="email" class="form-control" maxlength="45" placeholder="Email" value="{$client->email}">
 	               </div>
 	            </div>
@@ -55,7 +55,7 @@
                <div class="row">
 
 	               <div class="col-md-12">
-	               	<label for="address" class="input-group-addon">Direccion</label>
+	               	<label for="address" class="input-group-addon">Direccion*</label>
 							<input type="text" name="address" required="required" id="address" class="form-control" maxlength="45" placeholder="Direccion" value="{$client->address}">
 	               </div>
 	            </div>

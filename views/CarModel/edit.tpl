@@ -11,18 +11,18 @@
 				<form action="index.php?controller=CarModel&view=delete&id={$carModel->id}" name="post_54684496c4fdf026147299" style="display:none;" method="post">
 					<input type="hidden" name="_method" value="POST">
 				</form>
-				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_54684496c4fdf026147299.submit(); } event.returnValue = false; return false;">Delete
+				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_54684496c4fdf026147299.submit(); } event.returnValue = false; return false;">Eliminar
 				</a>
 			</li>
-			<li><a href="index.php?controller=CarModel">List CarModel</a></li>
+			<li><a href="index.php?controller=CarModel">Mostrar</a></li>
 		</ul>
 	</div>
 	<div class="carModel form large-10 medium-9 columns">
 		<form method="post" accept-charset="utf-8" action="index.php?controller=CarModel&view=edit&id={$carModel->id}">
 			<fieldset>
-				<legend>Edit CarModel</legend>
-				<div class="input text required"><label for="name">Name</label><input type="text" name="name" required="required" maxlength="45" id="name" value="{$carModel->name}"></div>
-				<div class="input number required"><label for="idbrand">Id Brand</label>
+				<legend>Editar </legend>
+				<div class="input text required"><label for="name">Nombre*</label><input type="text" name="name" required="required" maxlength="45" id="name" value="{$carModel->name}"></div>
+				<div class="input number required"><label for="idbrand">Marca*</label>
 				<select  name="idBrand" required="required" id="idbrand">
 					    <option value=''>-- none --</option>
     					{html_options options=$brands selected=$carModel->idBrand}

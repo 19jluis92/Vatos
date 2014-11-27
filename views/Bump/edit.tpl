@@ -12,11 +12,11 @@
 					<input type="hidden" name="_method" value="POST">
 
 				</form>
-				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_54684496c4fdf026147299.submit(); } event.returnValue = false; return false;">Delete
+				<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # %s?&quot;)) { document.post_54684496c4fdf026147299.submit(); } event.returnValue = false; return false;">Eliminar
 				</a>
 
 			</li>
-			<li><a href="index.php?controller=Bump">List Bump
+			<li><a href="index.php?controller=Bump">LMostrar Golpes
 			</a>
 		</li>
 		
@@ -27,7 +27,7 @@
 	<form method="post" accept-charset="utf-8" action="index.php?controller=Bump&view=edit&id={$bump->id}">
 		<fieldset>
 			<legend>Edit Bump</legend>
-			<label for="idpiece">Id Piece</label>
+			<label for="idpiece">Pieza*</label>
 			<select name="idPiece" required="required" id="idpiece" class="form-control">
 				<option value=''>-- none --</option>
 				{html_options options=$pieces selected=$bump->idPiece}
@@ -35,7 +35,7 @@
 			<input type="number" name="idPiece" required="required" id="idpiece" value="{}">
 		</div>
 		<div class="input number required">
-			<label for="idseverity">Id Severity</label>
+			<label for="idseverity">Severidad*</label>
 			<select name="idSeverity" required="required" id="idseverity" class="form-control">
 				<option value=''>-- none --</option>
 				{html_options options=$severities selected=$bump->idSeverity}
@@ -44,7 +44,7 @@
 			<input type="number" name="idSeverity" required="required" id="idseverity" value="{$bump->idSeverity}">
 		</div>
 		<div class="input number required">
-			<label for="idinspection">Id Inspection</label>
+			<label for="idinspection">Inspeccion*</label>
 			<select name="idInspection" required="required" id="idinspection" class="form-control">
 				<option value=''>-- none --</option>
 				{html_options options=$inspections selected=$bump->idInspection}

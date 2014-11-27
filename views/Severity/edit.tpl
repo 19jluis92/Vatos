@@ -22,8 +22,8 @@
 		<form class="form-horizontal"  method="post" accept-charset="utf-8" action="index.php?controller=Severity&view=edit&id={$severity->id}">
 		<div style="display:none;"><input type="hidden" name="_method" value="PUT"></div>
 			<fieldset>
-				<legend>Edit Severity</legend>
-				<div class="input text required"><label for="name" class="input-group-addon">Name</label><input type="text" name="name" required="required" maxlength="45" id="name" value="{$severity->name}" class="form-control"></div>
+				<legend>Editar severidad</legend>
+				<div class="input text required"><label for="name" class="input-group-addon">Nombre*</label><input type="text" name="name" required="required" maxlength="45" id="name" value="{$severity->name}" class="form-control"></div>
 			</fieldset>
 			<button class="btn btn-default"type="submit">Submit</button>
 		</form>
