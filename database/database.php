@@ -218,6 +218,16 @@ class db{
 			}
 		}
 	}
+
+	public function getAttributeWithForeignKey($table,$id,$atttribute)
+	{
+		$table = $this->db_driver->escape_string($table);
+		$id = $this->db_driver->escape_string($id);
+		$atttribute = $this->db_driver->escape_string($atttribute);
+		$result = $this->db_driver->query("SELECT $atttribute FROM $table WHERE 'id' == $id");
+		return $result;
+		
+	}
 	
 } ?>
 

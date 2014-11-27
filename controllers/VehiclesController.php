@@ -64,6 +64,17 @@ class VehiclesController extends Controller {
 	{
 		//Get all the Vehicles
 		$result = $this->model->all();
+		$this->loadProperties();
+		foreach($result as &$vehicle)
+		{
+ 			$modelName = $this->models->details($vehicle['idModel']);
+ 			$vehicle['idModel'] = $modelName->name;
+ 			$colorName = $this->colors->details($vehicle['idColor']);
+ 			$vehicle['idColor'] = $colorName->name;
+ 			$carTypeName = $this->carTypes->details($vehicle['idCarType']);
+ 			$vehicle['idCarType'] = $carTypeName->name;
+		}
+
 		$this->smarty->assign('vehicles',$result);
 		if(isset($result))
 		{
@@ -107,10 +118,15 @@ class VehiclesController extends Controller {
 	{
 		$id = $this->validateNumber($_GET['id']);
 		$vehicle = $this->model->details($id);
+		
+		$this->loadProperties();
+		$modelName = $this->models->details($vehicle->idModel);
+		$vehicle->idModel = $modelName->name;
 		//select Succesfull
 		if($vehicle != NULL)
 		{
 			//Load view
+			//$this->smarty->assign('modelName',$modelName);
 			$this->smarty->assign('vehicle',$vehicle);
 			$this->smarty->display('./views/Vehicle/view.tpl');
 		}
@@ -278,6 +294,12 @@ class VehiclesController extends Controller {
 			$result = $this->model->create($vin, $model, $color, $year , $type, $conditions, $plates);
 		}
 		$this->all();
+	}
+	/*Helpers*/
+	public function getModelName($modelId)
+	{
+		$modelData = $this->model->details('model',$modelId);
+		var_dump($modelData);
 	}
 
 }
