@@ -213,7 +213,7 @@ class HomeController extends Controller {
 	public function ClientView()
 	{
 		$this->LoadProperties();
-		$user=  $this->LoggedIn();
+		$user=$this->LoggedIn();
 		
 		$Clients=$this->Client->GetByColum($user->email,'email');
 		$cliente=$this->Client->details($Clients[0]['id']);

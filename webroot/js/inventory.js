@@ -200,6 +200,7 @@ $('#bto2').on('click',function(e){
 			$('#bto2').remove()
 			$('.bloqIns').attr('readonly',true);
 			$('#bien').modal('show');
+			window.location= "?controller=inventory";
 		});
 	});
 	

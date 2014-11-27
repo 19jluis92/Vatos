@@ -5,6 +5,7 @@
 {block name=body}
 <div class="row">
 	<div class="col-md-10">
+	<h2>Detalles</h2>
 		<table class="table" cellpadding="0" cellspacing="0">
 			<thead>
 				<tr>
@@ -44,6 +45,7 @@
 			</tbody>
 			
 		</table>
+		<h2>Automóviles</h2>
       <table class="table" cellpadding="0" cellspacing="0">
          <thead>
             <tr>
@@ -71,6 +73,7 @@
             {/foreach}
          </tbody>
       </table>
+      <h2>Servicios</h2>
       <table class="table" cellpadding="0" cellspacing="0">
 			<thead>
 				<tr>
@@ -78,7 +81,7 @@
 					<th><a href="index.php?controller=service?sort=startDate&amp;direction=asc">Fecha de Inicio</a></th>
 					<th><a href="index.php?controller=service?sort=endDate&amp;direction=asc">Fecha de Fin</a></th>
 					<th><a href="index.php?controller=service?sort=idVehicle&amp;direction=asc">Id del Vehiculo</a></th>
-					
+					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -89,6 +92,7 @@
 					<td>{$service.startDate}</td>
 					<td>{$service.endDate}</td>
 					<td>{$service.idVehicle}</td>
+					<td><a href="?controller=inventory&view=details&id={$service.id}">Detalles</a></td>
 				</tr>
 			</tbody>
 			{/foreach}

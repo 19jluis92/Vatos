@@ -41,7 +41,7 @@
                    <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="glyphicon glyphicon-user"></i>
-                      <span>Jane Doe <i class="caret"></i></span>
+                      <span>{$user->email} <i class="caret"></i></span>
                     </a>
                     <ul class="dropdown-menu">
                       {if isset($loggedin)}
@@ -76,34 +76,31 @@
                     {/if}
                     <!-- User image -->
                     <li class="user-header bg-light-blue">
-                      
-       
-        
+                      <img src="webroot/img/avatar.png" class="img-circle" alt="User Image" />
                       <p>
-                        Sesion
-                        
+                        {$user->email}
+                        <small></small>
                       </p>
                     </li>
-                    <!-- Menu Body 
+                    <!-- Menu Body -->
                     <li class="user-body">
                       <div class="col-xs-4 text-center">
-                        <a href="#">Followers</a>
+                      <!--  <a href="#">Followers</a>-->
                       </div>
                       <div class="col-xs-4 text-center">
-                        <a href="#">Sales</a>
+                       <!-- <a href="#">Sales</a>-->
                       </div>
                       <div class="col-xs-4 text-center">
-                        <a href="#">Friends</a>
+                        <!--<a href="#">Friends</a>-->
                       </div>
                     </li>
-                     Menu Footer-->
+                    <!-- Menu Footer-->
                     <li class="user-footer">
                       <div class="pull-left">
-                        
+                        <!--<a href="#" class="btn btn-default btn-flat">Profile</a>-->
                       </div>
                       <div class="pull-right">
-                        
-                        <a href="#"  class="btn btn-default btn-flat" data-toggle="modal" data-target="#logout-modal" >Cerrar Sesión</a>
+                        <a href="index.php?controller=account&view=logout" class="btn btn-default btn-flat">Salir</a>
                       </div>
                     </li>
                   </ul>
@@ -259,7 +256,7 @@
                   <li><a href="index.php?controller=carworkshop&view=create"><i class="fa fa-angle-double-right"></i>Agregar</a></li>
                 </ul>
               </li>
-              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>Location</span>
+              <li class="treeview"><a href="#"><i class="fa fa-edit"></i> <span>location</span>
                 <i class="fa fa-angle-left pull-right"></i></a>
 
                 <ul class="treeview-menu">
