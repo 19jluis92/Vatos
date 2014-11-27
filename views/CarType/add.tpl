@@ -17,7 +17,7 @@
 			<fieldset>
 			<legend>Agregar</legend>
 				<div class="input text required">
-					<label  class="input-group-addon"  for="name">Nombre</label>
+					<label  class="input-group-addon"  for="name">Nombre*</label>
 					<input type="text" name="name" required="required" maxlength="45" id="name"  class="form-control">
 				</div>
 			</fieldset>

@@ -17,17 +17,17 @@
          <fieldset>
             <legend>Agregar Taller automotriz</legend>
             <div class="form-group input-group">
-               <label for="name" class="input-group-addon">Nombre</label>
+               <label for="name" class="input-group-addon">Nombre*</label>
                <input type="text" name="name" required="required" class="form-control" maxlength="45" id="name" placeholder="Nombre">
             </div>
 
             <div class="form-group input-group">
-               <label for="address" class="input-group-addon">Direccion</label>
+               <label for="address" class="input-group-addon">Direccion*</label>
                <input type="text" name="address" required="required" class="form-control" maxlength="45" id="address" placeholder="Direccion">
             </div>
 
             <div class="form-group input-group">
-               <label for="idCity" class="input-group-addon">Id Ciudad</label>
+               <label for="idCity" class="input-group-addon"> Ciudad*</label>
                   <select name="idCity" required="required" class="form-control"id="idCity" placeholder="Id Ciudad">
                    <option value=''>-- none --</option>
                   {html_options options=$cities}
