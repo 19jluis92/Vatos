@@ -112,6 +112,7 @@
 				});
 				$("#areas-table").on("click",".element-option",function(e){
 					e.preventDefault();
+					$("#areas-table tr").removeClass("active info");
 					$(this).parents("tr").addClass("active info");
 					$("#areas-table .element-option i").removeClass("glyphicon-check");
 					$("#areas-table .element-option i").addClass("glyphicon-unchecked");

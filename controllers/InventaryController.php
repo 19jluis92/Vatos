@@ -30,7 +30,8 @@ class InventaryController extends Controller
 			break;
 			case 'details':
 						//Validate User and permissions
-			$this->view();		
+			$this->view();
+			break;		
 			case 'create':
 						//Validate User and permissions
 			$this->create();		
